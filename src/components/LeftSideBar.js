@@ -14,7 +14,18 @@ const LeftSideBar = ()=>{
                 {/* <img src={sidebar} style={{height:"60vh"}}/> */}
                 <div className="bar">
                     <div className="bar-top">Home Page</div>
-                    <ul></ul>
+                    <ul className="list-items">
+                        <li>Games</li>
+                        <li>Bonuses</li>
+                        <li>Rules</li>
+                        <li>Casino</li>
+                        <li>P2P Betting</li>
+                        <p>Popular Games</p>
+                        <li>Coinflip</li>
+                        <li>Blackjack</li>
+                        <li>Random</li>
+                    </ul>
+                    <button>Read more...</button>
                 </div>
             </div>
         </div>

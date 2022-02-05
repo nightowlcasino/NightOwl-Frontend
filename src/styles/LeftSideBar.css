@@ -24,3 +24,21 @@
     background-color: white;
     height: 8%;
 }
+
+.list-items{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    list-style: none;
+    color: white;
+}
+
+.bar button{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    height: 4vh;
+    width: 50%;
+    border: white;
+    border-radius: 15px;
+}
