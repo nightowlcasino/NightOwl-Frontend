@@ -25,15 +25,28 @@
     height: 8%;
 }
 
+.bar-top img{
+    padding-right: 15px;
+    height: 2vh;
+    width: auto;
+}
+
 .list-items{
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 1.5rem;
     list-style: none;
     color: white;
 }
 
+.list-items img{
+    padding-right: 15px;
+    height: 2vh;
+    width: auto;
+}
+
 .bar button{
+    margin: 25px 30px;
     display: flex;
     align-items: center;
     justify-content: start;
