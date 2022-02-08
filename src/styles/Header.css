@@ -1,0 +1,30 @@
+.header{
+    display: flex;
+    gap: 220px;
+    justify-content: center;
+    width: 80%;
+}
+
+.header-right{
+    background-image: linear-gradient(to right, #51127f, #d70a84);
+    width: 60%;
+    border-radius: 25px;
+    height: 2.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#search-game{
+    border-radius: 25px;
+    height: 90%;
+    width: 35%;
+}
+
+.connect-wallet{
+    border-radius: 25px;
+    height: 80%;
+    width: 15%;
+    margin-right: 10px;
+    border: none;
+}

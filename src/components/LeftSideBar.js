@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../assets/Elements/logo.png";
 import Homepage from "../assets/Elements/Design-2_0039_Layer-5.png";
 import Games from "../assets/Elements/Design-2_0037_Layer-7.png";
 import Bonuses from "../assets/Elements/Design-2_0036_Layer-8.png";
@@ -14,10 +13,6 @@ import "../styles/LeftSideBar.css";
 const LeftSideBar = ()=>{
     return(
         <div className="left-side-bar">
-            <div className="sidebar-logo">
-                <img src={logo} style={{height:"8vh"}} />
-            </div>
-
             <div className="left-sidebar-div">
                 {/* <img src={sidebar} style={{height:"60vh"}}/> */}
                 <div className="bar">
