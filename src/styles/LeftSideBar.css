@@ -12,7 +12,7 @@
 .bar{
     background-image: linear-gradient(to top left, #d70a84, #51127f);
     height: 70vh;
-    width: 15vw;
+    width: 13vw;
     border-radius: 15px;
     overflow:hidden ;
 }

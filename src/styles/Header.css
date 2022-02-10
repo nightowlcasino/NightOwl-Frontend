@@ -2,12 +2,19 @@
     display: flex;
     gap: 220px;
     justify-content: center;
-    width: 80%;
+    align-items: center;
+}
+
+.sidebar-logo {
+    margin-left:120px ;
+    justify-content: center;
+    align-items: center;
 }
 
 .header-right{
     background-image: linear-gradient(to right, #51127f, #d70a84);
-    width: 60%;
+    width: 1500px;
+    margin-left: 15%;
     border-radius: 25px;
     height: 2.8rem;
     display: flex;
@@ -15,16 +22,47 @@
     align-items: center;
 }
 
+.search-bar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90%;
+    width: 350px;
+}
+
 #search-game{
+    border-color: transparent;
     border-radius: 25px;
     height: 90%;
-    width: 35%;
+    width: 90%;
+}
+
+#search-game-icon {
+    position: absolute;
+    margin-left: 80%;
 }
 
 .connect-wallet{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.connect-wallet-icon {
+    position: absolute;
+    margin-right: 115px;
+    margin-bottom: 2px;
+    height: 100%;
+    width: 21px;
+    height: 26px;
+}
+
+.connect-wallet-button {
     border-radius: 25px;
-    height: 80%;
-    width: 15%;
-    margin-right: 10px;
+    padding: 10px 15px 10px 40px;
+    margin-right: 3px;
     border: none;
 }
