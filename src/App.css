@@ -21,6 +21,7 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   padding-right: 30px;
+  overflow: hidden;
 }
 
 input[type="text"] {

@@ -10,7 +10,7 @@ const Header = ()=>{
             <div className="sidebar-logo">
                 <img src={logo} style={{height:"8vh"}} />
             </div>
-
+<div class="right-container">
             <div className="header-right">
                 
                 <div className="search-bar">
@@ -19,11 +19,15 @@ const Header = ()=>{
                 </div>
 
                 <div className="connect-wallet">
+                    
+                    <button className="connect-wallet-button">
                     <img className="connect-wallet-icon" src={wallet}/>
-                    <button className="connect-wallet-button">Connect Wallet</button>
+                    Connect Wallet                    
+                    </button>
                 </div>
 
             </div>
+        </div>
         </div>
     )
 }

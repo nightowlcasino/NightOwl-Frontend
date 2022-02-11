@@ -1,18 +1,24 @@
 .left-side-bar{
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
+    display: table-cell;
+    margin-left: 5%;
     gap: 1.2rem;
-    width: 20%;
     justify-content: center;
     align-items: center;
+    vertical-align: top;
+    overflow: visible;
+    border-radius: 20px;
+    border: blueviolet 6px solid;
+}
+@media screen and (max-width:728px){
+    .left-side-bar {
+        display: none;
+    }
 }
 
 .bar{
     background-image: linear-gradient(to top left, #d70a84, #51127f);
-    height: 70vh;
-    width: 13vw;
+    height: auto;
+    width: 12vw;
     border-radius: 15px;
     overflow:hidden ;
 }
@@ -22,7 +28,7 @@
     align-items: center;
     justify-content: center;
     background-color: white;
-    height: 8%;
+    height: 6vh;
 }
 
 .bar-top img{

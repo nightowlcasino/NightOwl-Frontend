@@ -28,7 +28,7 @@ const LeftSideBar = ()=>{
                         <li><img src={Blackjack} />Blackjack</li>
                         <li><img src={Random} />Random</li>
                     </ul>
-                    <button>Read more...</button>
+                    
                 </div>
             </div>
         </div>

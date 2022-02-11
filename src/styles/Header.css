@@ -1,30 +1,44 @@
 .header{
-    display: flex;
-    gap: 220px;
+    display: table-row;
+    height: auto;
     justify-content: center;
     align-items: center;
+    vertical-align: middle;
+    position: absolute;
+    top: 0;
+    padding-top: 52px;
 }
 
 .sidebar-logo {
-    margin-left:120px ;
+    padding-left: 8%;
+    margin-right: 2vw;
+    display: table-cell;
     justify-content: center;
     align-items: center;
+    overflow: none;
 }
-
+.right-container {
+    display: table-cell;
+    width: 100%;
+    vertical-align: middle;
+}
 .header-right{
     background-image: linear-gradient(to right, #51127f, #d70a84);
-    width: 1500px;
-    margin-left: 15%;
+    width: auto;
+    margin-left: 20%;
+    margin-right: 10%;
     border-radius: 25px;
     height: 2.8rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    vertical-align: middle;
 }
 
 .search-bar {
     position: relative;
-    display: flex;
+    padding-bottom: 2px;
+    display: inline-block;
     justify-content: space-between;
     align-items: center;
     height: 90%;
@@ -34,6 +48,7 @@
 #search-game{
     border-color: transparent;
     border-radius: 25px;
+    padding-left: 10px;
     height: 90%;
     width: 90%;
 }
@@ -49,20 +64,26 @@
     justify-content: center;
     align-items: center;
     height: 100%;
+    vertical-align: middle;
+}
+.connect-text{
+    padding-top: 1px;
 }
 
 .connect-wallet-icon {
-    position: absolute;
-    margin-right: 115px;
-    margin-bottom: 2px;
     height: 100%;
     width: 21px;
     height: 26px;
+    padding-right: 8px;
+    float: left;
 }
 
 .connect-wallet-button {
+    width: 170px;
+    display: block;
     border-radius: 25px;
     padding: 10px 15px 10px 40px;
-    margin-right: 3px;
+    margin-right: 0px;
     border: none;
+    
 }
