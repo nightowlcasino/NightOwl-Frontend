@@ -1,0 +1,44 @@
+.maincontent-wrapper{
+   width: 80%; 
+  display: table-row;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse; 
+  vertical-align: top;
+}
+.table{
+    border-spacing: 96px;
+}
+.Hero{
+    margin-left: 20px;
+    margin-right: 10%;
+    padding-left: 20px;
+    background-image: url("../assets/Elements/hero-1.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: bottom center;
+    width: 90%;
+    border-radius: 20px;
+    border: solid 6px blueviolet;
+    
+    height: auto;
+    display: table-cell;
+    overflow: auto;
+    vertical-align: top;
+}
+.badge-text{
+    color: lightgrey;
+}
+.hero-heading{
+    color: white;
+}
+.hero-content{
+    padding: 12px;
+    color: white;
+}
+.hero-button{
+    float: bottom;
+    color: white;
+    background-color: blueviolet;
+    border-radius: 12px;
+}
