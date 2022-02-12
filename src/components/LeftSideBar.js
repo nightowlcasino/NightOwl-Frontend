@@ -16,19 +16,23 @@ const LeftSideBar = ()=>{
             <div className="left-sidebar-div">
                 {/* <img src={sidebar} style={{height:"60vh"}}/> */}
                 <div className="bar">
-                    <div className="bar-top"><img src={Homepage} />Home page</div>
-                    <ul className="list-items">
-                        <li><img src={Games} />Games</li>
-                        <li><img src={Bonuses} />Bonuses</li>
-                        <li><img src={Rules} />Rules</li>
-                        <li><img src={Casino} />Casino</li>
-                        <li><img src={P2P} />P2P Betting</li>
-                        <p>Popular Games</p>
-                        <li><img src={Coinflip} />Coinflip</li>
-                        <li><img src={Blackjack} />Blackjack</li>
-                        <li><img src={Random} />Random</li>
-                    </ul>
-                    
+              
+                    <div className="list-items">
+                        <a href="#"><img src={Homepage} />Home page</a>
+                        <a href="#"><img src={Games} />Games</a>
+                        <a href="#"><img src={Bonuses} />Bonuses</a>
+                        <a href="#"><img src={Rules} />Rules</a>
+                        <a href="#"><img src={Casino} />Casino</a>
+                        <a href="#"><img src={P2P} />P2P Betting</a>
+                        <span class="popgames">Popular Games</span>
+                        <a href="#"><img src={Coinflip} />Coinflip</a>
+                        <a href="#"><img src={Blackjack} />Blackjack</a>
+                        <a href="#"><img src={Random} />Random</a>
+                    </div>
+                
+                    <div align="center" class="caret">
+                        <a href="#">▼</a>
+                        </div>
                 </div>
             </div>
         </div>

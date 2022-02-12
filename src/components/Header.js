@@ -19,11 +19,14 @@ const Header = ()=>{
                 </div>
 
                 <div className="connect-wallet">
-                    
+                    <span class="volume">Volume: $123,456</span>
                     <button className="connect-wallet-button">
+                    <a href="#">
                     <img className="connect-wallet-icon" src={wallet}/>
-                    Connect Wallet                    
+                    <span class="connect-text">Connect Wallet</span>                    
+                    </a>
                     </button>
+                   
                 </div>
 
             </div>

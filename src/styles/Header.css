@@ -6,27 +6,27 @@
     vertical-align: middle;
     position: absolute;
     top: 0;
-    padding-top: 52px;
+    padding-top: 32px;
+    background-image: linear-gradient(to top right, #490185, #850dad);
+    background-repeat: no-repeat;
 }
-
 .sidebar-logo {
-    padding-left: 8%;
-    margin-right: 2vw;
+    padding-left: 6vw;
     display: table-cell;
     justify-content: center;
     align-items: center;
     overflow: none;
 }
 .right-container {
-    display: table-cell;
+    display:table-cell;
     width: 100%;
     vertical-align: middle;
 }
 .header-right{
-    background-image: linear-gradient(to right, #51127f, #d70a84);
+    background-image: linear-gradient(to right, #51127f, #e20c8d);
     width: auto;
     margin-left: 20%;
-    margin-right: 10%;
+    margin-right: 20%;
     border-radius: 25px;
     height: 2.8rem;
     display: flex;
@@ -66,24 +66,41 @@
     height: 100%;
     vertical-align: middle;
 }
+.volume{
+    color: white;
+    font-size:11px;
+    font-weight: 500;
+    padding-right: 8px;
+}
+@media screen and (max-width:728px){
+    .volume {
+        display: none;
+    }
+}
 .connect-text{
-    padding-top: 1px;
+    margin-top: 1px;
+    color: #e20c8d;
+    font-weight: 500;
 }
 
 .connect-wallet-icon {
     height: 100%;
     width: 21px;
     height: 26px;
-    padding-right: 8px;
+    padding-left: 4px;
+    padding-right: 4px;
+    
     float: left;
 }
 
 .connect-wallet-button {
-    width: 170px;
+    width: 150px;
     display: block;
+    font-size: 12px;
     border-radius: 25px;
-    padding: 10px 15px 10px 40px;
-    margin-right: 0px;
+    padding: 6px 10px 6px 10px;
+    margin-right: 4px;
     border: none;
-    
+    background: white;
+    line-height: 27px;
 }
