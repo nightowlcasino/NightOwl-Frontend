@@ -34,7 +34,7 @@
     border: solid 6px darkmagenta;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     height: auto;
-    overflow: none;
+    overflow: hidden;
   }
   .imagecolumn {
     float: left;
@@ -48,6 +48,7 @@
     background-size: 200px;
     background-repeat:no-repeat;
     background-position-x: right;
+    background-origin: inherit;
     border-radius: 20px;
     border: solid 6px darkmagenta;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -115,8 +116,14 @@
     width: 100%;
     text-align: center;
     padding-top: 10px;
+    padding-bottom:8px;
 }
-
+.leaderboard-toprow{
+    color: hotpink;
+}
+.leaderboard-rows{
+    font-size: smaller;
+}
 .badge-text{
     color: lightgrey;
     vertical-align: top;
@@ -139,10 +146,28 @@
     padding-bottom: 7px;
     border-radius: 32px;
     margin-bottom: 32px;
-    margin-left: 24px;
+    margin-left: 12px;
     border-style: none;
 }
 .hero-button:hover{
+    background: white;
+    color: blueviolet;
+}
+.module-button{
+    float: bottom;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    background-image: linear-gradient(to right, blueviolet , darkmagenta);
+    width: 123px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 32px;
+    margin-top: 18px;
+    margin-bottom: 32px;
+    border-style: none;
+}
+.module-button:hover{
     background: white;
     color: blueviolet;
 }

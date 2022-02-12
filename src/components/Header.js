@@ -8,7 +8,7 @@ const Header = ()=>{
     return(
         <div className="header">
             <div className="sidebar-logo">
-                <img src={logo} style={{height:"8vh"}} />
+                <a href="#"><img src={logo} style={{height:"8vh"}} /></a>
             </div>
 <div class="right-container">
             <div className="header-right">

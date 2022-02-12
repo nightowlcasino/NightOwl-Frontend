@@ -24,42 +24,44 @@ const Main = ()=>{
     <div class="precolumn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" /></div>
          <div class="leadercolumn">
              <div classname="leaderboard">
-                 <h1-leader>Leaderboard</h1-leader>
+                <h1-leader>Leaderboard</h1-leader>
                  <br />
              <table class="leaderboard-table">
                  <tr>
-                     <th>Address</th>
-                     <th>Amount</th>
-                     <th>Tx Explorer</th>
+                    
+                     <th><span class="leaderboard-toprow">Address</span></th>
+                     <th><span class="leaderboard-toprow">Amount</span></th>
+                     <th><span class="leaderboard-toprow">Tx Explorer</span></th>
+                     
                  </tr>
     <tr>
-    <td>9h5GHKeAKJ...</td>
-    <td>10 OWL</td> 
-    <td><a href="#">9c5ed99794d38...</a></td>
+    <td><span class="leaderboard-rows">9h5GHKeAKJ...</span></td>
+    <td><span class="leaderboard-rows">10 OWL</span></td> 
+    <td><a href="#"><span class="leaderboard-rows">9c5ed99794d38...</span></a></td>
      </tr>
 
      <tr>
-    <td>9h5GHKeAKJ...</td>
-    <td>10 OWL</td> 
-    <td><a href="#">9c5ed99794d38...</a></td>
+    <td><span class="leaderboard-rows">9h5GHKeAKJ...</span></td>
+    <td><span class="leaderboard-rows">10 OWL</span></td> 
+    <td><a href="#"><span class="leaderboard-rows">9c5ed99794d38...</span></a></td>
      </tr>
 
      <tr>
-    <td>9h5GHKeAKJ...</td>
-    <td>10 OWL</td> 
-    <td><a href="#">9c5ed99794d38...</a></td>
+    <td><span class="leaderboard-rows">9h5GHKeAKJ...</span></td>
+    <td><span class="leaderboard-rows">10 OWL</span></td> 
+    <td><a href="#"><span class="leaderboard-rows">9c5ed99794d38...</span></a></td>
      </tr>
 
      <tr>
-    <td>9h5GHKeAKJ...</td>
-    <td>10 OWL</td> 
-    <td><a href="#">9c5ed99794d38...</a></td>
+    <td><span class="leaderboard-rows">9h5GHKeAKJ...</span></td>
+    <td><span class="leaderboard-rows">10 OWL</span></td> 
+    <td><a href="#"><span class="leaderboard-rows">9c5ed99794d38...</span></a></td>
      </tr>
 
-       <tr>
-    <td>9h5GHKeAKJ...</td>
-    <td>10 OWL</td> 
-    <td><a href="#">9c5ed99794d38...</a></td>
+     <tr>
+    <td><span class="leaderboard-rows">9h5GHKeAKJ...</span></td>
+    <td><span class="leaderboard-rows">10 OWL</span></td> 
+    <td><a href="#"><span class="leaderboard-rows">9c5ed99794d38...</span></a></td>
      </tr>
               
                  </table>
@@ -70,7 +72,7 @@ const Main = ()=>{
          <p class="leaderboard-header">ERGOHACK FEB 2022</p>
          <p class="leaderboard-header">NIGHT OWL CASINO</p>
          <p class="leaderboard-header"></p>
-         <button class="hero-button">COMING SOON!</button>
+         <button class="module-button">COMING SOON!</button>
          </div>
 </div>
 </div>

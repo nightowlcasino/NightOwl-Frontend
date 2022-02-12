@@ -42,7 +42,6 @@ a {
 .list-items:active{
     padding-left: 32px;
     padding-top: 12px;
-    padding-bottom: 24px;
     display: flex;
     flex-direction: column;
     line-height: 3;
