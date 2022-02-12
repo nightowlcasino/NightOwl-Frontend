@@ -70,7 +70,25 @@
     color: white;
     font-size:11px;
     font-weight: 500;
+    text-align: right;
     padding-right: 8px;
+}
+.connect-wallet-button {
+    width: 155px;
+    display: block;
+    font-size: 12px;
+    border-radius: 25px;
+    padding: 6px 10px 5px 10px;
+    margin-right: 3px;
+    border: none;
+    background: white;
+    line-height: 27px;
+    vertical-align: middle;
+}
+@media screen and (max-width:728px){
+    .connect-wallet-button {
+        width: auto;
+    }
 }
 @media screen and (max-width:728px){
     .volume {
@@ -83,6 +101,11 @@
     font-weight: 500;
     font-size: 9px;
 }
+@media screen and (max-width:728px){
+    .connect-text {
+        display: none;
+    }
+}
 
 .connect-wallet-icon {
     height: 100%;
@@ -94,14 +117,3 @@
     float: left;
 }
 
-.connect-wallet-button {
-    width: 150px;
-    display: block;
-    font-size: 12px;
-    border-radius: 25px;
-    padding: 6px 10px 5px 10px;
-    margin-right: 4px;
-    border: none;
-    background: white;
-    line-height: 27px;
-}
