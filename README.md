@@ -80,7 +80,7 @@ Longer term goals are still being figured out, very hard to estimate any dates a
 <!-- ERGOHACK3 -->
 ## Ergo Hack III Goals
 
-Although ErgoHack's main focus is not the frontend of a dApp, and unfortunately most of our frontend devs will not be able to attend the event, not much development regarding the frontend will be done at the ErgoHack, however we plan to start creating the basics for the coinflip game while our backend devs are working hard with the help of the Ergo community!
+Although ErgoHack's main focus is not the frontend of a dApp, the team will be working to develop a beautiful UI for its users. 
 
 ### Run the project
 In the project directory, you can run:
