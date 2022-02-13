@@ -75,16 +75,6 @@ And after gathering information from different sources [1](https://www.freecodec
 - Set up a proper [file management](https://en.reactjs.org/docs/faq-structure.html)
 - Use [a linter](https://www.npmjs.com/package/@imaginary-cloud/eslint-config-react)
 
-<!-- ROADMAP -->
-## Roadmap
-
-### 2022
-
-#### Q1
-- [ ] Being able to connect your personal wallet with the website 
-- [ ] Testing of the known Coinflip game via website 
-- [ ] Have coinflip game launched, ideally coinflip and roulette
-
 Longer term goals are still being figured out, very hard to estimate any dates at this moment.
 
 <!-- ERGOHACK3 -->
