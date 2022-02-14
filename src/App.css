@@ -1,4 +1,24 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@300&display=swap');
+
+html,body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+}
+
+#root{
+  height: 100%;
+}
+
+.App{
+  background-image: linear-gradient(to top right,#190356, #4e038b, #74039A);
+  background-repeat: no-repeat;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   text-align: center;
 }
 
