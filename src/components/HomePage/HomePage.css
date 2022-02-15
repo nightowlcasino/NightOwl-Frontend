@@ -1,0 +1,22 @@
+.home-page{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.top-div{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 60%;
+    height: 30rem;
+    color: #fff;
+    background-image: url("../../assets/Elements/Design-2_0031_Layer-20.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.left-section{
+    margin-left: 60px;
+    text-align: left;
+}

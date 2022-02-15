@@ -1,0 +1,63 @@
+.swap-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #51127f;
+    color: white;
+    width: 30%;
+    border-radius: 25px;
+    box-shadow: 5px 10px 16px black;
+}
+
+.custom-select{
+    position: relative;
+}
+
+.custom-select select{
+    width: 100%;
+    color: #d70a84;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: transparent;
+    border: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 16%;
+    background-position-y: -4px;
+}
+
+.custom-select select:focus{
+    border: none;
+}
+
+.mid-swap p{
+    padding: -10px;
+    margin: -10px;
+}
+
+.mid-swap span{
+    display: block;
+    background-color: #d70a84;
+    width: 4rem;
+    border-radius: 15px;
+    margin: 5px;
+}
+
+.token-input{
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: #fff;
+    background-color: transparent;
+    top: 0;
+}
+
+.swap-div button{
+    color: #fff;
+    width: 50%;
+    height: 50px;
+    border: none;
+    border-radius: 30px;
+    background-image: linear-gradient(to right, #4e038b, #d70a84);
+    cursor: pointer;
+}
