@@ -85,6 +85,10 @@
     line-height: 27px;
     vertical-align: middle;
 }
+
+.connect-wallet-button a{
+    text-decoration-line: none;
+}
 @media screen and (max-width:728px){
     .connect-wallet-button {
         width: auto;

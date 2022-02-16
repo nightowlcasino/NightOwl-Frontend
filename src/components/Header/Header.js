@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../../assets/Elements/logo.png";
 import wallet from "../../assets/Elements/Design-2_0026_Layer-17.png"
 import "./Header.css"
+import { Link } from "react-router-dom";
 
 const Header = () => {
 	return (
@@ -20,10 +21,10 @@ const Header = () => {
 					<div className="connect-wallet">
 						<span class="volume">Volume: $123,456</span>
 						<button className="connect-wallet-button">
-							<a href="#">
+							<Link to="#">
 								<img className="connect-wallet-icon" src={wallet} />
 								<span class="connect-text">Connect Wallet</span>
-							</a>
+							</Link>
 						</button>
 					</div>
 				</div>

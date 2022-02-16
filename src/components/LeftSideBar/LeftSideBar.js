@@ -43,10 +43,10 @@ const LeftSideBar = () => {
 							P2P Betting
 						</Link>
 						<span className="popgames">Popular Games</span>
-						<a href="#">
+						<Link to="/coinflip">
 							<img src={Coinflip} />
 							Coinflip
-						</a>
+						</Link>
 						<Link to="/soon">
 							<img src={Blackjack} />
 							Blackjack
