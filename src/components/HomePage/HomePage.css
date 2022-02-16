@@ -1,7 +1,10 @@
 .home-page{
     display: flex;
+    flex-direction: column;
+    /* height: fit-content; */
     width: 100%;
     justify-content: center;
+    align-items: flex-start;
 }
 
 .top-div{
@@ -19,4 +22,52 @@
 .left-section{
     margin-left: 60px;
     text-align: left;
+}
+
+.bottom-div{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    gap: 5rem;
+}
+
+.bottom-top-section h2{
+    text-align: start;
+}
+
+.bottom-left-div{
+    margin-top: 2rem;
+    color: #fff;
+    background: #1f0452;
+    border: 5px solid #bd0b83;
+    border-radius: 25px;
+    width: 60%;
+}
+
+th span{
+    margin: 0 5rem;
+    color: #bd0b83;
+}
+
+tr td span{
+    margin: 0 3.8rem;
+}
+
+.bottom-right-div{
+    display: flex;
+    color: #fff;
+    background-color: #1f0452;
+    border: 5px solid #bd0b83;
+    border-radius: 25px;
+    width: 40%;
+    height: 250px;
+}
+
+.bottom-right-div button{
+    width: 20%;
+    height: 2rem;
+    border-radius: 25px;
+    color: #fff;
+    background: #1f0452;
+    border: 2px solid #bd0b83;
 }
