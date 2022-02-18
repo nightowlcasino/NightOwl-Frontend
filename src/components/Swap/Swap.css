@@ -1,3 +1,10 @@
+main{
+    display: flex;
+    justify-content: center;
+    gap: 12rem;
+    width: 100%;
+}
+
 .swap-div{
     display: flex;
     flex-direction: column;
@@ -5,9 +12,21 @@
     align-items: center;
     background-color: #51127f;
     color: white;
-    width: 30%;
+    width: 24%;
+    height: 60vh;
     border-radius: 25px;
     box-shadow: 5px 10px 16px black;
+    margin-top: 45px;
+}
+
+.swap-div h1{
+    color: #d70a84;
+    margin: 0;
+    padding: 0;
+}
+
+.desc{
+    padding-bottom: 20px;
 }
 
 .custom-select{
@@ -36,12 +55,16 @@
     margin: -10px;
 }
 
-.mid-swap span{
-    display: block;
+.to{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     background-color: #d70a84;
-    width: 4rem;
-    border-radius: 15px;
-    margin: 5px;
+    width: 3.2rem;
+    height: 1.2rem;
+    border-radius: 10px;
+    margin: 15px;
 }
 
 .token-input{
