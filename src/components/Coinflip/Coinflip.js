@@ -3,7 +3,7 @@ import "./Coinflip.css";
 
 const Coinflip = () => {
 	return (
-		<div className="swap-div">
+		<div className="coinflip-div">
 			<h1><span style={{color:"#d70a84"}}>Head </span><span>/ Tail</span></h1>
 
             <div className="below-head">

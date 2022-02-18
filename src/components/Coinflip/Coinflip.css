@@ -1,3 +1,17 @@
+.coinflip-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #51127f;
+    color: white;
+    width: 24%;
+    height: 60vh;
+    border-radius: 25px;
+    box-shadow: 5px 10px 16px black;
+    margin-top: 45px;
+}
+
 .below-head{
     display: flex;
     width: 90%;
@@ -21,8 +35,8 @@
     border-width: 0 0 2px;
     border-color: #fff;
     background-color: transparent;
-    height: 50px;
-    top: 0;
+    height: 20px;
+    margin: 30px 10px 0px 10px;
 }
 
 .coinflip-calc h1{
@@ -34,4 +48,15 @@
     margin: auto;
     color: #d70a84;
     font-weight: bolder;
+}
+
+.coinflip-div button{
+    margin-top: 10px;
+    color: #fff;
+    width: 50%;
+    height: 50px;
+    border: none;
+    border-radius: 30px;
+    background-image: linear-gradient(to right, #4e038b, #d70a84);
+    cursor: pointer;
 }
