@@ -4,6 +4,7 @@ import image from "../../assets/Elements/coinflip-pyramid.png";
 
 const Coinflip = () => {
   return (
+
     <main className="coinflip-container-main">
       <div className="coinflip-div">
         <h1>
@@ -33,8 +34,9 @@ const Coinflip = () => {
 
         <p>Transaction ID: {}</p>
       </div>
+
       <div className="coinflip-image-container">
-        <img src={image} style={{width:"30%"}} />
+        <img src={image} style={{width:"100%"}} />
       </div>
     </main>
   );

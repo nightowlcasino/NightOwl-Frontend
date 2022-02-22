@@ -1,6 +1,6 @@
 .coinflip-container-main {
     display:flex;   
-    justify-content: center;
+    align-items: center;
     gap: 12rem;
     width: 100%;
 }
@@ -19,7 +19,10 @@
     margin-top: 45px;
 }
 
-
+.coinflip-image-container {
+    height: 250px;
+    width: 300px;
+}
 .below-head{
     display: flex;
     width: 90%;
