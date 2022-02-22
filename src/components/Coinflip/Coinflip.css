@@ -1,3 +1,10 @@
+.coinflip-container-main {
+    display:flex;   
+    justify-content: center;
+    gap: 12rem;
+    width: 100%;
+}
+
 .coinflip-div{
     display: flex;
     flex-direction: column;
@@ -11,6 +18,7 @@
     box-shadow: 5px 10px 16px black;
     margin-top: 45px;
 }
+
 
 .below-head{
     display: flex;
