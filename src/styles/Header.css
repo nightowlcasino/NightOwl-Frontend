@@ -1,0 +1,119 @@
+.header{
+    display: table-row;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    position: absolute;
+    top: 0;
+    padding-top: 32px;
+    background-image: linear-gradient(to right, #490185, #720197);
+    background-repeat: no-repeat;
+}
+.sidebar-logo {
+    padding-left: 6vw;
+    display: table-cell;
+    justify-content: center;
+    align-items: center;
+    overflow: none;
+}
+.right-container {
+    display:table-cell;
+    width: 100%;
+    vertical-align: middle;
+}
+.header-right{
+    background-image: linear-gradient(to right, #51127f, #e20c8d);
+    width: auto;
+    margin-left: 20%;
+    margin-right: 20%;
+    border-radius: 25px;
+    height: 2.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.search-bar {
+    position: relative;
+    padding-bottom: 2px;
+    display: inline-block;
+    justify-content: space-between;
+    align-items: center;
+    height: 90%;
+    width: 350px;
+}
+
+#search-game{
+    border-color: transparent;
+    border-radius: 25px;
+    padding-left: 10px;
+    height: 90%;
+    width: 90%;
+}
+
+#search-game-icon {
+    position: absolute;
+    margin-left: 80%;
+}
+
+.connect-wallet{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    vertical-align: middle;
+}
+.volume{
+    color: white;
+    font-size:11px;
+    font-weight: 500;
+    text-align: right;
+    padding-right: 8px;
+}
+.connect-wallet-button {
+    width: 155px;
+    display: block;
+    font-size: 12px;
+    border-radius: 25px;
+    padding: 6px 10px 5px 10px;
+    margin-right: 3px;
+    border: none;
+    background: white;
+    line-height: 27px;
+    vertical-align: middle;
+}
+@media screen and (max-width:728px){
+    .connect-wallet-button {
+        width: auto;
+    }
+}
+@media screen and (max-width:728px){
+    .volume {
+        display: none;
+    }
+}
+.connect-text{
+    margin-top: 1px;
+    color: #e20c8d;
+    font-weight: 500;
+    font-size: 9px;
+}
+@media screen and (max-width:728px){
+    .connect-text {
+        display: none;
+    }
+}
+
+.connect-wallet-icon {
+    height: 100%;
+    width: 21px;
+    height: 26px;
+    padding-left: 4px;
+    padding-right: 4px;
+    
+    float: left;
+}
+

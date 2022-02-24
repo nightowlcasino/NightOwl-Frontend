@@ -1,57 +1,76 @@
 .left-side-bar{
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
-    gap: 1.2rem;
-    width: 20%;
-    justify-content: center;
-    align-items: center;
+    display: table-cell;
+    margin-left: 5%;
+    vertical-align: top;
+    overflow: visible;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
-
+@media screen and (max-width:728px){
+    .left-side-bar {
+        display: none;
+    }
+}
+a {
+    color: white;
+    text-decoration:none;
+  }
+  a:active{
+      color: hotpink;
+  }
+  a:hover{
+      color: hotpink;
+  }
 .bar{
     background-image: linear-gradient(to top left, #d70a84, #51127f);
-    height: 70vh;
-    width: 15vw;
+    height: auto;
+    min-width: 210px;
     border-radius: 15px;
     overflow:hidden ;
 }
 
-.bar-top{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    height: 8%;
-}
-
-.bar-top img{
-    padding-right: 15px;
-    height: 2vh;
-    width: auto;
-}
-
 .list-items{
+    padding-left: 32px;
+    padding-top: 12px;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    list-style: none;
+    line-height: 3;
+    background-color: none;
     color: white;
-}
 
+}
+.list-items:active{
+    padding-left: 32px;
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    line-height: 3;
+    color: white;
+
+}
 .list-items img{
     padding-right: 15px;
     height: 2vh;
     width: auto;
 }
 
-.bar button{
-    margin: 25px 30px;
+.bar-button{
+ background: none;
+}
+.popgames{
+    font-size: smaller;
+    font-weight: 100;
+    
+}
+.bar-button:hover{
     display: flex;
     align-items: center;
     justify-content: start;
-    height: 4vh;
-    width: 50%;
     border: white;
     border-radius: 15px;
+    background: white;
+}
+.caret{
+    color: white;
+    margin-bottom: 8px
 }
