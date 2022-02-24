@@ -4,19 +4,21 @@
     /* height: fit-content; */
     width: 100%;
     justify-content: center;
-    align-items: flex-start;
+    align-items: flex-end;
 }
 
 .top-div{
     display: flex;
     justify-content: start;
     align-items: center;
-    width: 60%;
+    width: 58%;
     height: 30rem;
     color: #fff;
     background-image: url("../../assets/Elements/Design-2_0031_Layer-20.png");
     background-size: cover;
     background-repeat: no-repeat;
+    margin-top: 5px;
+    margin-right: 200px;
 }
 
 .left-section{
@@ -25,10 +27,12 @@
 }
 
 .bottom-div{
-    width: 80%;
+    width: 60%;
     display: flex;
-    justify-content: space-between;
-    gap: 5rem;
+    /* justify-content: space-between; */
+    gap: 2rem;
+    margin-right: 155px;
+    margin-top: -20px;
 }
 
 .bottom-top-section h2{
@@ -41,7 +45,8 @@
     background: #1f0452;
     border: 5px solid #bd0b83;
     border-radius: 25px;
-    width: 60%;
+    width: 50%;
+    height: 85%;
 }
 
 th span{
@@ -60,7 +65,8 @@ tr td span{
     border: 5px solid #bd0b83;
     border-radius: 25px;
     width: 40%;
-    height: 250px;
+    height: 240px;
+    margin-top: 30px;
 }
 
 .bottom-right-div button{

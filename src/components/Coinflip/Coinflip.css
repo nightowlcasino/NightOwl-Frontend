@@ -52,16 +52,19 @@
 
 .coinflip-calc h1{
     cursor: pointer;
-
+    margin-left: 5px;
 }
 
 .coinflip-calc span{
-    margin: auto;
+    margin-top: 1.8rem;
     color: #d70a84;
     font-weight: bolder;
 }
 
 .coinflip-div button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 10px;
     color: #fff;
     width: 50%;
