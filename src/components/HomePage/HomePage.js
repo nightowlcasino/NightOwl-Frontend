@@ -51,14 +51,6 @@ const HomePage = ()=>{
                                     </td>
                                 </tr>
 
-                                <tr>
-                                    <td>
-                                        <span>2hRSbf...FKbhnz</span>
-                                        <span>1534 ERG</span>
-                                        <span>kjj3nDS...d342sz</span>
-                                    </td>
-                                </tr>
-
                             </table>
 
                         </div>

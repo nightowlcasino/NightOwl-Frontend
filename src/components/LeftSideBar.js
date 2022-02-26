@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../assets/Elements/logo.png";
 import Homepage from "../assets/Elements/Design-2_0039_Layer-5.png";
 import Games from "../assets/Elements/Design-2_0037_Layer-7.png";
 import Bonuses from "../assets/Elements/Design-2_0036_Layer-8.png";
@@ -14,26 +13,26 @@ import "../styles/LeftSideBar.css";
 const LeftSideBar = ()=>{
     return(
         <div className="left-side-bar">
-            <div className="sidebar-logo">
-                <img src={logo} style={{height:"8vh"}} />
-            </div>
-
             <div className="left-sidebar-div">
                 {/* <img src={sidebar} style={{height:"60vh"}}/> */}
                 <div className="bar">
-                    <div className="bar-top"><img src={Homepage} />Home page</div>
-                    <ul className="list-items">
-                        <li><img src={Games} />Games</li>
-                        <li><img src={Bonuses} />Bonuses</li>
-                        <li><img src={Rules} />Rules</li>
-                        <li><img src={Casino} />Casino</li>
-                        <li><img src={P2P} />P2P Betting</li>
-                        <p>Popular Games</p>
-                        <li><img src={Coinflip} />Coinflip</li>
-                        <li><img src={Blackjack} />Blackjack</li>
-                        <li><img src={Random} />Random</li>
-                    </ul>
-                    <button>Read more...</button>
+              
+                    <div className="list-items">
+                        <a href="#"><img src={Homepage} />Home page</a>
+                        <a href="#"><img src={Games} />Games</a>
+                        <a href="#"><img src={Bonuses} />Bonuses</a>
+                        <a href="#"><img src={Rules} />Rules</a>
+                        <a href="#"><img src={Casino} />Casino</a>
+                        <a href="#"><img src={P2P} />P2P Betting</a>
+                        <span class="popgames">Popular Games</span>
+                        <a href="#"><img src={Coinflip} />Coinflip</a>
+                        <a href="#"><img src={Blackjack} />Blackjack</a>
+                        <a href="#"><img src={Random} />Random</a>
+                    </div>
+                
+                    <div align="center" class="caret">
+                        <a href="#">▼</a>
+                        </div>
                 </div>
             </div>
         </div>
