@@ -26,9 +26,19 @@ h1-leader{
   height: 100%;
   width: 100%;
   display: flex;
+  justify-content: center;
   align-items: center;
   text-align: center;
+  left: 10rem;
+}
+
+.mainBody{
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-left: 10rem;
+  gap: 10rem;
 }
 
 .main{

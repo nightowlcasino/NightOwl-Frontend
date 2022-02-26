@@ -42,7 +42,7 @@ const Swap = () => {
 
                 <p>Slippage: {}</p>
             </div>
-            <img src={image} style={{width:"24%"}} />
+            <img src={image} style={{width:"30%"}} />
         </main>
 	);
 };

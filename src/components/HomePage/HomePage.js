@@ -30,7 +30,7 @@ const HomePage = ()=>{
                                 <th>
                                     <span>Address</span>
                                     <span>Amount</span>
-                                    <span>TX ID</span>
+                                    <span>TXID</span>
                                 </th>
                                 
                                 {/* {map the table rows here} */}

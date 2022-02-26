@@ -37,8 +37,8 @@ const Coinflip = () => {
         <p>Transaction ID: {}</p>
       </div>
 
-      <div className="coinflip-image-container">
-        <img src={image} style={{width:"100%"}} />
+      <div className="coinflip-image-container" style={{marginBottom:"150px"}}>
+        <img src={image} style={{width:"25vw"}} />
       </div>
     </main>
   );

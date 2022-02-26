@@ -26,7 +26,7 @@ const LeftSideBar = () => {
 							<img src={Games} />
 							Games
 						</Link>
-						<Link to="/soon">
+						<Link to="/stake">
 							<img src={Bonuses} />
 							Stake
 						</Link>

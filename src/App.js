@@ -6,19 +6,23 @@ import LeftSideBar from './components/LeftSideBar/LeftSideBar';
 import Swap from './components/Swap/Swap';
 import HomePage from './components/HomePage/HomePage';
 import Coinflip from './components/Coinflip/Coinflip';
+import Stake from './components/Stake/Stake';
 
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <LeftSideBar />
-      <div className="main">
-        <Routes>
-          <Route path='/swap' element={<Swap />} />
-          <Route path='/coinflip' element={<Coinflip />} />
-          <Route path='/' element={<HomePage />} />
-        </Routes>
+      <div className='mainBody'>
+        <LeftSideBar />
+        <div className="main">
+          <Routes>
+            <Route path='/swap' element={<Swap />} />
+            <Route path='/coinflip' element={<Coinflip />} />
+            <Route path='/stake' element={<Stake />} />
+            <Route path='/' element={<HomePage />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );

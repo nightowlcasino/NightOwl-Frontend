@@ -1,15 +1,16 @@
 .header{
-    display: table-row;
+    display: flex;
     height: auto;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     vertical-align: middle;
     position: absolute;
     top: 0;
     padding-top: 32px;
-    background-image: linear-gradient(to right, #490185, #720197);
-    background-repeat: no-repeat;
-    width: 100%;
+    /* background-image: linear-gradient(to right, #490185, #720197); */
+    /* background-repeat: no-repeat; */
+    width: 90%;
+    margin-left: 4rem;
 }
 .sidebar-logo {
     padding-left: 6vw;
@@ -25,9 +26,8 @@
 }
 .header-right{
     background-image: linear-gradient(to right, #51127f, #e20c8d);
-    width: auto;
-    margin-left: 20%;
-    margin-right: 20%;
+    width: 65%;
+    margin-left: 15%;
     border-radius: 25px;
     height: 2.8rem;
     display: flex;
@@ -84,7 +84,7 @@
     border: none;
     background: white;
     line-height: 27px;
-    vertical-align: middle;
+
 }
 
 .connect-wallet-button a{
@@ -95,26 +95,12 @@
     font-size: 15px;
     font-weight: bold;
 }
-@media screen and (max-width:728px){
-    .connect-wallet-button {
-        width: auto;
-    }
-}
-@media screen and (max-width:728px){
-    .volume {
-        display: none;
-    }
-}
+
 .connect-text{
     margin-top: 1px;
     color: #e20c8d;
     font-weight: 500;
     font-size: 9px;
-}
-@media screen and (max-width:728px){
-    .connect-text {
-        display: none;
-    }
 }
 
 .connect-wallet-icon {
@@ -123,6 +109,5 @@
     height: 26px;
     padding-left: 4px;
     padding-right: 4px;
-    
     float: left;
 }

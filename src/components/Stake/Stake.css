@@ -1,0 +1,30 @@
+.app{
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    width: 100%;
+}
+
+.text-content{
+    width: 50%;
+    display: flex;
+    text-align: start;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    background-color: #51127f;
+    border-radius: 25px;
+    box-shadow: 5px 10px 16px black;
+    height: 30%;
+    padding: 2rem;
+}
+
+.text-content button{
+    width: 22%;
+    height: 5rem;
+    border-radius: 25px;
+    border: none;
+    background-color: #d70a84;
+    color: white;
+    cursor: pointer;
+}

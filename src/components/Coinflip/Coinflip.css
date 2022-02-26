@@ -1,7 +1,8 @@
 .coinflip-container-main {
-    display:flex;   
+    display:flex;
+    justify-content: center; 
     align-items: center;
-    gap: 12rem;
+    gap: 10rem;
     width: 100%;
 }
 
@@ -12,11 +13,12 @@
     align-items: center;
     background-color: #51127f;
     color: white;
-    width: 24%;
+    width: 28%;
     height: 60vh;
     border-radius: 25px;
-    box-shadow: 5px 10px 16px black;
+    box-shadow: 1px 1px 20px black;
     margin-top: 45px;
+    margin-right: 4rem;
 }
 
 .coinflip-image-container {
