@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.loading-markup  {
+  padding: 4px 0;
+  text-align: center;
+}

@@ -37,7 +37,7 @@ const Coinflip = () => {
 
       <div className="coinflip-image-container">
         <img src={image} style={{width:"100%"}} />
-      </div>
+      </div>+
     </main>
   );
 };
