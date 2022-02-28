@@ -8,6 +8,9 @@ import HomePage from './components/HomePage/HomePage';
 import Coinflip from './components/Coinflip/Coinflip';
 import Stake from './components/Stake/Stake';
 
+import Swap from "./components/Swap/Swap";
+import HomePage from "./components/HomePage/HomePage";
+import Coinflip from "./components/Coinflip/Coinflip";
 
 function App() {
   return (

@@ -11,49 +11,51 @@ import Blackjack from "../../assets/Elements/Design-2_0050_Layer-12.png";
 import Random from "../../assets/Elements/Design-2_0049_Layer-13.png";
 import Swapicon from "../../assets/Elements/swap-icon.png";
 import "./LeftSideBar.css";
+import { useTranslation } from "react-i18next";
 
 const LeftSideBar = () => {
+	const { t } = useTranslation();
 	return (
 		<div className="left-side-bar">
 				<div className="bar">
 					<div className="list-items">
 						<Link to="/">
 							<img src={Homepage} />
-							Home page
+							{t("home_page")}
 						</Link>
 
 						<Link to="/soon">
 							<img src={Games} />
-							Games
+							{t("games")}
 						</Link>
 						<Link to="/stake">
 							<img src={Bonuses} />
-							Stake
+							{t("stake")}
 						</Link>
 						<Link to="/swap">
 							<img src={Swapicon} />
-							Swap
+							{t("swap")}
 						</Link>
 						<Link to="/soon">
 							<img src={Rules} />
-							Rules
+							{t("rules")}
 						</Link>
 						<Link to="/soon">
 							<img src={P2P} />
-							P2P Betting
+							{t("p2p_betting")}
 						</Link>
 						<span className="popgames">Popular Games</span>
 						<Link to="/coinflip">
 							<img src={Coinflip} />
-							Coinflip
+							{t("coinflip")}
 						</Link>
 						<Link to="/soon">
 							<img src={Blackjack} />
-							Blackjack
+							{t("blackjack")}
 						</Link>
 						<Link to="/soon">
 							<img src={Random} />
-							Random
+							{t("random")}
 						</Link>
 					</div>
 					<div align="center" className="caret">
