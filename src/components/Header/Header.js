@@ -7,18 +7,6 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import cookies from "js-cookie"
 
-const languages = [
-	{
-		code: 'en',
-		name: 'English',
-		country_code: 'us'
-	},
-	{
-		code: 'es',
-		name: 'Spanish',
-		country_code: 'es'
-	}
-]
 const Header = () => {
 	const currentLanguageCode = cookies.get("i18next") || "en"
 

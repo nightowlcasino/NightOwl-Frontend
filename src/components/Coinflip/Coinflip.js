@@ -3,27 +3,32 @@ import "./Coinflip.css";
 import image from "../../assets/Elements/coinflip-pyramid.png";
 import { HiPlus, HiMinus } from "react-icons/hi";
 import { ImHammer2 } from "react-icons/im";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
+import cookies from "js-cookie"
 
 const Coinflip = () => {
+  const { t } = useTranslation();
+
   return (
 
     <main className="coinflip-container-main">
       <div className="coinflip-div">
         <h1>
-          <span style={{ color: "#d70a84" }}>Head </span>
-          <span>/ Tail</span>
+          <span style={{ color: "#d70a84" }}>{t("head")} </span>
+          <span>/ {t("tail")}</span>
         </h1>
 
         <div className="below-head">
           <p>
-            selected <span>{"Head"}</span>
+          {t("selected")} <span>{"Head"}</span>
           </p>
           <p>
-            reward <span>{"20,000"}</span>
+          {t("reward")}<span>{"20,000"}</span>
           </p>
         </div>
 
-        <p>Please set a bet amount</p>
+        <p>{t("please_set")}</p>
 
         <div className="coinflip-calc">
           <h1>{<HiMinus size={35}/>}</h1>
@@ -32,9 +37,9 @@ const Coinflip = () => {
           <h1>{<HiPlus size={35}/>}</h1>
         </div>
 
-        <button><span style={{marginRight:'5px', transform: 'rotateY(180deg)'}}>{<ImHammer2 size={25} />}</span>Place bet</button>
+        <button><span style={{marginRight:'5px', transform: 'rotateY(180deg)'}}>{<ImHammer2 size={25} />}</span>{t("place_bet")}</button>
 
-        <p>Transaction ID: {}</p>
+        <p>{t("transaction_id")}{}</p>
       </div>
 
       <div className="coinflip-image-container" style={{marginBottom:"150px"}}>

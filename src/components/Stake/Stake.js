@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Chart from "react-apexcharts";
 import './Stake.css'
+import { useTranslation } from "react-i18next";
 
 const Stake = ()=> {
+  const { t } = useTranslation();
     const [options, setOptions] = useState({
         options: {
           chart: {
@@ -32,10 +34,9 @@ const Stake = ()=> {
     return (
       <div className="app">
         <div className="text-content">
-            <h1>Become a house!</h1>
-            <p>By staking your coins you are providing liquidity for other people to <br/>
-            play their favourite games and have fun.</p>
-            <button>STAKE NOW</button>
+            <h1>{t("become_house")}</h1>
+            <p>{t("become_house_txt")}</p>
+            <button>{t("stake_now")}</button>
         </div>
 
         <div className="row">
