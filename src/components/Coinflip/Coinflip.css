@@ -43,6 +43,10 @@
     display: flex;
 }
 
+#owl-literal {
+    font-size: 30px;
+    line-height: 30px;
+}
 .coinflip-calc input{
     outline: 0;
     border-width: 0 0 2px;

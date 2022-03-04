@@ -52,6 +52,7 @@
     padding-left: 10px;
     height: 90%;
     width: 90%;
+    font-family: 'Poppins', sans-serif;
 }
 
 #search-game-icon {
@@ -179,6 +180,7 @@
 .connect-text{
     font-size: 15px;
     font-weight: bold;
+    font-family: 'Poppins', sans-serif;
 }
 
 .connect-text{

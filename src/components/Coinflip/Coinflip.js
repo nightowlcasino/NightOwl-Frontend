@@ -4,14 +4,12 @@ import image from "../../assets/Elements/coinflip-pyramid.png";
 import { HiPlus, HiMinus } from "react-icons/hi";
 import { ImHammer2 } from "react-icons/im";
 import { useTranslation } from "react-i18next";
-import i18next from "i18next";
-import cookies from "js-cookie"
+
 
 const Coinflip = () => {
   const { t } = useTranslation();
 
   return (
-
     <main className="coinflip-container-main">
       <div className="coinflip-div">
         <h1>
@@ -33,7 +31,7 @@ const Coinflip = () => {
         <div className="coinflip-calc">
           <h1>{<HiMinus size={35}/>}</h1>
           <input type="text" pattern="[^a-zA-Z]+" />
-          <span>OWL</span>
+          <span id="owl-literal">OWL</span>
           <h1>{<HiPlus size={35}/>}</h1>
         </div>
 
