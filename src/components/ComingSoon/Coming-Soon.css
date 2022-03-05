@@ -4,7 +4,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: blueviolet;
+    background-color: #51127f;
+    box-shadow: 5px 10px 16px black;
     border-radius: 25px;
     margin: auto;
 }
