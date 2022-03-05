@@ -1,0 +1,14 @@
+.soon{
+    width: 50%;
+    height: 25vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blueviolet;
+    border-radius: 25px;
+    margin: auto;
+}
+
+h1{
+    color: white;
+}
