@@ -16,7 +16,7 @@ const LeftSideBar = () => {
 	const { t } = useTranslation();
 	return (
 		<div className="hidden lg:flex flex-col mt-[5rem] h-full">
-				<div className="flex flex-col justify-center bg-gradient-to-tl from-[#d70a84] to-[#51127f] h-[60vh] lg:h-[60vh] xl:h-[70vh] 2xl:h-[84vh] w-[15vw] lg:w-[25vw] xl:max-w-[22vw] 2xl:w-[16vw] rounded-xl mt-[2rem] ">
+				<div className="flex flex-col justify-center bg-gradient-to-tl from-[#d70a84] to-[#51127f] h-[60vh] lg:h-[700px] w-[15vw] lg:w-[25vw] xl:max-w-[22vw] 2xl:w-[16vw] rounded-3xl mt-[2rem] ">
 					<div className="overflow-y-auto flex justify-center items-center">
 						<div className="flex flex-col gap-9 2xl:gap-10 justify-center items-start mt-4 mb-4 sm:text-sm lg:text-lg text-white font-medium">
 							<Link to="/" className="flex gap-4 justify-center items-center ">

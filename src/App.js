@@ -16,15 +16,17 @@ function App() {
       <Header />
       <div className='mainBody'>
         <LeftSideBar />
-        <div className="main">
-          <Routes>
-            <Route path='/swap' element={<Swap />} />
-            <Route path='/coinflip' element={<Coinflip />} />
-            <Route path='/stake' element={<Stake />} />
-            <Route path='/soon' element={<ComingSoon />} />
-            <Route path='/leaderboard' element={<Leaderboard />} />
-            <Route path='/' element={<HomePage />} />
-          </Routes>
+        <div className=' h-[100%] w-full'>
+          <div className="main">
+              <Routes>
+                <Route path='/swap' element={<Swap />} />
+                <Route path='/coinflip' element={<Coinflip />} />
+                <Route path='/stake' element={<Stake />} />
+                <Route path='/soon' element={<ComingSoon />} />
+                <Route path='/leaderboard' element={<Leaderboard />} />
+                <Route path='/' element={<HomePage />} />
+              </Routes>
+            </div>
         </div>
       </div>
     </div>
