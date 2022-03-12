@@ -4,7 +4,6 @@ import Homepage from "../../assets/Elements/Design-2_0039_Layer-5.png";
 import Games from "../../assets/Elements/Design-2_0037_Layer-7.png";
 import Bonuses from "../../assets/Elements/Design-2_0036_Layer-8.png";
 import Rules from "../../assets/Elements/Design-2_0035_Layer-9.png";
-import Casino from "../../assets/Elements/Design-2_0034_Layer-10.png";
 import P2P from "../../assets/Elements/Design-2_0038_Layer-6.png";
 import Coinflip from "../../assets/Elements/Design-2_0051_Layer-11.png";
 import Blackjack from "../../assets/Elements/Design-2_0050_Layer-12.png";
@@ -16,10 +15,10 @@ import { useTranslation } from "react-i18next";
 const LeftSideBar = () => {
 	const { t } = useTranslation();
 	return (
-		<div className="hidden lg:flex flex-col m-0 p-0 mt-[5rem] ">
-				<div className="flex flex-col justify-center bg-gradient-to-tl from-[#d70a84] to-[#51127f] lg:h-[60vh] xl:h-[70vh] 2xl:h-[82vh] w-[15vw] lg:w-[25vw] xl:max-w-[22vw] 2xl:w-[16vw] rounded-xl overflow-hidden mt-[2rem] ">
-					<div className="flex justify-center items-center">
-						<div className="flex flex-col gap-9 2xl:gap-10 justify-center items-start mt-4 mb-4 text-lg text-white font-medium">
+		<div className="hidden lg:flex flex-col mt-[5rem] h-full">
+				<div className="flex flex-col justify-center bg-gradient-to-tl from-[#d70a84] to-[#51127f] h-[60vh] lg:h-[60vh] xl:h-[70vh] 2xl:h-[84vh] w-[15vw] lg:w-[25vw] xl:max-w-[22vw] 2xl:w-[16vw] rounded-xl mt-[2rem] ">
+					<div className="overflow-y-auto flex justify-center items-center">
+						<div className="flex flex-col gap-9 2xl:gap-10 justify-center items-start mt-4 mb-4 sm:text-sm lg:text-lg text-white font-medium">
 							<Link to="/" className="flex gap-4 justify-center items-center ">
 								<img src={Homepage} className=" h-[2vh] w-auto " />
 								{t("home_page")}
