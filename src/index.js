@@ -10,6 +10,7 @@ import HttpApi from "i18next-http-backend";
 import "./index.css";
 import App from "./App";
 
+
 i18n
 	.use(initReactI18next) // passes i18n down to react-i18next
 	.use(LanguageDetector)
@@ -18,7 +19,7 @@ i18n
 		supportedLngs: ["en", "es"],
 		fallbackLng: "en",
 		detection: {
-			order: ["htmlTag", "cookie", "localStorage", , "htmlTag", "path"],
+			order: ["htmlTag", "cookie", "localStorage", "htmlTag", "path"],
 			caches: ["cookie"],
 		},
 		backend: {

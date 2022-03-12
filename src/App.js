@@ -8,6 +8,7 @@ import HomePage from './components/HomePage/HomePage';
 import Coinflip from './components/Coinflip/Coinflip';
 import Stake from './components/Stake/Stake';
 import ComingSoon from './components/ComingSoon/Coming-Soon';
+import Leaderboard from './components/HomePage/Leaderboard';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path='/coinflip' element={<Coinflip />} />
             <Route path='/stake' element={<Stake />} />
             <Route path='/soon' element={<ComingSoon />} />
+            <Route path='/leaderboard' element={<Leaderboard />} />
             <Route path='/' element={<HomePage />} />
           </Routes>
         </div>
