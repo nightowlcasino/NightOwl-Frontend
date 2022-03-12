@@ -10,55 +10,57 @@ import Coinflip from "../../assets/Elements/Design-2_0051_Layer-11.png";
 import Blackjack from "../../assets/Elements/Design-2_0050_Layer-12.png";
 import Random from "../../assets/Elements/Design-2_0049_Layer-13.png";
 import Swapicon from "../../assets/Elements/swap-icon.png";
-import "./LeftSideBar.css";
+// import "./LeftSideBar.css";
 import { useTranslation } from "react-i18next";
 
 const LeftSideBar = () => {
 	const { t } = useTranslation();
 	return (
-		<div className="left-side-bar">
-				<div className="bar">
-					<div className="list-items">
-						<Link to="/">
-							<img src={Homepage} />
-							{t("home_page")}
-						</Link>
+		<div className="hidden lg:flex flex-col m-0 p-0 mt-[5rem] ">
+				<div className="flex flex-col justify-center bg-gradient-to-tl from-[#d70a84] to-[#51127f] lg:h-[60vh] xl:h-[70vh] 2xl:h-[82vh] w-[15vw] lg:w-[25vw] xl:max-w-[22vw] 2xl:w-[16vw] rounded-xl overflow-hidden mt-[2rem] ">
+					<div className="flex justify-center items-center">
+						<div className="flex flex-col gap-9 2xl:gap-10 justify-center items-start mt-4 mb-4 text-lg text-white font-medium">
+							<Link to="/" className="flex gap-4 justify-center items-center ">
+								<img src={Homepage} className=" h-[2vh] w-auto " />
+								{t("home_page")}
+							</Link>
 
-						<Link to="/soon">
-							<img src={Games} />
-							{t("games")}
-						</Link>
-						<Link to="/stake">
-							<img src={Bonuses} />
-							{t("stake")}
-						</Link>
-						<Link to="/swap">
-							<img src={Swapicon} />
-							{t("swap")}
-						</Link>
-						<Link to="/soon">
-							<img src={Rules} />
-							{t("rules")}
-						</Link>
-						<Link to="/soon">
-							<img src={P2P} />
-							{t("p2p_betting")}
-						</Link>
-						<span className="popgames">Popular Games</span>
-						<Link to="/coinflip">
-							<img src={Coinflip} />
-							{t("coinflip")}
-						</Link>
-						<Link to="/soon">
-							<img src={Blackjack} />
-							{t("blackjack")}
-						</Link>
-						<Link to="/soon">
-							<img src={Random} />
-							{t("random")}
-						</Link>
+							<Link to="/soon" className="flex gap-4 justify-center items-center ">
+								<img src={Games} className="h-[2vh] w-auto " />
+								{t("games")}
+							</Link>
+							<Link to="/stake" className="flex gap-4 justify-center items-center ">
+								<img src={Bonuses} className="pr-[15px] h-[2vh] w-auto " />
+								{t("stake")}
+							</Link>
+							<Link to="/swap" className="flex gap-4 justify-center items-center ">
+								<img src={Swapicon} className="pr-[15px] h-[2vh] w-auto " />
+								{t("swap")}
+							</Link>
+							<Link to="/soon" className="flex gap-4 justify-center items-center ">
+								<img src={Rules} className="pr-[15px] h-[2vh] w-auto " />
+								{t("rules")}
+							</Link>
+							<Link to="/soon" className="flex gap-4 justify-center items-center ">
+								<img src={P2P} className="pr-[15px] h-[2vh] w-auto " />
+								{t("p2p_betting")}
+							</Link>
+							<span className="font-normal">Popular Games</span>
+							<Link to="/coinflip" className="flex gap-4 justify-center items-center ">
+								<img src={Coinflip} className="pr-[15px] h-[2vh] w-auto " />
+								{t("coinflip")}
+							</Link>
+							<Link to="/soon" className="flex gap-4 justify-center items-center ">
+								<img src={Blackjack} className="pr-[15px] h-[2vh] w-auto " />
+								{t("blackjack")}
+							</Link>
+							<Link to="/soon" className="flex gap-4 justify-center items-center ">
+								<img src={Random} className="pr-[15px] h-[2vh] w-auto " />
+								{t("random")}
+							</Link>
+						</div>
 					</div>
-					<div align="center" className="caret">
+					<div className="text-white">
 						<a href="#">▼</a>
 					</div>
 				</div>
