@@ -9,14 +9,13 @@ import Coinflip from "../../assets/Elements/Design-2_0051_Layer-11.png";
 import Blackjack from "../../assets/Elements/Design-2_0050_Layer-12.png";
 import Random from "../../assets/Elements/Design-2_0049_Layer-13.png";
 import Swapicon from "../../assets/Elements/swap-icon.png";
-// import "./LeftSideBar.css";
 import { useTranslation } from "react-i18next";
 
 const LeftSideBar = () => {
 	const { t } = useTranslation();
 	return (
 		<div className="hidden lg:flex flex-col mt-[5rem] h-full">
-				<div className="flex flex-col justify-center bg-gradient-to-tl from-[#d70a84] to-[#51127f] h-[60vh] lg:h-[700px] w-[15vw] lg:w-[25vw] xl:max-w-[22vw] 2xl:w-[16vw] rounded-3xl mt-[2rem] ">
+				<div className="flex flex-col justify-center bg-purple-500 h-[700px] max-w-[20vw] lg:w-[20vw] xl:w-[18vw] 2xl:max-w-[16vw] rounded-3xl">
 					<div className="overflow-y-auto flex justify-center items-center">
 						<div className="flex flex-col gap-9 2xl:gap-10 justify-center items-start mt-4 mb-4 sm:text-sm lg:text-lg text-white font-medium">
 							<Link to="/" className="flex gap-4 justify-center items-center ">

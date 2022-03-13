@@ -14,10 +14,10 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div className='mainBody'>
+      <div className='w-[100%] h-[100%] flex justify-center mt-[15px] gap-[5rem] lg:gap-4 ml-2 2xl:ml-[20rem] '>
         <LeftSideBar />
-        <div className=' h-[100%] w-full'>
-          <div className="main">
+        <div className=' h-[100%] w-full mt-[5rem]'>
+          <div className="w-[100%] flex justify-center lg:justify-start">
               <Routes>
                 <Route path='/swap' element={<Swap />} />
                 <Route path='/coinflip' element={<Coinflip />} />

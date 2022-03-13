@@ -46,9 +46,8 @@ h1-leader{
 .main{
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   margin-top: 5rem;
-  width: 100%;
 }
 
 .App-logo {
