@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <div className="flex h-auto justify-between sm:justify-start lg:items-center top-0 fixed w-full md:max-w-[700px] lg:max-w-[1460px] mt-[10px]">      
 
-      <img src={logo} className="sm:hidden max-w-[120px] sm:ml-0 fixed min-w-[100px] w-[100px] sm:w-[15vw] md:min-w-[60px] 2xl:h-[50px] 2xl:w-[6%] min-h-[62px] top-0" />
+      <img src={logo} className="sm:hidden mt-2 max-w-[120px] sm:ml-0 fixed min-w-[100px] w-[100px] sm:w-[15vw] md:min-w-[60px] 2xl:h-[50px] 2xl:w-[6%] min-h-[62px] top-0" />
       <div className="w-full flex  sm:ml-12 lg:ml-0 justify-end sm:justify-start  ">
         <div style={{backgroundImage: "linear-gradient(to right, #51127f,#e20c8d)"}} className="flex justify-between items-center w-[70%] lg:ml-0 rounded-[25px] h-[2.8rem]">
           <div className="search-bar">

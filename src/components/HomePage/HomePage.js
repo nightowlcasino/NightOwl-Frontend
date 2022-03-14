@@ -5,7 +5,7 @@ import topSectionRightImg from "../../assets/Elements/homePageRightImg.png";
 
 const HomePage = () => {
 	return (
-		<div className="max-w-full flex flex-col justify-center xl:mr-16 items-center lg:items-start">
+		<div className="mx-2 lg:mx-0 max-w-full flex flex-col justify-center xl:mr-16 items-center lg:items-start">
 			<header
 				style={{
 					backgroundImage: "linear-gradient(to bottom right, #190551,#420d7c)",
