@@ -24,18 +24,14 @@ const Header = () => {
 
   const { t } = useTranslation();
   return (
-    <div className="header">
-      <div className="sidebar-logo">
-        <a href="#">
-          <img src={logo} style={{ height: "8vh" }} />
-        </a>
-      </div>
-      <div class="right-container">
-        <div className="header-right">
+    <div className="flex h-auto items-center top-0 fixed w-full lg:ml-[4rem] mt-[10px]">      
+
+      <div className="w-full mr-10 flex justify-end lg:justify-center lg:ml-[11rem] xl:ml-[4rem] 2xl:ml-[13rem] ">
+        <div style={{backgroundImage: "linear-gradient(to right, #51127f,#e20c8d)"}} className="flex justify-between items-center  w-[80%] md:w-[90%] md:ml-0 lg:w-[75%] xl:w-[70%] rounded-[25px] h-[2.8rem]">
           <div className="search-bar">
             <input id="search-game" type="text" placeholder={t("search_games")} />
           </div>
-          <div className="lang-menu">
+          <div className="lang-menu hidden lg:block ">
             <div className="selected-lang">English</div>
             <ul>
               <li>
@@ -51,7 +47,7 @@ const Header = () => {
             </ul>
           </div>
           <div className="connect-wallet">
-            <span class="volume">{t("volume")} $123,456</span>
+            <span className="volume hidden lg:inline">{t("volume")} $123,456</span>
             <button className="connect-wallet-button">
               <Link to="#">
                 <img className="connect-wallet-icon" src={wallet} />

@@ -19,13 +19,13 @@
     overflow: none;
 }
 .right-container {
-    display:table-cell;
+    /* display:table-cell; */
     width: 100%;
-    vertical-align: middle;
+    /* vertical-align: middle; */
 }
 .header-right{
     background-image: linear-gradient(to right, #51127f, #e20c8d);
-    width: 65%;
+    width: 75%;
     margin-left: 15%;
     border-radius: 25px;
     height: 2.8rem;

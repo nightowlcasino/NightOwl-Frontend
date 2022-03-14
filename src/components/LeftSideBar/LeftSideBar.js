@@ -14,8 +14,8 @@ import { useTranslation } from "react-i18next";
 const LeftSideBar = () => {
 	const { t } = useTranslation();
 	return (
-		<div className="hidden lg:flex flex-col mt-[5rem] h-full">
-				<div className="flex flex-col justify-center bg-purple-500 h-[700px] max-w-[20vw] lg:w-[20vw] xl:w-[18vw] 2xl:max-w-[16vw] rounded-3xl">
+		<div className="hidden lg:flex flex-col mt-[5rem] h-full gap-4">			
+				<div style={{backgroundImage:"linear-gradient(to bottom left, #d70a84, #51127f)"}} className="flex flex-col justify-center h-[700px] max-w-[25vw] lg:w-[25vw] xl:w-[18vw] 2xl:max-w-[16vw] rounded-3xl">
 					<div className="overflow-y-auto flex justify-center items-center">
 						<div className="flex flex-col gap-9 2xl:gap-10 justify-center items-start mt-4 mb-4 sm:text-sm lg:text-lg text-white font-medium">
 							<Link to="/" className="flex gap-4 justify-center items-center ">

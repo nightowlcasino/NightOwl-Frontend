@@ -46,7 +46,7 @@ h1-leader{
 .main{
   width: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   margin-top: 5rem;
 }
 

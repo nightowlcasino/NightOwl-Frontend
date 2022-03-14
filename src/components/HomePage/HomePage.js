@@ -5,41 +5,53 @@ import topSectionRightImg from "../../assets/Elements/homePageRightImg.png";
 
 const HomePage = () => {
 	return (
-		<div className="flex flex-col justify-center items-start sm:items-center lg:items-start">
-			<header className="flex justify-start items-center object-cover rounded-xl w-[90%] h-auto lg:h-[30rem] text-white bg-home-1 bg-cover bg-no-repeat lg:mr-50 ">
-				<div className="left-section">
-					<div className="top-para hidden lg:block">
+		<div className="w-full flex flex-col justify-center mr-16 items-center sm:items-center lg:items-start">
+			<header
+				style={{
+					backgroundImage: "linear-gradient(to bottom right, #190551,#420d7c)",
+				}}
+				className="border-4 border-[#bd0b83] rounded-[25px] w-[80%] lg:w-[90%] flex flex-col lg:flex-row justify-evenly lg:justify-between items-center object-contain rounded-xl h-[600px] text-white lg:mr-50"
+			>
+				<div className="lg:text-left lg:h-full lg:flex lg:flex-col lg:justify-between lg:ml-6 lg:ml-12">
+					<div className="top-para hidden lg:block mt-4">
 						<p>Hot right</p>
 						<p>now!</p>
 					</div>
+					<div className="mb-8">
+						<div className="font-semibold leading-relaxed tracking-wider mb-4">
+							<h1 className="text-5xl">Win 100$ and</h1>
+							<h1 className="text-5xl">5 free spins!</h1>
+						</div>
+						<p className="hidden lg:block mb-4">
+							Have fun in a decentralized way and enjoy <br />
+							the freedom of the blockchain!
+						</p>
 
-					<h1>Win 100$ and</h1>
-					<h1>5 free spins!</h1>
-					<p className="hidden lg:block">
-						Have fun in a decentralized way and enjoy <br />
-						the freedom of the blockchain!
-					</p>
-
-					<button>CLAIM HERE</button>
+						<div className="w-full h-full">
+							<button style={{backgroundImage: "linear-gradient(to right, #420d7c,#bd0b83)", lineHeight:"1.6"}}
+							className="w-[60%] h-[40px] lg:w-[20vw] lg:h-[50px] rounded-2xl text-lg ">
+								CLAIM HERE
+							</button>
+						</div>
+					</div>
 				</div>
-
-				<div>
+				<div className="lg:mr-6 h-auto w-[60vw] md:w-[45vw] ">
 					<img src={topSectionRightImg} />
 				</div>
 			</header>
-			<div className="w-[90%] flex gap-1  mt-[-20px] ">
-				<div className="mt-[2rem] text-white bg-[#1f0452] border-[5px] border-[#bd0b83] rounded-[25px] w-[55%] h-auto ">
-					<div className="bottom-top-section">
+			<div className="w-[90%] flex flex-col lg:flex-row items-center mt-[25px] lg:gap-4">
+				<div className="mt-[2rem] text-white bg-[#1f0452] border-[5px] border-[#bd0b83] rounded-[25px] w-[90%] mt-0 lg:w-[55%] h-[150px] sm:h-[180px] flex flex-col justify-center ">
+					<div className="bottom-top-section ml-[15px]">
 						<h2>Leaderboard</h2>
 					</div>
 
-					<div className="table-div">
+					<div className="table-div w-full">
 						<table>
 							<tbody>
 								<th>
 									<span>Address</span>
 									<span>Amount</span>
-									<span>TXID</span>
+									<span className="hidden lg:inline">TXID</span>
 								</th>
 
 								{/* {map the table rows here} */}
@@ -48,7 +60,7 @@ const HomePage = () => {
 									<td>
 										<span>2hRSbf...FKbhnz</span>
 										<span>1534 ERG</span>
-										<span>kjj3nDS...d342sz</span>
+										<span className="hidden lg:inline">kjj3nDS...d342sz</span>
 									</td>
 								</tr>
 
@@ -56,7 +68,7 @@ const HomePage = () => {
 									<td>
 										<span>2hRSbf...FKbhnz</span>
 										<span>1534 ERG</span>
-										<span>kjj3nDS...d342sz</span>
+										<span className="hidden lg:inline">kjj3nDS...d342sz</span>
 									</td>
 								</tr>
 							</tbody>
@@ -64,20 +76,13 @@ const HomePage = () => {
 					</div>
 				</div>
 
-				<div className="flex text-white bg-[#1f0452] border-[5px] border-[#bd0b83] rounded-[25px] w-[45%] h-auto mt-[30px] ">
-					<div
-						style={{
-							display: "flex",
-							flexDirection: "column",
-							justifyContent: "space-between",
-							height: "100%",
-						}}
-					>
-						<div style={{ margin: "2rem" }}>
+				<div className="flex justify-evenly text-white bg-[#1f0452] border-[5px] border-[#bd0b83] rounded-[25px] w-[90%] lg:w-[45%] h-[150px] sm:h-[180px] mt-[20px] lg:mt-0 ">
+					<div className="flex flex-col justify-between h-full">
+						<div>
 							<h2
 								style={{
 									textAlign: "start",
-									margin: "0",
+									marginLeft: "15px",
 									padding: "0",
 									top: 0,
 								}}
@@ -87,7 +92,7 @@ const HomePage = () => {
 							<p
 								style={{
 									textAlign: "start",
-									margin: "0",
+									marginLeft: "15px",
 									padding: "0",
 									top: 0,
 								}}
@@ -96,12 +101,14 @@ const HomePage = () => {
 							</p>
 						</div>
 
-						<button style={{ margin: "2rem", width: "50%", height: "3rem" }}>
+						<button className="mb-2 ml-[15px] w-[90%] h-[38px] border-2 border-[#bd0b83] rounded-2xl ">
 							Play it now
 						</button>
 					</div>
+					
 
-					<img src={image1} style={{ maxWidth: "40%", height: "auto" }} />
+					<img src={image1} className="w-[25%] sm:w-[22%] lg:w-[15vw] mb-2 h-auto" />
+
 				</div>
 			</div>
 		</div>
