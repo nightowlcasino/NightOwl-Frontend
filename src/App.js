@@ -13,13 +13,14 @@ import Leaderboard from './components/HomePage/Leaderboard';
 function App() {
   return (
     <div className="App">
-      <Header />
-      <div className='w-[100%] h-[100%] flex justify-center mt-[15px] gap-[5rem] lg:gap-8 ml-2 2xl:ml-[18rem] '>
-        <div className='flex flex-col items-center'>
-          <img src={logo} className="ml-16 sm:ml-10 lg:ml-0 fixed min-w-[10vw] w-[18vw] sm:w-[15vw] md:min-w-[6%] md:w-[10%] 2xl:h-[50px] 2xl:w-[6%] min-h-[62px] top-0" />
+     
+      <div className='w-[100%] h-[100%] flex justify-center mt-[15px] lg:gap-2 xl:gap-8 2xl:gap-28 lg:ml-[9rem] 2xl:ml-[18rem] '>
+        <div className='flex flex-col items-end sm:items-center'>
+          <img src={logo} className="hidden sm:block max-w-[120px] sm:ml-0 fixed min-w-[100px] w-[18vw] sm:w-[15vw] md:min-w-[60px] 2xl:h-[50px] 2xl:w-[6%] min-h-[62px] top-0" />
           <LeftSideBar />
         </div>
-        <div className=' h-[100%] w-full mt-[5rem]'>
+        <div className=' h-[100%] flex flex-col items-center sm:items-start w-full mt-[5rem]'>
+          <Header />
           <div className="w-[100%] flex justify-center lg:justify-start">
               <Routes>
                 <Route path='/swap' element={<Swap />} />

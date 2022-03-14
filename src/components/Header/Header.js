@@ -24,10 +24,11 @@ const Header = () => {
 
   const { t } = useTranslation();
   return (
-    <div className="flex h-auto items-center top-0 fixed w-full lg:ml-[4rem] mt-[10px]">      
+    <div className="flex h-auto justify-between sm:justify-start lg:items-center top-0 fixed w-full md:max-w-[700px] lg:max-w-[1460px] mt-[10px]">      
 
-      <div className="w-full mr-10 flex justify-end lg:justify-center lg:ml-[11rem] xl:ml-[4rem] 2xl:ml-[13rem] ">
-        <div style={{backgroundImage: "linear-gradient(to right, #51127f,#e20c8d)"}} className="flex justify-between items-center  w-[80%] md:w-[90%] md:ml-0 lg:w-[75%] xl:w-[70%] rounded-[25px] h-[2.8rem]">
+      <img src={logo} className="sm:hidden max-w-[120px] sm:ml-0 fixed min-w-[100px] w-[100px] sm:w-[15vw] md:min-w-[60px] 2xl:h-[50px] 2xl:w-[6%] min-h-[62px] top-0" />
+      <div className="w-full flex  sm:ml-12 lg:ml-0 justify-end sm:justify-start  ">
+        <div style={{backgroundImage: "linear-gradient(to right, #51127f,#e20c8d)"}} className="flex justify-between items-center w-[70%] lg:ml-0 rounded-[25px] h-[2.8rem]">
           <div className="search-bar">
             <input id="search-game" type="text" placeholder={t("search_games")} />
           </div>
