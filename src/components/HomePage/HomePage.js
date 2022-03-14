@@ -12,7 +12,7 @@ const HomePage = () => {
 				}}
 				className="border-4 border-[#bd0b83] rounded-[25px] w-[80%] lg:w-[90%] flex flex-col lg:flex-row justify-evenly lg:justify-between items-center object-contain rounded-xl h-[600px] text-white lg:mr-50"
 			>
-				<div className="lg:text-left lg:h-full lg:flex lg:flex-col lg:justify-between lg:ml-6 lg:ml-12">
+				<div className="lg:text-left lg:h-full lg:flex lg:flex-col lg:justify-between lg:ml-20">
 					<div className="top-para hidden lg:block mt-4">
 						<p>Hot right</p>
 						<p>now!</p>
@@ -35,9 +35,9 @@ const HomePage = () => {
 						</div>
 					</div>
 				</div>
-				<div className="lg:mr-6 h-auto w-[60vw] md:w-[45vw] ">
-					<img src={topSectionRightImg} />
-				</div>
+				
+				<img src={topSectionRightImg} className="lg:mr-20 h-auto w-[60vw] md:w-[45vw] lg:max-w-[40vw] 2xl:w-[32vw] " />
+
 			</header>
 			<div className="w-[90%] flex flex-col lg:flex-row items-center mt-[25px] lg:gap-4">
 				<div className="mt-[2rem] text-white bg-[#1f0452] border-[5px] border-[#bd0b83] rounded-[25px] w-[90%] mt-0 lg:w-[55%] h-[150px] sm:h-[180px] flex flex-col justify-center ">
