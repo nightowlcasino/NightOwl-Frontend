@@ -10,7 +10,6 @@ import HttpApi from "i18next-http-backend";
 import "./index.css";
 import App from "./App";
 
-
 i18n
 	.use(initReactI18next) // passes i18n down to react-i18next
 	.use(LanguageDetector)
@@ -35,7 +34,7 @@ const loadingMarkup = (
 ReactDOM.render(
 	<Suspense fallback={loadingMarkup}>
 		<React.StrictMode>
-			<BrowserRouter>
+			<BrowserRouter basename="/app">
 				<App />
 			</BrowserRouter>
 		</React.StrictMode>
