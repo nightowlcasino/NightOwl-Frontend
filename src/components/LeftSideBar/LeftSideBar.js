@@ -44,11 +44,11 @@ const LeftSideBar = () => {
 								{t("p2p_betting")}
 							</Link>
 							<span className="font-normal">Popular Games</span>
-							<Link to="/coinflip" className="flex gap-4 justify-center items-center ">
+							<Link to="/games/coinflip" className="flex gap-4 justify-center items-center ">
 								<img src={Coinflip} className="pr-[15px] h-[2vh] w-auto " />
 								{t("coinflip")}
 							</Link>
-							<Link to="/soon" className="flex gap-4 justify-center items-center ">
+							<Link to="/games/roulette" className="flex gap-4 justify-center items-center ">
 								<img src={Blackjack} className="pr-[15px] h-[2vh] w-auto " />
 								{t("blackjack")}
 							</Link>
