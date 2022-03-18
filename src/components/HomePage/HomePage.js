@@ -36,7 +36,7 @@ const HomePage = () => {
 					</div>
 				</div>
 				
-				<img src={topSectionRightImg} className="lg:mr-14 h-auto w-[60vw] md:w-[45vw] lg:w-[35vw] lg:max-w-[600px] 2xl:w-[32vw] " />
+				<img src={topSectionRightImg} className="lg:mr-14 h-auto w-[60vw] md:w-[45vw] lg:w-[25vw] lg:max-w-[600px] 2xl:w-[32vw] " />
 
 			</header>
 			<div className="w-[90%] lg:w-[100%] xl:w-[90%] flex flex-col xl:flex-row items-center lg:items-start xl:items-center mt-[25px] lg:gap-4">
