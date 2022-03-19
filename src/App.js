@@ -22,9 +22,9 @@ function App() {
           <img src={logo} className="hidden sm:block mt-2 max-w-[120px] sm:ml-16 lg:ml-0 fixed min-w-[100px] w-[18vw] sm:w-[15vw] md:min-w-[60px] 2xl:h-[50px] 2xl:w-[6%] min-h-[62px] top-0" />
           {path.includes('/games') ? <div>
             
-          </div> : <LeftSideBar />}
+            </div> : <LeftSideBar />}
         </div>
-        <div className=' h-[100%] flex flex-col items-center sm:items-start w-full mt-[5rem]'>
+        <div className=' h-[100%] flex flex-col items-center sm:items-start w-full max-w-[1200px] mt-[5rem]'>
           <Header />
           <div className="w-[100%] flex justify-center lg:justify-start mt-4">
               <Routes>
