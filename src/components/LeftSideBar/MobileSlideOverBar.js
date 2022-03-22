@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
+import { HiOutlineChevronDoubleRight } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Homepage from "../../assets/Elements/Design-2_0039_Layer-5.png";
@@ -21,10 +22,10 @@ export default function MobileSlideOverBar() {
 		<>
 			{!open && (
 				<div
-					className="fixed inset-y-0 left-0 top-[50%] max-w-full pl-5 text-white"
+					className="fixed inset-y-0 left-0 top-[50%] max-w-full pl-5 text-gray-100"
 					onClick={() => setOpen(true)}
 				>
-					Open
+					<HiOutlineChevronDoubleRight size={32}/>
 				</div>
 			)}
 
@@ -57,13 +58,13 @@ export default function MobileSlideOverBar() {
 								leaveFrom="translate-x-0"
 								leaveTo="-translate-x-full"
 							>
-								<div className="pointer-events-auto w-screen max-w-md">
+								<div className="pointer-events-auto w-screen max-w-sm">
 									<div
 										style={{
 											backgroundImage:
 												"linear-gradient(to bottom left, #d70a84, #51127f)",
 										}}
-										className="flex h-full flex-col overflow-y-scroll py-6 shadow-xl"
+										className="flex h-full flex-col  py-6 shadow-xl"
 									>
 										<div className="px-4 sm:px-6">
 											<div className="flex items-start justify-between">
@@ -83,11 +84,11 @@ export default function MobileSlideOverBar() {
 												</div>
 											</div>
 										</div>
-										<div className="flex justify-center pointer-events-auto relative flex-1 px-4 sm:px-6">
-											<div className="border-2 border-2 rounded-[25px] border-gray-200 w-[90%] flex flex-col gap-9 2xl:gap-10 justify-center items-center mt-4 mb-4 sm:text-sm lg:text-lg text-white font-medium">
+										<div className="overflow-y-auto flex justify-center pointer-events-auto relative flex-1 px-4 sm:px-6">
+											<div className="border-2 border-2 rounded-[25px] border-gray-200 w-[90%] h-[750px] flex flex-col gap-4 justify-center items-center mt-4 sm:text-sm lg:text-lg text-white font-medium">
 												<Link
 													to="/"
-													className="hover:bg-white hover:text-[#d70a84] h-[45px] rounded-t-[23px] w-full flex gap-4 justify-center items-center "
+													className="hover:bg-white hover:text-[#d70a84] h-16 rounded-t-[22px] w-full flex gap-4 justify-center items-center "
 												>
 													<img src={Homepage} className=" h-[2vh] w-auto " />
 													{t("home_page")}
@@ -95,14 +96,14 @@ export default function MobileSlideOverBar() {
 
 												<Link
 													to="/soon"
-													className="hover:bg-white hover:text-[#d70a84] h-[45px] w-full flex gap-4 justify-center items-center "
+													className="hover:bg-white hover:text-[#d70a84] h-16 w-full flex gap-4 justify-center items-center "
 												>
 													<img src={Games} className="h-[2vh] w-auto" />
 													{t("games")}
 												</Link>
 												<Link
 													to="/stake"
-													className="hover:bg-white hover:text-[#d70a84] h-[45px] w-full flex gap-4 justify-center items-center "
+													className="hover:bg-white hover:text-[#d70a84] h-16 w-full flex gap-4 justify-center items-center "
 												>
 													<img
 														src={Bonuses}
@@ -112,7 +113,7 @@ export default function MobileSlideOverBar() {
 												</Link>
 												<Link
 													to="/swap"
-													className="hover:bg-white hover:text-[#d70a84] h-[45px] w-full flex gap-4 justify-center items-center "
+													className="hover:bg-white hover:text-[#d70a84] h-16 w-full flex gap-4 justify-center items-center "
 												>
 													<img
 														src={Swapicon}
@@ -122,7 +123,7 @@ export default function MobileSlideOverBar() {
 												</Link>
 												<Link
 													to="/soon"
-													className="hover:bg-white hover:text-[#d70a84] h-[45px] w-full flex gap-4 justify-center items-center "
+													className="hover:bg-white hover:text-[#d70a84] h-16 w-full flex gap-4 justify-center items-center "
 												>
 													<img
 														src={Rules}
@@ -132,7 +133,7 @@ export default function MobileSlideOverBar() {
 												</Link>
 												<Link
 													to="/soon"
-													className="hover:bg-white hover:text-[#d70a84] h-[45px] w-full flex gap-4 justify-center items-center "
+													className="hover:bg-white hover:text-[#d70a84] h-16 w-full flex gap-4 justify-center items-center "
 												>
 													<img
 														src={P2P}
@@ -140,10 +141,10 @@ export default function MobileSlideOverBar() {
 													/>
 													{t("p2p_betting")}
 												</Link>
-												<span className="font-normal">Popular Games</span>
+												<span className="flex justify-center items-center font-normal h-16">Popular Games</span>
 												<Link
 													to="/games/coinflip"
-													className="hover:bg-white hover:text-[#d70a84] h-[45px] w-full flex gap-4 justify-center items-center "
+													className="hover:bg-white hover:text-[#d70a84] h-16 w-full flex gap-4 justify-center items-center "
 												>
 													<img
 														src={Coinflip}
@@ -153,7 +154,7 @@ export default function MobileSlideOverBar() {
 												</Link>
 												<Link
 													to="/games/roulette"
-													className="hover:bg-white hover:text-[#d70a84] h-[45px] w-full flex gap-4 justify-center items-center "
+													className="hover:bg-white hover:text-[#d70a84] h-16 w-full flex gap-4 justify-center items-center "
 												>
 													<img
 														src={Blackjack}
@@ -163,7 +164,7 @@ export default function MobileSlideOverBar() {
 												</Link>
 												<Link
 													to="/soon"
-													className="hover:bg-white hover:text-[#d70a84] h-[45px] rounded-b-[22px] w-full flex gap-4 justify-center items-center "
+													className="hover:bg-white hover:text-[#d70a84] h-16 rounded-b-[22px] w-full flex gap-4 justify-center items-center "
 												>
 													<img
 														src={Random}

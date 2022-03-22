@@ -25,12 +25,12 @@ const Header = () => {
 	const { t } = useTranslation();
 	return (
 		<div className="min-w-full flex justify-center">
-			<div className="flex h-auto justify-between sm:justify-between lg:justify-end lg:items-center top-0 fixed w-[80%] xl:[90%] 2xl:w-[1600px] md:max-w-[700px] lg:max-w-[1600px] mt-[10px]">
+			<div className="flex h-auto justify-between sm:justify-between lg:justify-end lg:items-center top-0 fixed w-[80%] xl:[90%] 2xl:w-[1680px] md:max-w-[700px] lg:max-w-[1680px] mt-[10px]">
 				<img
 					src={logo}
 					className="sm:hidden mt-2 max-w-[120px] sm:ml-0 fixed min-w-[100px] w-[100px] sm:w-[15vw] md:min-w-[60px] 2xl:h-[50px] 2xl:w-[6%] min-h-[62px] top-0"
 				/>
-				<div className="w-full flex sm:ml-12 lg:ml-8 xl:ml-2 2xl:ml-0 justify-end sm:justify-center lg:justify-start 2xl:justify-between 2xl:ml-52">
+				<div className="w-full flex sm:ml-12 lg:ml-8 xl:ml-2 2xl:ml-0 justify-end sm:justify-center lg:justify-start 2xl:justify-between 2xl:ml-[236px]">
 					<div
 						style={{
 							backgroundImage: "linear-gradient(to right, #51127f,#e20c8d)",
