@@ -5,12 +5,12 @@ import topSectionRightImg from "../../assets/Elements/homePageRightImg.png";
 
 const HomePage = () => {
 	return (
-		<div className="mx-2 lg:mx-0 max-w-full flex flex-col justify-center xl:mr-16 items-center lg:items-start">
+		<div className="mx-2 lg:mx-0 max-w-full flex flex-col justify-center items-center ">
 			<header
 				style={{
 					backgroundImage: "linear-gradient(to bottom right, #190551,#420d7c)",
 				}}
-				className="border-4 border-[#bd0b83] rounded-[25px] max-w-[1400px] w-[80%] xl:w-[90%] flex flex-col lg:flex-row lg:gap-12 xl:gap-8 justify-evenly lg:justify-between items-center object-contain rounded-3xl h-[600px] text-white lg:mr-50"
+				className="border-4 border-[#bd0b83] rounded-[25px] max-w-[1400px] w-[80%] xl:w-[90%] flex flex-col lg:flex-row lg:gap-12 justify-evenly lg:justify-between items-center object-contain rounded-3xl h-[600px] text-white "
 			>
 				<div className="lg:text-left lg:h-full lg:flex lg:flex-col lg:justify-between lg:ml-20">
 					<div className="top-para hidden lg:block mt-4">
@@ -39,7 +39,7 @@ const HomePage = () => {
 				<img src={topSectionRightImg} className="lg:mr-14 h-auto w-[60vw] md:w-[45vw] lg:w-[25vw] lg:max-w-[600px] 2xl:w-[32vw] " />
 
 			</header>
-			<div className="w-[90%] lg:w-[100%] xl:w-[90%] flex flex-col xl:flex-row items-center lg:items-start xl:items-center mt-[25px] lg:gap-4">
+			<div className="w-[90%] lg:w-[100%] xl:w-[90%] flex flex-col xl:flex-row items-center mt-[25px] lg:gap-4">
 				<div className="mt-[2rem] text-white bg-[#1f0452] border-[5px] border-[#bd0b83] rounded-[25px] w-[90%] mt-0 lg:w-[80%] h-[150px] sm:h-[180px] flex flex-col justify-center ">
 					<div className="bottom-top-section ml-[15px]">
 						<h2>Leaderboard</h2>

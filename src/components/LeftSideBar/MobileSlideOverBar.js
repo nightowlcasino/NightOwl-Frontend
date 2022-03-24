@@ -22,7 +22,7 @@ export default function MobileSlideOverBar() {
 		<>
 			{!open && (
 				<div
-					className="fixed inset-y-0 left-0 top-[50%] max-w-full pl-5 text-gray-100"
+					className="fixed inset-y-0 left-0 top-[50%] max-w-full pl-5 text-gray-100 cursor-pointer hover:text-[#d70a84]"
 					onClick={() => setOpen(true)}
 				>
 					<HiOutlineChevronDoubleRight size={32}/>
@@ -45,7 +45,7 @@ export default function MobileSlideOverBar() {
 							leaveFrom="opacity-100"
 							leaveTo="opacity-0"
 						>
-							<Dialog.Overlay className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+							<Dialog.Overlay className="absolute inset-0 bg-[#d70a84] bg-opacity-20 backdrop-blur-sm transition-opacity" />
 						</Transition.Child>
 
 						<div className="pointer-events-none fixed inset-y-0 left-0 flex max-w-full pr-10">

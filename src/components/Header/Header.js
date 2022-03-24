@@ -24,64 +24,64 @@ const Header = () => {
 
 	const { t } = useTranslation();
 	return (
-		<div className="min-w-full flex justify-center">
-			<div className="flex h-auto justify-between sm:justify-between lg:justify-end lg:items-center top-0 fixed w-[80%] xl:[90%] 2xl:w-[1680px] md:max-w-[700px] lg:max-w-[1680px] mt-[10px]">
-				<img
+		// <div className="w-full xl:min-w-[1200px] max-w-[1600px] flex justify-center">
+		<div className="w-[80%] xl:w-[90%] flex h-auto justify-start items-center top-0 fixed max-w-[1600px] mt-[10px]">
+			{/* <img
 					src={logo}
-					className="sm:hidden mt-2 max-w-[120px] sm:ml-0 fixed min-w-[100px] w-[100px] sm:w-[15vw] md:min-w-[60px] 2xl:h-[50px] 2xl:w-[6%] min-h-[62px] top-0"
-				/>
-				<div className="w-full flex sm:ml-12 lg:ml-8 xl:ml-2 2xl:ml-0 justify-end sm:justify-center lg:justify-start 2xl:justify-between 2xl:ml-[236px]">
-					<div
-						style={{
-							backgroundImage: "linear-gradient(to right, #51127f,#e20c8d)",
-						}}
-						className="flex justify-between items-center w-[70%] lg:ml-0 rounded-[25px] h-[2.8rem]"
-					>
-						<div className="search-bar">
-							<input
-								id="search-game"
-								type="text"
-								placeholder={t("search_games")}
-							/>
-						</div>
-						<div className="lang-menu hidden lg:block ">
-							<div className="selected-lang">English</div>
-							<ul>
-								<li>
-									<button
-										class="en"
-										onClick={() => i18next.changeLanguage("en")}
-										disabled={"en" === currentLanguageCode}
-									>
-										English
-									</button>
-								</li>
-								<li>
-									<button
-										class="es"
-										onClick={() => i18next.changeLanguage("es")}
-										disabled={"es" === currentLanguageCode}
-									>
-										Spanish
-									</button>
-								</li>
-							</ul>
-						</div>
-						<div className="connect-wallet">
-							<span className="volume hidden lg:inline">
-								{t("volume")} $123,456
-							</span>
-							<button className="connect-wallet-button">
-								<Link to="#">
-									<img className="connect-wallet-icon" src={wallet} />
-									<span class="connect-text">{t("connect_wallet")}</span>
-								</Link>
-							</button>
-						</div>
+					className="mt-2 max-w-[120px] sm:ml-0 min-w-[100px] w-[100px] sm:w-[15vw] md:min-w-[60px] 2xl:h-[50px] 2xl:w-[6%] min-h-[62px]"
+				/> */}
+			<div className="w-full max-w-[90%] flex justify-end">
+				<div
+					style={{
+						backgroundImage: "linear-gradient(to right, #51127f,#e20c8d)",
+					}}
+					className="flex justify-between items-center w-[70%] lg:ml-0 rounded-[25px] h-[2.8rem]"
+				>
+					<div className="search-bar">
+						<input
+							id="search-game"
+							type="text"
+							placeholder={t("search_games")}
+						/>
+					</div>
+					<div className="lang-menu hidden lg:block ">
+						<div className="selected-lang">English</div>
+						<ul>
+							<li>
+								<button
+									class="en"
+									onClick={() => i18next.changeLanguage("en")}
+									disabled={"en" === currentLanguageCode}
+								>
+									English
+								</button>
+							</li>
+							<li>
+								<button
+									class="es"
+									onClick={() => i18next.changeLanguage("es")}
+									disabled={"es" === currentLanguageCode}
+								>
+									Spanish
+								</button>
+							</li>
+						</ul>
+					</div>
+					<div className="connect-wallet">
+						<span className="volume hidden lg:inline">
+							{t("volume")} $123,456
+						</span>
+						<button className="connect-wallet-button">
+							<Link to="#">
+								<img className="connect-wallet-icon" src={wallet} />
+								<span class="connect-text">{t("connect_wallet")}</span>
+							</Link>
+						</button>
 					</div>
 				</div>
 			</div>
 		</div>
+		// </div>
 	);
 };
 

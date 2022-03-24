@@ -18,14 +18,18 @@ function App() {
   return (
     <div className="App">
      
-      <div className='w-[100vw] h-[100%] flex justify-center mt-[15px] lg:gap-2 xl:gap-8 2xl:gap-28 lg:ml-[9rem] 2xl:ml-[8rem] '>
-        <div className='flex flex-col items-end sm:items-center'>
-          <img src={logo} className="hidden sm:block mt-2 max-w-[120px] sm:ml-16 lg:ml-0 fixed min-w-[100px] w-[18vw] sm:w-[15vw] md:min-w-[60px] 2xl:h-[50px] 2xl:w-[6%] min-h-[62px] top-0" />
-          {path.includes('/games') ? <MobileSlideOverBar /> : <LeftSideBar />}
-        </div>
-        <div className=' h-[100%] flex flex-col items-center sm:items-start w-full max-w-[1200px] mt-[5rem]'>
+      <div className=' xl:min-w-[1200px] max-w-[1600px] h-[100%] flex flex-col justify-center mt-[15px] lg:gap-2 2xl:gap-28  '>
+        
+        <div className='min-w-[100%] flex justify-between'>
+          <div className='max-w-[25vw] flex justify-center lg:w-[25vw] xl:w-[18vw] 2xl:max-w-[300px]'>
+            <img src={logo} className="hidden sm:block mt-2 max-w-[120px] fixed min-w-[100px] w-[18vw] sm:w-[15vw] md:min-w-[60px] 2xl:h-[50px] 2xl:w-[6%] min-h-[62px] top-0" />
+          </div>
           <Header />
-          <div className="w-[100%] flex justify-center lg:justify-start mt-4">
+        </div>
+
+        <div className='h-[100%] flex justify-between min-w-[100%] mt-[5rem]'>
+          {path.includes('/games') ? <MobileSlideOverBar /> : <LeftSideBar />}
+          <div className="mt-4">
               <Routes>
                 <Route path='/swap' element={<Swap />} />
                 <Route path='/games/coinflip' element={<Coinflip />} />
