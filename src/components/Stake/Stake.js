@@ -31,7 +31,7 @@ const Stake = ()=> {
       
 
     return (
-      <div className="flex flex-col gap-16 mx-2 lg:mx-0 max-w-full justify-center items-center xl:items-start xl:ml-20 2xl:items-center">
+      <div className="flex flex-col gap-16 mx-2 lg:mx-0 max-w-full justify-center items-center xl:items-start xl:ml-5 2xl:items-center">
        <header
 				style={{
 					backgroundImage: "linear-gradient(to bottom right, #190551,#420d7c)",

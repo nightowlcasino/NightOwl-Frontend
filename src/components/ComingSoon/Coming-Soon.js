@@ -4,7 +4,7 @@ import topSectionRightImg from "../../assets/Elements/homePageRightImg.png";
 
 function ComingSoon() {
 	return (
-		<div className="mx-2 lg:mx-0 max-w-full flex flex-col justify-center items-center xl:items-start xl:ml-20 2xl:items-center">
+		<div className="mx-2 lg:mx-0 max-w-full flex flex-col justify-center items-center xl:items-start xl:ml-5 2xl:items-center">
 			<header
 				style={{
 					backgroundImage: "linear-gradient(to bottom right, #190551,#420d7c)",
