@@ -17,7 +17,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<div className="sm:min-w-[600px] lg:min-w-[1100px] xl:min-w-[1500px] xl:ml-52 2xl:ml-0 max-w-[1600px] h-[100%] flex flex-col justify-center mt-[15px] lg:gap-2">
+			<div className="sm:min-w-[600px] sm:max-w-[600px] lg:min-w-[1100px] lg:max-w-[1100px] xl:min-w-[1500px] xl:ml-52 2xl:ml-0 max-w-[1600px] h-[100%] flex flex-col justify-center mt-[15px] lg:gap-2">
 				<div className="xl:min-w-[1200px] max-w-[1600px] flex justify-center fixed top-0 mt-4 md:mt-1">
 					<div className="w-full lg:w-full flex justify-center lg:justify-between items-center max-w-full">
 						<div className="max-w-[25vw] flex justify-center lg:w-[25vw] xl:w-[18vw] 2xl:max-w-[300px]">

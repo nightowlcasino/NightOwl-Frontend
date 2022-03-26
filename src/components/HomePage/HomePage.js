@@ -10,7 +10,7 @@ const HomePage = () => {
 				style={{
 					backgroundImage: "linear-gradient(to bottom right, #190551,#420d7c)",
 				}}
-				className="border-4 border-[#bd0b83] rounded-[25px] max-w-[1400px] w-[80%] 2xl:w-[90%] flex flex-col lg:flex-row lg:gap-12 justify-evenly lg:justify-between items-center object-contain rounded-3xl h-[600px] text-white"
+				className="border-4 border-[#bd0b83] rounded-[25px] max-w-[1400px] w-[80%] 2xl:w-[90%] flex flex-col lg:flex-row lg:gap-0 xl:gap-12 justify-evenly lg:justify-between items-center object-contain rounded-3xl h-[600px] text-white"
 			>
 				<div className="lg:text-left lg:h-full lg:flex lg:flex-col lg:justify-between lg:ml-20">
 					<div className="top-para hidden lg:block mt-4">
@@ -36,7 +36,7 @@ const HomePage = () => {
 					</div>
 				</div>
 				
-				<img src={topSectionRightImg} className="lg:mr-14 h-auto w-[60vw] sm:w-[55vw] md:w-[45vw] lg:w-[25vw] max-w-[340px] lg:max-w-[600px] 2xl:w-[32vw] " />
+				<img src={topSectionRightImg} className="lg:mr-14 h-auto w-[60vw] sm:w-[55vw] md:w-[45vw] lg:w-[24vw] xl:w-[28vw] max-w-[340px] lg:max-w-[600px] 2xl:w-[32vw] " />
 
 			</header>
 			<div className="w-[90%] lg:w-[100%] xl:w-[80%] 2xl:w-[90%] flex flex-col xl:flex-row items-center mt-[25px] lg:gap-4">

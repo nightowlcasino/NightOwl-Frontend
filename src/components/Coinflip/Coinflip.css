@@ -1,11 +1,3 @@
-.coinflip-container-main {
-    display:flex;
-    justify-content: center; 
-    align-items: center;
-    gap: 10rem;
-    width: 100%;
-}
-
 .coinflip-div{
     display: flex;
     flex-direction: column;
@@ -37,24 +29,6 @@
 
 .below-head span{
     color: #fff;
-}
-
-.coinflip-calc{
-    display: flex;
-}
-
-.coinflip-calc input{
-    outline: 0;
-    border-width: 0 0 2px;
-    border-color: #fff;
-    background-color: transparent;
-    height: 20px;
-    margin: 30px 10px 0px 10px;
-}
-
-.coinflip-calc h1{
-    cursor: pointer;
-    margin-left: 5px;
 }
 
 .coinflip-calc span{

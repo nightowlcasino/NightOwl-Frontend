@@ -4,36 +4,40 @@ import "./Swap.css";
 
 const Swap = () => {
 	return (
-        <main className="flex flex-col items-center lg:flex-row justify-center lg:justify-around xl:items-start xl:ml-20 max-w-full">
-            <div className="flex flex-col justify-center items-center bg-[#51127f] text-white w-[70%] sm:w-[50%] lg:w-[40%] xl:w-[28%] h-[60vh] rounded-[25px] shadow-[5px_10px_16px_rgb(0,0,0)] mt-[45px] ">
-                <h1 className="text-[#d70a84] m-0 p-0">Swap</h1>
+        <main className="flex flex-col items-center xl:flex-row justify-center lg:justify-around xl:items-start xl:ml-20 2xl:ml-0 max-w-full">
+            <div className="flex flex-col justify-center items-center bg-[#51127f] text-white w-[70%] sm:w-[50%] lg:w-[40%] xl:w-[28%] h-[45vh] xl:h-[60vh] rounded-[25px] shadow-[5px_10px_16px_rgb(0,0,0)] mt-[45px] ">
+                <h1 className="text-[#d70a84] m-0 pl-2 pb-2">Swap</h1>
                 <p className="pb-[20px]">Ergo blockchain token swap</p>
-                <div className="initial-swap-token">
+                <div className="initial-swap-token flex flex-col justify-center items-center">
                     <div className="custom-select">
                         <select>
                             <option value="erg">ERG</option>
                         </select>
                     </div>
                     
-                    <input type="number" className="token-input" />
+                    <input type="number" className="token-input w-[80%] " />
                 </div>
 
-                <div className="mid-swap">
-                    <p>.</p>
-                    <p style={{marginBottom:"8px"}}>.</p>
-                    <p className="to">To</p>
-                    <p>.</p>
-                    <p>.</p>
+                <div className="mid-swap flex flex-col justify-center items-center h-[120px] ">
+                    <div>
+                        <p>.</p>
+                        <p style={{marginBottom:"8px"}}>.</p>
+                    </div>
+                    <p className="text-center">To</p>
+                    <div>
+                        <p>.</p>
+                        <p>.</p>
+                    </div>
                 </div>
 
-                <div className="final-swap-token">
+                <div className="final-swap-token flex flex-col justify-center items-center mt-4">
                     <div className="custom-select">
                         <select>
                             <option value="erg">OWL</option>
                         </select>
                     </div>
 
-                    <input type="number" className="token-input" />
+                    <input type="number" className="token-input w-[80%]" />
                 </div>
 
                 <span><input type="checkbox" name="Private" />Private</span>
