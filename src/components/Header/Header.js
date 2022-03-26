@@ -25,17 +25,13 @@ const Header = () => {
 	const { t } = useTranslation();
 	return (
 		// <div className="w-full xl:min-w-[1200px] max-w-[1600px] flex justify-center">
-		<div className="w-[80%] xl:w-[90%] flex h-auto justify-start items-center top-0 fixed max-w-[1600px] mt-[10px]">
-			{/* <img
-					src={logo}
-					className="mt-2 max-w-[120px] sm:ml-0 min-w-[100px] w-[100px] sm:w-[15vw] md:min-w-[60px] 2xl:h-[50px] 2xl:w-[6%] min-h-[62px]"
-				/> */}
-			<div className="w-full max-w-[90%] flex justify-end">
+		// <div className="w-[80%] xl:w-[90%] flex h-auto justify-start items-center top-0 fixed max-w-[1600px] mt-[10px]">
+	
 				<div
 					style={{
 						backgroundImage: "linear-gradient(to right, #51127f,#e20c8d)",
 					}}
-					className="flex justify-between items-center w-[70%] lg:ml-0 rounded-[25px] h-[2.8rem]"
+					className="flex justify-between items-center gap-5 w-[100%] lg:ml-0 rounded-[25px] h-[2.8rem]"
 				>
 					<div className="search-bar">
 						<input
@@ -79,8 +75,7 @@ const Header = () => {
 						</button>
 					</div>
 				</div>
-			</div>
-		</div>
+	
 		// </div>
 	);
 };
