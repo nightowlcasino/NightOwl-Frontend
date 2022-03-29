@@ -1,7 +1,11 @@
 import React from "react";
-import logo from "../../assets/Elements/logo.png";
-import wallet from "../../assets/Elements/Design-2_0026_Layer-17.png";
+
 import "./Header.css";
+
+import logo from "../../assets/Elements/logo.png";
+import magnifier from "../../assets/Elements/magnifier.png";
+import wallet_pink from "../../assets/Elements/wallet_pink.png";
+
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
@@ -24,59 +28,37 @@ const Header = () => {
 
 	const { t } = useTranslation();
 	return (
-		// <div className="w-full xl:min-w-[1200px] max-w-[1600px] flex justify-center">
-		// <div className="w-[80%] xl:w-[90%] flex h-auto justify-start items-center top-0 fixed max-w-[1600px] mt-[10px]">
-	
-				<div
-					style={{
-						backgroundImage: "linear-gradient(to right, #51127f,#e20c8d)",
-					}}
-					className="flex justify-between items-center gap-5 w-[100%] lg:ml-0 rounded-[25px] h-[2.8rem]"
-				>
-					<div className="search-bar">
-						<input
-							id="search-game"
-							type="text"
-							placeholder={t("search_games")}
-						/>
+		<div id="header-wrapper">
+			<div id="header-content">
+				<div id="logo-wrapper">
+					<div id="logo" style={{ backgroundImage: `url(${logo})`}}></div>
+				</div>
+				<div id="header-items">
+					<div id="header-search-wrapper">
+						<input type="text" placeholder="Search games..." />
+						<div id="magnifier" style={{ backgroundImage: `url(${magnifier})` }}></div>
 					</div>
-					<div className="lang-menu hidden lg:block ">
-						<div className="selected-lang">English</div>
-						<ul>
-							<li>
-								<button
-									class="en"
-									onClick={() => i18next.changeLanguage("en")}
-									disabled={"en" === currentLanguageCode}
-								>
-									English
-								</button>
-							</li>
-							<li>
-								<button
-									class="es"
-									onClick={() => i18next.changeLanguage("es")}
-									disabled={"es" === currentLanguageCode}
-								>
-									Spanish
-								</button>
-							</li>
-						</ul>
+					<div id="header-seperator"></div>
+					<div id="header-language">
+						<div>
+							<span>EN</span>
+						</div>
 					</div>
-					<div className="connect-wallet">
-						<span className="volume hidden lg:inline">
-							{t("volume")} $123,456
-						</span>
-						<button className="connect-wallet-button">
-							<Link to="#">
-								<img className="connect-wallet-icon" src={wallet} />
-								<span class="connect-text">{t("connect_wallet")}</span>
-							</Link>
-						</button>
+					<div id="header-balance-wrapper">
+						<div id="header-balance">
+							Volume: $<span id="header-balance-value">123,4</span><span id="header-balance-exponent">k</span></div>
+						</div>
+					<div id="header-wallet-wrapper">
+						<div id="header-wallet">
+							<div id="header-wallet-image" style={{ backgroundImage: `url(${wallet_pink})` }}></div>
+							<div id="wallet-connect">
+								<span>Connect Wallet</span>
+							</div>
+						</div>
 					</div>
 				</div>
-	
-		// </div>
+			</div>
+		</div>
 	);
 };
 

@@ -1,0 +1,129 @@
+#sidebars
+{
+    flex: 25%;
+}
+
+#sidebars #side-navigation-large-wrapper
+{
+    flex: 100%;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large
+{
+    margin: 30px;
+    height: calc(100% - 60px);
+    width: calc(100% - 60px);
+    background-image: linear-gradient(to bottom, #340580, #d70a84);
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0px 0px 15px -5px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper
+{
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper .item-content
+{
+    display: flex;
+    flex-direction: row;
+    color: white;
+    align-content: center;
+    align-items: center;
+    font-size: 20px;
+    padding: 10px;
+    transition: all 0.4s ease;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper.active .item-content,
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper:hover .item-content
+{
+    background-color: white;
+    color: #ab0d82;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper .item-content .item-icon-wrapper
+{
+    width: 25px;
+    height: 35px;
+    margin: 10px 20px;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper .item-content .item-icon-wrapper .item-icon-white,
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper .item-content .item-icon-wrapper .item-icon-pink
+{
+    position: absolute;
+    width: 25px;
+    height: 35px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: all 0.4s ease;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper .item-content .item-icon-wrapper .item-icon-white,
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper.active .item-content .item-icon-wrapper .item-icon-pink,
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper:hover .item-content .item-icon-wrapper .item-icon-pink
+{
+    opacity: 1;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper .item-content .item-icon-wrapper .item-icon-pink,
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper.active .item-content .item-icon-wrapper .item-icon-white,
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper:hover .item-content .item-icon-wrapper .item-icon-white
+{
+    opacity: 0;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper .item-content .item-text
+{
+    text-align: left;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper-string .item-content
+{
+    display: flex;
+    flex-direction: row;
+    color: white;
+    align-content: center;
+    align-items: center;
+    font-size: 20px;
+    padding: 10px;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large .side-navigation-large-item-wrapper-string .item-content span
+{
+    text-align: left;
+    margin: 0px 20px;
+    font-size: 14px;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large #downshift-arrow-wrapper
+{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large #downshift-arrow-wrapper #downshift-arrow
+{
+    display: flex;
+    flex-direction: row;
+    color: white;
+    align-content: center;
+    align-items: center;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+    position: flex-end;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large #downshift-arrow-wrapper #downshift-arrow #item
+{
+    width: 100%;
+}

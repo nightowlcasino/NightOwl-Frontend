@@ -1,5 +1,5 @@
 import React from "react";
-import "./Coming-Soon.css";
+import "./ComingSoon.css";
 import topSectionRightImg from "../../assets/Elements/homePageRightImg.png";
 
 function ComingSoon() {
