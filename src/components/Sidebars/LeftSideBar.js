@@ -38,11 +38,24 @@ import blackjack_icon_white from "../../assets/Elements/blackjack_image_white.pn
 import random_icon_pink from "../../assets/Elements/random_image_pink.png";
 import random_icon_white from "../../assets/Elements/random_image_white.png";
 
-const LeftSideBar = () => {
+function LeftSideBar() {
+
+	function change_class(element)
+	{
+		var side_nav_elements = document.getElementsByClassName("side-navigation-large-item-wrapper");
+
+		for(var i = 0; i < side_nav_elements.length; i++)
+		{
+			side_nav_elements[i].classList.remove("active");
+		}
+
+		element.classList.add("active");
+	}
+
 	return (
 		<div id="side-navigation-large-wrapper">
 			<div id="side-navigation-large">
-				<Link to="/" className="side-navigation-large-item-wrapper active">
+				<Link to="/" onClick={change_class.bind(this)} className="side-navigation-large-item-wrapper active">
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${home_icon_white})`}}></div>
@@ -51,7 +64,7 @@ const LeftSideBar = () => {
 						<span className="item-text">Home page</span>
 					</div>
 				</Link>
-				<Link to="/soon" className="side-navigation-large-item-wrapper">
+				<Link to="/soon" onClick={change_class.bind(this)} className="side-navigation-large-item-wrapper">
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${games_icon_white})`}}></div>
@@ -60,7 +73,7 @@ const LeftSideBar = () => {
 						<span className="item-text">Games</span>
 					</div>
 				</Link>
-				<Link to="/stake" className="side-navigation-large-item-wrapper">
+				<Link to="/stake" onClick={change_class.bind(this)} className="side-navigation-large-item-wrapper">
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${bonuses_icon_white})`}}></div>
@@ -69,7 +82,7 @@ const LeftSideBar = () => {
 						<span className="item-text">Bonuses</span>
 					</div>
 				</Link>
-				<Link to="/swap" className="side-navigation-large-item-wrapper">
+				<Link to="/swap" onClick={change_class.bind(this)} className="side-navigation-large-item-wrapper">
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${rules_icon_white})`}}></div>
@@ -78,7 +91,7 @@ const LeftSideBar = () => {
 						<span className="item-text">Rules</span>
 					</div>
 				</Link>
-				<Link to="/soon" className="side-navigation-large-item-wrapper">
+				<Link to="/soon" onClick={change_class.bind(this)} className="side-navigation-large-item-wrapper">
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${casino_icon_white})`}}></div>
@@ -87,7 +100,7 @@ const LeftSideBar = () => {
 						<span className="item-text">Casino</span>
 					</div>
 				</Link>
-				<Link to="/soon" className="side-navigation-large-item-wrapper">
+				<Link to="/soon" onClick={change_class.bind(this)} className="side-navigation-large-item-wrapper">
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${p2p_icon_white})`}}></div>
@@ -101,7 +114,7 @@ const LeftSideBar = () => {
 						<span>Popular games</span>
 					</div>
 				</div>
-				<Link to="/games/coinflip" className="side-navigation-large-item-wrapper">
+				<Link to="/games/coinflip" onClick={change_class.bind(this)} className="side-navigation-large-item-wrapper">
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${coinflip_icon_white})`}}></div>
@@ -110,7 +123,7 @@ const LeftSideBar = () => {
 						<span className="item-text">Coinflip</span>
 					</div>
 				</Link>
-				<Link to="/soon" className="side-navigation-large-item-wrapper">
+				<Link to="/soon" onClick={change_class.bind(this)} className="side-navigation-large-item-wrapper">
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${blackjack_icon_white})`}}></div>
@@ -119,7 +132,7 @@ const LeftSideBar = () => {
 						<span className="item-text">Blackjack</span>
 					</div>
 				</Link>
-				<Link to="/soon" className="side-navigation-large-item-wrapper">
+				<Link to="/soon" onClick={change_class.bind(this)} className="side-navigation-large-item-wrapper">
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${random_icon_white})`}}></div>

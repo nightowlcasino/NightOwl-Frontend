@@ -37,11 +37,11 @@
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border
 {
-    width: calc(100% - 60px);
+    width: calc(100% - 50px);
     height: calc(100% - 45px);
     background-image: linear-gradient(to bottom right, #D60A84, #481077);
     border-radius: 30px;
-    margin: 30px;
+    margin: 30px 25px;
     display: flex;
     flex-direction: row;
     align-content: center;
@@ -143,11 +143,11 @@
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-transactions-wrapper #home-page-transactions-border
 {
-    width: calc(100% - 60px);
+    width: calc(100% - 50px);
     height: calc(100% - 45px);
     background-image: linear-gradient(to bottom, #4a1077, #d53a9d);
     border-radius: 30px;
-    margin: 15px 30px 30px 30px;
+    margin: 15px 25px 30px 25px;
     display: flex;
     flex-direction: row;
     align-content: center;
@@ -227,7 +227,7 @@
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games #hot-games-border
 {
-    width: calc(100% - 30px);
+    width: calc(100% - 25px);
     height: calc(100% - 45px);
     background-image: linear-gradient(to bottom, #4a1077, #d53a9d);
     border-radius: 30px;
