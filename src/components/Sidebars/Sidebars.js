@@ -1,5 +1,6 @@
 import "./Sidebars.css";
 import LeftSideBar from "./LeftSideBar.js";
+import MobileNavigation from "./MobileNavigation.js";
 
 const Sidebars = () => {
 
@@ -7,6 +8,7 @@ const Sidebars = () => {
         <div id="sidebars">
             {/* {path.includes("/games") ? <MobileSlideOverBar /> : <LeftSideBar />} */}
             <LeftSideBar />
+            <MobileNavigation />
         </div>
     )
 

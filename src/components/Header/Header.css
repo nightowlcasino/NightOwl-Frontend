@@ -153,3 +153,43 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
+
+@media all and (max-width: 992px)
+{
+    #header-wrapper
+    {
+        max-width: calc(100% - 10px);
+    }
+
+    #header-wrapper #logo-wrapper
+    {
+        flex: 15%;
+    }
+
+    #header-wrapper #header-items
+    {
+        margin: 25px 5px;
+    }
+
+
+    #header-wrapper #header-items #header-language
+    {
+        display: none;
+    }
+
+    #header-wrapper #header-items #header-balance-wrapper
+    {
+        display: none;
+    }
+
+    #header-wrapper #header-items #header-wallet-wrapper
+    {
+        flex: 360px;
+        max-width: 360px;
+    }
+
+    #header-wrapper #header-items #header-wallet-wrapper #header-wallet
+    {
+        font-size: 12px;
+    }
+}

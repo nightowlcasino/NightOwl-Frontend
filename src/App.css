@@ -85,3 +85,13 @@ h1-leader{
     transform: rotate(360deg);
   }
 } */
+
+@media all and (max-width: 992px)
+{
+	.App
+	{
+		height: calc(100vh - 70px);
+		display: flex;
+		flex-direction: column;
+	}
+}

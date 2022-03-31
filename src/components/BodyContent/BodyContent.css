@@ -225,7 +225,7 @@
     flex: 40%;
 }
 
-#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games #hot-games-border
+#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border
 {
     width: calc(100% - 25px);
     height: calc(100% - 45px);
@@ -238,7 +238,12 @@
     align-items: center;
 }
 
-#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games #hot-games-border #hot-games-wrapper
+#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border#hot-game-roulette
+{
+    display: none;
+}
+
+#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper
 {
     color: white;
     background-color: #20075a;
@@ -249,44 +254,44 @@
     display: flex;
 }
 
-#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games #hot-games-border #hot-games-wrapper #hot-games-inner-left
+#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left
 {
     flex: 50%;
     display: flex;
     flex-direction: column;
 }
 
-#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games #hot-games-border #hot-games-wrapper #hot-games-inner-left #top
+#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left .top
 {
     display: flex;
     flex-direction: column;
 }
 
-#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games #hot-games-border #hot-games-wrapper #hot-games-inner-left #top #hot-games-top-header
+#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left .top .hot-games-top-header
 {
     font-size: 18px;
     margin: 15px 15px 0px 15px;
 }
 
-#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games #hot-games-border #hot-games-wrapper #hot-games-inner-left #top #hot-game-name
+#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left .top .hot-game-name
 {
     font-size: 14px;
     margin: 0px 15px 15px 15px;
 }
 
-#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games #hot-games-border #hot-games-wrapper #hot-games-inner-left #bottom
+#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left .bottom
 {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
 }
 
-#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games #hot-games-border #hot-games-wrapper #hot-games-inner-left #bottom #inner-fill
+#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left .bottom .inner-fill
 {
     flex: 1 1 auto;
 }
 
-#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games #hot-games-border #hot-games-wrapper #hot-games-inner-left #bottom #button-wrapper #button-background
+#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left .bottom .button-wrapper .button-background
 {
     margin: 20px;
     background-image: linear-gradient(to bottom, #4a1077, #d53a9d);
@@ -295,7 +300,7 @@
     width: 112px;
 }
 
-#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games #hot-games-border #hot-games-wrapper #hot-games-inner-left #bottom #button-wrapper #button-background #hot-games-button
+#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left .bottom .button-wrapper .button-background .hot-games-button
 {
     color: white;
     background-color: #20075a;
@@ -307,16 +312,153 @@
     width: 110px;
 }
 
-#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games #hot-games-border #hot-games-wrapper #hot-games-inner-right
+#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-right
 {
     flex: 50%;
 }
 
-#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games #hot-games-border #hot-games-wrapper #hot-games-inner-right #background-image
+#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-right .background-image
 {
     width: 100%;
     height: 100%;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+}
+
+@media all and (max-width: 992px)
+{
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper
+    {
+        flex: 0 0 auto;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border
+    {
+        width: calc(100% - 20px);
+        margin: 30px 10px;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background
+    {
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background #home-page-inner-wrapper #home-page-inner-left
+    {
+        flex: calc(45% - 30px);
+        padding: 15px;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background #home-page-inner-wrapper #home-page-inner-left #top
+    {
+        display: none;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background #home-page-inner-wrapper #home-page-inner-left #bottom
+    {
+        flex-direction: row;
+        align-items: center;
+        align-content: center;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background #home-page-inner-wrapper #home-page-inner-left #bottom #inner-fill
+    {
+        display: none;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background #home-page-inner-wrapper #home-page-inner-left #bottom #header
+    {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background #home-page-inner-wrapper #home-page-inner-left #bottom #header h1
+    {
+        font-size: 20px;
+        margin: 0 auto;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background #home-page-inner-wrapper #home-page-inner-right #background-image
+    {
+        background-size: 80%;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background #home-page-inner-wrapper #home-page-inner-left #bottom #header #header-description
+    {
+        display: none;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-footer
+    {
+        flex-direction: column-reverse;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-transactions-wrapper
+    {
+        max-height: 235px;
+        flex: 235px;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-transactions-wrapper #home-page-transactions-border
+    {
+        width: calc(100% - 20px);
+        margin: 10px 10px;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-transactions-wrapper #home-page-transactions-border #transactions-wrapper
+    {
+        height: calc(100% - 10px);
+        width: calc(100% - 10px);
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-transactions-wrapper #home-page-transactions-border #transactions-wrapper #transactions-table-wrapper table th.transaction-amount,
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-transactions-wrapper #home-page-transactions-border #transactions-wrapper #transactions-table-wrapper table td.transaction-amount
+    {
+        display: none;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games
+    {
+        display: flex;
+        flex-direction: row;
+        flex: 1 1 auto;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border
+    {
+        margin: 10px 10px;
+        height: calc(100% - 20px);
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border#hot-game-roulette
+    {
+        display: flex;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper
+    {
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        flex-direction: column-reverse;
+    }
+    
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left .top
+    {
+        text-align: center;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left .top .hot-games-top-header,
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left .top .hot-game-name
+    {
+        margin: 5px 0px;
+    }
+
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left .bottom .button-wrapper .button-background
+    {
+        margin: 5px auto;
+    }
+
 }

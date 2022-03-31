@@ -1,6 +1,7 @@
 import home_trending from "../../assets/Elements/home_trending.png";
 import leaderboard_icon from "../../assets/Elements/leaderboard_icon.png";
-import hot_games from "../../assets/Elements/hot_games.png";
+import slots from "../../assets/Elements/slots.png";
+import roulette from "../../assets/Elements/roulette.png";
 
 function LandingPage() {
 	return (    
@@ -47,24 +48,24 @@ function LandingPage() {
                                     <thead>
                                         <tr>
                                             <th>Address</th>
-                                            <th>Amount</th>
+                                            <th className="transaction-amount">Amount</th>
                                             <th>Tx ID</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>2hRSbF...FKbhnz</td>
-                                            <td>1534 ERG</td>
+                                            <td className="transaction-amount">1534 ERG</td>
                                             <td>kjjnDS...d342sz</td>
                                         </tr>
                                         <tr>
                                             <td>2hRSbF...FKbhnz</td>
-                                            <td>1534 ERG</td>
+                                            <td className="transaction-amount">1534 ERG</td>
                                             <td>kjjnDS...d342sz</td>
                                         </tr>
                                         <tr>
                                             <td>2hRSbF...FKbhnz</td>
-                                            <td>1534 ERG</td>
+                                            <td className="transaction-amount">1534 ERG</td>
                                             <td>kjjnDS...d342sz</td>
                                         </tr>
                                     </tbody>
@@ -74,24 +75,45 @@ function LandingPage() {
                     </div>
                 </div>
                 <div id="home-page-hot-games">
-                    <div id="hot-games-border">
-                        <div id="hot-games-wrapper">
-                            <div id="hot-games-inner-left">
-                                <div id="top">
-                                    <h1 id="hot-games-top-header">Popular games</h1>
-                                    <span id="hot-game-name">Slots</span>
+                    <div id="hot-game-slots" className="hot-games-border">
+                        <div className="hot-games-wrapper">
+                            <div className="hot-games-inner-left">
+                                <div className="top">
+                                    <h1 className="hot-games-top-header">Popular games</h1>
+                                    <span className="hot-game-name">Slots</span>
                                 </div>
-                                <div id="bottom">
-                                    <div id="inner-fill"></div>
-                                    <div id="button-wrapper">
-                                        <div id="button-background">
-                                            <button id="hot-games-button">Play it now</button>
+                                <div className="bottom">
+                                    <div className="inner-fill"></div>
+                                    <div className="button-wrapper">
+                                        <div className="button-background">
+                                            <button className="hot-games-button">Play it now</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div id="hot-games-inner-right">
-                                <div id="background-image" style={{backgroundImage:`url(${hot_games})`}}></div>
+                            <div className="hot-games-inner-right">
+                                <div className="background-image" style={{backgroundImage:`url(${slots})`}}></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="hot-game-roulette" className="hot-games-border">
+                        <div className="hot-games-wrapper">
+                            <div className="hot-games-inner-left">
+                                <div className="top">
+                                    <h1 className="hot-games-top-header">Popular games</h1>
+                                    <span className="hot-game-name">Slots</span>
+                                </div>
+                                <div className="bottom">
+                                    <div className="inner-fill"></div>
+                                    <div className="button-wrapper">
+                                        <div className="button-background">
+                                            <button className="hot-games-button">Play it now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="hot-games-inner-right">
+                                <div className="background-image" style={{backgroundImage:`url(${roulette})`}}></div>
                             </div>
                         </div>
                     </div>
