@@ -101,7 +101,7 @@ function LandingPage() {
                             <div className="hot-games-inner-left">
                                 <div className="top">
                                     <h1 className="hot-games-top-header">Popular games</h1>
-                                    <span className="hot-game-name">Slots</span>
+                                    <span className="hot-game-name">Roulette</span>
                                 </div>
                                 <div className="bottom">
                                     <div className="inner-fill"></div>
