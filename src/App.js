@@ -2,6 +2,7 @@ import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header/Header.js";
 import BodyContent from "./components/BodyContent/BodyContent.js"
+import ComingSoon from "./components/ComingSoon/ComingSoon.js";
 // import LeftSideBar from "./components/LeftSideBar/LeftSideBar";
 // import logo from "./assets/Elements/logo.png";
 // import Swap from "./components/Swap/Swap";
@@ -18,8 +19,9 @@ function App() {
 
 	return (
 		<div className="App">
-			<Header />
-			<BodyContent />
+			<ComingSoon />
+			{/* <Header />
+			<BodyContent /> */}
 		</div>
 	);
 }

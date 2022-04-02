@@ -1,22 +1,43 @@
 import React from "react";
 import "./ComingSoon.css";
-import topSectionRightImg from "../../assets/Elements/homePageRightImg.png";
+// import topSectionRightImg from "../../assets/Elements/homePageRightImg.png";
+
+import logo from "../../assets/Elements/logo.png";
+// import { Link } from "react-router-dom";
 
 function ComingSoon() {
 	return (
-		<div className="mx-2 lg:mx-0 max-w-full flex flex-col justify-center items-center xl:items-start xl:ml-5 2xl:items-center">
-			<header
-				style={{
-					backgroundImage: "linear-gradient(to bottom right, #190551,#420d7c)",
-				}}
-				className="border-4 border-[#bd0b83] rounded-[25px] max-w-[1400px] w-[80%] 2xl:w-[90%] flex justify-center items-center rounded-3xl h-[600px] text-white"
-			>
-				<div className="lg:text-left lg:h-full lg:flex lg:justify-between items-center lg:ml-20">
-					<h1 className="text-center font-bold text-sm sm:text-6xl my-0">
-						Coming Soon...
-					</h1>
+		<div id="content-background">
+			<div id="content-wrapper">
+				<div id="logo-wrapper">
+					<div id="logo-fill"></div>
+					<div id="logo-background">
+						<div id="logo-element">
+							<div id="logo" style={{backgroundImage:`url(${logo})`}}></div>
+						</div>
+					</div>
 				</div>
-			</header>
+				<div id="about-wrapper">
+					<h1>Coming Soon!</h1>
+					<div id="about">
+						<span>Our developers are working hard intending to catch the roadmap deadline date.</span>
+						<br />
+						<span id="night-owl-team">Night Owl Team</span>
+					</div>
+					<div id="icons-wrapper">
+						<a href="https://twitter.com/NightOwlCasino" target="_blank" className="icon-wrapper">
+							<div id="twitter-icon" className="icon"></div>
+						</a>
+						<a href="https://discord.com/invite/W69GTHe3pJ" target="_blank" className="icon-wrapper">
+							<div id="discord-icon" className="icon"></div>
+						</a>
+						<a href="https://linktr.ee/NightOwlCasino" target="_blank" className="icon-wrapper">
+							<div id="linktree-icon" className="icon"></div>
+						</a>
+					</div>
+				</div>
+				<div id="content-filler"></div>
+			</div>
 		</div>
 	);
 }
