@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 // import Homepage from "../../assets/Elements/Design-2_0039_Layer-5.png";
 // import Games from "../../assets/Elements/Design-2_0037_Layer-7.png";
 // import Bonuses from "../../assets/Elements/Design-2_0036_Layer-8.png";
@@ -40,6 +41,15 @@ import random_icon_white from "../../assets/Elements/random_image_white.png";
 
 function LeftSideBar() {
 	const [isSelected, setIsSelected] = useState('');
+	const location = useLocation();
+	const path = location.pathname;
+
+	var home_page_class = "side-navigation-large-item-wrapper";
+
+	if(path === "/")
+	{
+		home_page_class += " active";
+	}
 
 	function changeSelection(element)
 	{
@@ -49,7 +59,7 @@ function LeftSideBar() {
 	return (
 		<div id="side-navigation-large-wrapper">
 			<div id="side-navigation-large">
-				<Link to="/" onClick={()=>changeSelection('homepage')} className={isSelected === 'homepage' ? "side-navigation-large-item-wrapper active" : "side-navigation-large-item-wrapper"}>
+				<Link to="/" onClick={()=>changeSelection('homepage')} className={home_page_class}>
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${home_icon_white})`}}></div>
