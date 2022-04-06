@@ -35,7 +35,7 @@ const TOKENID_FAKE_SIGUSD = "96c402c0e658909aa03f534006124f0e43725c467dbc8dea396
 const Header = () => {
 
   const [walletConnected, setWalletConnected] = useState(false)
-  const [unusedAddress, setUnusedAddress] = useState("")
+  const [defaultAddress, setDefaultAddress] = useState("")
   const [ergBalance, setErgBalance] = useState(0)
   const [sigUSDBalance, setSigUSDBalance] = useState(0)
   const [owlBalance, setOwlBalance] = useState(0)
@@ -69,8 +69,8 @@ const Header = () => {
         setOwlBalance(balance)
         console.log(`OWL: ${balance}`)
       });
-      ergoWallet.get_unused_addresses().then(function(address) {
-        setUnusedAddress(address[0])
+      ergoWallet.get_change_address().then(function(address) {
+        setDefaultAddress(address)
       });
     }
   }, [ergoWallet]);
@@ -81,12 +81,12 @@ const Header = () => {
 
     if (walletConnected) {
       walletIcon.style.display = "none"
-      walletText.textContent = truncate(unusedAddress, 14, "...")
+      walletText.textContent = truncate(defaultAddress, 14, "...")
     } else {
       walletIcon.style.display = ""
       walletText.textContent = t("connect wallet")
     }
-  }, [unusedAddress]);
+  }, [defaultAddress]);
 
   useEffect(() => {
     const walletBalance = document.getElementsByClassName('wallet-balance')[0]
@@ -112,8 +112,8 @@ const Header = () => {
     console.log('swap button pressed')
 
     // get input boxes for each token ID
-    const sigUSDAmount = 50
-    const owl = 50
+    const sigUSDAmount = 10
+    const owl = 10
 
     ergoWallet.get_utxos(sigUSDAmount, TOKENID_FAKE_SIGUSD).then(utxosResponse => {
       if(utxosResponse.length === 0){
@@ -122,12 +122,12 @@ const Header = () => {
         // send token input boxes and token amounts in a POST message to the backend
         axios.post('http://localhost:8088/api/v1/swap/sigusd', {
           amnt: sigUSDAmount,
-          senderAddr: unusedAddress,
+          senderAddr: defaultAddress,
           utxos: utxosResponse
         })
         .then(async function (response) {
           const signedTx = await signTx(response.data);
-          console.log(signedTx)
+          console.log("signedTx", signedTx)
           const txId = await submitTx(signedTx);
           if (!txId) {
             console.log(`No submitted tx ID`);
@@ -144,7 +144,7 @@ const Header = () => {
 
   async function signTx(txToBeSigned) {
     try {
-      console.log(txToBeSigned);
+      console.log("txToBeSigned", txToBeSigned)
       return await ergoWallet.sign_tx(txToBeSigned);
     } catch (err) {
       const msg = `[signTx] Error: ${JSON.stringify(err)}`;
@@ -226,7 +226,7 @@ const Header = () => {
     window.addEventListener("ergo_wallet_disconnected", function(event) {
       setWalletConnected(false)
       setErgoWallet()
-      setUnusedAddress("")
+      setDefaultAddress("")
       setOwlBalance(0)
     });
   }
