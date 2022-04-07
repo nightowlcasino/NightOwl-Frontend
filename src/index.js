@@ -34,7 +34,7 @@ const loadingMarkup = (
 ReactDOM.render(
 	<Suspense fallback={loadingMarkup}>
 		<React.StrictMode>
-			<BrowserRouter basename="/app">
+			<BrowserRouter>
 				<App />
 			</BrowserRouter>
 		</React.StrictMode>
