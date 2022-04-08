@@ -20,19 +20,22 @@ function ComingSoon() {
 				<div id="about-wrapper">
 					<h1>Coming Soon!</h1>
 					<div id="about">
-						<span>Our developers are working hard intending to catch the roadmap deadline date.</span>
+						<span>Our developers are working very hard in an attempt to meet the target roadmap deadlines.</span>
 						<br />
 						<span id="night-owl-team">Night Owl Team</span>
 					</div>
 					<div id="icons-wrapper">
 						<a href="https://twitter.com/NightOwlCasino" target="_blank" className="icon-wrapper">
-							<div id="twitter-icon" className="icon"></div>
+							<div id="twitter-icon-blue" className="icon-color"></div>
+							<div id="twitter-icon-white" className="icon-white"></div>
 						</a>
 						<a href="https://discord.com/invite/W69GTHe3pJ" target="_blank" className="icon-wrapper">
-							<div id="discord-icon" className="icon"></div>
+							<div id="discord-icon-blue" className="icon-color"></div>
+							<div id="discord-icon-white" className="icon-white"></div>
 						</a>
 						<a href="https://linktr.ee/NightOwlCasino" target="_blank" className="icon-wrapper">
-							<div id="linktree-icon" className="icon"></div>
+							<div id="linktree-icon-green" className="icon-color"></div>
+							<div id="linktree-icon-white" className="icon-white"></div>
 						</a>
 					</div>
 				</div>

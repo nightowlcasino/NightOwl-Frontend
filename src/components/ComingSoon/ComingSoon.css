@@ -3,8 +3,6 @@ body
     padding: 0;
     margin: 0;
     background-image: radial-gradient(ellipse at right top, #750a9a,#200964);
-    width: 100vw;
-    height: 100vh;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -41,8 +39,8 @@ body
 
 #logo-background
 {
-    flex: 200px;
-    max-height: 200px;
+    flex: 250px;
+    max-height: 250px;
     display: flex;
 }
 
@@ -57,8 +55,8 @@ body
 
 #logo
 {
-    flex: 180px;
-    max-width: 180px;
+    flex: 350px;
+    max-width: 350px;
     margin: 0 auto;
     height: 100%;
     background-size: contain;
@@ -96,11 +94,11 @@ body
 #icons-wrapper
 {
     display: flex;
-    height: 62px;
+    height: 40px;
     align-content: center;
     align-items: center;
     margin: 0 auto;
-    width: 186px;
+    width: 140px;
 }
 
 #icons-wrapper .icon-fill
@@ -115,9 +113,11 @@ body
     align-items: center;
     width: 100%;
     height: 100%;
+    position: relative;
 }
 
-#icons-wrapper .icon-wrapper .icon
+#icons-wrapper .icon-wrapper .icon-white,
+#icons-wrapper .icon-wrapper .icon-color
 {
     width: calc(100% - 5px);
     height: calc(100% - 5px);
@@ -125,21 +125,53 @@ body
     background-size: contain;
     background-repeat: no-repeat;
     margin: 0 auto;
+    transition: all 0.4s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0
 }
 
-#twitter-icon
+#icons-wrapper .icon-wrapper .icon-white,
+#icons-wrapper .icon-wrapper:hover .icon-color
 {
-    background-image: url("../../assets/Elements/twitter_icon.svg");
+    opacity: 1;   
 }
 
-#discord-icon
+#icons-wrapper .icon-wrapper .icon-color,
+#icons-wrapper .icon-wrapper:hover .icon-white
 {
-    background-image: url("../../assets/Elements/discord_icon.svg");
+    opacity: 0;
 }
 
-#linktree-icon
+#twitter-icon-white
 {
-    background-image: url("../../assets/Elements/linktree_icon.svg");
+    background-image: url("../../assets/Elements/twitter_icon_white.svg");
+}
+
+#twitter-icon-blue
+{
+    background-image: url("../../assets/Elements/twitter_icon_blue.svg");
+}
+
+#discord-icon-white
+{
+    background-image: url("../../assets/Elements/discord_icon_white.svg");
+}
+
+#discord-icon-blue
+{
+    background-image: url("../../assets/Elements/discord_icon_blue.svg");
+}
+
+#linktree-icon-white
+{
+    background-image: url("../../assets/Elements/linktree_icon_white.svg");
+}
+
+#linktree-icon-green
+{
+    background-image: url("../../assets/Elements/linktree_icon_green.svg");
 }
 
 #content-filler

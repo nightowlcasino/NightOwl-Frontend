@@ -16,12 +16,10 @@ import ComingSoon from "./components/ComingSoon/ComingSoon.js";
 function App() {
 	const location = useLocation();
 	const path = location.pathname;
-
+	console.log(path)
 	return (
 		<div className="App">
-			<ComingSoon />
-			{/* <Header />
-			<BodyContent /> */}
+				{path.includes('/soon') ? <ComingSoon /> : <> <Header /> <BodyContent /></>}
 		</div>
 	);
 }
