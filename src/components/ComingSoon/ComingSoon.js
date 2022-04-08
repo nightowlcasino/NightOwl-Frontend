@@ -20,7 +20,7 @@ function ComingSoon() {
 				<div id="about-wrapper">
 					<h1>Coming Soon!</h1>
 					<div id="about">
-						<span>Our developers are working hard intending to catch the roadmap deadline date.</span>
+						<span>Our developers are working very hard in an attempt to meet the target roadmap deadlines.</span>
 						<br />
 						<span id="night-owl-team">Night Owl Team</span>
 					</div>
