@@ -145,11 +145,6 @@ function LeftSideBar() {
 						<span className="item-text">Random</span>
 					</div>
 				</Link>
-				<div id="downshift-arrow-wrapper">
-					<div id="downshift-arrow">
-						<div id="item">▼</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	);

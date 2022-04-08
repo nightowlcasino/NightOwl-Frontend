@@ -1,5 +1,6 @@
 import "./App.css";
-import { Routes, Route, useLocation } from "react-router-dom";
+// import { Routes, Route, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Header from "./components/Header/Header.js";
 import BodyContent from "./components/BodyContent/BodyContent.js"
 import ComingSoon from "./components/ComingSoon/ComingSoon.js";
@@ -16,7 +17,7 @@ import ComingSoon from "./components/ComingSoon/ComingSoon.js";
 function App() {
 	const location = useLocation();
 	const path = location.pathname;
-	console.log(path)
+	// console.log(path)
 	return (
 		<div className="App">
 				{path.includes('/soon') ? <ComingSoon /> : <> <Header /> <BodyContent /></>}
