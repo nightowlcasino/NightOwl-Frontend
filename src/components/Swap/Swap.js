@@ -1,53 +1,55 @@
+// import { Listbox } from "@headlessui/react";
 import React from "react";
-import image from "../../assets/Elements/swap-desktop.png";
+import swap_image from "../../assets/Elements/swap-desktop.png";
 import "./Swap.css";
 
 const Swap = () => {
 	return (
-        <main className="flex flex-col items-center xl:flex-row justify-center lg:justify-around xl:items-start xl:ml-5  max-w-full">
-            <div className="flex flex-col justify-center items-center bg-[#51127f] text-white w-[70%] sm:w-[50%] lg:w-[40%] xl:w-[28%] h-[45vh] xl:h-[60vh] rounded-[25px] shadow-[5px_10px_16px_rgb(0,0,0)] mt-[45px] ">
-                <h1 className="text-[#d70a84] m-0 pl-2 pb-2">Swap</h1>
-                <p className="pb-[20px]">Ergo blockchain token swap</p>
-                <div className="initial-swap-token flex flex-col justify-center items-center">
-                    <div className="custom-select">
-                        <select>
-                            <option value="erg">ERG</option>
-                        </select>
+        <div id="swap-wrapper">
+            <div id="swap-content-wrapper">
+                <div id="swap-content-inner-wrapper">
+                    <div id="swap-content">
+                        <div id="swap-header">
+                            <h1>Swap</h1>
+                            <span>Ergo blockchain token swap</span>
+                        </div>
+                        <div id="swap-input-fields-wrapper">
+                            <div id="swap-input-fields">
+                                <div className="input-field">
+                                    <select>
+                                        <option value="erg">ERG</option>
+                                    </select>
+                                    <input placeholder="ERG amount" />
+                                </div>
+                                <div id="input-separator-wrapper">
+                                    <div id="input-seperator">To</div>
+                                </div>
+                                <div className="input-field">
+                                    <select>
+                                        <option value="erg">ERG</option>
+                                    </select>
+                                    <input value="20.0000" />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="swap-buttons">
+                            <label id="private-wrapper" className="container">
+                                <input id="private-checkbox" type="checkbox" />
+                                <span class="checkmark"></span>
+                                Private
+                            </label>
+                            <div id="swap-button">
+                                <button>Swap</button>
+                            </div>
+                            <div id="swap-slippage">Slippage <span id="swap-slippage-value">0.5</span>%</div>
+                        </div>
                     </div>
-                    
-                    <input type="number" className="token-input w-[80%] " />
                 </div>
-
-                <div className="mid-swap flex flex-col justify-center items-center h-[120px] ">
-                    <div>
-                        <p>.</p>
-                        <p style={{marginBottom:"8px"}}>.</p>
-                    </div>
-                    <p className="text-center">To</p>
-                    <div>
-                        <p>.</p>
-                        <p>.</p>
-                    </div>
-                </div>
-
-                <div className="final-swap-token flex flex-col justify-center items-center mt-4">
-                    <div className="custom-select">
-                        <select>
-                            <option value="erg">OWL</option>
-                        </select>
-                    </div>
-
-                    <input type="number" className="token-input w-[80%]" />
-                </div>
-
-                <span><input type="checkbox" name="Private" />Private</span>
-
-                <button>Swap</button>
-
-                <p>Slippage: {}</p>
             </div>
-            <img src={image} className="w-[40%] lg:w-[40%] lg:mr-8 xl:mr-28" />
-        </main>
-	);
+            <div id="swap-image-wrapper">
+                <div id="swap-image" style={{ backgroundImage: `url(${swap_image})` }}></div>
+            </div>
+        </div>
+    );
 };
 export default Swap;

@@ -2,10 +2,8 @@
 {
     display: flex;
     flex-direction: row;
-    height: calc(100vh - 100px);
-    width: 100vw;
+    width: calc(100vw - 20px);
     max-width: 1400px;
-    max-height: 855px;
     margin: 0 auto;
 }
 
@@ -328,6 +326,11 @@
 
 @media all and (max-width: 992px)
 {
+    #body-content-wrapper #body-content
+    {
+        padding-bottom: 60px;
+    }
+
     #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper
     {
         flex: 0 0 auto;
@@ -393,6 +396,7 @@
     #body-content-wrapper #body-content #page-content-wrapper #home-page-footer
     {
         flex-direction: column-reverse;
+        max-height: 585px;
     }
 
     #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-transactions-wrapper
@@ -430,6 +434,8 @@
     {
         margin: 10px 10px;
         height: calc(100% - 20px);
+        min-height: 300px;
+        max-height: 350px;
     }
 
     #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border#hot-game-roulette
@@ -444,6 +450,10 @@
         flex-direction: column-reverse;
     }
     
+    #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left
+    {
+        flex: 1 1 auto;
+    }
 
     #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left .top
     {
