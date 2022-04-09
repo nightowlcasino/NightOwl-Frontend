@@ -26,6 +26,8 @@ const languages = [
   }
 ]
 
+const backend = process.env.BACKEND_FQDN || "localhost"
+
 const currentLanguageCode = cookies.get("i18next") || "en"
 
 const NANOERG_TO_ERG = 1000000000;
@@ -116,11 +118,13 @@ const Header = () => {
     const owl = 10
 
     ergoWallet.get_utxos(sigUSDAmount, TOKENID_FAKE_SIGUSD).then(utxosResponse => {
+    //ergoWallet.get_utxos(owl, TOKENID_NO_TEST).then(utxosResponse => {
       if(utxosResponse.length === 0){
           console.log('NO UTXOS')
       } else {
         // send token input boxes and token amounts in a POST message to the backend
-        axios.post('http://localhost:8088/api/v1/swap/sigusd', {
+        axios.post(`http://${backend}:8088/api/v1/swap/sigusd`, {
+        //axios.post(`http://${backend}:8088/api/v1/swap/owl`, {
           amnt: sigUSDAmount,
           senderAddr: defaultAddress,
           utxos: utxosResponse
@@ -144,7 +148,6 @@ const Header = () => {
 
   async function signTx(txToBeSigned) {
     try {
-      console.log("txToBeSigned", txToBeSigned)
       return await ergoWallet.sign_tx(txToBeSigned);
     } catch (err) {
       const msg = `[signTx] Error: ${JSON.stringify(err)}`;
