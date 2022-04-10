@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import cookies from "js-cookie"
 import WalletSelector from "./WalletSelector";
+import WalletHover from "./WalletHover/WalletHover";
 
 
 const languages = [
@@ -43,6 +44,7 @@ const Header = () => {
   const [owlBalance, setOwlBalance] = useState(0)
   const [ergoWallet, setErgoWallet] = useState()
   const [showSelector, setShowSelector] = useState(false)
+  const [walletHover, setWalletHover] = useState(false);
 
   const { t } = useTranslation();
 
@@ -51,7 +53,7 @@ const Header = () => {
   }
 
   const toggleSelector = () => {
-    setShowSelector(!showSelector)
+    if(!walletConnected)setShowSelector(!showSelector);
   }
 
   useEffect(() => {
@@ -108,6 +110,14 @@ const Header = () => {
     } else {
       return str.substring(0,parseInt(len/2)) + sep + str.substring(str.length-(parseInt(len/2)+1),str.length-1)
     }
+  }
+
+  const handleWalletTrue = () => {
+    if(walletConnected)setWalletHover(prev=>!prev);
+  }
+
+  const handleWalletFalse = () => {
+    setWalletHover(false);
   }
 
   const swapTokens = () => {
@@ -267,10 +277,11 @@ const Header = () => {
               </>}
               handleClose={toggleSelector}/>}
             <button onClick={toggleSelector} className="connect-wallet-button">
-              <Link to="#">
+              <Link to="#" onClick={handleWalletTrue} >
                 <img className="connect-wallet-icon" src={wallet} />
-                <span className="wallet-balance" style={{display: "none"}}>{balanceValue()}</span>
+                <span className="wallet-balance" style={{}}>{balanceValue()}</span>
                 <span className="connect-text">{t("connect wallet")}</span>
+                {walletHover && <WalletHover /> }
               </Link>
             </button>
             <button onClick={swapTokens} className="connect-wallet-button">
