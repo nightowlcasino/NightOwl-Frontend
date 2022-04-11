@@ -1,6 +1,4 @@
-// import { Listbox } from "@headlessui/react";
 import React from "react";
-import swap_image from "../../assets/Elements/swap-desktop.png";
 import "./Swap.css";
 
 const Swap = () => {
@@ -47,9 +45,12 @@ const Swap = () => {
                 </div>
             </div>
             <div id="swap-image-wrapper">
-                <div id="swap-image" style={{ backgroundImage: `url(${swap_image})` }}></div>
+                <div id="swap-box">
+                    <div id="swap-coin"></div>
+                </div>
             </div>
         </div>
     );
 };
+
 export default Swap;
