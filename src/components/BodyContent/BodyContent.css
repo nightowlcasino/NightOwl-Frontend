@@ -14,6 +14,38 @@
     flex: 75%;
 }
 
+#body-content-wrapper.game #body-content
+{
+    flex: 100%;
+}
+
+#body-content-wrapper.game #sidebars
+{
+    flex: 0%;
+    max-width: 0px;
+}
+
+#body-content-wrapper.game #sidebars #side-navigation-large-wrapper
+{
+	position: fixed;
+	left: 0px;
+	min-width: 350px;
+	max-width: 350px;
+	width: 100vw;
+	transform: translateX(-330px);
+	transition: all 0.4s ease;
+}
+
+#body-content-wrapper #sidebars #side-navigation-large-wrapper #side-navigation-large #left-side-bar-show-button-wrapper
+{
+    display: none;
+}
+
+#body-content-wrapper.game #sidebars #side-navigation-large-wrapper #side-navigation-large #left-side-bar-show-button-wrapper
+{
+    display: flex;
+}
+
 #body-content-wrapper #body-content #page-content-wrapper
 {
     flex: 75%;

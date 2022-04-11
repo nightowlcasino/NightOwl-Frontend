@@ -4,6 +4,7 @@
     position: sticky;
     top: 100px;
     height: calc(100vh - 100px);
+    transition: all 0.4s ease;
 }
 
 #sidebars #side-navigation-large-wrapper
@@ -200,6 +201,62 @@
 #sidebars #mobile-navigation #items-wrapper .mobile-navigation-item-wrapper.active .item-content .item-icon-wrapper .item-icon-white
 {
     opacity: 0;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large #left-side-bar-show-button-wrapper
+{
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    transform: translateX(340px);
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large #left-side-bar-show-button-wrapper #left-side-bar-show-button
+{
+    background-color: #d70a84aa;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 40px;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px -5px black;
+    padding: 2px 10px 10px 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.4s ease;
+}
+
+#sidebars #side-navigation-large-wrapper #side-navigation-large #left-side-bar-show-button-wrapper.hide-side-nav-button
+{
+    opacity: 0;
+    visibility: hidden;
+}
+
+#sidebars #left-side-bar-show-button-wrapper #left-side-bar-show-button:hover
+{
+    background-color: #d70a84;
+    box-shadow: 0px 0px 15px -5px white;
+}
+
+#sidebars #side-navigation-large-wrapper.show-game-sidebar
+{
+    transform: translateX(0px) !important;
+}
+
+#sidebars #side-navigation-large-wrapper.show-game-sidebar #side-navigation-large #left-side-bar-show-button-wrapper
+{
+    transform: translateX(320px);
+}
+
+#sidebars #side-navigation-large-wrapper.show-game-sidebar #side-navigation-large #left-side-bar-show-button-wrapper #left-side-bar-show-button
+{
+    transform: rotate(180deg);
 }
 
 @media all and (max-width: 992px)

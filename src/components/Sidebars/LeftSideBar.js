@@ -51,6 +51,62 @@ function LeftSideBar() {
 		home_page_class += " active";
 	}
 
+	var games_page_class = "side-navigation-large-item-wrapper";
+
+	if(path === "/games/" || path === "/games")
+	{
+		games_page_class += " active";
+	}
+
+	var bonuses_page_class = "side-navigation-large-item-wrapper";
+
+	if(path === "/bonuses/" || path === "/bonuses")
+	{
+		bonuses_page_class += " active";
+	}
+
+	var rules_page_class = "side-navigation-large-item-wrapper";
+
+	if(path === "/rules/" || path === "/rules")
+	{
+		rules_page_class += " active";
+	}
+
+	var casino_page_class = "side-navigation-large-item-wrapper";
+
+	if(path === "/casino/" || path === "/casino")
+	{
+		casino_page_class += " active";
+	}
+
+	var p2p_page_class = "side-navigation-large-item-wrapper";
+
+	if(path === "/p2p/" || path === "/p2p")
+	{
+		p2p_page_class += " active";
+	}
+
+	var coinflip_page_class = "side-navigation-large-item-wrapper";
+
+	if(path === "/games/coinflip/" || path === "/games/coinflip")
+	{
+		coinflip_page_class += " active";
+	}
+
+	var blackjack_page_class = "side-navigation-large-item-wrapper";
+
+	if(path === "/games/blackjack/" || path === "/games/blackjack")
+	{
+		blackjack_page_class += " active";
+	}
+
+	var random_page_class = "side-navigation-large-item-wrapper";
+
+	if(path === "/games/random/" || path === "/games/random")
+	{
+		random_page_class += " active";
+	}
+
 	function changeSelection(element)
 	{
 		setIsSelected(element);
@@ -58,6 +114,7 @@ function LeftSideBar() {
 
 	return (
 		<div id="side-navigation-large-wrapper">
+			{/* add "show-game-sidebar" class to element above to show navigation on game pages, remove to hide navigation */}
 			<div id="side-navigation-large">
 				<Link to="/" onClick={()=>changeSelection('homepage')} className={home_page_class}>
 					<div className="item-content">
@@ -68,7 +125,7 @@ function LeftSideBar() {
 						<span className="item-text">Home page</span>
 					</div>
 				</Link>
-				<Link to="/soon" onClick={()=>changeSelection('soonGames')} className={isSelected === 'soonGames' ? "side-navigation-large-item-wrapper active" : "side-navigation-large-item-wrapper"}>
+				<Link to="/soon" onClick={()=>changeSelection('soonGames')} className={games_page_class}>
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${games_icon_white})`}}></div>
@@ -77,7 +134,7 @@ function LeftSideBar() {
 						<span className="item-text">Games</span>
 					</div>
 				</Link>
-				<Link to="/stake" onClick={()=>changeSelection('stack')} className={isSelected === 'stack' ? "side-navigation-large-item-wrapper active" : "side-navigation-large-item-wrapper"}>
+				<Link to="/stake" onClick={()=>changeSelection('stack')} className={bonuses_page_class}>
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${bonuses_icon_white})`}}></div>
@@ -86,7 +143,7 @@ function LeftSideBar() {
 						<span className="item-text">Bonuses</span>
 					</div>
 				</Link>
-				<Link to="/swap" onClick={()=>changeSelection('swap')} className={isSelected === 'swap' ? "side-navigation-large-item-wrapper active" : "side-navigation-large-item-wrapper"}>
+				<Link to="/swap" onClick={()=>changeSelection('swap')} className={rules_page_class}>
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${rules_icon_white})`}}></div>
@@ -95,7 +152,7 @@ function LeftSideBar() {
 						<span className="item-text">Rules</span>
 					</div>
 				</Link>
-				<Link to="/soon" onClick={()=>changeSelection('soonCasino')} className={isSelected === 'soonCasino' ? "side-navigation-large-item-wrapper active" : "side-navigation-large-item-wrapper"}>
+				<Link to="/soon" onClick={()=>changeSelection('soonCasino')} className={casino_page_class}>
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${casino_icon_white})`}}></div>
@@ -104,7 +161,7 @@ function LeftSideBar() {
 						<span className="item-text">Casino</span>
 					</div>
 				</Link>
-				<Link to="/soon" onClick={()=>changeSelection('soonBetting')} className={isSelected === 'soonBetting' ? "side-navigation-large-item-wrapper active" : "side-navigation-large-item-wrapper"}>
+				<Link to="/soon" onClick={()=>changeSelection('soonBetting')} className={p2p_page_class}>
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${p2p_icon_white})`}}></div>
@@ -118,7 +175,7 @@ function LeftSideBar() {
 						<span>Popular games</span>
 					</div>
 				</div>
-				<Link to="/games/coinflip" onClick={()=>changeSelection('coinflip')} className={isSelected === 'coinflip' ? "side-navigation-large-item-wrapper active" : "side-navigation-large-item-wrapper"}>
+				<Link to="/games/coinflip" onClick={()=>changeSelection('coinflip')} className={coinflip_page_class}>
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${coinflip_icon_white})`}}></div>
@@ -127,7 +184,7 @@ function LeftSideBar() {
 						<span className="item-text">Coinflip</span>
 					</div>
 				</Link>
-				<Link to="/soon" onClick={()=>changeSelection('soonBlackjack')} className={isSelected === 'soonBlackjack' ? "side-navigation-large-item-wrapper active" : "side-navigation-large-item-wrapper"}>
+				<Link to="/soon" onClick={()=>changeSelection('soonBlackjack')} className={blackjack_page_class}>
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${blackjack_icon_white})`}}></div>
@@ -136,7 +193,7 @@ function LeftSideBar() {
 						<span className="item-text">Blackjack</span>
 					</div>
 				</Link>
-				<Link to="/soon" onClick={()=>changeSelection('soonRandom')} className={isSelected === 'soonRandom' ? "side-navigation-large-item-wrapper active" : "side-navigation-large-item-wrapper"}>
+				<Link to="/soon" onClick={()=>changeSelection('soonRandom')} className={random_page_class}>
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${random_icon_white})`}}></div>
@@ -145,6 +202,9 @@ function LeftSideBar() {
 						<span className="item-text">Random</span>
 					</div>
 				</Link>
+				<div id="left-side-bar-show-button-wrapper">
+					<div id="left-side-bar-show-button">&#8811;</div>
+				</div>
 			</div>
 		</div>
 	);
