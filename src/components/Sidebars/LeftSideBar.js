@@ -185,13 +185,13 @@ function LeftSideBar() {
 						<span className="item-text">Coinflip</span>
 					</div>
 				</Link>
-				<Link to="/soon" onClick={()=>setSidebarToggled(false)} className={blackjack_page_class}>
+				<Link to="/games/roulette" onClick={()=>setSidebarToggled(false)} className={blackjack_page_class}>
 					<div className="item-content">
 						<div className="item-icon-wrapper">
 							<div className="item-icon-white" style={{backgroundImage:`url(${blackjack_icon_white})`}}></div>
 							<div className="item-icon-pink" style={{backgroundImage:`url(${blackjack_icon_pink})`}}></div> 
 						</div>
-						<span className="item-text">Blackjack</span>
+						<span className="item-text">Roulette</span>
 					</div>
 				</Link>
 				<Link to="/soon" onClick={()=>setSidebarToggled(false)} className={random_page_class}>

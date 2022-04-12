@@ -10,6 +10,7 @@ import ComingSoon from "../ComingSoon/ComingSoon.js";
 import Stake from "../Stake/Stake.js";
 import Swap from "../Swap/Swap.js";
 import Coinflip from "../Games/Coinflip/Coinflip.js";
+import Roulette from "../Games/Roulette/Roulette";
 
 function BodyContent() {
     const location = useLocation();
@@ -38,7 +39,7 @@ function BodyContent() {
                     <Route path="/stake" element={<Stake />} />
                     <Route path="/swap" element={<Swap />} />
                     <Route path="/games/coinflip" element={<Coinflip />} />
-                    <Route path="/games/roulette" element={<ComingSoon />} />
+                    <Route path="/games/roulette" element={<Roulette />} />
                 </Routes>
             </div>
         </div>
