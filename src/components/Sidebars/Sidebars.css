@@ -214,7 +214,7 @@
     flex-direction: row;
     align-content: center;
     align-items: center;
-    transform: translateX(340px);
+    transform: translateX(320px);
 }
 
 #sidebars #side-navigation-large-wrapper #side-navigation-large #left-side-bar-show-button-wrapper #left-side-bar-show-button
@@ -247,11 +247,6 @@
 #sidebars #side-navigation-large-wrapper.show-game-sidebar
 {
     transform: translateX(0px) !important;
-}
-
-#sidebars #side-navigation-large-wrapper.show-game-sidebar #side-navigation-large #left-side-bar-show-button-wrapper
-{
-    transform: translateX(320px);
 }
 
 #sidebars #side-navigation-large-wrapper.show-game-sidebar #side-navigation-large #left-side-bar-show-button-wrapper #left-side-bar-show-button
