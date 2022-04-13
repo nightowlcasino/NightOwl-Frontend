@@ -1,3 +1,112 @@
+.number:nth-child(1) {
+    transform: rotateZ(9.7297297297297deg);
+}
+.number:nth-child(2) {
+    transform: rotateZ(19.459459459459deg);
+}
+.number:nth-child(3) {
+    transform: rotateZ(29.189189189189deg);
+}
+.number:nth-child(4) {
+    transform: rotateZ(38.918918918919deg);
+}
+.number:nth-child(5) {
+    transform: rotateZ(48.648648648649deg);
+}
+.number:nth-child(6) {
+    transform: rotateZ(58.378378378378deg);
+}
+.number:nth-child(7) {
+    transform: rotateZ(68.108108108108deg);
+}
+.number:nth-child(8) {
+    transform: rotateZ(77.837837837838deg);
+}
+.number:nth-child(9) {
+    transform: rotateZ(87.567567567568deg);
+}
+.number:nth-child(10) {
+    transform: rotateZ(97.297297297297deg);
+}
+.number:nth-child(11) {
+    transform: rotateZ(107.02702702703deg);
+}
+.number:nth-child(12) {
+    transform: rotateZ(116.75675675676deg);
+}
+.number:nth-child(13) {
+    transform: rotateZ(126.48648648649deg);
+}
+.number:nth-child(14) {
+    transform: rotateZ(136.21621621622deg);
+}
+.number:nth-child(15) {
+    transform: rotateZ(145.94594594595deg);
+}
+.number:nth-child(16) {
+    transform: rotateZ(155.67567567568deg);
+}
+.number:nth-child(17) {
+    transform: rotateZ(165.40540540541deg);
+}
+.number:nth-child(18) {
+    transform: rotateZ(175.13513513514deg);
+}
+.number:nth-child(19) {
+    transform: rotateZ(184.86486486486deg);
+}
+.number:nth-child(20) {
+    transform: rotateZ(194.59459459459deg);
+}
+.number:nth-child(21) {
+    transform: rotateZ(204.32432432432deg);
+}
+.number:nth-child(22) {
+    transform: rotateZ(214.05405405405deg);
+}
+.number:nth-child(23) {
+    transform: rotateZ(223.78378378378deg);
+}
+.number:nth-child(24) {
+    transform: rotateZ(233.51351351351deg);
+}
+.number:nth-child(25) {
+    transform: rotateZ(243.24324324324deg);
+}
+.number:nth-child(26) {
+    transform: rotateZ(252.97297297297deg);
+}
+.number:nth-child(27) {
+    transform: rotateZ(262.7027027027deg);
+}
+.number:nth-child(28) {
+    transform: rotateZ(272.43243243243deg);
+}
+.number:nth-child(29) {
+    transform: rotateZ(282.16216216216deg);
+}
+.number:nth-child(30) {
+    transform: rotateZ(291.89189189189deg);
+}
+.number:nth-child(31) {
+    transform: rotateZ(301.62162162162deg);
+}
+.number:nth-child(32) {
+    transform: rotateZ(311.35135135135deg);
+}
+.number:nth-child(33) {
+    transform: rotateZ(321.08108108108deg);
+}
+.number:nth-child(34) {
+    transform: rotateZ(330.81081081081deg);
+}
+.number:nth-child(35) {
+    transform: rotateZ(340.54054054054deg);
+}
+.number:nth-child(36) {
+    transform: rotateZ(350.27027027027deg);
+}
+
 .roulette-wrapper
 {
     flex: 100%;
@@ -5,7 +114,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    background-color: antiquewhite;
+    /* background-color: #000; */
 }
 
 .plate {
@@ -26,12 +135,13 @@
 .plate:after {
     top: -6px;
     right: -6px;
-    bottom: -6px;
+    bottom: -7px;
     left: -6px;
     border: 6px solid #E0CCFF;
     /* offset-x | offset-y | blur-radius | spread-radius | color */
     box-shadow: 
-        inset 0 0 1em 0 #A739FF, 0 0 5em 0 #A739FF
+        inset 0 0 2em 3px #A739FF, 0 0 3em 1em #A739FF
+        
 
 }
 .plate:before {
@@ -40,9 +150,9 @@
     /* offset-x | offset-y | blur-radius | spread-radius | color */
     box-shadow: inset 0px 0px 0.5em 1px #A739FF, 0px 0px 0.5em 1px #A739FF;
     top: 12%;
-    left: 12%;
+    left: 14%;
     right: 12%;
-    bottom: 12%;
+    bottom: 13%;
     z-index: 1;
 }
 
@@ -81,12 +191,12 @@
 .behindlol {
     /*2024 1835*/ 
     position: absolute;
-    width: 550px;
-    height: 550px;
-    bottom: 0%;
-    left: -35%;
-    top: -28%;
-    right: 0%;
+    width: 497px;
+    height: 497px;
+    left: -22%;
+    top: -21%;
+    border-radius: 50%;
+    box-shadow: inset 0 0 2em 1px #A739FF, 0 0 2.5em 1.5em #A739FF
 }
 .inner {
     display: block;
@@ -103,7 +213,7 @@
 .inner:after {
     z-index:3;
     top: 20%;
-    right: 40%;
+    right: 39%;
     bottom: 20%;
     left: 16%;
     border: 3px solid #ebdeff;
@@ -111,7 +221,7 @@
     box-shadow: inset 0px 0px 0.5em 1px #A739FF, 0px 0px 0.3em 1px #A739FF;
     background-image: url("../../../assets/Elements/Middle.svg");
     background-position: center;
-    background-size: cover;
+    background-size: 105%;
 }
 .inner:before {
     top: 20%;
@@ -315,11 +425,12 @@
     border: 1px solid #000000;
     border-top-color: #00b300;
     border-left-color: #00b300;
+    top: 150px;
     padding: 0;
-    margin: 0;
+    margin-bottom: 0;
     display: inline-block;
     font-size: 15px;
-    width: 175px;
+    width: 350px;
     padding: 12px;
     margin: 12px;
     margin-right: 300px;
@@ -327,6 +438,7 @@
     color: #fff;
     font-family: 'Roboto', sans-serif;
     border-radius: 3px;
+    position: absolute;
 }
 .btn .btn-label {
     padding: 12px;
