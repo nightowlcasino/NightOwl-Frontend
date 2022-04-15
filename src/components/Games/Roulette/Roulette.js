@@ -1,57 +1,84 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Roulette.css";
 import outterWheel1 from "../../../assets/Elements/behind2.png";
 const Roulette = () => {
   var red = [32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3];
-  var inner = document.querySelector(".inner");
-  var spin = document.querySelector("#spin");
-  var data = document.querySelector(".data");
-  var mask = document.querySelector(".mask");
+
   var maskDefault = "Place Your Bets",
     timer = 9000;
-  console.log(inner);
-  const [maskText, setMaskText] = useState("");
+
+  const [maskText, setMaskText] = useState(maskDefault);
+  const [spinAvailable, setSpinAvailable] = useState(true);
+  const [revealData, setRevealData] = useState(false);
+  const [resultNumber, setResultNumber] = useState(null);
+  const [resultColor, setResultColor] = useState(null);
+  const [randomNumber, setRandomNumber] = useState(null);
+  const [firstSpin, setFirstSpin] = useState(true);
+
+  const innerRef = useRef();
 
   function spinTheWheel() {
-    var randomNumber = 19,//Math.floor(Math.random() * 36),
-      color = null;
-	console.log("he entrado");
-    var lol = inner.setAttribute("data-spinto", randomNumber).querySelector("li:nth-child(" + randomNumber + ") input");
-	console.log(lol);
-      
-	lol.prop("checked", "checked");
+    innerRef.current.setAttribute("data-spinto", "");
+	if (!firstSpin) {
+		setRevealData(false);
+	}
+    var randomNumber = Math.floor(Math.random() * 36);
+    var color = null;
+	setTimeout(function () {
+		innerRef.current.setAttribute("data-spinto", randomNumber);
+	}, 50);
+    
+    setSpinAvailable(false);
 
-    // setTimeout(function () {
-    //   setMaskText("No more bets");
-    // }, timer / 2);
+    //$(".placeholder").remove();
 
-    // setTimeout(function () {
-	// 	setMaskText(maskDefault);
-    // }, timer + 500);
+    setMaskText("No more bets");
+
+    setTimeout(function () {
+      setMaskText(maskDefault);
+    }, timer + 540);
+
+    // remove the disabled attribute when the ball has stopped
+    setTimeout(function () {
+      setSpinAvailable(true);
+
+      if (randomNumber === 0) {
+        color = "green";
+      } else if (red.indexOf(randomNumber) !== -1) {
+        color = "red";
+      } else {
+        color = "black";
+      }
+
+      setResultNumber(randomNumber);
+      setResultColor(color);
+      setRevealData(true);
+      setRandomNumber(randomNumber);
+	  if (firstSpin) setFirstSpin(false);
+    }, timer+50);
   }
-
+  console.log(randomNumber);
+  console.log(revealData);
+  console.log(resultColor);
   return (
     <div className="roulette-wrapper">
       <div className="roulette-wheel-content-wrapper">
         <div className="roulette-wheel-content">
           <button
             type="button"
-            className="btn"
+            className={spinAvailable ? "btn" : "btn disabled"}
             id="spin"
             onClick={() => spinTheWheel()}
           >
             <span className="btn-label">Spin</span>
           </button>
-          {/*<button type="button" className="btn btn-reset" id="reset">
-            <span className="btn-label">New Game</span>
-          </button> */}
           <div className="plate" id="plate">
             <img
               src={outterWheel1}
               className="behindlol"
               alt="outter-roulette-wheel"
             />
-            <ul className="inner">
+            <ul id="fuckinginner" className="inner" ref={innerRef}>
               <li className="number">
                 <label>
                   <input type="radio" name="pit" value="32" />
@@ -275,26 +302,25 @@ const Roulette = () => {
                 </label>
               </li>
             </ul>
-            <div className="data">
+
+            <div className={revealData ? "data reveal" : "data"}>
               <div className="data-inner">
                 <div className="mask">{maskText}</div>
-                <div className="result">
-                  <div className="result-number">00</div>
-                  <div className="result-color">red</div>
+                <div
+                  className="result"
+                  style={{ backgroundColor: resultColor }}
+                >
+                  <div className="result-number">{resultNumber}</div>
+                  <div className="result-color">{resultColor}</div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="previous-results">
-            <ol className="previous-list">
-              <li className="visuallyhidden placeholder">No results yet.</li>
-            </ol>
-          </div>
         </div>
       </div>
       <div className="roulette-table-content-wrapper">
-        <div className="roulette-table-content">
-          Hello good afternoon sir Bane
+        <div className="roulette-table-content" style={{color:"white"}}>
+          The table will go here
         </div>
       </div>
     </div>
