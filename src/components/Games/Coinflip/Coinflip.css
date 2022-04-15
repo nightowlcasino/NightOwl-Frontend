@@ -203,7 +203,8 @@
 #coinflip-game-wrapper #coin-wrapper #platform
 {
     position: relative;
-    min-width: 600px;
+    width: 100vw;
+    max-width: 600px;
     min-height: 600px;
     background-image: url(../../../assets/Elements/pyramid.svg);
     background-position: center;
@@ -231,4 +232,23 @@
 {
     from {top: 15%}
     to {top: 20%}
+}
+
+@media all and (max-width: 992px)
+{
+    #coinflip-game-wrapper
+    {
+        flex-direction: column;
+    }
+
+    #coinflip-game-wrapper #coin-wrapper
+    {
+        z-index: -1;
+    }
+
+    #coinflip-game-wrapper #coin-wrapper #platform
+    {
+        width: calc(100vw - 20px);
+        min-width: auto;
+    }
 }
