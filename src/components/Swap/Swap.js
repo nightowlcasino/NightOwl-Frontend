@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import image from "../../assets/Elements/swap-desktop.png";
+import React from "react";
 import "./Swap.css";
 //import { WalletContext } from "../Header/Header";
 
@@ -31,46 +30,54 @@ const Swap = () => {
     }
 
 	return (
-        <main>
-            <div className="swap-div">
-                <h1>Swap</h1>
-                <p className="desc">Ergo blockchain token swap</p>
-                <div className="initial-swap-token">
-                    <div className="custom-select">
-                        <select>
-                            <option value="SigUSD">SigUSD</option>
-                        </select>
+        <div id="swap-wrapper">
+            <div id="swap-content-wrapper">
+                <div id="swap-content-inner-wrapper">
+                    <div id="swap-content">
+                        <div id="swap-header">
+                            <h1>Swap</h1>
+                            <span>Ergo blockchain token swap</span>
+                        </div>
+                        <div id="swap-input-fields-wrapper">
+                            <div id="swap-input-fields">
+                                <div className="input-field">
+                                    <select>
+                                        <option value="erg">ERG</option>
+                                    </select>
+                                    <input placeholder="ERG amount" />
+                                </div>
+                                <div id="input-separator-wrapper">
+                                    <div id="input-seperator">To</div>
+                                </div>
+                                <div className="input-field">
+                                    <select>
+                                        <option value="erg">ERG</option>
+                                    </select>
+                                    <input value="20.0000" />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="swap-buttons">
+                            <label id="private-wrapper" className="container">
+                                <input id="private-checkbox" type="checkbox" />
+                                <span class="checkmark"></span>
+                                Private
+                            </label>
+                            <div id="swap-button">
+                                <button>Swap</button>
+                            </div>
+                            <div id="swap-slippage">Slippage <span id="swap-slippage-value">0.5</span>%</div>
+                        </div>
                     </div>
-                    
-                    <input id="sigUSDInput" onChange={convertOwl} type="number" className="token-input" />
                 </div>
-
-                <div className="mid-swap">
-                    <p>.</p>
-                    <p style={{marginBottom:"8px"}}>.</p>
-                    <p className="to">To</p>
-                    <p>.</p>
-                    <p>.</p>
-                </div>
-
-                <div className="final-swap-token">
-                    <div className="custom-select">
-                        <select>
-                            <option value="erg">OWL</option>
-                        </select>
-                    </div>
-
-                    <input id="owlInput" onChange={convertSigUSD} type="number" className="token-input" />
-                </div>
-
-                <span><input type="checkbox" name="Private" />Private</span>
-
-                <button onClick={swapTokens}>Swap</button>
-
-                <p>Slippage: {}</p>
             </div>
-            <img src={image} style={{width:"30%"}} />
-        </main>
-	);
+            <div id="swap-image-wrapper">
+                <div id="swap-box">
+                    <div id="swap-coin"></div>
+                </div>
+            </div>
+        </div>
+    );
 };
+
 export default Swap;
