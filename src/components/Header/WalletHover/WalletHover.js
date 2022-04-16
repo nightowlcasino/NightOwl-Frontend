@@ -15,7 +15,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function WalletHover() {
+export default function WalletHover({ disconnect, owlBalance, sigUSDBalance, ergBalance }) {
     const [open, setOpen] = useState(true);
 
   return (
@@ -43,7 +43,7 @@ export default function WalletHover() {
                   )}
                 >
                   <ArchiveIcon className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-                  Wallet Ballance - ERG
+                  Wallet Ballance - {ergBalance} ERG
                 </a>
               )}
             </Menu.Item>
@@ -57,7 +57,7 @@ export default function WalletHover() {
                   )}
                 >
                   <ArchiveIcon className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-                  Wallet Ballance - SigUSD
+                  Wallet Ballance - {sigUSDBalance} SigUSD
                 </a>
               )}
             </Menu.Item>
@@ -73,7 +73,7 @@ export default function WalletHover() {
                   )}
                 >
                   <ArchiveIcon className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-                  Wallet Ballance - OWL
+                  Wallet Ballance - {owlBalance} OWL
                 </a>
               )}
             </Menu.Item>            
@@ -81,16 +81,16 @@ export default function WalletHover() {
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="#"
+                <p
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'group flex items-center px-4 py-2 text-sm'
                   )}
+                  onClick={disconnect}
                 >
                   <TrashIcon className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
                   Disconnect
-                </a>
+                </p>
               )}
             </Menu.Item>
           </div>
