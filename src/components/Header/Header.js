@@ -4,7 +4,7 @@ import "./Header.css";
 
 import logo from "../../assets/Elements/logo.png";
 import magnifier from "../../assets/Elements/magnifier.png";
-import wallet_pink from "../../assets/Elements/wallet_pink.png";
+import AddWallet from "../ConnectWallet/AddWallet";
 
 // import { Link } from "react-router-dom";
 // import { useTranslation } from "react-i18next";
@@ -60,14 +60,7 @@ const Header = () => {
 						<div id="header-balance">
 							Volume: $<span id="header-balance-value">123,4</span><span id="header-balance-exponent">k</span></div>
 						</div>
-					<div id="header-wallet-wrapper">
-						<div id="header-wallet">
-							<div id="header-wallet-image" style={{ backgroundImage: `url(${wallet_pink})` }}></div>
-							<div id="wallet-connect">
-								<span>Connect Wallet</span>
-							</div>
-						</div>
-					</div>
+					<AddWallet />
 				</div>
 			</div>
 		</div>

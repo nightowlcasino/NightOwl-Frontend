@@ -1,58 +1,66 @@
-import { useContext, useEffect, useState } from "react"
-import axios from 'axios';
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
 import WalletContext from "./WalletContext";
+import wallet_pink from "../../assets/Elements/wallet_pink.png";
 import WalletHover from "../Header/WalletHover/WalletHover";
 import wallet from "../../assets/Elements/Design-2_0026_Layer-17.png";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const backend = process.env.BACKEND_FQDN || "localhost"
+const backend = process.env.BACKEND_FQDN || "localhost";
 
 const NANOERG_TO_ERG = 1000000000;
-const TOKENID_NO_TEST = "afd0d6cb61e86d15f2a0adc1e7e23df532ba3ff35f8ba88bed16729cae933032";
-const TOKENID_FAKE_SIGUSD = "96c402c0e658909aa03f534006124f0e43725c467dbc8dea39680d0861892de5";
+const TOKENID_NO_TEST =
+	"afd0d6cb61e86d15f2a0adc1e7e23df532ba3ff35f8ba88bed16729cae933032";
+const TOKENID_FAKE_SIGUSD =
+	"96c402c0e658909aa03f534006124f0e43725c467dbc8dea39680d0861892de5";
 
 function AddWallet(props) {
-    const { t } = useTranslation();
-    const [ergBalance, setErgBalance] = useState(0)
-    const [sigUSDBalance, setSigUSDBalance] = useState(0)
-    const [owlBalance, setOwlBalance] = useState(0)
-    const [ergoWallet, setErgoWallet] = useState()
-    const [walletConnected, setWalletConnected] = useState(false)
-    const [defaultAddress, setDefaultAddress] = useState("")
-    const [showSelector, setShowSelector] = useState(false)
-    const [walletHover, setWalletHover] = useState(false);
+	const { t } = useTranslation();
+	const [ergBalance, setErgBalance] = useState(0);
+	const [sigUSDBalance, setSigUSDBalance] = useState(0);
+	const [owlBalance, setOwlBalance] = useState(0);
+	const [ergoWallet, setErgoWallet] = useState();
+	const [walletConnected, setWalletConnected] = useState(false);
+	const [defaultAddress, setDefaultAddress] = useState("");
+	const [showSelector, setShowSelector] = useState(false);
+	const [walletHover, setWalletHover] = useState(false);
 	const [readOnlyNautilus, setReadOnlyNautilus] = useState(false);
+	const [walletImg, setWalletImg] = useState('')
 
-    const balanceValue = () => {
-        return 0
-    }
+	const balanceValue = () => {
+		return 0;
+	};
 
-	useEffect(()=>{
-		const checkWallet = localStorage.getItem('walletConnected');
-		if(checkWallet==='true'){
+	useEffect(() => {
+		const checkWallet = localStorage.getItem("walletConnected");
+		if (checkWallet === "true") {
 			window.ergoConnector.nautilus.connect();
-			window.addEventListener('ergo_wallet_disconnected', ()=>{
-				localStorage.setItem('walletAddress', '');
-				localStorage.setItem('walletConnected', 'false');
-				setDefaultAddress(false)
-				setWalletConnected(false)
-				console.log('Wallet Disconnected!!!')
-			})
-			setDefaultAddress(truncate(localStorage.getItem('walletAddress'), 14, "..."));
+			window.addEventListener("ergo_wallet_disconnected", () => {
+				localStorage.setItem("walletAddress", "");
+				localStorage.setItem("walletConnected", "false");
+				setDefaultAddress(false);
+				setWalletConnected(false);
+				console.log("Wallet Disconnected!!!");
+			});
+			setDefaultAddress(
+				truncate(localStorage.getItem("walletAddress"), 14, "...")
+			);
 			setWalletConnected(true);
+		}else{
+			setWalletImg(wallet_pink);
 		}
-	},[])
+	}, []);
 
 	useEffect(() => {
 		if (typeof ergoWallet !== "undefined") {
-			window.addEventListener('ergo_wallet_disconnected', ()=>{
-				localStorage.setItem('walletAddress', '');
-				localStorage.setItem('walletConnected', 'false');
-				setDefaultAddress(false)
-				setWalletConnected(false)
-				console.log('Wallet Disconnected!!!')
-			})
+			window.addEventListener("ergo_wallet_disconnected", () => {
+				localStorage.setItem("walletAddress", "");
+				localStorage.setItem("walletConnected", "false");
+				setDefaultAddress(false);
+				setWalletConnected(false);
+				console.log("Wallet Disconnected!!!");
+			});
 			// get ERG balance
 			ergoWallet.get_balance(NANOERG_TO_ERG).then(function (balance) {
 				setErgBalance(balance);
@@ -69,12 +77,12 @@ function AddWallet(props) {
 				console.log(`OWL: ${balance}`);
 			});
 			ergoWallet.get_change_address().then(function (address) {
-				localStorage.setItem('walletAddress', address);
+				localStorage.setItem("walletAddress", address);
 				setDefaultAddress(truncate(address, 14, "..."));
 			});
-			localStorage.setItem('walletConnected', 'true');
+			localStorage.setItem("walletConnected", "true");
 		}
-        
+		setWalletImg('')
 	}, [ergoWallet]);
 
 	const truncate = (str, len, sep) => {
@@ -128,7 +136,7 @@ function AddWallet(props) {
 			});
 	};
 
-    const disconnectWallet = () => {
+	const disconnectWallet = () => {
 		if (typeof window.ergo_request_read_access === "undefined") {
 			console.log("Ergo not found");
 		} else {
@@ -140,21 +148,21 @@ function AddWallet(props) {
 			}
 		}
 	};
-    
-    const toggleSelector = () => {
-        if(!walletConnected)setShowSelector(!showSelector);
-      }
-    
-      const handleWalletTrue = () => {
-        if(walletConnected)setWalletHover(prev=>!prev);
-		else{
-			setShowSelector(true)
+
+	const toggleSelector = () => {
+		if (!walletConnected) setShowSelector(!showSelector);
+	};
+
+	const handleWalletTrue = () => {
+		if (walletConnected) setWalletHover((prev) => !prev);
+		else {
+			setShowSelector(true);
 		}
-      }
-    
-      const handleWalletFalse = () => {
+	};
+
+	const handleWalletFalse = () => {
 		setWalletHover(false);
-      }
+	};
 
 	async function signTx(txToBeSigned) {
 		try {
@@ -178,15 +186,15 @@ function AddWallet(props) {
 
 	const connectNautilus = () => {
 		window.ergoConnector.nautilus.isConnected().then((connected) => {
-			if(!walletConnected){
-				console.log('WALLET CREDENTIALS: ', connected)
-				console.log('BEFORE CONNECTION')
+			if (!walletConnected) {
+				console.log("WALLET CREDENTIALS: ", connected);
+				console.log("BEFORE CONNECTION");
 				window.ergoConnector.nautilus.connect().then((access_granted) => {
-					console.log('AFTER CONNECTION')
+					console.log("AFTER CONNECTION");
 					if (access_granted) {
 						setWalletConnected(true);
 						window.ergoConnector.nautilus.getContext().then((context) => {
-							console.log('nautilus is connected', context);
+							console.log("nautilus is connected", context);
 							setErgoWallet(context);
 						});
 					} else {
@@ -195,8 +203,7 @@ function AddWallet(props) {
 					}
 				});
 				toggleSelector();
-			}
-			else {
+			} else {
 				// Already connected
 				console.log(`nautilus is connected`);
 				toggleSelector();
@@ -226,11 +233,11 @@ function AddWallet(props) {
 
 	const handleReadOnlyNautilus = (input) => {
 		setReadOnlyNautilus(input);
-	}
+	};
 
 	const connectReadOnlyNautilus = () => {
 		window.ergo_request_read_access();
-	}
+	};
 	/*const disconnectWallet = () => {
         //console.log(window)
         window.ergoConnector.nautilus.isConnected().then(connected => {
@@ -244,35 +251,52 @@ function AddWallet(props) {
       }*/
 
 	return (
-        <>
-        {showSelector && <div className="popup-box">
-			<div className="box">
-				<span className="close-icon" onClick={toggleSelector}>
-					x
-				</span>
-				<>
-					<button onClick={connectNautilus} className="nautilus-button">
-						Nautilus
-					</button>
-					{/* <input type="text" value={readOnlyNautilus!==false && readOnlyNautilus} onChange={(e)=>handleReadOnlyNautilus(e.target.value)} placeholder="Enter wallet address for read only access" className='w-full rounded-xl px-4 h-full' />
+		<>
+			{showSelector && (
+				<div className="popup-box">
+					<div className="box">
+						<span className="close-icon" onClick={toggleSelector}>
+							x
+						</span>
+						<>
+							<button onClick={connectNautilus} className="nautilus-button">
+								Nautilus
+							</button>
+							{/* <input type="text" value={readOnlyNautilus!==false && readOnlyNautilus} onChange={(e)=>handleReadOnlyNautilus(e.target.value)} placeholder="Enter wallet address for read only access" className='w-full rounded-xl px-4 h-full' />
 					<button onClick={connectReadOnlyNautilus} className="border border-black rounded-full bg-white w-[20%] mt-2">Connect</button> */}
-					<br />
-					<button onClick={connectSafew} className="safew-button">
-						SAFEW
-					</button>
-				</>
+							<br />
+							<button onClick={connectSafew} className="safew-button">
+								SAFEW
+							</button>
+						</>
+					</div>
+				</div>
+			)}
+			
+			<div id="header-wallet-wrapper" onClick={handleWalletTrue}>
+				<div id="header-wallet">
+					<div
+						id="header-wallet-image"
+						style={
+							{ backgroundImage: `url(${walletImg})` }
+						}
+					></div>
+					<div id="wallet-connect">
+						<span>
+							{walletConnected ? <>{defaultAddress}</> : "Connect Wallet"}
+						</span>
+					</div>
+					{walletHover && (
+						<WalletHover
+							disconnect={disconnectWallet}
+							owlBalance={owlBalance}
+							sigUSDBalance={sigUSDBalance}
+							ergBalance={ergBalance}
+						/>
+					)}
+				</div>
 			</div>
-		</div>}
-            <button onClick={toggleSelector} className="connect-wallet-button">
-              <Link to="#" onClick={handleWalletTrue} >
-                {!walletConnected && <img className="connect-wallet-icon" src={wallet} />}
-                {/* {walletConnected && <span className="wallet-balance" style={{}}>{`${owlBalance}OWL`}</span>} */}
-                <span className="connect-text">{walletConnected ? <>{defaultAddress}</> : t("connect wallet")}</span>
-                {walletHover && <WalletHover disconnect={disconnectWallet} owlBalance={owlBalance} sigUSDBalance={sigUSDBalance} ergBalance={ergBalance} /> }
-              </Link>
-            </button>
-            </>
-		
+		</>
 	);
 }
 
