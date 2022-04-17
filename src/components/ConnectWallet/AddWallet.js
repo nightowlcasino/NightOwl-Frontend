@@ -185,6 +185,9 @@ function AddWallet(props) {
 	}
 
 	const connectNautilus = () => {
+		if(!window.ergoConnector){
+			return;
+		}
 		window.ergoConnector.nautilus.isConnected().then((connected) => {
 			if (!walletConnected) {
 				console.log("WALLET CREDENTIALS: ", connected);
@@ -213,6 +216,9 @@ function AddWallet(props) {
 	};
 
 	const connectSafew = () => {
+		if(!window.ergoConnector){
+			return;
+		}
 		if (!window.ergoConnector.safew.isConnected()) {
 			// we aren't connected
 			window.ergoConnector.safew.connect().then((access_granted) => {
