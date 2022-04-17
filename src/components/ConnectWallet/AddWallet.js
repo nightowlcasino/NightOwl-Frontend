@@ -35,7 +35,19 @@ function AddWallet(props) {
 	useEffect(() => {
 		const checkWallet = localStorage.getItem("walletConnected");
 		if (checkWallet === "true") {
-			window.ergoConnector.nautilus.connect();
+			window.ergoConnector.nautilus.connect().then((access_granted) => {
+				console.log("AFTER CONNECTION");
+				if (access_granted) {
+					setWalletConnected(true);
+					window.ergoConnector.nautilus.getContext().then((context) => {
+						console.log("nautilus is connected", context);
+						setErgoWallet(context);
+					});
+				} else {
+					setWalletConnected(false);
+					console.log("Wallet access denied");
+				}
+			});
 			window.addEventListener("ergo_wallet_disconnected", () => {
 				localStorage.setItem("walletAddress", "");
 				localStorage.setItem("walletConnected", "false");
@@ -292,7 +304,7 @@ function AddWallet(props) {
 							{walletConnected ? <>{defaultAddress}</> : "Connect Wallet"}
 						</span>
 					</div>
-					{walletHover && (
+					{(walletHover && walletConnected) &&(
 						<WalletHover
 							disconnect={disconnectWallet}
 							owlBalance={owlBalance}
