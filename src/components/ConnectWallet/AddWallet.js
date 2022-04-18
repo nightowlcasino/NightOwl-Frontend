@@ -174,7 +174,7 @@ function AddWallet(props) {
 	const handleWalletTrue = () => {
 		if (walletConnected) setWalletHover((prev) => !prev);
 		else {
-			setShowSelector(true);
+			setShowSelector((prev) => !prev);
 		}
 	};
 
