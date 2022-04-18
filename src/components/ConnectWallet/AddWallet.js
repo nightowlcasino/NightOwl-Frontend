@@ -2,6 +2,8 @@ import { useContext, useEffect, useState, Fragment } from "react";
 import axios from "axios";
 import WalletContext from "./WalletContext";
 import wallet_pink from "../../assets/Elements/wallet_pink.png";
+import nautiusIcon from "../../assets/Elements/nautilus.jpg";
+import safewIcon from "../../assets/Elements/safew_icon_32.png";
 import WalletHover from "../Header/WalletHover/WalletHover";
 import wallet from "../../assets/Elements/Design-2_0026_Layer-17.png";
 import { Link } from "react-router-dom";
@@ -300,6 +302,7 @@ function AddWallet(props) {
 							  'item3'
 							)}
 						  >
+							<img src={nautiusIcon} style={{height:'30px', marginRight:'3rem'}} />
 							Nautilus
 						  </a>
 						)}
@@ -313,6 +316,7 @@ function AddWallet(props) {
 							  'item3'
 							)}
 						  >
+							<img src={safewIcon} style={{height:'25px', marginRight:'3.5rem', marginLeft:'0.2rem'}} />
 							Safew
 						  </a>
 						)}
