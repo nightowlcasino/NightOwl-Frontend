@@ -35,7 +35,7 @@ function Swap() {
 					axios
 						.post(`http://${backend}:8088/api/v1/swap/sigusd`, {
 							//axios.post(`http://${backend}:8088/api/v1/swap/owl`, {
-							amnt: sigUSDAmount,
+							amnt: swap1,
 							senderAddr: localStorage.getItem('walletAddress'),
 							utxos: utxosResponse,
 						})
