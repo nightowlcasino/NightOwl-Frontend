@@ -117,6 +117,12 @@
     /* background-color: #000; */
 }
 
+.roulette-wrapper .roulette-wheel-content-wrapper,
+.roulette-wrapper .roulette-table-content-wrapper
+{
+    flex: 50%;
+}
+
 .plate {
     background-color: gray;
     width: 350px;
@@ -141,8 +147,6 @@
     /* offset-x | offset-y | blur-radius | spread-radius | color */
     box-shadow: 
         inset 0 0 2em 3px #A739FF, 0 0 3em 1em #A739FF
-        
-
 }
 .plate:before {
     background: rgba(0,0,0,0.75);
@@ -150,7 +154,7 @@
     /* offset-x | offset-y | blur-radius | spread-radius | color */
     box-shadow: inset 0px 0px 0.5em 1px #A739FF, 0px 0px 0.5em 1px #A739FF;
     top: 13%;
-    left: 14%;
+    left: 13%;
     right: 13%;
     bottom: 13%;
     z-index: 1;
@@ -188,6 +192,22 @@
     top: -175px;
     left: -16px;
 }
+
+#fuckinginner.default-spin::before
+{
+    animation-name: default-ball;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+#fuckinginner.stop-spin::before
+{
+    padding-top: 55px;
+    padding-left: 55px;
+    transition: padding 2s ease, transform 9s ease-out;
+}
+
 .behindlol {
     /*2024 1835*/ 
     position: absolute;
@@ -212,9 +232,9 @@
 }
 .inner:after {
     z-index:3;
-    top: 20%;
-    right: 40%;
-    bottom: 20%;
+    top: 21%;
+    right: 41%;
+    bottom: 21%;
     left: 16%;
     border: 3px solid #ebdeff;
     /* offset-x | offset-y | blur-radius | spread-radius | color */
@@ -224,241 +244,201 @@
     background-size: 105%;
 }
 .inner:before {
-    top: 3%;
-    right: 29%;
-    bottom: 3%;
-    left: 4%;
-    content: '';
-    border: 3px solid #ebdeff;
+    top: 8.5%;
+    right: 31.5%;
+    bottom: 8%;
+    left: 7%;
     color: #fff;
-    font-size: 60px;
     border-radius: 0;
-    z-index: 5,
+    z-index: 5;
+    /* content: ''; */
+    content: url("../../../assets/Elements/roulette_ball.png");
 }
-
 
 .inner[data-spinto='1']:before {
     z-index: 1;
-    transform: rotateZ(-2600deg);
+    transform: rotateZ(-2612deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='2']:before {
     z-index: 1;
-    transform: rotateZ(-2769deg);
+    transform: rotateZ(-2778deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='3']:before {
     z-index: 1;
-    transform: rotateZ(-2850deg);
+    transform: rotateZ(-2856deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='4']:before {
     z-index: 1;
-    transform: rotateZ(-2793deg);
+    transform: rotateZ(-2797deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='5']:before {
     z-index: 1;
-    transform: rotateZ(-2642deg);
+    transform: rotateZ(-2651deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='6']:before {
     z-index: 1;
-    transform: rotateZ(-2734deg);
+    transform: rotateZ(-2739deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='7']:before {
     z-index: 1;
-    transform: rotateZ(-2526deg);
+    transform: rotateZ(-2534deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='8']:before {
     z-index: 1;
-    transform: rotateZ(-2671deg);
+    transform: rotateZ(-2680deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='9']:before {
     z-index: 1;
-    transform: rotateZ(-2564deg);
+    transform: rotateZ(-2572deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='10']:before {
     z-index: 1;
-    transform: rotateZ(-2652deg);
+    transform: rotateZ(-2660deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
-    
 }
 .inner[data-spinto='11']:before {
     z-index: 1;
-    transform: rotateZ(-2693deg);
+    transform: rotateZ(-2700deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='12']:before {
     z-index: 1;
-    transform: rotateZ(-2868deg);
+    transform: rotateZ(-2874deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='13']:before {
     z-index: 1;
-    transform: rotateZ(-2714deg);
+    transform: rotateZ(-2720deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='14']:before {
     z-index: 1;
-    transform: rotateZ(-2582deg);
+    transform: rotateZ(-2591deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='15']:before {
     z-index: 1;
-    transform: rotateZ(-2813deg);
+    transform: rotateZ(-2818deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='16']:before {
     z-index: 1;
-    transform: rotateZ(-2620deg);
+    transform: rotateZ(-2631deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='17']:before {
     z-index: 1;
-    transform: rotateZ(-2755deg);
+    transform: rotateZ(-2759deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='18']:before {
     z-index: 1;
-    transform: rotateZ(-2545deg);
+    transform: rotateZ(-2553deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='19']:before {
     z-index: 1;
-    transform: rotateZ(-2800deg);
+    transform: rotateZ(-2808deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='20']:before {
     z-index: 1;
-    transform: rotateZ(-2592deg);
+    transform: rotateZ(-2602deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='21']:before {
     z-index: 1;
-    transform: rotateZ(-2784deg);
+    transform: rotateZ(-2788deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='22']:before {
     z-index: 1;
-    transform: rotateZ(-2554deg);
+    transform: rotateZ(-2563deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='23']:before {
     z-index: 1;
-    transform: rotateZ(-2662deg);
+    transform: rotateZ(-2670deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='24']:before {
     z-index: 1;
-    transform: rotateZ(-2632deg);
+    transform: rotateZ(-2640deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='25']:before {
     z-index: 1;
-    transform: rotateZ(-2764deg);
+    transform: rotateZ(-2769deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='26']:before {
     z-index: 1;
-    transform: rotateZ(-2840deg);
+    transform: rotateZ(-2847deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='27']:before {
     z-index: 1;
-    transform: rotateZ(-2724deg);
+    transform: rotateZ(-2730deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='28']:before {
     z-index: 1;
-    transform: rotateZ(-2877deg);
+    transform: rotateZ(-2885deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='29']:before {
     z-index: 1;
-    transform: rotateZ(-2535deg);
+    transform: rotateZ(-2544deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='30']:before {
     z-index: 1;
-    transform: rotateZ(-2684deg);
+    transform: rotateZ(-2690deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='31']:before {
     z-index: 1;
-    transform: rotateZ(-2573deg);
+    transform: rotateZ(-2582deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='32']:before {
     z-index: 1;
-    transform: rotateZ(-2822deg);
+    transform: rotateZ(-2827deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='33']:before {
     z-index: 1;
-    transform: rotateZ(-2612deg);
+    transform: rotateZ(-2621deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='34']:before {
     z-index: 1;
-    transform: rotateZ(-2745deg);
+    transform: rotateZ(-2749deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='35']:before {
     z-index: 1;
-    transform: rotateZ(-2499deg);
+    transform: rotateZ(-2506deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='36']:before {
     z-index: 1;
-    transform: rotateZ(-2703deg);
+    transform: rotateZ(-2709deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 .inner[data-spinto='0']:before {
     z-index: 1;
-    transform: rotateZ(-2830deg);
+    transform: rotateZ(-2837deg);
     transition: transform 9s ease-out;
-    content: url("../../../assets/Elements/roulette_ball.png");
 }
 
 .btn {
@@ -501,14 +481,7 @@
     cursor: not-allowed;
     pointer-events: none;
 }
-@keyframes rotate {
-    0% {
-        transform: rotateZ(0deg);
-   }
-    100% {
-        transform: rotateZ(360deg);
-   }
-}
+
 .data {
     display: block;
     position: absolute;
@@ -616,6 +589,16 @@
     padding: 0;
     border: 0;
 }
+
+@keyframes rotate {
+    0% {
+        transform: rotateZ(0deg);
+   }
+    100% {
+        transform: rotateZ(360deg);
+   }
+}
+
 @keyframes flipin {
     0% {
         transform: rotateX(90deg);
@@ -624,3 +607,18 @@
         transform: rotateX(0deg);
    }
 }
+
+@keyframes default-ball
+{
+    0% { transform: rotateZ(0deg);}
+    100% { transform: rotateZ(360deg);}
+}
+
+/********************************************/
+/********************************************/
+/*****************TABLEEEEEEE****************/
+/********************************************/
+/********************************************/
+
+
+
