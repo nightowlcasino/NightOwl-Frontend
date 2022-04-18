@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, Fragment } from "react";
 import axios from "axios";
 import WalletContext from "./WalletContext";
 import wallet_pink from "../../assets/Elements/wallet_pink.png";
@@ -6,8 +6,17 @@ import WalletHover from "../Header/WalletHover/WalletHover";
 import wallet from "../../assets/Elements/Design-2_0026_Layer-17.png";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Menu, Transition } from '@headlessui/react'
+import {
+  ArchiveIcon,
+} from '@heroicons/react/solid'
+import '../Header/WalletHover/WalletHover.css'
 
 const backend = process.env.BACKEND_FQDN || "localhost";
+
+function classNames(...classes) {
+	return classes.filter(Boolean).join(' ')
+}
 
 const NANOERG_TO_ERG = 1000000000;
 const TOKENID_NO_TEST =
@@ -26,7 +35,7 @@ function AddWallet(props) {
 	const [showSelector, setShowSelector] = useState(false);
 	const [walletHover, setWalletHover] = useState(false);
 	const [readOnlyNautilus, setReadOnlyNautilus] = useState(false);
-	const [walletImg, setWalletImg] = useState('')
+	const [open, setOpen] = useState(true);
 
 	const balanceValue = () => {
 		return 0;
@@ -59,8 +68,6 @@ function AddWallet(props) {
 				truncate(localStorage.getItem("walletAddress"), 14, "...")
 			);
 			setWalletConnected(true);
-		}else{
-			setWalletImg(wallet_pink);
 		}
 	}, []);
 
@@ -68,7 +75,7 @@ function AddWallet(props) {
 		if (typeof ergoWallet !== "undefined") {
 			window.addEventListener("ergo_wallet_disconnected", () => {
 				localStorage.setItem("walletAddress", "");
-				localStorage.setItem("walletConnected", "false");
+				localStorage.setItem("walletConnected", "");
 				setDefaultAddress(false);
 				setWalletConnected(false);
 				console.log("Wallet Disconnected!!!");
@@ -91,10 +98,9 @@ function AddWallet(props) {
 			ergoWallet.get_change_address().then(function (address) {
 				localStorage.setItem("walletAddress", address);
 				setDefaultAddress(truncate(address, 14, "..."));
+				localStorage.setItem("walletConnected", "true");
 			});
-			localStorage.setItem("walletConnected", "true");
 		}
-		setWalletImg('')
 	}, [ergoWallet]);
 
 	const truncate = (str, len, sep) => {
@@ -271,34 +277,62 @@ function AddWallet(props) {
 	return (
 		<>
 			{showSelector && (
-				<div className="popup-box">
-					<div className="box">
-						<span className="close-icon" onClick={toggleSelector}>
-							x
-						</span>
-						<>
-							<button onClick={connectNautilus} className="nautilus-button">
-								Nautilus
-							</button>
-							{/* <input type="text" value={readOnlyNautilus!==false && readOnlyNautilus} onChange={(e)=>handleReadOnlyNautilus(e.target.value)} placeholder="Enter wallet address for read only access" className='w-full rounded-xl px-4 h-full' />
-					<button onClick={connectReadOnlyNautilus} className="border border-black rounded-full bg-white w-[20%] mt-2">Connect</button> */}
-							<br />
-							<button onClick={connectSafew} className="safew-button">
-								SAFEW
-							</button>
-						</>
+				<Menu as="div" className="mainDiv">
+
+				<Transition
+				  show={open}
+				  as={Fragment}
+				  enter="transition ease-out duration-100"
+				  enterFrom="transform opacity-0 scale-95"
+				  enterTo="transform opacity-100 scale-100"
+				  leave="transition ease-in duration-75"
+				  leaveFrom="transform opacity-100 scale-100"
+				  leaveTo="transform opacity-0 scale-95"
+				>
+				  <Menu.Items className="mainMenuItem" style={{left:'-32px', marginTop:'3.5rem'}}>
+					<div style={{padding:'0.25rem 0 0.25rem', marginBottom:'1px'}}>
+					  <Menu.Item onClick={connectNautilus}>
+						{({ active }) => (
+						  <a
+							href="#"
+							className={classNames(
+							  active ? 'item1' : 'item2',
+							  'item3'
+							)}
+						  >
+							Nautilus
+						  </a>
+						)}
+					  </Menu.Item>
+					  <Menu.Item onClick={connectSafew}>
+						{({ active }) => (
+						  <a
+							href="#"
+							className={classNames(
+							  active ? 'item1' : 'item2',
+							  'item3'
+							)}
+						  >
+							Safew
+						  </a>
+						)}
+					  </Menu.Item>        
 					</div>
-				</div>
+				   
+				  </Menu.Items>
+				</Transition>
+			  </Menu>
 			)}
 			
 			<div id="header-wallet-wrapper" onClick={handleWalletTrue}>
 				<div id="header-wallet">
-					<div
+					{/* <div
 						id="header-wallet-image"
 						style={
 							{ backgroundImage: `url(${walletImg})` }
 						}
-					></div>
+					></div> */}
+					{!walletConnected && <img src={wallet_pink} id="header-wallet-image" />}
 					<div id="wallet-connect">
 						<span>
 							{walletConnected ? <>{defaultAddress}</> : "Connect Wallet"}
