@@ -147,7 +147,9 @@
     border-radius: 20px;
     display: flex;
     align-content: center;
-    align-items: center;   
+    align-items: center;  
+    justify-content: center; 
+    cursor: pointer;
 }
 
 #header-wrapper #header-items #header-wallet-wrapper #header-wallet-image
