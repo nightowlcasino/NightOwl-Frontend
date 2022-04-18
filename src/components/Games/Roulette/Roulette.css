@@ -117,6 +117,12 @@
     /* background-color: #000; */
 }
 
+.roulette-wrapper .roulette-wheel-content-wrapper,
+.roulette-wrapper .roulette-table-content-wrapper
+{
+    flex: 50%;
+}
+
 .plate {
     background-color: gray;
     width: 350px;
@@ -607,3 +613,12 @@
     0% { transform: rotateZ(0deg);}
     100% { transform: rotateZ(360deg);}
 }
+
+/********************************************/
+/********************************************/
+/*****************TABLEEEEEEE****************/
+/********************************************/
+/********************************************/
+
+
+
