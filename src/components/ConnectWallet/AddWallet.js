@@ -83,8 +83,8 @@ function AddWallet(props) {
 				console.log("Wallet Disconnected!!!");
 			});
 			// get ERG balance
-			ergoWallet.get_balance(NANOERG_TO_ERG).then(function (balance) {
-				setErgBalance(balance);
+			ergoWallet.get_balance().then(function (balance) {
+				setErgBalance(balance/NANOERG_TO_ERG);
 				console.log(`ERG: ${balance}`);
 			});
 			// get SigUSD balance
