@@ -1,4 +1,6 @@
 import "./App.css";
+import { useState } from "react";
+import StateContext from "./components/Context";
 // import { Routes, Route, useLocation } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Header from "./components/Header/Header.js";
@@ -15,12 +17,19 @@ import ComingSoon from "./components/ComingSoon/ComingSoon.js";
 // import MobileSlideOverBar from "./components/LeftSideBar/MobileSlideOverBar";
 
 function App() {
+	const [ergoWallet, setErgoWallet] = useState();
+    const [defaultAddress, setDefaultAddress] = useState();
 	const location = useLocation();
 	const path = location.pathname;
 	// console.log(path)
 	return (
 		<div className="App">
-				{path.includes('/soon') ? <ComingSoon /> : <> <Header /> <BodyContent /></>}
+				{path.includes('/soon') ? <ComingSoon /> : 
+				<StateContext.Provider value={{ergoWallet, setErgoWallet, defaultAddress, setDefaultAddress}}>
+					<Header />
+					<BodyContent />
+				</StateContext.Provider>
+				}
 		</div>
 	);
 }

@@ -13,6 +13,7 @@ import {
   ArchiveIcon,
 } from '@heroicons/react/solid'
 import '../Header/WalletHover/WalletHover.css'
+import StateContext from "../Context";
 
 const backend = process.env.BACKEND_FQDN || "localhost";
 
@@ -27,13 +28,12 @@ const TOKENID_FAKE_SIGUSD =
 	"96c402c0e658909aa03f534006124f0e43725c467dbc8dea39680d0861892de5";
 
 function AddWallet(props) {
+	const {ergoWallet, setErgoWallet, defaultAddress, setDefaultAddress} = useContext(StateContext);
 	const { t } = useTranslation();
 	const [ergBalance, setErgBalance] = useState(0);
 	const [sigUSDBalance, setSigUSDBalance] = useState(0);
 	const [owlBalance, setOwlBalance] = useState(0);
-	const [ergoWallet, setErgoWallet] = useState();
 	const [walletConnected, setWalletConnected] = useState(false);
-	const [defaultAddress, setDefaultAddress] = useState("");
 	const [showSelector, setShowSelector] = useState(false);
 	const [walletHover, setWalletHover] = useState(false);
 	const [readOnlyNautilus, setReadOnlyNautilus] = useState(false);
@@ -83,8 +83,8 @@ function AddWallet(props) {
 				console.log("Wallet Disconnected!!!");
 			});
 			// get ERG balance
-			ergoWallet.get_balance(NANOERG_TO_ERG).then(function (balance) {
-				setErgBalance(balance);
+			ergoWallet.get_balance().then(function (balance) {
+				setErgBalance(balance/NANOERG_TO_ERG);
 				console.log(`ERG: ${balance}`);
 			});
 			// get SigUSD balance
