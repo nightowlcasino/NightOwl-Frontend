@@ -14,9 +14,69 @@ const Roulette = () => {
     const [resultColor, setResultColor] = useState(null);
     const [randomNumber, setRandomNumber] = useState(null);
     const [firstSpin, setFirstSpin] = useState(true);
-
+    const [chipSelected, setChipSelected] = useState(1);
+    const [betObject, setBetObject] = useState({
+        num_val0: 0,
+        num_val0_3: 0,
+        num_val3: 0,
+        num_val3_6: 0,
+        num_val6: 0,
+        num_val6_9: 0,
+        num_val9: 0,
+        num_val9_12: 0,
+        num_val12: 0,
+        num_val12_15: 0,
+        num_val15: 0,
+        num_val15_18: 0,
+        num_val18: 0,
+        num_val18_21: 0,
+        num_val21: 0,
+        num_val21_24: 0,
+        num_val24: 0,
+        num_val24_27: 0,
+        num_val27: 0,
+        num_val27_30: 0,
+        num_val30: 0,
+        num_val30_33: 0,
+        num_val33: 0,
+        num_val33_36: 0,
+        num_val36: 0,
+        num_val0_2_3: 0,
+        num_val2_3: 0,
+        num_val2_3_5_6: 0,
+        num_val5_6: 0,
+        num_val5_6_8_9: 0,
+        num_val8_9: 0,
+        num_val8_9_11_12: 0,
+        num_val11_12: 0,
+        num_val11_12_14_15: 0,
+        num_val14_15: 0,
+        num_val14_15_17_18: 0,
+        num_val17_18: 0,
+        num_val17_18_20_21: 0,
+        num_val20_21: 0,
+        num_val20_21_23_24: 0,
+        num_val23_24: 0,
+        num_val23_24_26_27: 0,
+        num_val26_27: 0,
+        num_val26_27_29_30: 0,
+        num_val29_30: 0,
+        num_val29_30_32_33: 0,
+        num_val32_33: 0,
+        num_val32_33_35_36: 0,
+        num_val35_36: 0,
+    });
     const innerRef = useRef();
 
+    function addBetToObject(e) {
+        console.log(e.target.getAttribute("num-val"));
+        var numbers = e.target.getAttribute("num-val");
+        setBetObject({
+            ...betObject,
+            [`num_val${numbers}`]: betObject[`num_val${numbers}`] + chipSelected,
+    });
+}
+    console.log(betObject);
     function spinTheWheel()
     {
         innerRef.current.setAttribute("data-spinto", "");
@@ -68,9 +128,7 @@ const Roulette = () => {
             innerRef.current.classList.add("stop-spin");
         }, timer * 0.7);
     }
-    console.log(randomNumber);
-    console.log(revealData);
-    console.log(resultColor);
+
     return (
         <div className="roulette-wrapper">
             <div className="roulette-wheel-content-wrapper">
@@ -477,59 +535,59 @@ const Roulette = () => {
                                     <div className="row number-center">
                                         <div className="inner-row spacer"></div>
                                         <div className="inner-row number-center" num-val="0"></div>
-                                        <div className="inner-row number-between" num-val="0-3"></div>
-                                        <div className="inner-row number-center" num-val="3"></div>
-                                        <div className="inner-row number-between" num-val="3-6"></div>
+                                        <div className="inner-row number-between" num-val="0_3"></div>
+                                        <div className="inner-row number-center" num-val="3" onClick={(e) => addBetToObject(e)}></div>
+                                        <div className="inner-row number-between" num-val="3_6"></div>
                                         <div className="inner-row number-center" num-val="6"></div>
-                                        <div className="inner-row number-between" num-val="6-9"></div>
+                                        <div className="inner-row number-between" num-val="6_9"></div>
                                         <div className="inner-row number-center" num-val="9"></div>
-                                        <div className="inner-row number-between" num-val="9-12"></div>
+                                        <div className="inner-row number-between" num-val="9_12"></div>
                                         <div className="inner-row number-center" num-val="12"></div>
-                                        <div className="inner-row number-between" num-val="12-15"></div>
+                                        <div className="inner-row number-between" num-val="12_15"></div>
                                         <div className="inner-row number-center" num-val="15"></div>
-                                        <div className="inner-row number-between" num-val="15-18"></div>
+                                        <div className="inner-row number-between" num-val="15_18"></div>
                                         <div className="inner-row number-center" num-val="18"></div>
-                                        <div className="inner-row number-between" num-val="18-21"></div>
+                                        <div className="inner-row number-between" num-val="18_21"></div>
                                         <div className="inner-row number-center" num-val="21"></div>
-                                        <div className="inner-row number-between" num-val="21-24"></div>
+                                        <div className="inner-row number-between" num-val="21_24"></div>
                                         <div className="inner-row number-center" num-val="24"></div>
-                                        <div className="inner-row number-between" num-val="24-27"></div>
+                                        <div className="inner-row number-between" num-val="24_27"></div>
                                         <div className="inner-row number-center" num-val="27"></div>
-                                        <div className="inner-row number-between" num-val="27-30"></div>
+                                        <div className="inner-row number-between" num-val="27_30"></div>
                                         <div className="inner-row number-center" num-val="30"></div>
-                                        <div className="inner-row number-between" num-val="30-33"></div>
+                                        <div className="inner-row number-between" num-val="30_33"></div>
                                         <div className="inner-row number-center" num-val="33"></div>
-                                        <div className="inner-row number-between" num-val="33-36"></div>
+                                        <div className="inner-row number-between" num-val="33_36"></div>
                                         <div className="inner-row number-center" num-val="36"></div>
                                         <div className="inner-row spacer"></div>
                                     </div>
                                     <div className="row number-between">
                                         <div className="inner-row spacer"></div>
                                         <div className="inner-row number-center" num-val="0"></div>
-                                        <div className="inner-row number-between" num-val="0-2-3"></div>
-                                        <div className="inner-row number-center" num-val="2-3"></div>
-                                        <div className="inner-row number-between" num-val="2-3-5-6"></div>
-                                        <div className="inner-row number-center" num-val="5-6"></div>
-                                        <div className="inner-row number-between" num-val="5-6-8-9"></div>
-                                        <div className="inner-row number-center" num-val="8-9"></div>
-                                        <div className="inner-row number-between" num-val="8-9-11-12"></div>
-                                        <div className="inner-row number-center" num-val="11-12"></div>
-                                        <div className="inner-row number-between" num-val="11-12-14-15"></div>
-                                        <div className="inner-row number-center" num-val="14-15"></div>
-                                        <div className="inner-row number-between" num-val="14-15-17-18"></div>
-                                        <div className="inner-row number-center" num-val="17-18"></div>
-                                        <div className="inner-row number-between" num-val="17-18-20-21"></div>
-                                        <div className="inner-row number-center" num-val="20-21"></div>
-                                        <div className="inner-row number-between" num-val="20-21-23-24"></div>
-                                        <div className="inner-row number-center" num-val="23-24"></div>
-                                        <div className="inner-row number-between" num-val="23-24-26-27"></div>
-                                        <div className="inner-row number-center" num-val="26-27"></div>
-                                        <div className="inner-row number-between" num-val="26-27-29-30"></div>
-                                        <div className="inner-row number-center" num-val="29-30"></div>
-                                        <div className="inner-row number-between" num-val="29-30-32-33"></div>
-                                        <div className="inner-row number-center" num-val="32-33"></div>
-                                        <div className="inner-row number-between" num-val="32-33-35-36"></div>
-                                        <div className="inner-row number-center" num-val="35-36"></div>
+                                        <div className="inner-row number-between" num-val="0_2_3"></div>
+                                        <div className="inner-row number-center" num-val="2_3"></div>
+                                        <div className="inner-row number-between" num-val="2_3_5_6"></div>
+                                        <div className="inner-row number-center" num-val="5_6"></div>
+                                        <div className="inner-row number-between" num-val="5_6_8_9"></div>
+                                        <div className="inner-row number-center" num-val="8_9"></div>
+                                        <div className="inner-row number-between" num-val="8_9_11_12"></div>
+                                        <div className="inner-row number-center" num-val="11_12"></div>
+                                        <div className="inner-row number-between" num-val="11_12_14_15"></div>
+                                        <div className="inner-row number-center" num-val="14_15"></div>
+                                        <div className="inner-row number-between" num-val="14_15_17_18"></div>
+                                        <div className="inner-row number-center" num-val="17_18"></div>
+                                        <div className="inner-row number-between" num-val="17_18_20_21"></div>
+                                        <div className="inner-row number-center" num-val="20_21"></div>
+                                        <div className="inner-row number-between" num-val="20_21_23_24"></div>
+                                        <div className="inner-row number-center" num-val="23_24"></div>
+                                        <div className="inner-row number-between" num-val="23_24_26_27"></div>
+                                        <div className="inner-row number-center" num-val="26_27"></div>
+                                        <div className="inner-row number-between" num-val="26_27_29_30"></div>
+                                        <div className="inner-row number-center" num-val="29_30"></div>
+                                        <div className="inner-row number-between" num-val="29_30_32_33"></div>
+                                        <div className="inner-row number-center" num-val="32_33"></div>
+                                        <div className="inner-row number-between" num-val="32_33_35_36"></div>
+                                        <div className="inner-row number-center" num-val="35_36"></div>
                                         <div className="inner-row spacer"></div>
                                     </div>
                                     <div className="row number-center">
