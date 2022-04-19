@@ -117,6 +117,14 @@
     /* background-color: #000; */
 }
 
+.roulette-wrapper .roulette-wheel-content-wrapper
+{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+}
+
 .roulette-wrapper .roulette-wheel-content-wrapper,
 .roulette-wrapper .roulette-table-content-wrapper
 {
@@ -312,7 +320,7 @@
 }
 .inner[data-spinto='12']:before {
     z-index: 1;
-    transform: rotateZ(-2874deg);
+    transform: rotateZ(-2876deg);
     transition: transform 9s ease-out;
 }
 .inner[data-spinto='13']:before {
@@ -372,7 +380,7 @@
 }
 .inner[data-spinto='24']:before {
     z-index: 1;
-    transform: rotateZ(-2640deg);
+    transform: rotateZ(-2640.5deg);
     transition: transform 9s ease-out;
 }
 .inner[data-spinto='25']:before {
@@ -513,6 +521,7 @@
     bottom: 0;
     left: 0;
     position: absolute;
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: 50%;
     overflow: hidden;
@@ -620,5 +629,313 @@
 /********************************************/
 /********************************************/
 
+/* #table-outter td
+{
+    padding: 5px;
+    background-color: red;
+    text-align: center;
+}
 
+#numbers-table td
+{
+    margin: 10px;
+    background-color: #009700;
+} */
 
+#table-wrapper
+{
+    min-width: 700px;
+    max-width: 700px;
+}
+
+#table-wrapper,
+#top-row,
+#table-numbers,
+.table-row,
+#right-table,
+#bottom-center-table,
+#bottom-row
+{
+    display: flex;
+}
+
+#top-row,
+.table-row,
+#bottom-row
+{
+    flex-direction: row;
+}
+
+#table-wrapper,
+#table-numbers,
+#right-table,
+#bottom-center-table
+{
+    flex-direction: column;
+}
+
+.table-row
+{
+    flex: 100%;
+}
+
+.table-value
+{
+    padding: 10px 0px;
+    background-color: #A739FF;
+    margin: 5px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.width-1-3rd
+{
+    flex: calc(100% / 3);
+}
+
+.width-1-6th
+{
+    flex: calc(100% / 6);
+}
+
+.width-1-12th
+{
+    flex: calc(100% / 12);
+}
+
+.bottom-table-spacer
+{
+    flex: 50px;
+    max-width: 50px;
+}
+
+.bottom-table-spacer .table-value
+{
+    visibility: hidden;
+}
+
+#left-table
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+}
+
+#left-table .table-value
+{
+    flex: 1 1 auto;
+    align-content: center;
+    align-items: center;
+    display: flex;
+    height: calc(100% - 30px);
+}
+
+#left-table .table-value div
+{
+    margin: 0 auto;
+}
+
+#left-table, #right-table
+{
+    flex: 50px;
+    max-width: 50px;
+}
+
+#table-numbers
+{
+    flex: 1 1 auto;
+}
+
+#bottom-center-table
+{
+    flex: 1 1 auto;
+}
+
+#numbers-table-wrapper
+{
+    display: flex;
+    flex: 1 1 auto;
+    position: relative;
+}
+
+#numbers-overlay
+{
+    position: absolute;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+#numbers-overlay .row
+{
+    flex: calc(100% / 7);
+    opacity: 0.5;
+    display: flex;
+}
+
+#numbers-overlay .row.spacer
+{
+    max-height: 6px;
+}
+
+#numbers-overlay .row .inner-row
+{
+    display: flex;
+    flex-direction: column;
+    flex: calc(100% / 27);
+}
+
+#numbers-overlay .row .inner-row.spacer
+{
+    max-width: 8px;
+}
+
+#numbers-overlay .row .inner-row:hover
+{
+    background-color: white;
+    border-radius: 50px;
+}
+
+#numbers-overlay .row .inner-row.spacer:hover
+{
+    background-color: transparent !important;
+}
+
+#numbers-overlay .row .inner-row.active
+{
+    background-color: red;
+}
+
+@media all and (max-width: 992px)
+{
+    .roulette-wrapper
+    {
+        flex-direction: column;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    .roulette-wheel-content-wrapper {
+        padding-top: 0px;
+        transform: scale(0.75);
+        flex: 400px;
+        max-height: 400px;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    .roulette-wrapper {
+        min-height: 1000px;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    .roulette-table-content-wrapper {
+        flex: 1 1 auto;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    #table-wrapper {
+        flex-direction: row;
+        min-width: 0px;
+        margin: 50px 0px;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    #top-row {
+        flex-direction: column;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    #right-table {
+        flex-direction: row;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    #table-numbers {
+        flex-direction: row-reverse;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    #first-row {
+        flex-direction: column;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    #second-row {
+        flex-direction: column;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    #third-row {
+        flex-direction: column;
+    }
+
+    /* Inline #10 | http://localhost:3000/games/roulette */
+
+    .table-value {
+        /* padding: 10px 0px; */
+        padding: 10px 10px;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    #bottom-row {
+        flex-direction: column;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    #bottom-center-table {
+        flex-direction: row;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    #center-top-row {
+        flex-direction: column;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    #center-bottom-row {
+        flex-direction: column;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    #left-table {
+        max-width: 100%;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    div.bottom-table-spacer:nth-child(1) {
+        max-height: 50px;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    div.bottom-table-spacer:nth-child(3) {
+        max-height: 50px;
+    }
+
+    /* Element | http://localhost:3000/games/roulette */
+
+    .roulette-table-content {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        align-items: center;
+    }
+}
