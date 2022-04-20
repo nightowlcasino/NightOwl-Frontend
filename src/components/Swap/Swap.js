@@ -6,9 +6,10 @@ import StateContext from "../Context";
 
 const TOKENID_NO_TEST = "afd0d6cb61e86d15f2a0adc1e7e23df532ba3ff35f8ba88bed16729cae933032";
 const TOKENID_FAKE_SIGUSD = "96c402c0e658909aa03f534006124f0e43725c467dbc8dea39680d0861892de5";
+const TOKENID_ERG  = "0000000000000000000000000000000000000000000000000000000000000000";
 
 function Swap() {
-    const [swap1, setSwap1] = useState(20);
+    const [swap1, setSwap1] = useState(0);
     const [swap2, setSwap2] = useState();
     const [swapSelect1, setSwapSelect1] = useState('ERG');
     const {ergoWallet, defaultAddress} = useContext(StateContext);
@@ -25,17 +26,17 @@ function Swap() {
 		const owl = 10;
 
 		ergoWallet
-			.get_utxos(sigUSDAmount, TOKENID_FAKE_SIGUSD)
+			.get_utxos(swap1, TOKENID_FAKE_SIGUSD)
 			.then((utxosResponse) => {
-				//ergoWallet.get_utxos(owl, TOKENID_NO_TEST).then(utxosResponse => {
+		//ergoWallet.get_utxos(swap2, TOKENID_NO_TEST).then(utxosResponse => {
 				if (utxosResponse.length === 0) {
 					console.log("NO UTXOS");
 				} else {
 					// send token input boxes and token amounts in a POST message to the backend
 					axios
 						.post(`http://${backend}:8088/api/v1/swap/sigusd`, {
-							//axios.post(`http://${backend}:8088/api/v1/swap/owl`, {
-							amnt: swap1,
+					//axios.post(`http://${backend}:8088/api/v1/swap/owl`, {
+							amnt: swap2,
 							senderAddr: localStorage.getItem('walletAddress'),
 							utxos: utxosResponse,
 						})
@@ -54,7 +55,7 @@ function Swap() {
 						});
 				}
 			});
-	};
+	    };
 
     async function signTx(txToBeSigned) {
 		try {

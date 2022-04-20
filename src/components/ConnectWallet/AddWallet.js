@@ -83,14 +83,14 @@ function AddWallet(props) {
 				console.log("Wallet Disconnected!!!");
 			});
 			// get ERG balance
-			ergoWallet.get_balance(NANOERG_TO_ERG).then(function (balance) {
+			ergoWallet.get_balance().then(function (balance) {
 				setErgBalance(balance);
-				console.log(`ERG: ${balance}`);
+				console.log(`ERG: ${balance/NANOERG_TO_ERG}`);
 			});
 			// get SigUSD balance
 			ergoWallet.get_balance(TOKENID_FAKE_SIGUSD).then(function (balance) {
 				setSigUSDBalance(balance);
-				console.log(`SigUSD: ${balance}`);
+				console.log(`SigUSD: ${balance/100}`);
 			});
 			// get OWL balance
 			ergoWallet.get_balance(TOKENID_NO_TEST).then(function (balance) {
@@ -112,7 +112,7 @@ function AddWallet(props) {
 			return (
 				str.substring(0, parseInt(len / 2)) +
 				sep +
-				str.substring(str.length - (parseInt(len / 2) + 1), str.length - 1)
+				str.substring(str.length - (parseInt(len / 2)), str.length)
 			);
 		}
 	};
