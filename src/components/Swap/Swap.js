@@ -7,6 +7,9 @@ import StateContext from "../Context";
 const TOKENID_NO_TEST = "afd0d6cb61e86d15f2a0adc1e7e23df532ba3ff35f8ba88bed16729cae933032";
 const TOKENID_FAKE_SIGUSD = "96c402c0e658909aa03f534006124f0e43725c467dbc8dea39680d0861892de5";
 const TOKENID_ERG  = "0000000000000000000000000000000000000000000000000000000000000000";
+const FEE_VALUE = 1100000;
+const MIN_BOX_VALUE = 1000000;
+
 
 function Swap() {
     const [swap1, setSwap1] = useState(0);
@@ -25,6 +28,17 @@ function Swap() {
 		const sigUSDAmount = 10;
 		const owl = 10;
 
+        let utxos = []
+        const minERG = MIN_BOX_VALUE + FEE_VALUE
+
+        // Get utxo for ERGs
+        ergoWallet.get_utxos(minERG, TOKENID_ERG).then((utxosResponse) => {
+            if (utxosResponse.length === 0) {
+                console.log("NO UTXOS")
+            } else {
+                utxos = utxosResponse
+            }
+        })
 		ergoWallet
 			.get_utxos(swap1, TOKENID_FAKE_SIGUSD)
 			.then((utxosResponse) => {
@@ -32,13 +46,27 @@ function Swap() {
 				if (utxosResponse.length === 0) {
 					console.log("NO UTXOS");
 				} else {
+                    utxosResponse.forEach(sigBox => {
+                        let found = false
+                        utxos.forEach(box => {
+                            // Check if any matching boxIds
+                            // TODO: Add a break/continue
+                            if (sigBox.boxId == box.boxId) {
+                                found = true
+                            }
+                        })
+                        // Found none
+                        if (!found) {
+                            utxos.push(sigBox)
+                        }
+                    })
 					// send token input boxes and token amounts in a POST message to the backend
 					axios
 						.post(`http://${backend}:8088/api/v1/swap/sigusd`, {
 					//axios.post(`http://${backend}:8088/api/v1/swap/owl`, {
 							amnt: swap1,
 							senderAddr: localStorage.getItem('walletAddress'),
-							utxos: utxosResponse,
+							utxos: utxos,
 						})
 						.then(async function (response) {
 							const signedTx = await signTx(response.data);

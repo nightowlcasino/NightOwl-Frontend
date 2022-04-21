@@ -59,7 +59,7 @@ export default function WalletHover({ disconnect, owlBalance, sigUSDBalance, erg
                   )}
                 >
                   <ArchiveIcon className="icon" aria-hidden="true" />
-                  Wallet Ballance - {sigUSDBalance} SigUSD
+                  Wallet Ballance - {sigUSDBalance/100} SigUSD
                 </a>
               )}
             </Menu.Item>
