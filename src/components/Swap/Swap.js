@@ -9,9 +9,9 @@ const TOKENID_FAKE_SIGUSD = "96c402c0e658909aa03f534006124f0e43725c467dbc8dea396
 const TOKENID_ERG  = "0000000000000000000000000000000000000000000000000000000000000000";
 
 function Swap() {
-    const [swap1, setSwap1] = useState(0);
+    const [swap1, setSwap1] = useState();
     const [swap2, setSwap2] = useState();
-    const [swapSelect1, setSwapSelect1] = useState('ERG');
+    const [swapSelect1, setSwapSelect1] = useState('SigUSD');
     const {ergoWallet, defaultAddress} = useContext(StateContext);
 
     //const [wallet, setWallet] = useContext(WalletContext)
@@ -83,10 +83,12 @@ function Swap() {
     
     const handleSwap1 = (value) => {
         setSwap1(value);
+        setSwap2(value*100);
     }
     
     const handleSwap2 = (value) => {
         setSwap2(value);
+        setSwap1(value/100)
     }
 
     const convertOwl = () => {
@@ -106,25 +108,25 @@ function Swap() {
                     <form id="swap-content">
                         <div id="swap-header">
                             <h1>Swap</h1>
-                            <span>Ergo blockchain token swap</span>
+                            <span>Swap {swapSelect1} for Owl</span>
                         </div>
                         <div id="swap-input-fields-wrapper">
                             <div id="swap-input-fields">
                                 <div className="input-field">
-                                    <select value={swapSelect1} onChange={(e)=>handleSwapSelect(e.target.value)}>
-                                        <option value="ERG">ERG</option>
+                                    <select value={swapSelect1} onChange={(e)=>handleSwapSelect(e.target.value)} style={{color:'white',outline:'none',width:'29%'}}>
                                         <option value="SigUSD">SigUSD</option>
+                                        {/* <option value="ERG">ERG</option> */}
                                     </select>
-                                    <input type='number' name="swap1" placeholder={`${swapSelect1} amount`} value={swap1} onChange={(e)=>handleSwap1(e.target.value)} />
+                                    <input type='number' name="swap1" placeholder={`${swapSelect1} amount`} value={swap1} onChange={(e)=>handleSwap1(e.target.value)} style={{outline:'none'}} />
                                 </div>
                                 <div id="input-separator-wrapper">
                                     <div id="input-seperator">To</div>
                                 </div>
                                 <div className="input-field">
-                                    <select>
+                                    <select style={{color:'white',outline:'none'}}>
                                         <option value="owl">OWL</option>
                                     </select>
-                                    <input type='number' name="swap2" placeholder="OWL amount" value={swap2} onChange={(e)=>handleSwap2(e.target.value)} />
+                                    <input type='number' name="swap2" placeholder="OWL amount" value={swap2} onChange={(e)=>handleSwap2(e.target.value)} style={{outline:'none'}} />
                                 </div>
                             </div>
                         </div>

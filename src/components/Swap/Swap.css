@@ -65,6 +65,18 @@
     width: 100%;
 }
 
+/* Remove input field arrows: Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove input field arrows: Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 #swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-input-fields-wrapper #swap-input-fields .input-field
 {
     display: flex;
