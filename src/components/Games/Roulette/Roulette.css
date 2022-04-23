@@ -207,6 +207,7 @@
     animation-duration: 4s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
+    /* display: none; */
 }
 
 #fuckinginner.stop-spin::before
@@ -583,10 +584,12 @@
     background-color: green;
 }
 .color-black {
-    background-color: black;
+    /* background-color: black; */
+    background-color: #270D3C !important;
 }
 .color-red {
-    background-color: red;
+    /* background-color: red; */
+    background-color: #E80F44 !important;
 }
 .visuallyhidden {
     position: absolute;

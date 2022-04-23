@@ -114,7 +114,7 @@ function Swap() {
                                         <option value="ERG">ERG</option>
                                         <option value="SigUSD">SigUSD</option>
                                     </select>
-                                    <input type='number' name="swap1" placeholder={`${swapSelect1} amount`} value={swap1} onChange={(e)=>handleSwap1(e.target.value)} />
+                                    <input type='text' name="swap1" placeholder={`${swapSelect1} amount`} value={swap1} onChange={(e)=>handleSwap1(e.target.value)} />
                                 </div>
                                 <div id="input-separator-wrapper">
                                     <div id="input-seperator">To</div>
@@ -123,7 +123,7 @@ function Swap() {
                                     <select>
                                         <option value="owl">OWL</option>
                                     </select>
-                                    <input type='number' name="swap2" placeholder="OWL amount" value={swap2} onChange={(e)=>handleSwap2(e.target.value)} />
+                                    <input type='text' name="swap2" placeholder="OWL amount" value={swap2} onChange={(e)=>handleSwap2(e.target.value)} />
                                 </div>
                             </div>
                         </div>
