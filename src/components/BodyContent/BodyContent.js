@@ -12,7 +12,7 @@ import Swap from "../Swap/Swap.js";
 import Coinflip from "../Games/Coinflip/Coinflip.js";
 import Roulette from "../Games/Roulette/Roulette";
 
-function BodyContent() {
+function BodyContent({setIsLoading,setSwapTransaction}) {
     const location = useLocation();
     const path = location.pathname;
 
@@ -37,7 +37,7 @@ function BodyContent() {
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/soon" element={<ComingSoon />} />
                     <Route path="/stake" element={<Stake />} />
-                    <Route path="/swap" element={<Swap />} />
+                    <Route path="/swap" element={<Swap setIsLoading={setIsLoading} setSwapTransaction={setSwapTransaction} />} />
                     <Route path="/games/coinflip" element={<Coinflip />} />
                     <Route path="/games/roulette" element={<Roulette />} />
                 </Routes>

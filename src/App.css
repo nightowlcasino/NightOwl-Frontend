@@ -89,7 +89,7 @@ h1-leader{
 .App.overlay #header-wrapper,
 .App.overlay #body-content-wrapper
 {
-  filter: blur(6px);
+  filter: blur(5px);
 }
 
 .App.overlay #overlay
@@ -144,6 +144,18 @@ h1-leader{
     margin: 0 auto;
     width: 100px;
     height: 100px;
+    border-radius: 5px;
+    filter: blur(0px) !important;
+}
+
+.overlay-swap
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+    margin: 0 auto;
+    width: 500px;
+    height: 300px;
     border-radius: 5px;
     background-color: white;
     filter: blur(0px) !important;

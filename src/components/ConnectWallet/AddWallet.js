@@ -99,7 +99,7 @@ function AddWallet(props) {
 			});
 			ergoWallet.get_change_address().then(function (address) {
 				localStorage.setItem("walletAddress", address);
-				setDefaultAddress(truncate(address, 14, "..."));
+				setDefaultAddress(truncate(address, 6, "..."));
 				localStorage.setItem("walletConnected", "true");
 			});
 		}
@@ -339,7 +339,17 @@ function AddWallet(props) {
 					{!walletConnected && <img src={wallet_pink} id="header-wallet-image" />}
 					<div id="wallet-connect">
 						<span>
-							{walletConnected ? <>{defaultAddress}</> : "Connect Wallet"}
+							{walletConnected ? <span style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+								<p style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center',fontWeight:'bold'}}>
+									{owlBalance}
+									<span>OWL</span>
+								</p>
+								<span style={{display:'flex', justifyContent:'end', alignItems:'center', gap:'3px'}}>
+									<img src={nautiusIcon} style={{height:'20px'}} />
+									<p>{defaultAddress}</p>
+								</span>
+
+								</span> : "Connect Wallet"}
 						</span>
 					</div>
 					{(walletHover && walletConnected) &&(

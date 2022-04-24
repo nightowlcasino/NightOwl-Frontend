@@ -8,9 +8,9 @@ const TOKENID_NO_TEST = "afd0d6cb61e86d15f2a0adc1e7e23df532ba3ff35f8ba88bed16729
 const TOKENID_FAKE_SIGUSD = "96c402c0e658909aa03f534006124f0e43725c467dbc8dea39680d0861892de5";
 const TOKENID_ERG  = "0000000000000000000000000000000000000000000000000000000000000000";
 
-function Swap() {
-    const [swap1, setSwap1] = useState();
-    const [swap2, setSwap2] = useState();
+function Swap({setIsLoading,setSwapTransaction}) {
+    const [swap1, setSwap1] = useState(false);
+    const [swap2, setSwap2] = useState(false);
     const [swapSelect1, setSwapSelect1] = useState('SigUSD');
     const {ergoWallet, defaultAddress} = useContext(StateContext);
 
@@ -33,6 +33,7 @@ function Swap() {
 					console.log("NO UTXOS");
 				} else {
 					// send token input boxes and token amounts in a POST message to the backend
+                    setIsLoading(true);
 					axios
 						.post(`http://${backend}:8088/api/v1/swap/sigusd`, {
 					//axios.post(`http://${backend}:8088/api/v1/swap/owl`, {
@@ -48,6 +49,8 @@ function Swap() {
 								console.log(`No submitted tx ID`);
 								return null;
 							}
+                            // setIsLoading(false);
+                            setSwapTransaction(txId);
 							console.log(`Transaction submitted - ${txId}`);
 						})
 						.catch(function (error) {
