@@ -131,6 +131,12 @@
     flex: 50%;
 }
 
+.roulette-table-content-wrapper
+{
+    display: flex;
+    flex-direction: column;
+}
+
 .plate {
     background-color: gray;
     width: 350px;
@@ -138,7 +144,7 @@
     margin: 12px;
     border-radius: 50%;
     position: relative;
-    animation: rotate 24s infinite linear;
+    /* animation: rotate 24s infinite linear; */
 }
 .plate:after, .plate:before {
     content: '';
@@ -203,7 +209,7 @@
 
 #fuckinginner.default-spin::before
 {
-    animation-name: default-ball;
+    /* animation-name: default-ball; */
     animation-duration: 4s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
@@ -453,25 +459,17 @@
 .btn {
     background: white;
     border: 1px solid #000000;
-    border-top-color: #00b300;
-    border-left-color: #00b300;
-    top: 150px;
     padding: 0;
     margin-bottom: 0;
-    display: inline-block;
-    font-size: 15px;
     width: 350px;
     padding: 12px;
-    margin: 12px;
-    margin-right: 300px;
     cursor: pointer;
     color: black;
-    font-weight: bold;
-    font-family: 'Roboto', sans-serif;
     border-radius: 3px;
-    position: absolute;
     text-align: center;
+    margin: 0 auto;
 }
+
 .btn .btn-label {
     font-size: 20px;
     font-weight: 900;
@@ -499,7 +497,7 @@
     bottom: 30%;
     left: 30%;
     border-radius: 50%;
-    animation: rotate 24s reverse linear infinite;
+    /* animation: rotate 24s reverse linear infinite; */
     perspective: 2000px;
     z-index: 100;
 }
@@ -536,6 +534,7 @@
     margin: auto;
     line-height: 1.4;
     padding-top: 36px;
+    display: none;
 }
 .data .result {
     background-color: green;
@@ -544,16 +543,16 @@
     align-items: center;
     color: #fff;
     z-index: 102;
-    top: -6px;
-    right: -6px;
-    left: -6px;
-    bottom: -6px;
+    top: -26px;
+    right: -26px;
+    left: -26px;
+    bottom: -26px;
 }
 .data .result-number {
     font-size: 72px;
     font-weight: 500;
     line-height: 1.2;
-    margin-top: 12px;
+    margin-top: 35px;
 }
 .data .result-color {
     text-transform: uppercase;
@@ -775,7 +774,6 @@
 #numbers-overlay .row
 {
     flex: calc(100% / 7);
-    opacity: 0.5;
     display: flex;
 }
 
@@ -799,6 +797,7 @@
 #numbers-overlay .row .inner-row:hover
 {
     background-color: white;
+    opacity: 0.5;
     border-radius: 50px;
 }
 
@@ -809,7 +808,61 @@
 
 #numbers-overlay .row .inner-row.active
 {
-    background-color: red;
+    background-color: white;
+    color: black;
+    opacity: 1;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    border-radius: 50px;
+}
+
+#numbers-overlay .row .inner-row.active div
+{
+    margin: 0 auto;
+}
+
+
+#roulette-table-chips
+{
+    margin-top: 20px;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+}
+
+#roulette-table-chips .table-chip-wrapper
+{
+    flex: calc(100% / 5);
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+#roulette-table-chips .table-chip-wrapper:hover .table-chip
+{
+    width: 80px;
+    height: 80px;
+}
+
+#roulette-table-chips .table-chip-wrapper.active .table-chip
+{
+    width: 100px;
+    height: 100px;
+}
+
+#roulette-table-chips .table-chip
+{
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: all 0.4s ease;
+    cursor: pointer;
 }
 
 @media all and (max-width: 992px)
@@ -819,8 +872,6 @@
         flex-direction: column;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     .roulette-wheel-content-wrapper {
         padding-top: 0px;
         transform: scale(0.75);
@@ -828,19 +879,13 @@
         max-height: 400px;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     .roulette-wrapper {
         min-height: 1000px;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     .roulette-table-content-wrapper {
         flex: 1 1 auto;
     }
-
-    /* Element | http://localhost:3000/games/roulette */
 
     #table-wrapper {
         flex-direction: row;
@@ -848,92 +893,62 @@
         margin: 50px 0px;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     #top-row {
         flex-direction: column;
     }
-
-    /* Element | http://localhost:3000/games/roulette */
 
     #right-table {
         flex-direction: row;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     #table-numbers {
         flex-direction: row-reverse;
     }
-
-    /* Element | http://localhost:3000/games/roulette */
 
     #first-row {
         flex-direction: column;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     #second-row {
         flex-direction: column;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     #third-row {
         flex-direction: column;
     }
-
-    /* Inline #10 | http://localhost:3000/games/roulette */
 
     .table-value {
         /* padding: 10px 0px; */
         padding: 10px 10px;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     #bottom-row {
         flex-direction: column;
     }
-
-    /* Element | http://localhost:3000/games/roulette */
 
     #bottom-center-table {
         flex-direction: row;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     #center-top-row {
         flex-direction: column;
     }
-
-    /* Element | http://localhost:3000/games/roulette */
 
     #center-bottom-row {
         flex-direction: column;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     #left-table {
         max-width: 100%;
     }
-
-    /* Element | http://localhost:3000/games/roulette */
 
     div.bottom-table-spacer:nth-child(1) {
         max-height: 50px;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     div.bottom-table-spacer:nth-child(3) {
         max-height: 50px;
     }
-
-    /* Element | http://localhost:3000/games/roulette */
 
     .roulette-table-content {
         display: flex;

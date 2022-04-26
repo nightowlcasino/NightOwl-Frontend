@@ -23,7 +23,7 @@ function App() {
 	const path = location.pathname;
 	// console.log(path)
 	return (
-		<div className="App overlay">
+		<div className="App">
 			{/* need to add class 'overlay' to app in order to have blurred content in case swap overlay is active */}
 				{path.includes('/soon') ? <ComingSoon /> : 
 				<StateContext.Provider value={{ergoWallet, setErgoWallet, defaultAddress, setDefaultAddress}}>
