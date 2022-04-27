@@ -33,7 +33,7 @@ function App() {
 						<div id="overlay-background"></div>
 						<div id="overlay-content-wrapper">
 							<div id="overlay-content">
-								Some content here, as you like
+								I will be centered automatically, no matter the content you place inside me
 							</div>
 						</div>
 					</div>
