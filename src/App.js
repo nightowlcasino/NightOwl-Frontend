@@ -7,6 +7,7 @@ import Header from "./components/Header/Header.js";
 import BodyContent from "./components/BodyContent/BodyContent.js"
 import ComingSoon from "./components/ComingSoon/ComingSoon.js";
 import { Triangle } from  'react-loader-spinner'
+import green_check from "./assets/Elements/green_checkmark.png"
 // import LeftSideBar from "./components/LeftSideBar/LeftSideBar";
 // import logo from "./assets/Elements/logo.png";
 // import Swap from "./components/Swap/Swap";
@@ -26,7 +27,7 @@ function App() {
 	const path = location.pathname;
 	// console.log(path)
 	return (
-		<div className={(swapTransaction || isLoading) ? "App overlay" : "App"}>
+		<div className={(swapTransaction || isLoading) ? "App overlay" : "App overlay"}>
 			{/* need to add class 'overlay' to app in order to have blurred content in case swap overlay is active */}
 				{path.includes('/soon') ? <ComingSoon /> : 
 				<StateContext.Provider value={{ergoWallet, setErgoWallet, defaultAddress, setDefaultAddress}}>
@@ -36,6 +37,13 @@ function App() {
 						<div id="overlay-background"></div>
 						<div id="overlay-content-wrapper">
 							<div id="overlay-content">
+								<div id="green-checkmark" style={{backgroundImage: `url(${green_check})`}}></div>
+								<div id="overlay-text">
+									<span>Transaction submitted</span>
+									<a>Link goes in here</a>
+								</div>
+								 {/* add functionality to close overlay to element below */}
+								<div id="overlay-close">X</div>
 								{isLoading && 
 									<Triangle
 										height="100"
