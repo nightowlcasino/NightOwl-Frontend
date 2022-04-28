@@ -123,6 +123,7 @@
     align-items: center;
     align-content: center;
     flex-direction: column;
+    transition: transform 0.4s ease;
 }
 
 .roulette-wrapper .roulette-wheel-content-wrapper,
@@ -625,25 +626,6 @@
     100% { transform: rotateZ(360deg);}
 }
 
-/********************************************/
-/********************************************/
-/*****************TABLEEEEEEE****************/
-/********************************************/
-/********************************************/
-
-/* #table-outter td
-{
-    padding: 5px;
-    background-color: red;
-    text-align: center;
-}
-
-#numbers-table td
-{
-    margin: 10px;
-    background-color: #009700;
-} */
-
 #table-wrapper
 {
     min-width: 700px;
@@ -789,6 +771,11 @@
     flex: calc(100% / 27);
 }
 
+#numbers-overlay .row .inner-row div
+{
+    opacity: 0;
+}
+
 #numbers-overlay .row .inner-row.spacer
 {
     max-width: 8px;
@@ -808,7 +795,6 @@
 
 #numbers-overlay .row .inner-row.active
 {
-    background-color: white;
     color: black;
     opacity: 1;
     flex-direction: row;
@@ -816,13 +802,26 @@
     align-items: center;
     align-content: center;
     border-radius: 50px;
+    background-image: url(../../../assets/Elements/coin_purple.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #numbers-overlay .row .inner-row.active div
 {
     margin: 0 auto;
+    opacity: 1;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	height: calc(100% - 9px);
+	width: 100%;
+	padding-top: 7px;
+	background-color: #ffffff66;
+	border-radius: 50%;
+    text-align: center;
 }
-
 
 #roulette-table-chips
 {
@@ -863,6 +862,68 @@
     background-repeat: no-repeat;
     transition: all 0.4s ease;
     cursor: pointer;
+}
+
+.roulette-wrapper.place-bets .roulette-wheel-content-wrapper, .roulette-wrapper .roulette-table-content-wrapper
+{
+    flex: 25% 1;
+}
+
+.roulette-wrapper.place-bets #table-wrapper
+{
+    max-width: 1200px;
+}
+
+.roulette-wrapper.place-bets .table-value
+{
+    padding: 25px 10px;
+    margin: 3px;
+}
+
+.roulette-wrapper.place-bets #numbers-overlay .row.spacer
+{
+    max-height: 15px;
+}
+
+.roulette-wrapper.place-bets #left-table, #right-table
+{
+    flex: 70px 1;
+    max-width: 71px;
+}
+
+.roulette-wrapper.place-bets #numbers-overlay .row .inner-row.spacer
+{
+    max-width: 10px;
+    background-color: transparent;
+}
+
+.roulette-wrapper.place-bets .bottom-table-spacer
+{
+    flex: 70px 1;
+    max-width: 70px;
+}
+
+.roulette-wrapper.place-bets #numbers-overlay
+{
+    width: calc(100% - 14px);
+    margin: 5px 7px;
+}
+
+.roulette-wrapper.place-bets .roulette-table-content-wrapper
+{
+    flex: 75%;
+}
+
+.roulette-wrapper.place-bets .roulette-wheel-content-wrapper
+{
+    transform: scale(0.5);
+}
+
+.roulette-wrapper.place-bets #left-table > div:nth-child(1)
+{
+    max-height: 166px;
+    max-width: 70px;
+    padding: 25px 19px;
 }
 
 @media all and (max-width: 992px)
