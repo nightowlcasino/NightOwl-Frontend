@@ -24,7 +24,7 @@ function App() {
 	const [ergoWallet, setErgoWallet] = useState();
     const [defaultAddress, setDefaultAddress] = useState();
 	const [isLoading, setIsLoading] = useState(false);
-	const [swapTransaction, setSwapTransaction] = useState(true);
+	const [swapTransaction, setSwapTransaction] = useState(false);
 	const location = useLocation();
 	const path = location.pathname;
 	// console.log(path)
