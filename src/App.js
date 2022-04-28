@@ -8,6 +8,8 @@ import BodyContent from "./components/BodyContent/BodyContent.js"
 import ComingSoon from "./components/ComingSoon/ComingSoon.js";
 import { Triangle } from  'react-loader-spinner'
 import green_check from "./assets/Elements/green_checkmark.png"
+import { IoClose } from 'react-icons/io5'
+import successTick from './assets/Elements/successTick.png'
 // import LeftSideBar from "./components/LeftSideBar/LeftSideBar";
 // import logo from "./assets/Elements/logo.png";
 // import Swap from "./components/Swap/Swap";
@@ -22,12 +24,12 @@ function App() {
 	const [ergoWallet, setErgoWallet] = useState();
     const [defaultAddress, setDefaultAddress] = useState();
 	const [isLoading, setIsLoading] = useState(false);
-	const [swapTransaction, setSwapTransaction] = useState(false);
+	const [swapTransaction, setSwapTransaction] = useState(true);
 	const location = useLocation();
 	const path = location.pathname;
 	// console.log(path)
 	return (
-		<div className={(swapTransaction || isLoading) ? "App overlay" : "App overlay"}>
+		<div className={(swapTransaction || isLoading) ? "App overlay" : "App"}>
 			{/* need to add class 'overlay' to app in order to have blurred content in case swap overlay is active */}
 				{path.includes('/soon') ? <ComingSoon /> : 
 				<StateContext.Provider value={{ergoWallet, setErgoWallet, defaultAddress, setDefaultAddress}}>
@@ -37,13 +39,7 @@ function App() {
 						<div id="overlay-background"></div>
 						<div id="overlay-content-wrapper">
 							<div id="overlay-content">
-								<div id="green-checkmark" style={{backgroundImage: `url(${green_check})`}}></div>
-								<div id="overlay-text">
-									<span>Transaction submitted</span>
-									<a>Link goes in here</a>
-								</div>
-								 {/* add functionality to close overlay to element below */}
-								<div id="overlay-close">X</div>
+								
 								{isLoading && 
 									<Triangle
 										height="100"
@@ -53,13 +49,15 @@ function App() {
 									/>
 								}
 								{swapTransaction && 
-									<>
-										<div className="overlay-swap">
-											<h1 style={{color:'#ab0d82'}}>Success!</h1>
-											<h3>Transaction Submitted</h3>
-											<a target="_blank" rel="noreferrer" href={`https://explorer.ergoplatform.com/en/search?query=${swapTransaction && swapTransaction}`} style={{color:'blue'}}>View on Explorer</a>
+									<div id="overlay-popup">
+										<div id="green-checkmark" style={{backgroundImage: `url(${green_check})`}}></div>
+										<div id="overlay-text">
+											<span>Transaction submitted</span>
+											<a style={{textDecoration:'underline'}} target="_blank" rel="noreferrer" href={`https://explorer.ergoplatform.com/en/transactions/${swapTransaction}`}>View Transaction</a>
 										</div>
-									</>
+										{/* add functionality to close overlay to element below */}
+										<div id="overlay-close" onClick={()=>setSwapTransaction(false)}>X</div>
+									</div>
 								}
 							</div>
 						</div>
