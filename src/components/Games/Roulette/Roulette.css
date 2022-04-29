@@ -802,23 +802,77 @@
     align-items: center;
     align-content: center;
     border-radius: 50px;
-    background-image: url(../../../assets/Elements/coin_purple.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+#numbers-overlay .row .inner-row.active.purple.two-d
+{
+    background-image: url(../../../assets/Elements/coin_purple.png);
+}
+
+#numbers-overlay .row .inner-row.active.green.two-d
+{
+    background-image: url(../../../assets/Elements/coin_green.png);
+}
+
+#numbers-overlay .row .inner-row.active.pink.two-d
+{
+    background-image: url(../../../assets/Elements/coin_pink.png);
+}
+
+#numbers-overlay .row .inner-row.active.blue.two-d
+{
+    background-image: url(../../../assets/Elements/coin_blue.png);
+}
+
+#numbers-overlay .row .inner-row.active.black.two-d
+{
+    background-image: url(../../../assets/Elements/coin_black.png);
+}
+
+#numbers-overlay .row .inner-row.active.purple.three-d
+{
+    background-image: url(../../../assets/Elements/coin_100.png);
+}
+
+#numbers-overlay .row .inner-row.active.green.three-d
+{
+    background-image: url(../../../assets/Elements/coin_500.png);
+}
+
+#numbers-overlay .row .inner-row.active.pink.three-d
+{
+    background-image: url(../../../assets/Elements/coin_2k5.png);
+}
+
+#numbers-overlay .row .inner-row.active.blue.three-d
+{
+    background-image: url(../../../assets/Elements/coin_10k.png);
+}
+
+#numbers-overlay .row .inner-row.active.black.three-d
+{
+    background-image: url(../../../assets/Elements/coin_50k.png);
+}
+
+#numbers-overlay .row .inner-row.active.three-d
+{
+    background-size: contain;
+}
+
 #numbers-overlay .row .inner-row.active div
 {
     margin: 0 auto;
-    opacity: 1;
+    /* opacity: 1; */
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
 	height: calc(100% - 9px);
 	width: 100%;
 	padding-top: 7px;
-	background-color: #ffffff66;
+	/* background-color: #ffffff66; */
 	border-radius: 50%;
     text-align: center;
 }
