@@ -28,6 +28,8 @@ const Roulette = () => {
   const [randomNumber, setRandomNumber] = useState(null);
   const [firstSpin, setFirstSpin] = useState(true);
   const [chipSelected, setChipSelected] = useState(100);
+  const [totalBet, setTotalBet] = useState(0);
+
   const [betObject, setBetObject] = useState({
     num_val0: [],
     num_val0_3: [],
@@ -78,12 +80,219 @@ const Roulette = () => {
     num_val32_33: [],
     num_val32_33_35_36: [],
     num_val35_36: [],
+
+    num_val0_2: [],
+    num_val2: [],
+    num_val2_5: [],
+    num_val5: [],
+    num_val5_8: [],
+    num_val8: [],
+    num_val8_11: [],
+    num_val11: [],
+    num_val11_14: [],
+    num_val14: [],
+    num_val14_17: [],
+    num_val17: [],
+    num_val17_20: [],
+    num_val20: [],
+    num_val20_23: [],
+    num_val23: [],
+    num_val23_26: [],
+    num_val26: [],
+    num_val26_29: [],
+    num_val29: [],
+    num_val29_32: [],
+    num_val32: [],
+    num_val32_35: [],
+    num_val35: [],
+
+    num_val0_1_2: [],
+    num_val1_2: [],
+    num_val1_2_4_5: [],
+    num_val4_5: [],
+    num_val4_5_7_8: [],
+    num_val7_8: [],
+    num_val7_8_10_11: [],
+    num_val10_11: [],
+    num_val10_11_13_14: [],
+    num_val13_14: [],
+    num_val13_14_16_17: [],
+    num_val16_17: [],
+    num_val16_17_19_20: [],
+    num_val19_20: [],
+    num_val19_20_22_23: [],
+    num_val22_23: [],
+    num_val22_23_25_26: [],
+    num_val25_26: [],
+    num_val25_26_28_29: [],
+    num_val28_29: [],
+    num_val28_29_31_32: [],
+    num_val31_32: [],
+    num_val31_32_34_35: [],
+    num_val34_35: [],
+
+    num_val0_1: [],
+    num_val1: [],
+    num_val1_4: [],
+    num_val4: [],
+    num_val4_7: [],
+    num_val7: [],
+    num_val7_10: [],
+    num_val10: [],
+    num_val10_13: [],
+    num_val13: [],
+    num_val13_16: [],
+    num_val16: [],
+    num_val16_19: [],
+    num_val19: [],
+    num_val19_22: [],
+    num_val22: [],
+    num_val22_25: [],
+    num_val25: [],
+    num_val25_28: [],
+    num_val28: [],
+    num_val28_31: [],
+    num_val31: [],
+    num_val31_34: [],
+    num_val34: [],
   });
-  var arrayWithNumVals = ["num_val0", "num_val0_3", "num_val3", "num_val3_6", "num_val6", "num_val6_9", "num_val9", "num_val9_12", "num_val12", "num_val12_15", "num_val15", "num_val15_18", "num_val18", "num_val18_21", "num_val21", "num_val21_24", "num_val24", "num_val24_27", "num_val27", "num_val27_30", "num_val30", "num_val30_33", "num_val33", "num_val33_36", "num_val36"];
+  var arrayWithNumVals = [
+    "num_val0",
+    "num_val0_3",
+    "num_val3",
+    "num_val3_6",
+    "num_val6",
+    "num_val6_9",
+    "num_val9",
+    "num_val9_12",
+    "num_val12",
+    "num_val12_15",
+    "num_val15",
+    "num_val15_18",
+    "num_val18",
+    "num_val18_21",
+    "num_val21",
+    "num_val21_24",
+    "num_val24",
+    "num_val24_27",
+    "num_val27",
+    "num_val27_30",
+    "num_val30",
+    "num_val30_33",
+    "num_val33",
+    "num_val33_36",
+    "num_val36",
+  ];
   var arrayWithNumVals1 = [
-    "num_val0_2_3", "num_val2_3", "num_val2_3_5_6", "num_val5_6", "num_val5_6_8_9", "num_val8_9", "num_val8_9_11_12", "num_val11_12", "num_val11_12_14_15", "num_val14_15", "num_val14_15_17_18", "num_val17_18",
-    "num_val17_18_20_21", "num_val20_21", "num_val20_21_23_24", "num_val23_24", "num_val23_24_26_27", "num_val26_27", "num_val26_27_29_30", "num_val29_30", "num_val29_30_32_33", "num_val32_33", "num_val32_33_35_36", "num_val35_36"];
-  console.log(betObject["num_val3"]);
+    "num_val0",
+    "num_val0_2_3",
+    "num_val2_3",
+    "num_val2_3_5_6",
+    "num_val5_6",
+    "num_val5_6_8_9",
+    "num_val8_9",
+    "num_val8_9_11_12",
+    "num_val11_12",
+    "num_val11_12_14_15",
+    "num_val14_15",
+    "num_val14_15_17_18",
+    "num_val17_18",
+    "num_val17_18_20_21",
+    "num_val20_21",
+    "num_val20_21_23_24",
+    "num_val23_24",
+    "num_val23_24_26_27",
+    "num_val26_27",
+    "num_val26_27_29_30",
+    "num_val29_30",
+    "num_val29_30_32_33",
+    "num_val32_33",
+    "num_val32_33_35_36",
+    "num_val35_36",
+  ];
+  var arrayWithNumVals2 = [
+    "num_val0",
+    "num_val0_2",
+    "num_val2",
+    "num_val2_5",
+    "num_val5",
+    "num_val5_8",
+    "num_val8",
+    "num_val8_11",
+    "num_val11",
+    "num_val11_14",
+    "num_val14",
+    "num_val14_17",
+    "num_val17",
+    "num_val17_20",
+    "num_val20",
+    "num_val20_23",
+    "num_val23",
+    "num_val23_26",
+    "num_val26",
+    "num_val26_29",
+    "num_val29",
+    "num_val29_32",
+    "num_val32",
+    "num_val32_35",
+    "num_val35",
+  ];
+  var arrayWithNumVals3 = [
+    "num_val0",
+    "num_val0_1_2",
+    "num_val1_2",
+    "num_val1_2_4_5",
+    "num_val4_5",
+    "num_val4_5_7_8",
+    "num_val7_8",
+    "num_val7_8_10_11",
+    "num_val10_11",
+    "num_val10_11_13_14",
+    "num_val13_14",
+    "num_val13_14_16_17",
+    "num_val16_17",
+    "num_val16_17_19_20",
+    "num_val19_20",
+    "num_val19_20_22_23",
+    "num_val22_23",
+    "num_val22_23_25_26",
+    "num_val25_26",
+    "num_val25_26_28_29",
+    "num_val28_29",
+    "num_val28_29_31_32",
+    "num_val31_32",
+    "num_val31_32_34_35",
+    "num_val34_35",
+  ];
+
+  var arrayWithNumVals4 = [
+    "num_val0",
+    "num_val0_1",
+    "num_val1",
+    "num_val1_4",
+    "num_val4",
+    "num_val4_7",
+    "num_val7",
+    "num_val7_10",
+    "num_val10",
+    "num_val10_13",
+    "num_val13",
+    "num_val13_16",
+    "num_val16",
+    "num_val16_19",
+    "num_val19",
+    "num_val19_22",
+    "num_val22",
+    "num_val22_25",
+    "num_val25",
+    "num_val25_28",
+    "num_val28",
+    "num_val28_31",
+    "num_val31",
+    "num_val31_34",
+    "num_val34",
+  ];
+
   const innerRef = useRef();
 
   function addBetToObject(e) {
@@ -94,6 +303,7 @@ const Roulette = () => {
       ...betObject,
       [`num_val${numbers}`]: currentArrayCopy, //betObject[`num_val${numbers}`] + chipSelected,
     });
+    setTotalBet(totalBet + chipSelected);
   }
   function spinTheWheel() {
     innerRef.current.setAttribute("data-spinto", "");
@@ -142,7 +352,6 @@ const Roulette = () => {
   }
 
   function fromNumberToColor(number) {
-
     switch (number) {
       case 100:
         return "purple";
@@ -154,7 +363,6 @@ const Roulette = () => {
         return "blue";
       case 50000:
         return "black";
-
     }
   }
 
@@ -165,6 +373,7 @@ const Roulette = () => {
       return "between";
     }
   }
+
   return (
     <div className="roulette-wrapper place-bets">
       <div className="roulette-wheel-content-wrapper">
@@ -417,7 +626,7 @@ const Roulette = () => {
       </div>
       <div className="roulette-table-content-wrapper">
         <div id="table-total-bet">
-          Total bet <span>20.000</span>
+          Total bet <span>{totalBet}</span>
         </div>
         <div className="roulette-table-content" style={{ color: "white" }}>
           <div id="table-wrapper">
@@ -552,14 +761,14 @@ const Roulette = () => {
                       <div
                         className={
                           betObject[val].length > 0
-                            ? `inner-row number-center active ${fromNumberToColor(betObject[val][betObject[val].length - 1])} two-d`
+                            ? `inner-row number-center active ${fromNumberToColor(
+                                betObject[val][betObject[val].length - 1]
+                              )} two-d`
                             : "inner-row number-center"
                         }
                         num-val={val.split("l")[1]}
                         onClick={(e) => addBetToObject(e)}
-                      >
-
-                      </div>
+                      ></div>
                     ))}
 
                     <div className="inner-row spacer"></div>
@@ -570,560 +779,76 @@ const Roulette = () => {
                       <div
                         className={
                           betObject[val].length > 0
-                            ? `inner-row number-${centerOrBetween(index)} active ${fromNumberToColor(betObject[val][betObject[val].length - 1])} two-d`
+                            ? `inner-row number-${centerOrBetween(
+                                index
+                              )} active ${fromNumberToColor(
+                                betObject[val][betObject[val].length - 1]
+                              )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
                         }
                         num-val={val.split("l")[1]}
                         onClick={(e) => addBetToObject(e)}
-                      >
-
-                      </div>
+                      ></div>
                     ))}
-                    
-                    {/* <div
-                      className="inner-row number-center"
-                      num-val="35_36"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div> */}
+
                     <div className="inner-row spacer"></div>
                   </div>
                   <div className="row number-center">
                     <div className="inner-row spacer"></div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="0"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="0-2"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="2"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="2-5"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="5"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="5-8"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="8"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="8-11"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="11"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="11-14"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="14"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="14-17"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="17"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="17-20"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="20"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="20-23"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="23"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="23-26"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="26"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="26-29"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="29"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="29-32"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="32"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="32-35"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="35"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
+                    {arrayWithNumVals2.map((val, index) => (
+                      <div
+                        className={
+                          betObject[val].length > 0
+                            ? `inner-row number-${centerOrBetween(
+                                index
+                              )} active ${fromNumberToColor(
+                                betObject[val][betObject[val].length - 1]
+                              )} two-d`
+                            : `inner-row number-${centerOrBetween(index)}`
+                        }
+                        num-val={val.split("l")[1]}
+                        onClick={(e) => addBetToObject(e)}
+                      ></div>
+                    ))}
+
                     <div className="inner-row spacer"></div>
                   </div>
                   <div className="row number-between">
                     <div className="inner-row spacer"></div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="0"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="0-1-2"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="1-2"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="1-2-4-5"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="4-5"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="4-5-7-8"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="7-8"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="7-8-10-11"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="10-11"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="10-11-13-14"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="13-14"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="13-14-16-17"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="16-17"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="16-17-19-20"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="19-20"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="19-20-22-23"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="22-23"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="22-23-25-26"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="25-26"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="25-26-28-29"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="28-29"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="28-29-31-32"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="31-32"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="31-32-34-35"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="34-35"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
+                    {arrayWithNumVals3.map((val, index) => (
+                      <div
+                        className={
+                          betObject[val].length > 0
+                            ? `inner-row number-${centerOrBetween(
+                                index
+                              )} active ${fromNumberToColor(
+                                betObject[val][betObject[val].length - 1]
+                              )} two-d`
+                            : `inner-row number-${centerOrBetween(index)}`
+                        }
+                        num-val={val.split("l")[1]}
+                        onClick={(e) => addBetToObject(e)}
+                      ></div>
+                    ))}
                     <div className="inner-row spacer"></div>
                   </div>
                   <div className="row number-center">
                     <div className="inner-row spacer"></div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="0"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="0-1"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="1"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="1-4"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="4"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="4-7"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="7"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="7-10"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="10"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="10-13"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="13"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="13-16"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="16"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="16-19"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="19"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="19-22"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="22"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="22-25"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="25"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="25-28"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="28"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="28-31"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="31"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-between"
-                      num-val="31-34"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
-                    <div
-                      className="inner-row number-center"
-                      num-val="34"
-                      onClick={(e) => addBetToObject(e)}
-                    >
-                      <div></div>
-                    </div>
+                    {arrayWithNumVals4.map((val, index) => (
+                      <div
+                        className={
+                          betObject[val].length > 0
+                            ? `inner-row number-${centerOrBetween(
+                                index
+                              )} active ${fromNumberToColor(
+                                betObject[val][betObject[val].length - 1]
+                              )} two-d`
+                            : `inner-row number-${centerOrBetween(index)}`
+                        }
+                        num-val={val.split("l")[1]}
+                        onClick={(e) => addBetToObject(e)}
+                      ></div>
+                    ))}
                     <div className="inner-row spacer"></div>
                   </div>
                   <div className="row spacer"></div>
