@@ -10,6 +10,7 @@ import { Triangle } from  'react-loader-spinner'
 import green_check from "./assets/Elements/green_checkmark.png"
 import { IoClose } from 'react-icons/io5'
 import successTick from './assets/Elements/successTick.png'
+import Footer from "./components/Footer/Footer";
 // import LeftSideBar from "./components/LeftSideBar/LeftSideBar";
 // import logo from "./assets/Elements/logo.png";
 // import Swap from "./components/Swap/Swap";
@@ -35,6 +36,7 @@ function App() {
 				<StateContext.Provider value={{ergoWallet, setErgoWallet, defaultAddress, setDefaultAddress}}>
 					<Header />
 					<BodyContent setIsLoading={setIsLoading} setSwapTransaction={setSwapTransaction} />
+					<Footer />
 					{<div id="overlay">
 						<div id="overlay-background"></div>
 						<div id="overlay-content-wrapper">
