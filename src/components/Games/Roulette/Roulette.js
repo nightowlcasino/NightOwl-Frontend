@@ -29,6 +29,7 @@ const Roulette = () => {
   const [firstSpin, setFirstSpin] = useState(true);
   const [chipSelected, setChipSelected] = useState(100);
   const [totalBet, setTotalBet] = useState(0);
+  const [bets_end, bets_end_toggle] = useState(false);
 
   const [betObject, setBetObject] = useState({
     num_val0: [],
@@ -56,6 +57,7 @@ const Roulette = () => {
     num_val33: [],
     num_val33_36: [],
     num_val36: [],
+    
     num_val0_2_3: [],
     num_val2_3: [],
     num_val2_3_5_6: [],
@@ -318,6 +320,10 @@ const Roulette = () => {
       innerRef.current.setAttribute("data-spinto", randomNumber);
     }, 50);
 
+    setTimeout(() => {
+      bets_end_toggle(true);
+    }, 2000);
+
     setSpinAvailable(false);
 
     //$(".placeholder").remove();
@@ -339,6 +345,10 @@ const Roulette = () => {
       } else {
         color = "black";
       }
+
+      setTimeout(() => {
+        bets_end_toggle(false);
+      }, 3000);
 
       setResultNumber(randomNumber);
       setResultColor(color);
@@ -366,6 +376,18 @@ const Roulette = () => {
     }
   }
 
+  function check_if_zero(number)
+  {
+    if(number != 0)
+    {
+      return "active"
+    }
+    else
+    {
+      return "";
+    }
+  }
+
   function centerOrBetween(index) {
     if (index % 2 === 0) {
       return "center";
@@ -375,7 +397,7 @@ const Roulette = () => {
   }
 
   return (
-    <div className="roulette-wrapper place-bets">
+    <div className={bets_end ? "roulette-wrapper" : "roulette-wrapper bets-end"}>
       <div className="roulette-wheel-content-wrapper">
         <div className="roulette-wheel-content">
           <div className="plate" id="plate">
@@ -761,7 +783,7 @@ const Roulette = () => {
                       <div
                         className={
                           betObject[val].length > 0
-                            ? `inner-row number-center active ${fromNumberToColor(
+                            ? `inner-row number-center ${check_if_zero(val.split("l")[1])} ${fromNumberToColor(
                                 betObject[val][betObject[val].length - 1]
                               )} two-d`
                             : "inner-row number-center"
@@ -770,7 +792,6 @@ const Roulette = () => {
                         onClick={(e) => addBetToObject(e)}
                       ></div>
                     ))}
-
                     <div className="inner-row spacer"></div>
                   </div>
                   <div className="row number-between">
@@ -781,7 +802,7 @@ const Roulette = () => {
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
                                 index
-                              )} active ${fromNumberToColor(
+                              )} ${check_if_zero(val.split("l")[1])} ${fromNumberToColor(
                                 betObject[val][betObject[val].length - 1]
                               )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
@@ -790,7 +811,6 @@ const Roulette = () => {
                         onClick={(e) => addBetToObject(e)}
                       ></div>
                     ))}
-
                     <div className="inner-row spacer"></div>
                   </div>
                   <div className="row number-center">
@@ -810,7 +830,6 @@ const Roulette = () => {
                         onClick={(e) => addBetToObject(e)}
                       ></div>
                     ))}
-
                     <div className="inner-row spacer"></div>
                   </div>
                   <div className="row number-between">
@@ -821,7 +840,7 @@ const Roulette = () => {
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
                                 index
-                              )} active ${fromNumberToColor(
+                              )} ${check_if_zero(val.split("l")[1])} ${fromNumberToColor(
                                 betObject[val][betObject[val].length - 1]
                               )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
@@ -840,7 +859,7 @@ const Roulette = () => {
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
                                 index
-                              )} active ${fromNumberToColor(
+                              )} ${check_if_zero(val.split("l")[1])} ${fromNumberToColor(
                                 betObject[val][betObject[val].length - 1]
                               )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
@@ -960,6 +979,9 @@ const Roulette = () => {
         >
           <span className="btn-label">Spin</span>
         </button>
+        <div id="table-overlay">
+          <div id="table-overlay-text">Alright, thats enough</div>
+        </div>
       </div>
     </div>
   );

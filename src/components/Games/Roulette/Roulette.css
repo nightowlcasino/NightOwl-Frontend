@@ -1,3 +1,8 @@
+:root
+{
+    --roulette-bets-end-transition-time: 0.6s;
+}
+
 .number:nth-child(1) {
     transform: rotateZ(9.7297297297297deg);
 }
@@ -123,19 +128,21 @@
     align-items: center;
     align-content: center;
     flex-direction: column;
-    transition: transform 0.4s ease;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 .roulette-wrapper .roulette-wheel-content-wrapper,
 .roulette-wrapper .roulette-table-content-wrapper
 {
     flex: 50%;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 .roulette-table-content-wrapper
 {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .plate {
@@ -145,7 +152,7 @@
     margin: 12px;
     border-radius: 50%;
     position: relative;
-    /* animation: rotate 24s infinite linear; */
+    animation: rotate 24s infinite linear;
 }
 .plate:after, .plate:before {
     content: '';
@@ -210,7 +217,7 @@
 
 #fuckinginner.default-spin::before
 {
-    /* animation-name: default-ball; */
+    animation-name: default-ball;
     animation-duration: 4s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
@@ -498,7 +505,7 @@
     bottom: 30%;
     left: 30%;
     border-radius: 50%;
-    /* animation: rotate 24s reverse linear infinite; */
+    animation: rotate 24s reverse linear infinite;
     perspective: 2000px;
     z-index: 100;
 }
@@ -626,10 +633,60 @@
     100% { transform: rotateZ(360deg);}
 }
 
+#table-total-bet
+{
+    padding: 20px;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+    background-color: #A739FF;
+    border-radius: 15px;
+    width: 20%;
+    min-width: 200px;
+    margin: 10px auto;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 #table-wrapper
 {
     min-width: 700px;
     max-width: 700px;
+    transition: all var(--roulette-bets-end-transition-time) ease;
+}
+
+.roulette-wrapper #table-overlay
+{
+    visibility: visible;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #343434aa;
+    transition: all 0.4s ease;
+}
+
+.roulette-wrapper.bets-end #table-overlay
+{
+    visibility: hidden;
+    opacity: 0;
+}
+
+#table-overlay #table-overlay-text
+{
+    margin: 0 auto;
+    color: white;
+    background-color: #A739FF;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 #table-wrapper,
@@ -661,15 +718,25 @@
 .table-row
 {
     flex: 100%;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 .table-value
 {
-    padding: 10px 0px;
+    padding: 15px 0px;
     background-color: #A739FF;
-    margin: 5px;
+    margin: 1px;
     min-width: 20px;
     text-align: center;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: all var(--roulette-bets-end-transition-time) ease;
+}
+
+.roulette-wrapper.bets-end .table-value
+{
+    font-weight: bold;
 }
 
 .width-1-3rd
@@ -691,6 +758,7 @@
 {
     flex: 50px;
     max-width: 50px;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 .bottom-table-spacer .table-value
@@ -704,6 +772,7 @@
     flex-direction: row;
     align-items: center;
     align-content: center;
+    transition: flex var(--roulette-bets-end-transition-time) ease;
 }
 
 #left-table .table-value
@@ -712,28 +781,34 @@
     align-content: center;
     align-items: center;
     display: flex;
-    height: calc(100% - 30px);
+    height: calc(100% - 32px);
+    max-height: 118px;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 #left-table .table-value div
 {
     margin: 0 auto;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 #left-table, #right-table
 {
     flex: 50px;
     max-width: 50px;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 #table-numbers
 {
     flex: 1 1 auto;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 #bottom-center-table
 {
     flex: 1 1 auto;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 #numbers-table-wrapper
@@ -741,6 +816,7 @@
     display: flex;
     flex: 1 1 auto;
     position: relative;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 #numbers-overlay
@@ -757,6 +833,7 @@
 {
     flex: calc(100% / 7);
     display: flex;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 #numbers-overlay .row.spacer
@@ -769,6 +846,7 @@
     display: flex;
     flex-direction: column;
     flex: calc(100% / 27);
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 #numbers-overlay .row .inner-row div
@@ -892,6 +970,7 @@
     flex-direction: row;
     align-content: center;
     align-items: center;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 #roulette-table-chips .table-chip-wrapper:hover .table-chip
@@ -914,66 +993,67 @@
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    transition: all 0.4s ease;
+    transition: all var(--roulette-bets-end-transition-time) ease;
     cursor: pointer;
 }
 
-.roulette-wrapper.place-bets .roulette-wheel-content-wrapper, .roulette-wrapper .roulette-table-content-wrapper
+.roulette-wrapper.bets-end .roulette-wheel-content-wrapper, .roulette-wrapper .roulette-table-content-wrapper
 {
     flex: 25% 1;
 }
 
-.roulette-wrapper.place-bets #table-wrapper
+.roulette-wrapper.bets-end #table-wrapper
 {
     max-width: 1200px;
 }
 
-.roulette-wrapper.place-bets .table-value
+.roulette-wrapper.bets-end .table-value
 {
     padding: 25px 10px;
     margin: 3px;
 }
 
-.roulette-wrapper.place-bets #numbers-overlay .row.spacer
+.roulette-wrapper.bets-end #numbers-overlay .row.spacer
 {
     max-height: 15px;
 }
 
-.roulette-wrapper.place-bets #left-table, #right-table
+.roulette-wrapper.bets-end #left-table, .roulette-wrapper.bets-end #right-table
 {
     flex: 70px 1;
     max-width: 71px;
+    max-height: 222px;
 }
 
-.roulette-wrapper.place-bets #numbers-overlay .row .inner-row.spacer
+.roulette-wrapper.bets-end #numbers-overlay .row .inner-row.spacer
 {
     max-width: 10px;
     background-color: transparent;
 }
 
-.roulette-wrapper.place-bets .bottom-table-spacer
+.roulette-wrapper.bets-end .bottom-table-spacer
 {
     flex: 70px 1;
     max-width: 70px;
 }
 
-.roulette-wrapper.place-bets #numbers-overlay
+.roulette-wrapper.bets-end #numbers-overlay
 {
     width: calc(100% - 14px);
     margin: 5px 7px;
 }
 
-.roulette-wrapper.place-bets .roulette-table-content-wrapper
+.roulette-wrapper.bets-end .roulette-table-content-wrapper
 {
     flex: 75%;
 }
 
-.roulette-wrapper.place-bets .roulette-wheel-content-wrapper
+.roulette-wrapper.bets-end .roulette-wheel-content-wrapper
 {
     transform: scale(0.5);
 }
 
-.roulette-wrapper.place-bets #left-table > div:nth-child(1)
+.roulette-wrapper.bets-end #left-table > div:nth-child(1)
 {
     max-height: 166px;
     max-width: 70px;
