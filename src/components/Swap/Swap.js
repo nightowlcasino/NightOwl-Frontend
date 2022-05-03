@@ -49,7 +49,7 @@ function Swap({setIsLoading,setSwapTransaction}) {
 								console.log(`No submitted tx ID`);
 								return null;
 							}
-                            // setIsLoading(false);
+                            setIsLoading(false);
                             setSwapTransaction(txId);
 							console.log(`Transaction submitted - ${txId}`);
 						})
