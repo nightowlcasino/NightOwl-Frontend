@@ -465,17 +465,20 @@
 }
 
 .btn {
-    background: white;
-    border: 1px solid #000000;
-    padding: 0;
-    margin-bottom: 0;
-    width: 350px;
-    padding: 12px;
-    cursor: pointer;
-    color: black;
-    border-radius: 3px;
+    padding: 20px;
     text-align: center;
-    margin: 0 auto;
+    font-size: 20px;
+    color: white;
+    background-image: linear-gradient(to right, #8e0081, #fa008c);
+    border-radius: 15px;
+    min-width: 200px;
+    max-width: 200px;
+    margin: 10px auto;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    border: none;
 }
 
 .btn .btn-label {
@@ -592,11 +595,13 @@
 }
 .color-black {
     /* background-color: black; */
-    background-color: #270D3C !important;
+    /* background-color: #270D3C !important; */
+    background-color: #232225 !important;
 }
 .color-red {
     /* background-color: red; */
-    background-color: #E80F44 !important;
+    /* background-color: #E80F44 !important; */
+    background-color: #bf2125 !important;
 }
 .visuallyhidden {
     position: absolute;
@@ -633,20 +638,68 @@
     100% { transform: rotateZ(360deg);}
 }
 
+#before-table
+{
+    display: flex;
+    flex-direction: row;
+}
+
 #table-total-bet
 {
     padding: 20px;
     text-align: center;
     font-size: 20px;
     color: white;
-    background-color: #A739FF;
+    background-image: linear-gradient(to right, #fa008c, #8e0081);
     border-radius: 15px;
-    width: 20%;
+    flex: 20%;
     min-width: 200px;
-    margin: 10px auto;
+    margin: 10px 5px 10px 0px;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+#table-history
+{
+    padding: 10px 20px;
+    margin: 10px 0px 10px 5px;
+    font-size: 20px;
+    background-color: #8e0081;
+    border-radius: 15px;
+    color: white;
+    flex: 80%;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    max-width: 410px;
+    transition: all var(--roulette-bets-end-transition-time) ease;
+}
+
+.roulette-wrapper.bets-end #table-history
+{
+    max-width: 735px;
+}
+
+#table-history .history-number
+{
+    padding: 10px 10px;
+    border-radius: 10px;
+}
+
+#table-history .history-number.red
+{
+    background-color: #bf2125;
+}
+
+#table-history .history-number.black
+{
+    background-color: #232225;
+}
+
+#table-history .history-spacer
+{
+    padding: 5px;
 }
 
 #table-wrapper
@@ -724,7 +777,7 @@
 .table-value
 {
     padding: 15px 0px;
-    background-color: #A739FF;
+    background-color: #8e0081;
     margin: 1px;
     min-width: 20px;
     text-align: center;
@@ -732,6 +785,116 @@
     -ms-user-select: none;
     user-select: none;
     transition: all var(--roulette-bets-end-transition-time) ease;
+}
+
+.table-value.red
+{
+    background-color: #bf2125;
+}
+
+.table-value.black
+{
+    background-color: #232225;
+}
+
+.table-value.romboid
+{
+    padding: 10px 10px !important;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+.table-value.romboid div
+{
+    width: 40px;
+    height: 40px;
+    transform: rotateZ(45deg);
+    margin: 0 auto;
+}
+
+.table-value.romboid div.red
+{
+    background-color: #bf2125;
+}
+
+.table-value.romboid div.black
+{
+    background-color: #232225;
+}
+
+.table-value.table-filter
+{
+    position: relative;
+}
+
+.table-value.table-filter.romboid .filter-overlay .filter-chip
+{
+    transform: rotateZ(-45deg);
+}
+
+.table-value.table-filter .filter-overlay
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+.table-value.table-filter .filter-overlay .filter-chip
+{
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+    opacity: 0;
+    transition: all var(--roulette-bets-end-transition-time) ease;
+}
+
+.table-value.table-filter.active .filter-overlay .filter-chip
+{
+    opacity: 1 !important;
+    border-radius: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.table-value.table-filter.active.chip-purple .filter-overlay .filter-chip
+{
+    background-image: url(../../../assets/Elements/coin_purple.png);
+}
+
+.table-value.table-filter.active.chip-green .filter-overlay .filter-chip
+{
+    background-image: url(../../../assets/Elements/coin_green.png);
+}
+
+.table-value.table-filter.active.chip-pink .filter-overlay .filter-chip
+{
+    background-image: url(../../../assets/Elements/coin_pink.png);
+}
+
+.table-value.table-filter.active.chip-blue .filter-overlay .filter-chip
+{
+    background-image: url(../../../assets/Elements/coin_blue.png);
+}
+
+.table-value.table-filter.active.chip-black .filter-overlay .filter-chip
+{
+    background-image: url(../../../assets/Elements/coin_black.png);
+}
+
+.table-value.table-filter:hover .filter-overlay .filter-chip
+{
+    background-color: white;
+    opacity: 0.5;
+    border-radius: 50%;
 }
 
 .roulette-wrapper.bets-end .table-value
@@ -803,6 +966,206 @@
 {
     flex: 1 1 auto;
     transition: all var(--roulette-bets-end-transition-time) ease;
+}
+
+#table-numbers.filter-applied .table-value
+{
+    opacity: 0.1;
+}
+
+#table-numbers.first-12 #number-1,
+#table-numbers.first-12 #number-2,
+#table-numbers.first-12 #number-3,
+#table-numbers.first-12 #number-4,
+#table-numbers.first-12 #number-5,
+#table-numbers.first-12 #number-6,
+#table-numbers.first-12 #number-7,
+#table-numbers.first-12 #number-8,
+#table-numbers.first-12 #number-9,
+#table-numbers.first-12 #number-10,
+#table-numbers.first-12 #number-11,
+#table-numbers.first-12 #number-12,
+
+#table-numbers.second-12 #number-13,
+#table-numbers.second-12 #number-14,
+#table-numbers.second-12 #number-15,
+#table-numbers.second-12 #number-16,
+#table-numbers.second-12 #number-17,
+#table-numbers.second-12 #number-18,
+#table-numbers.second-12 #number-19,
+#table-numbers.second-12 #number-20,
+#table-numbers.second-12 #number-21,
+#table-numbers.second-12 #number-22,
+#table-numbers.second-12 #number-23,
+#table-numbers.second-12 #number-24,
+
+#table-numbers.third-12 #number-25,
+#table-numbers.third-12 #number-26,
+#table-numbers.third-12 #number-27,
+#table-numbers.third-12 #number-28,
+#table-numbers.third-12 #number-29,
+#table-numbers.third-12 #number-30,
+#table-numbers.third-12 #number-31,
+#table-numbers.third-12 #number-32,
+#table-numbers.third-12 #number-33,
+#table-numbers.third-12 #number-34,
+#table-numbers.third-12 #number-35,
+#table-numbers.third-12 #number-36,
+
+#table-numbers.first-18 #number-1,
+#table-numbers.first-18 #number-2,
+#table-numbers.first-18 #number-3,
+#table-numbers.first-18 #number-4,
+#table-numbers.first-18 #number-5,
+#table-numbers.first-18 #number-6,
+#table-numbers.first-18 #number-7,
+#table-numbers.first-18 #number-8,
+#table-numbers.first-18 #number-9,
+#table-numbers.first-18 #number-10,
+#table-numbers.first-18 #number-11,
+#table-numbers.first-18 #number-12,
+#table-numbers.first-18 #number-13,
+#table-numbers.first-18 #number-14,
+#table-numbers.first-18 #number-15,
+#table-numbers.first-18 #number-16,
+#table-numbers.first-18 #number-17,
+#table-numbers.first-18 #number-18,
+
+#table-numbers.second-18 #number-19,
+#table-numbers.second-18 #number-20,
+#table-numbers.second-18 #number-21,
+#table-numbers.second-18 #number-22,
+#table-numbers.second-18 #number-23,
+#table-numbers.second-18 #number-24,
+#table-numbers.second-18 #number-25,
+#table-numbers.second-18 #number-26,
+#table-numbers.second-18 #number-27,
+#table-numbers.second-18 #number-28,
+#table-numbers.second-18 #number-29,
+#table-numbers.second-18 #number-30,
+#table-numbers.second-18 #number-31,
+#table-numbers.second-18 #number-32,
+#table-numbers.second-18 #number-33,
+#table-numbers.second-18 #number-34,
+#table-numbers.second-18 #number-35,
+#table-numbers.second-18 #number-36,
+
+#table-numbers.even #number-2,
+#table-numbers.even #number-4,
+#table-numbers.even #number-6,
+#table-numbers.even #number-8,
+#table-numbers.even #number-10,
+#table-numbers.even #number-12,
+#table-numbers.even #number-14,
+#table-numbers.even #number-16,
+#table-numbers.even #number-18,
+#table-numbers.even #number-20,
+#table-numbers.even #number-22,
+#table-numbers.even #number-24,
+#table-numbers.even #number-26,
+#table-numbers.even #number-28,
+#table-numbers.even #number-30,
+#table-numbers.even #number-32,
+#table-numbers.even #number-34,
+#table-numbers.even #number-36,
+
+#table-numbers.odd #number-1,
+#table-numbers.odd #number-3,
+#table-numbers.odd #number-5,
+#table-numbers.odd #number-7,
+#table-numbers.odd #number-9,
+#table-numbers.odd #number-11,
+#table-numbers.odd #number-13,
+#table-numbers.odd #number-15,
+#table-numbers.odd #number-17,
+#table-numbers.odd #number-19,
+#table-numbers.odd #number-21,
+#table-numbers.odd #number-23,
+#table-numbers.odd #number-25,
+#table-numbers.odd #number-27,
+#table-numbers.odd #number-29,
+#table-numbers.odd #number-31,
+#table-numbers.odd #number-33,
+#table-numbers.odd #number-35,
+
+#table-numbers.filter-color-red #number-1,
+#table-numbers.filter-color-red #number-3,
+#table-numbers.filter-color-red #number-5,
+#table-numbers.filter-color-red #number-7,
+#table-numbers.filter-color-red #number-9,
+#table-numbers.filter-color-red #number-12,
+#table-numbers.filter-color-red #number-14,
+#table-numbers.filter-color-red #number-16,
+#table-numbers.filter-color-red #number-18,
+#table-numbers.filter-color-red #number-19,
+#table-numbers.filter-color-red #number-21,
+#table-numbers.filter-color-red #number-23,
+#table-numbers.filter-color-red #number-25,
+#table-numbers.filter-color-red #number-27,
+#table-numbers.filter-color-red #number-30,
+#table-numbers.filter-color-red #number-32,
+#table-numbers.filter-color-red #number-34,
+#table-numbers.filter-color-red #number-36,
+
+#table-numbers.filter-color-black #number-2,
+#table-numbers.filter-color-black #number-4,
+#table-numbers.filter-color-black #number-6,
+#table-numbers.filter-color-black #number-8,
+#table-numbers.filter-color-black #number-10,
+#table-numbers.filter-color-black #number-11,
+#table-numbers.filter-color-black #number-13,
+#table-numbers.filter-color-black #number-15,
+#table-numbers.filter-color-black #number-17,
+#table-numbers.filter-color-black #number-20,
+#table-numbers.filter-color-black #number-22,
+#table-numbers.filter-color-black #number-24,
+#table-numbers.filter-color-black #number-26,
+#table-numbers.filter-color-black #number-28,
+#table-numbers.filter-color-black #number-29,
+#table-numbers.filter-color-black #number-31,
+#table-numbers.filter-color-black #number-33,
+#table-numbers.filter-color-black #number-35,
+
+#table-numbers.first-row #number-3,
+#table-numbers.first-row #number-6,
+#table-numbers.first-row #number-9,
+#table-numbers.first-row #number-12,
+#table-numbers.first-row #number-15,
+#table-numbers.first-row #number-18,
+#table-numbers.first-row #number-21,
+#table-numbers.first-row #number-24,
+#table-numbers.first-row #number-27,
+#table-numbers.first-row #number-30,
+#table-numbers.first-row #number-33,
+#table-numbers.first-row #number-36,
+
+#table-numbers.second-row #number-2,
+#table-numbers.second-row #number-5,
+#table-numbers.second-row #number-8,
+#table-numbers.second-row #number-11,
+#table-numbers.second-row #number-14,
+#table-numbers.second-row #number-17,
+#table-numbers.second-row #number-20,
+#table-numbers.second-row #number-23,
+#table-numbers.second-row #number-26,
+#table-numbers.second-row #number-29,
+#table-numbers.second-row #number-32,
+#table-numbers.second-row #number-35,
+
+#table-numbers.third-row #number-1,
+#table-numbers.third-row #number-4,
+#table-numbers.third-row #number-7,
+#table-numbers.third-row #number-10,
+#table-numbers.third-row #number-13,
+#table-numbers.third-row #number-16,
+#table-numbers.third-row #number-19,
+#table-numbers.third-row #number-22,
+#table-numbers.third-row #number-25,
+#table-numbers.third-row #number-28,
+#table-numbers.third-row #number-31,
+#table-numbers.third-row #number-34
+{
+    opacity: 1;
 }
 
 #bottom-center-table
