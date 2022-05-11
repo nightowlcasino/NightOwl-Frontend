@@ -142,7 +142,7 @@ function Swap({setIsLoading,setSwapTransaction}) {
                             <div id="swap-button">
                                 <button onClick={swapTokens}>Swap</button>
                             </div>
-                            <div id="swap-slippage">Slippage <span id="swap-slippage-value">0.5</span>%</div>
+                            {/* <div id="swap-slippage">Slippage <span id="swap-slippage-value">0.5</span>%</div> */}
                         </div>
                     </form>
                 </div>
