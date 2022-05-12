@@ -2,6 +2,7 @@
   "name": "nightowl-react",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://127.0.0.1:8088",
   "dependencies": {
     "@ergolabs/ergo-sdk": "^0.1.28",
     "@headlessui/react": "^1.5.0",
