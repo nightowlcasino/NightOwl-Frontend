@@ -697,10 +697,17 @@
     background-color: #232225;
 }
 
+#table-history .history-number.green
+{
+    background-color: #007907;
+}
+
 #table-history .history-spacer
 {
     padding: 5px;
 }
+
+
 
 #table-wrapper
 {
@@ -795,6 +802,12 @@
 .table-value.black
 {
     background-color: #232225;
+}
+
+.table-value.green {
+    background-color: #007907;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
 
 .table-value.romboid
@@ -1514,4 +1527,14 @@
         align-content: center;
         align-items: center;
     }
+
+    .bottom-buttons-container {
+        margin: 0 auto;
+    }
+
+    .buttons-temporal-spacer {
+        padding: 20px;
+    }
+
+    
 }

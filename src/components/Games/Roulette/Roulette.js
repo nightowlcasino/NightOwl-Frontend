@@ -11,54 +11,9 @@ import coin_50k from "../../../assets/Elements/coin_50k.png";
 const Roulette = () => {
   var red = [32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3];
 
-  var maskDefault = "Place Your Bets";
-  var overlay_default = "Alright, thats enough";
+  var overlay_default = "No more bets";
   var timer = 9000;
-  
-  const [overlay_string, set_overlay_string] = useState(overlay_default);
-  const [maskText, setMaskText] = useState(maskDefault);
-  const [spinAvailable, setSpinAvailable] = useState(true);
-  const [revealData, setRevealData] = useState(false);
-  const [resultNumber, setResultNumber] = useState(null);
-  const [resultColor, setResultColor] = useState(null);
-  const [randomNumber, setRandomNumber] = useState(null);
-  const [firstSpin, setFirstSpin] = useState(true);
-  const [chipSelected, setChipSelected] = useState(100);
-  const [totalBet, setTotalBet] = useState(0);
-  const [bets_end, bets_end_toggle] = useState(false);
-
-  const [table_filter_value, table_filter_set] = useState("");
-
-  const [filter_first_12, filter_first_12_set] = useState(false);
-  const [filter_first_12_value, filter_first_12_set_value] = useState(0);
-  const [filter_second_12, filter_second_12_set] = useState(false);
-  const [filter_second_12_value, filter_second_12_set_value] = useState(0);
-  const [filter_third_12, filter_third_12_set] = useState(false);
-  const [filter_third_12_value, filter_third_12_set_value] = useState(0);
-
-  const [filter_first_18, filter_first_18_set] = useState(false);
-  const [filter_first_18_value, filter_first_18_set_value] = useState(0);
-  const [filter_second_18, filter_second_18_set] = useState(false);
-  const [filter_second_18_value, filter_second_18_set_value] = useState(0);
-
-  const [filter_even, filter_even_set] = useState(false);
-  const [filter_even_value, filter_even_set_value] = useState(0);
-  const [filter_odd, filter_odd_set] = useState(false);
-  const [filter_odd_value, filter_odd_set_value] = useState(0);
-
-  const [filter_red, filter_red_set] = useState(false);
-  const [filter_red_value, filter_red_set_value] = useState(0);
-  const [filter_black, filter_black_set] = useState(false);
-  const [filter_black_value, filter_black_set_value] = useState(0);
-
-  const [filter_first_row, filter_first_row_set] = useState(false);
-  const [filter_first_row_value, filter_first_row_set_value] = useState(0);
-  const [filter_second_row, filter_second_row_set] = useState(false);
-  const [filter_second_row_value, filter_second_row_set_value] = useState(0);
-  const [filter_third_row, filter_third_row_set] = useState(false);
-  const [filter_third_row_value, filter_third_row_set_value] = useState(0);
-
-  const [betObject, setBetObject] = useState({
+  let betObjectInitialValue = {
     num_val0: [],
     num_val0_3: [],
     num_val3: [],
@@ -84,7 +39,7 @@ const Roulette = () => {
     num_val33: [],
     num_val33_36: [],
     num_val36: [],
-    
+
     num_val0_2_3: [],
     num_val2_3: [],
     num_val2_3_5_6: [],
@@ -184,7 +139,39 @@ const Roulette = () => {
     num_val31: [],
     num_val31_34: [],
     num_val34: [],
-  });
+
+    num_val1st: [],
+    num_val2nd: [],
+    num_val3rd: [],
+
+    num_val_first_12: [],
+    num_val_second_12: [],
+    num_val_third_12: [],
+
+    num_val_first_18: [],
+    num_val_second_18: [],
+
+    num_val_red: [],
+    num_val_black: [],
+
+    num_val_even: [],
+    num_val_odd: [],
+  };
+  const [overlay_string, set_overlay_string] = useState(overlay_default);
+  const [spinAvailable, setSpinAvailable] = useState(true);
+  const [revealData, setRevealData] = useState(false);
+  const [resultNumber, setResultNumber] = useState(null);
+  const [resultColor, setResultColor] = useState(null);
+  const [randomNumber, setRandomNumber] = useState(null);
+  const [firstSpin, setFirstSpin] = useState(true);
+  const [chipSelected, setChipSelected] = useState(100);
+  const [totalBet, setTotalBet] = useState(0);
+  const [betObject, setBetObject] = useState(betObjectInitialValue);
+  const [latestResults, setLatestResults] = useState([]);
+  const [latestBets, setLatestBets] = useState([]);
+  const [bets_end, bets_end_toggle] = useState(false);
+  const [table_filter_value, table_filter_set] = useState("");
+
   var arrayWithNumVals = [
     "num_val0",
     "num_val0_3",
@@ -326,13 +313,44 @@ const Roulette = () => {
 
   function addBetToObject(e) {
     var numbers = e.target.getAttribute("num-val");
-    let currentArrayCopy = betObject.num_val3.slice();
+    console.log(e.target);
+    console.log(numbers);
+    let currentArrayCopy = betObject[`num_val${numbers}`].slice();
     currentArrayCopy.push(chipSelected);
     setBetObject({
       ...betObject,
       [`num_val${numbers}`]: currentArrayCopy, //betObject[`num_val${numbers}`] + chipSelected,
     });
+    addLatestBet(numbers);
     setTotalBet(totalBet + chipSelected);
+  }
+
+  function resetBets() {
+    setBetObject(betObjectInitialValue);
+    setTotalBet(0);
+  }
+
+  function addLastResult(result) {
+    let latestResultsCopy = latestResults.slice();
+    latestResultsCopy.unshift(result);
+    setLatestResults(latestResultsCopy);
+  }
+
+  function addLatestBet(bet) {
+    let latestBetsCopy = latestBets.slice();
+    latestBetsCopy.push(bet);
+    setLatestBets(latestBetsCopy);
+  }
+
+  function fromNumberToColor(number) {
+    console.log("el numero es" + number);
+    if (number === 0) {
+      return "green";
+    } else if (red.indexOf(number) !== -1) {
+      return "red";
+    } else {
+      return "black";
+    }
   }
   function spinTheWheel() {
     innerRef.current.setAttribute("data-spinto", "");
@@ -353,15 +371,11 @@ const Roulette = () => {
 
     setSpinAvailable(false);
 
-    //$(".placeholder").remove();
-
-    setMaskText("No more bets");
-
     set_overlay_string(overlay_default);
 
-    setTimeout(() => {
-      setMaskText(maskDefault);
-    }, timer + 540);
+    // setTimeout(() => {
+    //   setMaskText(maskDefault);
+    // }, timer + 540);
 
     // remove the disabled attribute when the ball has stopped
     setTimeout(() => {
@@ -375,13 +389,15 @@ const Roulette = () => {
         color = "black";
       }
 
-      setTimeout(() => {
-        set_overlay_string("WON ? LOST");
-      }, 400);
+      // setTimeout(() => {
+      //   set_overlay_string("");
+      // }, 400);
 
       setTimeout(() => {
         bets_end_toggle(false);
-      }, 5000);
+        resetBets();
+        addLastResult(randomNumber);
+      }, 4000);
 
       setResultNumber(randomNumber);
       setResultColor(color);
@@ -394,7 +410,24 @@ const Roulette = () => {
     }, timer * 0.7);
   }
 
-  function fromNumberToColor(number) {
+  function globalUndo() {
+    console.log("amaiiiii");
+    let lastBet = latestBets.pop();
+    console.log(lastBet);
+    if (lastBet === undefined) {
+      return;
+    }
+
+    let currentBetObjectCopy = betObject[`num_val${lastBet}`].slice();
+    let chipValueUndone = currentBetObjectCopy.pop();
+    setBetObject({
+      ...betObject,
+      [`num_val${lastBet}`]: currentBetObjectCopy,
+    });
+    setTotalBet(totalBet - chipValueUndone);
+  }
+
+  function fromChipValueToColor(number) {
     switch (number) {
       case 100:
         return "purple";
@@ -411,100 +444,12 @@ const Roulette = () => {
     }
   }
 
-  function check_if_zero(number)
-  {
-    if(number != 0)
-    {
-      return "active"
-    }
-    else
-    {
+  function check_if_zero(number) {
+    if (number != 0) {
+      return "active";
+    } else {
       return "";
     }
-  }
-
-  function filter_first_12_click()
-  {
-    filter_first_12_set(true);
-    filter_first_12_set_value(chipSelected);
-    setTotalBet(totalBet + chipSelected);
-  }
-
-  function filter_second_12_click()
-  {
-    filter_second_12_set(true);
-    filter_second_12_set_value(chipSelected);
-    setTotalBet(totalBet + chipSelected);
-  }
-
-  function filter_third_12_click()
-  {
-    filter_third_12_set(true);
-    filter_third_12_set_value(chipSelected);
-    setTotalBet(totalBet + chipSelected);
-  }
-
-  function filter_first_18_click()
-  {
-    filter_first_18_set(true);
-    filter_first_18_set_value(chipSelected);
-    setTotalBet(totalBet + chipSelected);
-  }
-
-  function filter_second_18_click()
-  {
-    filter_second_18_set(true);
-    filter_second_18_set_value(chipSelected);
-    setTotalBet(totalBet + chipSelected);
-  }
-
-  function filter_even_click()
-  {
-    filter_even_set(true);
-    filter_even_set_value(chipSelected);
-    setTotalBet(totalBet + chipSelected);
-  }
-
-  function filter_odd_click()
-  {
-    filter_odd_set(true);
-    filter_odd_set_value(chipSelected);
-    setTotalBet(totalBet + chipSelected);
-  }
-
-  function filter_red_click()
-  {
-    filter_red_set(true);
-    filter_red_set_value(chipSelected);
-    setTotalBet(totalBet + chipSelected);
-  }
-
-  function filter_black_click()
-  {
-    filter_black_set(true);
-    filter_black_set_value(chipSelected);
-    setTotalBet(totalBet + chipSelected);
-  }
-
-  function filter_first_row_click()
-  {
-    filter_first_row_set(true);
-    filter_first_row_set_value(chipSelected);
-    setTotalBet(totalBet + chipSelected);
-  }
-
-  function filter_second_row_click()
-  {
-    filter_second_row_set(true);
-    filter_second_row_set_value(chipSelected);
-    setTotalBet(totalBet + chipSelected);
-  }
-
-  function filter_third_row_click()
-  {
-    filter_third_row_set(true);
-    filter_third_row_set_value(chipSelected);
-    setTotalBet(totalBet + chipSelected);
   }
 
   function centerOrBetween(index) {
@@ -516,7 +461,9 @@ const Roulette = () => {
   }
 
   return (
-    <div className={bets_end ? "roulette-wrapper" : "roulette-wrapper bets-end"}>
+    <div
+      className={bets_end ? "roulette-wrapper" : "roulette-wrapper bets-end"}
+    >
       <div className="roulette-wheel-content-wrapper">
         <div className="roulette-wheel-content">
           <div className="plate" id="plate">
@@ -752,7 +699,6 @@ const Roulette = () => {
 
             <div className={revealData ? "data reveal" : "data"}>
               <div className="data-inner">
-                <div className="mask">{maskText}</div>
                 <div
                   className="result"
                   style={{ backgroundColor: resultColor }}
@@ -771,42 +717,14 @@ const Roulette = () => {
             Total bet <span>{totalBet} OWL</span>
           </div>
           <div id="table-history">
-            <div className="history-number red">1</div>
-            <div className="history-spacer"></div>
-            <div className="history-number black">2</div>
-            <div className="history-spacer"></div>
-            <div className="history-number red">3</div>
-            <div className="history-spacer"></div>
-            <div className="history-number black">4</div>
-            <div className="history-spacer"></div>
-            <div className="history-number red">5</div>
-            <div className="history-spacer"></div>
-            <div className="history-number black">6</div>
-            <div className="history-spacer"></div>
-            <div className="history-number red">7</div>
-            <div className="history-spacer"></div>
-            <div className="history-number black">8</div>
-            <div className="history-spacer"></div>
-            <div className="history-number red">9</div>
-            <div className="history-spacer"></div>
-            <div className="history-number black">10</div>
-            <div className="history-spacer"></div>
-            <div className="history-number red">9</div>
-            <div className="history-spacer"></div>
-            <div className="history-number black">10</div>
-            <div className="history-spacer"></div>
-            <div className="history-number red">9</div>
-            <div className="history-spacer"></div>
-            <div className="history-number black">10</div>
-            <div className="history-spacer"></div>
-            <div className="history-number red">9</div>
-            <div className="history-spacer"></div>
-            <div className="history-number black">10</div>
-            <div className="history-spacer"></div>
-            <div className="history-number red">9</div>
-            <div className="history-spacer"></div>
-            <div className="history-number black">10</div>
-            <div className="history-spacer"></div>
+            {latestResults.map((result, index) => (
+              <>
+                <div className={`history-number ${fromNumberToColor(result)}`}>
+                  {result}
+                </div>
+                <div className="history-spacer"></div>
+              </>
+            ))}
           </div>
         </div>
         <div className="roulette-table-content" style={{ color: "white" }}>
@@ -814,7 +732,7 @@ const Roulette = () => {
             <div id="top-row">
               <div id="numbers-table-wrapper">
                 <div id="left-table">
-                  <div className="table-value">
+                  <div className="table-value green">
                     <div>0</div>
                   </div>
                 </div>
@@ -823,75 +741,138 @@ const Roulette = () => {
                     <div id="number-3" className="table-value width-1-12th red">
                       3
                     </div>
-                    <div id="number-6" className="table-value width-1-12th black">
+                    <div
+                      id="number-6"
+                      className="table-value width-1-12th black"
+                    >
                       6
                     </div>
                     <div id="number-9" className="table-value width-1-12th red">
                       9
                     </div>
-                    <div id="number-12" className="table-value width-1-12th red">
+                    <div
+                      id="number-12"
+                      className="table-value width-1-12th red"
+                    >
                       12
                     </div>
-                    <div id="number-15" className="table-value width-1-12th black">
+                    <div
+                      id="number-15"
+                      className="table-value width-1-12th black"
+                    >
                       15
                     </div>
-                    <div id="number-18" className="table-value width-1-12th red">
+                    <div
+                      id="number-18"
+                      className="table-value width-1-12th red"
+                    >
                       18
                     </div>
-                    <div id="number-21" className="table-value width-1-12th red">
+                    <div
+                      id="number-21"
+                      className="table-value width-1-12th red"
+                    >
                       21
                     </div>
-                    <div id="number-24" className="table-value width-1-12th black">
+                    <div
+                      id="number-24"
+                      className="table-value width-1-12th black"
+                    >
                       24
                     </div>
-                    <div id="number-27" className="table-value width-1-12th red">
+                    <div
+                      id="number-27"
+                      className="table-value width-1-12th red"
+                    >
                       27
                     </div>
-                    <div id="number-30" className="table-value width-1-12th red">
+                    <div
+                      id="number-30"
+                      className="table-value width-1-12th red"
+                    >
                       30
                     </div>
-                    <div id="number-33" className="table-value width-1-12th black">
+                    <div
+                      id="number-33"
+                      className="table-value width-1-12th black"
+                    >
                       33
                     </div>
-                    <div id="number-36" className="table-value width-1-12th red">
+                    <div
+                      id="number-36"
+                      className="table-value width-1-12th red"
+                    >
                       36
                     </div>
                   </div>
                   <div id="second-row" className="table-row">
-                    <div id="number-2" className="table-value width-1-12th black">
+                    <div
+                      id="number-2"
+                      className="table-value width-1-12th black"
+                    >
                       2
                     </div>
                     <div id="number-5" className="table-value width-1-12th red">
                       5
                     </div>
-                    <div id="number-8" className="table-value width-1-12th black">
+                    <div
+                      id="number-8"
+                      className="table-value width-1-12th black"
+                    >
                       8
                     </div>
-                    <div id="number-11" className="table-value width-1-12th black">
+                    <div
+                      id="number-11"
+                      className="table-value width-1-12th black"
+                    >
                       11
                     </div>
-                    <div id="number-14" className="table-value width-1-12th red">
+                    <div
+                      id="number-14"
+                      className="table-value width-1-12th red"
+                    >
                       14
                     </div>
-                    <div id="number-17" className="table-value width-1-12th black">
+                    <div
+                      id="number-17"
+                      className="table-value width-1-12th black"
+                    >
                       17
                     </div>
-                    <div id="number-20" className="table-value width-1-12th black">
+                    <div
+                      id="number-20"
+                      className="table-value width-1-12th black"
+                    >
                       20
                     </div>
-                    <div id="number-23" className="table-value width-1-12th red">
+                    <div
+                      id="number-23"
+                      className="table-value width-1-12th red"
+                    >
                       23
                     </div>
-                    <div id="number-26" className="table-value width-1-12th black">
+                    <div
+                      id="number-26"
+                      className="table-value width-1-12th black"
+                    >
                       26
                     </div>
-                    <div id="number-29" className="table-value width-1-12th black">
+                    <div
+                      id="number-29"
+                      className="table-value width-1-12th black"
+                    >
                       29
                     </div>
-                    <div id="number-32" className="table-value width-1-12th red">
+                    <div
+                      id="number-32"
+                      className="table-value width-1-12th red"
+                    >
                       32
                     </div>
-                    <div id="number-35" className="table-value width-1-12th black">
+                    <div
+                      id="number-35"
+                      className="table-value width-1-12th black"
+                    >
                       35
                     </div>
                   </div>
@@ -899,37 +880,67 @@ const Roulette = () => {
                     <div id="number-1" className="table-value width-1-12th red">
                       1
                     </div>
-                    <div id="number-4" className="table-value width-1-12th black">
+                    <div
+                      id="number-4"
+                      className="table-value width-1-12th black"
+                    >
                       4
                     </div>
                     <div id="number-7" className="table-value width-1-12th red">
                       7
                     </div>
-                    <div id="number-10" className="table-value width-1-12th black">
+                    <div
+                      id="number-10"
+                      className="table-value width-1-12th black"
+                    >
                       10
                     </div>
-                    <div id="number-13" className="table-value width-1-12th black">
+                    <div
+                      id="number-13"
+                      className="table-value width-1-12th black"
+                    >
                       13
                     </div>
-                    <div id="number-16" className="table-value width-1-12th red">
+                    <div
+                      id="number-16"
+                      className="table-value width-1-12th red"
+                    >
                       16
                     </div>
-                    <div id="number-19" className="table-value width-1-12th red">
+                    <div
+                      id="number-19"
+                      className="table-value width-1-12th red"
+                    >
                       19
                     </div>
-                    <div id="number-22" className="table-value width-1-12th black">
+                    <div
+                      id="number-22"
+                      className="table-value width-1-12th black"
+                    >
                       22
                     </div>
-                    <div id="number-25" className="table-value width-1-12th red">
+                    <div
+                      id="number-25"
+                      className="table-value width-1-12th red"
+                    >
                       25
                     </div>
-                    <div id="number-28" className="table-value width-1-12th black">
+                    <div
+                      id="number-28"
+                      className="table-value width-1-12th black"
+                    >
                       28
                     </div>
-                    <div id="number-31" className="table-value width-1-12th black">
+                    <div
+                      id="number-31"
+                      className="table-value width-1-12th black"
+                    >
                       31
                     </div>
-                    <div id="number-34" className="table-value width-1-12th red">
+                    <div
+                      id="number-34"
+                      className="table-value width-1-12th red"
+                    >
                       34
                     </div>
                   </div>
@@ -943,8 +954,10 @@ const Roulette = () => {
                         className={
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
-                              index
-                            )} ${check_if_zero(val.split("l")[1])} ${fromNumberToColor(
+                                index
+                              )} ${check_if_zero(
+                                val.split("l")[1]
+                              )} ${fromChipValueToColor(
                                 betObject[val][betObject[val].length - 1]
                               )} two-d`
                             : "inner-row number-center"
@@ -963,7 +976,9 @@ const Roulette = () => {
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
                                 index
-                              )} ${check_if_zero(val.split("l")[1])} ${fromNumberToColor(
+                              )} ${check_if_zero(
+                                val.split("l")[1]
+                              )} ${fromChipValueToColor(
                                 betObject[val][betObject[val].length - 1]
                               )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
@@ -982,7 +997,7 @@ const Roulette = () => {
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
                                 index
-                              )} active ${fromNumberToColor(
+                              )} active ${fromChipValueToColor(
                                 betObject[val][betObject[val].length - 1]
                               )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
@@ -1001,7 +1016,9 @@ const Roulette = () => {
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
                                 index
-                              )} ${check_if_zero(val.split("l")[1])} ${fromNumberToColor(
+                              )} ${check_if_zero(
+                                val.split("l")[1]
+                              )} ${fromChipValueToColor(
                                 betObject[val][betObject[val].length - 1]
                               )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
@@ -1020,7 +1037,9 @@ const Roulette = () => {
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
                                 index
-                              )} ${check_if_zero(val.split("l")[1])} ${fromNumberToColor(
+                              )} ${check_if_zero(
+                                val.split("l")[1]
+                              )} ${fromChipValueToColor(
                                 betObject[val][betObject[val].length - 1]
                               )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
@@ -1035,9 +1054,78 @@ const Roulette = () => {
                 </div>
               </div>
               <div id="right-table">
-                <div onMouseEnter={() => table_filter_set("filter-applied first-row")} onMouseLeave={() => table_filter_set("")} onClick={() => filter_first_row_click()} className={filter_first_row ? `table-value table-filter width-1-3rd chip-${fromNumberToColor(filter_first_row_value)} active` : "table-value table-filter width-1-3rd"}><div>1st</div><div className="filter-overlay"><div className="filter-chip"></div></div></div>
-                <div onMouseEnter={() => table_filter_set("filter-applied second-row")} onMouseLeave={() => table_filter_set("")} onClick={() => filter_second_row_click()} className={filter_second_row ? `table-value table-filter width-1-3rd chip-${fromNumberToColor(filter_second_row_value)} active` : "table-value table-filter width-1-3rd"}><div>2nd</div><div className="filter-overlay"><div className="filter-chip"></div></div></div>
-                <div onMouseEnter={() => table_filter_set("filter-applied third-row")} onMouseLeave={() => table_filter_set("")} onClick={() => filter_third_row_click()} className={filter_third_row ? `table-value table-filter width-1-3rd chip-${fromNumberToColor(filter_third_row_value)} active` : "table-value table-filter width-1-3rd"}><div>3rd</div><div className="filter-overlay"><div className="filter-chip"></div></div></div>
+                <div
+                  style={{
+                    borderTopRightRadius: "8px",
+                  }}
+                  onMouseEnter={() =>
+                    table_filter_set("filter-applied first-row")
+                  }
+                  onMouseLeave={() => table_filter_set("")}
+                  className={
+                    betObject.num_val1st.length > 0
+                      ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
+                          betObject.num_val1st[betObject.num_val1st.length - 1]
+                        )} active`
+                      : "table-value table-filter width-1-3rd"
+                  }
+                >
+                  <div>1st</div>
+                  <div className="filter-overlay">
+                    <div
+                      className="filter-chip"
+                      num-val="1st"
+                      onClick={(e) => addBetToObject(e)}
+                    ></div>
+                  </div>
+                </div>
+                <div
+                  onMouseEnter={() =>
+                    table_filter_set("filter-applied second-row")
+                  }
+                  onMouseLeave={() => table_filter_set("")}
+                  className={
+                    betObject.num_val2nd.length > 0
+                      ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
+                          betObject.num_val2nd[betObject.num_val2nd.length - 1]
+                        )} active`
+                      : "table-value table-filter width-1-3rd"
+                  }
+                >
+                  <div>2nd</div>
+                  <div className="filter-overlay">
+                    <div
+                      className="filter-chip"
+                      num-val="2nd"
+                      onClick={(e) => addBetToObject(e)}
+                    ></div>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    borderBottomRightRadius: "8px",
+                  }}
+                  onMouseEnter={() =>
+                    table_filter_set("filter-applied third-row")
+                  }
+                  onMouseLeave={() => table_filter_set("")}
+                  className={
+                    betObject.num_val3rd.length > 0
+                      ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
+                          betObject.num_val3rd[betObject.num_val3rd.length - 1]
+                        )} active`
+                      : "table-value table-filter width-1-3rd"
+                  }
+                >
+                  <div>3rd</div>
+                  <div className="filter-overlay">
+                    <div
+                      className="filter-chip"
+                      num-val="3rd"
+                      onClick={(e) => addBetToObject(e)}
+                    ></div>
+                  </div>
+                </div>
               </div>
             </div>
             <div id="bottom-row">
@@ -1046,17 +1134,222 @@ const Roulette = () => {
               </div>
               <div id="bottom-center-table">
                 <div id="center-top-row" className="table-row">
-                  <div onMouseEnter={() => table_filter_set("filter-applied first-12")} onMouseLeave={() => table_filter_set("")} onClick={() => filter_first_12_click()} className={filter_first_12 ? `table-value table-filter width-1-3rd chip-${fromNumberToColor(filter_first_12_value)} active` : "table-value table-filter width-1-3rd"}><div>1st 12</div><div className="filter-overlay"><div className="filter-chip"></div></div></div>
-                  <div onMouseEnter={() => table_filter_set("filter-applied second-12")} onMouseLeave={() => table_filter_set("")} onClick={() => filter_second_12_click()} className={filter_second_12 ? `table-value table-filter width-1-3rd chip-${fromNumberToColor(filter_second_12_value)} active` : "table-value table-filter width-1-3rd"}><div>2nd 12</div><div className="filter-overlay"><div className="filter-chip"></div></div></div>
-                  <div onMouseEnter={() => table_filter_set("filter-applied third-12")} onMouseLeave={() => table_filter_set("")} onClick={() => filter_third_12_click()} className={filter_third_12 ? `table-value table-filter width-1-3rd chip-${fromNumberToColor(filter_third_12_value)} active` : "table-value table-filter width-1-3rd"}><div>3rd 12</div><div className="filter-overlay"><div className="filter-chip"></div></div></div>
+                  <div
+                    onMouseEnter={() =>
+                      table_filter_set("filter-applied first-12")
+                    }
+                    onMouseLeave={() => table_filter_set("")}
+                    className={
+                      betObject.num_val_first_12.length > 0
+                        ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
+                            betObject.num_val_first_12[
+                              betObject.num_val_first_12.length - 1
+                            ]
+                          )} active`
+                        : "table-value table-filter width-1-3rd"
+                    }
+                  >
+                    <div>1st 12</div>
+                    <div className="filter-overlay">
+                      <div
+                        className="filter-chip"
+                        num-val="_first_12"
+                        onClick={(e) => addBetToObject(e)}
+                      ></div>
+                    </div>
+                  </div>
+                  <div
+                    onMouseEnter={() =>
+                      table_filter_set("filter-applied second-12")
+                    }
+                    onMouseLeave={() => table_filter_set("")}
+                    className={
+                      betObject.num_val_second_12.length > 0
+                        ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
+                            betObject.num_val_second_12[
+                              betObject.num_val_second_12.length - 1
+                            ]
+                          )} active`
+                        : "table-value table-filter width-1-3rd"
+                    }
+                  >
+                    <div>2nd 12</div>
+                    <div className="filter-overlay">
+                      <div
+                        className="filter-chip"
+                        num-val="_second_12"
+                        onClick={(e) => addBetToObject(e)}
+                      ></div>
+                    </div>
+                  </div>
+                  <div
+                    onMouseEnter={() =>
+                      table_filter_set("filter-applied third-12")
+                    }
+                    onMouseLeave={() => table_filter_set("")}
+                    className={
+                      betObject.num_val_third_12.length > 0
+                        ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
+                            betObject.num_val_third_12[
+                              betObject.num_val_third_12.length - 1
+                            ]
+                          )} active`
+                        : "table-value table-filter width-1-3rd"
+                    }
+                  >
+                    <div>3rd 12</div>
+                    <div className="filter-overlay">
+                      <div
+                        className="filter-chip"
+                        num-val="_third_12"
+                        onClick={(e) => addBetToObject(e)}
+                      ></div>
+                    </div>
+                  </div>
                 </div>
                 <div id="center-bottom-row" className="table-row">
-                  <div onMouseEnter={() => table_filter_set("filter-applied first-18")} onMouseLeave={() => table_filter_set("")} onClick={() => filter_first_18_click()} className={filter_first_18 ? `table-value table-filter width-1-6th chip-${fromNumberToColor(filter_first_18_value)} active` : "table-value table-filter width-1-6th"}><div>1st 18</div><div className="filter-overlay"><div className="filter-chip"></div></div></div>
-                  <div onMouseEnter={() => table_filter_set("filter-applied even")} onMouseLeave={() => table_filter_set("")} onClick={() => filter_even_click()} className={filter_even ? `table-value table-filter width-1-6th chip-${fromNumberToColor(filter_even_value)} active` : "table-value table-filter width-1-6th"}><div>Even</div><div className="filter-overlay"><div className="filter-chip"></div></div></div>
-                  <div onMouseEnter={() => table_filter_set("filter-applied filter-color-red")} onMouseLeave={() => table_filter_set("")} onClick={() => filter_red_click()} className={filter_red ? `table-value table-filter width-1-6th chip-${fromNumberToColor(filter_red_value)} active romboid` : "table-value table-filter width-1-6th romboid"}><div className="red"></div><div className="filter-overlay"><div className="filter-chip"></div></div></div>
-                  <div onMouseEnter={() => table_filter_set("filter-applied filter-color-black")} onMouseLeave={() => table_filter_set("")} onClick={() => filter_black_click()} className={filter_black ? `table-value table-filter width-1-6th chip-${fromNumberToColor(filter_black_value)} active romboid` : "table-value table-filter width-1-6th romboid"}><div className="black"></div><div className="filter-overlay"><div className="filter-chip"></div></div></div>
-                  <div onMouseEnter={() => table_filter_set("filter-applied odd")} onMouseLeave={() => table_filter_set("")} onClick={() => filter_odd_click()} className={filter_odd ? `table-value table-filter width-1-6th chip-${fromNumberToColor(filter_odd_value)} active` : "table-value table-filter width-1-6th"}><div>Odd</div><div className="filter-overlay"><div className="filter-chip"></div></div></div>
-                  <div onMouseEnter={() => table_filter_set("filter-applied second-18")} onMouseLeave={() => table_filter_set("")} onClick={() => filter_second_18_click()} className={filter_second_18 ? `table-value table-filter width-1-6th chip-${fromNumberToColor(filter_second_18_value)} active` : "table-value table-filter width-1-6th"}><div>2nd 18</div><div className="filter-overlay"><div className="filter-chip"></div></div></div>
+                  <div
+                  style={{borderBottomLeftRadius: "8px"}}
+                    onMouseEnter={() =>
+                      table_filter_set("filter-applied first-18")
+                    }
+                    onMouseLeave={() => table_filter_set("")}
+                    className={
+                      betObject.num_val_first_18.length > 0
+                        ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
+                            betObject.num_val_first_18[
+                              betObject.num_val_first_18.length - 1
+                            ]
+                          )} active`
+                        : "table-value table-filter width-1-6th"
+                    }
+                  >
+                    <div>1st 18</div>
+                    <div className="filter-overlay">
+                      <div
+                        className="filter-chip"
+                        num-val="_first_18"
+                        onClick={(e) => addBetToObject(e)}
+                      ></div>
+                    </div>
+                  </div>
+                  <div
+                    onMouseEnter={() => table_filter_set("filter-applied even")}
+                    onMouseLeave={() => table_filter_set("")}
+                    className={
+                      betObject.num_val_even.length > 0
+                        ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
+                            betObject.num_val_even[
+                              betObject.num_val_even.length - 1
+                            ]
+                          )} active`
+                        : "table-value table-filter width-1-6th"
+                    }
+                  >
+                    <div>Even</div>
+                    <div className="filter-overlay">
+                      <div
+                        className="filter-chip"
+                        num-val="_even"
+                        onClick={(e) => addBetToObject(e)}
+                      ></div>
+                    </div>
+                  </div>
+                  <div
+                    onMouseEnter={() =>
+                      table_filter_set("filter-applied filter-color-red")
+                    }
+                    onMouseLeave={() => table_filter_set("")}
+                    className={
+                      betObject.num_val_red.length > 0
+                        ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
+                            betObject.num_val_red[
+                              betObject.num_val_red.length - 1
+                            ]
+                          )} active romboid`
+                        : "table-value table-filter width-1-6th romboid"
+                    }
+                  >
+                    <div className="red"></div>
+                    <div className="filter-overlay">
+                      <div
+                        className="filter-chip"
+                        num-val="_red"
+                        onClick={(e) => addBetToObject(e)}
+                      ></div>
+                    </div>
+                  </div>
+                  <div
+                    onMouseEnter={() =>
+                      table_filter_set("filter-applied filter-color-black")
+                    }
+                    onMouseLeave={() => table_filter_set("")}
+                    className={
+                      betObject.num_val_black.length > 0
+                        ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
+                            betObject.num_val_black[
+                              betObject.num_val_black.length - 1
+                            ]
+                          )} active romboid`
+                        : "table-value table-filter width-1-6th romboid"
+                    }
+                  >
+                    <div className="black"></div>
+                    <div className="filter-overlay">
+                      <div
+                        className="filter-chip"
+                        num-val="_black"
+                        onClick={(e) => addBetToObject(e)}
+                      ></div>
+                    </div>
+                  </div>
+                  <div
+                    onMouseEnter={() => table_filter_set("filter-applied odd")}
+                    onMouseLeave={() => table_filter_set("")}
+                    className={
+                      betObject.num_val_odd.length > 0
+                        ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
+                            betObject.num_val_odd[
+                              betObject.num_val_odd.length - 1
+                            ]
+                          )} active`
+                        : "table-value table-filter width-1-6th"
+                    }
+                  >
+                    <div>Odd</div>
+                    <div className="filter-overlay">
+                      <div
+                        className="filter-chip"
+                        num-val="_odd"
+                        onClick={(e) => addBetToObject(e)}
+                      ></div>
+                    </div>
+                  </div>
+                  <div
+                  style={{ borderBottomRightRadius: "8px"}}
+                    onMouseEnter={() =>
+                      table_filter_set("filter-applied second-18")
+                    }
+                    onMouseLeave={() => table_filter_set("")}
+                    className={
+                      betObject.num_val_second_18.length > 0
+                        ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
+                            betObject.num_val_second_18[
+                              betObject.num_val_second_18.length - 1
+                            ]
+                          )} active`
+                        : "table-value table-filter width-1-6th"
+                    }
+                  >
+                    <div>2nd 18</div>
+                    <div className="filter-overlay">
+                      <div
+                        className="filter-chip"
+                        num-val="_second_18"
+                        onClick={(e) => addBetToObject(e)}
+                      ></div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="bottom-table-spacer">
@@ -1132,14 +1425,38 @@ const Roulette = () => {
             ></div>
           </div>
         </div>
-        <button
-          type="button"
-          className={spinAvailable ? "btn" : "btn disabled"}
-          id="spin"
-          onClick={() => spinTheWheel()}
-        >
-          <span className="btn-label">Spin</span>
-        </button>
+        <center className="bottom-buttons-container">
+          <button
+            type="button"
+            className={spinAvailable ? "btn" : "btn disabled"}
+            id="globalUndo"
+            onClick={() => globalUndo()}
+          >
+            <span className="btn-label">Undo</span>
+          </button>
+          <span className="buttons-temporal-spacer">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </span>
+          <button
+            type="button"
+            className={spinAvailable ? "btn" : "btn disabled"}
+            id="spin"
+            onClick={() => spinTheWheel()}
+          >
+            <span className="btn-label">Spin</span>
+          </button>
+          <span className="buttons-temporal-spacer">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </span>
+          <button
+            type="button"
+            className={spinAvailable ? "btn" : "btn disabled"}
+            id="resetBetsButton"
+            onClick={() => resetBets()}
+          >
+            <span className="btn-label">Clear all</span>
+          </button>
+        </center>
         <div id="table-overlay">
           <div id="table-overlay-text">{overlay_string}</div>
         </div>
