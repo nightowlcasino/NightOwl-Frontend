@@ -397,7 +397,7 @@ const Roulette = () => {
         bets_end_toggle(false);
         resetBets();
         addLastResult(randomNumber);
-      }, 4000);
+      }, 2500);
 
       setResultNumber(randomNumber);
       setResultColor(color);
@@ -411,13 +411,13 @@ const Roulette = () => {
   }
 
   function globalUndo() {
-    console.log("amaiiiii");
     let lastBet = latestBets.pop();
-    console.log(lastBet);
     if (lastBet === undefined) {
       return;
     }
 
+    console.log(lastBet);
+    console.log("he llegado hasta aqui osea que no ha detectado como undefined");
     let currentBetObjectCopy = betObject[`num_val${lastBet}`].slice();
     let chipValueUndone = currentBetObjectCopy.pop();
     setBetObject({
