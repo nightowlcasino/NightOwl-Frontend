@@ -1,3 +1,8 @@
+:root
+{
+    --roulette-bets-end-transition-time: 0.6s;
+}
+
 .number:nth-child(1) {
     transform: rotateZ(9.7297297297297deg);
 }
@@ -123,12 +128,21 @@
     align-items: center;
     align-content: center;
     flex-direction: column;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 .roulette-wrapper .roulette-wheel-content-wrapper,
 .roulette-wrapper .roulette-table-content-wrapper
 {
     flex: 50%;
+    transition: all var(--roulette-bets-end-transition-time) ease;
+}
+
+.roulette-table-content-wrapper
+{
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 .plate {
@@ -451,27 +465,22 @@
 }
 
 .btn {
-    background: white;
-    border: 1px solid #000000;
-    border-top-color: #00b300;
-    border-left-color: #00b300;
-    top: 150px;
-    padding: 0;
-    margin-bottom: 0;
-    display: inline-block;
-    font-size: 15px;
-    width: 350px;
-    padding: 12px;
-    margin: 12px;
-    margin-right: 300px;
-    cursor: pointer;
-    color: black;
-    font-weight: bold;
-    font-family: 'Roboto', sans-serif;
-    border-radius: 3px;
-    position: absolute;
+    padding: 20px;
     text-align: center;
+    font-size: 20px;
+    color: white;
+    background-image: linear-gradient(to right, #8e0081, #fa008c);
+    border-radius: 15px;
+    min-width: 200px;
+    max-width: 200px;
+    margin: 10px auto;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    border: none;
 }
+
 .btn .btn-label {
     font-size: 20px;
     font-weight: 900;
@@ -536,6 +545,7 @@
     margin: auto;
     line-height: 1.4;
     padding-top: 36px;
+    display: none;
 }
 .data .result {
     background-color: green;
@@ -544,16 +554,16 @@
     align-items: center;
     color: #fff;
     z-index: 102;
-    top: -6px;
-    right: -6px;
-    left: -6px;
-    bottom: -6px;
+    top: -26px;
+    right: -26px;
+    left: -26px;
+    bottom: -26px;
 }
 .data .result-number {
     font-size: 72px;
     font-weight: 500;
     line-height: 1.2;
-    margin-top: 12px;
+    margin-top: 35px;
 }
 .data .result-color {
     text-transform: uppercase;
@@ -585,11 +595,13 @@
 }
 .color-black {
     /* background-color: black; */
-    background-color: #270D3C !important;
+    /* background-color: #270D3C !important; */
+    background-color: #232225 !important;
 }
 .color-red {
     /* background-color: red; */
-    background-color: #E80F44 !important;
+    /* background-color: #E80F44 !important; */
+    background-color: #bf2125 !important;
 }
 .visuallyhidden {
     position: absolute;
@@ -626,29 +638,126 @@
     100% { transform: rotateZ(360deg);}
 }
 
-/********************************************/
-/********************************************/
-/*****************TABLEEEEEEE****************/
-/********************************************/
-/********************************************/
+#before-table
+{
+    display: flex;
+    flex-direction: row;
+}
 
-/* #table-outter td
+#table-total-bet
+{
+    padding: 20px;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+    background-image: linear-gradient(to right, #fa008c, #8e0081);
+    border-radius: 15px;
+    flex: 20%;
+    min-width: 200px;
+    margin: 10px 5px 10px 0px;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#table-history
+{
+    padding: 10px 20px;
+    margin: 10px 0px 10px 5px;
+    font-size: 20px;
+    background-color: #8e0081;
+    border-radius: 15px;
+    color: white;
+    flex: 80%;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    max-width: 410px;
+    transition: all var(--roulette-bets-end-transition-time) ease;
+}
+
+.roulette-wrapper.bets-end #table-history
+{
+    max-width: 735px;
+}
+
+#table-history .history-number
+{
+    padding: 10px 10px;
+    border-radius: 10px;
+}
+
+#table-outter td
 {
     padding: 5px;
     background-color: red;
     text-align: center;
+}
+#table-history .history-number.red
+{
+    background-color: #bf2125;
+}
+
+#table-history .history-number.black
+{
+    background-color: #232225;
+}
+
+#table-history .history-number.green
+{
+    background-color: #007907;
+}
+
+#table-history .history-spacer
+{
+    padding: 5px;
 }
 
 #numbers-table td
 {
     margin: 10px;
     background-color: #009700;
-} */
+} 
+
 
 #table-wrapper
 {
     min-width: 700px;
     max-width: 700px;
+    transition: all var(--roulette-bets-end-transition-time) ease;
+}
+
+.roulette-wrapper #table-overlay
+{
+    visibility: visible;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #343434aa;
+    transition: all 0.4s ease;
+}
+
+.roulette-wrapper.bets-end #table-overlay
+{
+    visibility: hidden;
+    opacity: 0;
+}
+
+#table-overlay #table-overlay-text
+{
+    margin: 0 auto;
+    color: white;
+    background-color: #A739FF;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 #table-wrapper,
@@ -680,15 +789,141 @@
 .table-row
 {
     flex: 100%;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 .table-value
 {
-    padding: 10px 0px;
-    background-color: #A739FF;
-    margin: 5px;
+    padding: 15px 0px;
+    background-color: #8e0081;
+    margin: 1px;
     min-width: 20px;
     text-align: center;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: all var(--roulette-bets-end-transition-time) ease;
+}
+
+.table-value.red
+{
+    background-color: #bf2125;
+}
+
+.table-value.black
+{
+    background-color: #232225;
+}
+
+.table-value.green {
+    background-color: #007907;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.table-value.romboid
+{
+    padding: 10px 10px !important;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+.table-value.romboid div
+{
+    width: 40px;
+    height: 40px;
+    transform: rotateZ(45deg);
+    margin: 0 auto;
+}
+
+.table-value.romboid div.red
+{
+    background-color: #bf2125;
+}
+
+.table-value.romboid div.black
+{
+    background-color: #232225;
+}
+
+.table-value.table-filter
+{
+    position: relative;
+}
+
+.table-value.table-filter.romboid .filter-overlay .filter-chip
+{
+    transform: rotateZ(-45deg);
+}
+
+.table-value.table-filter .filter-overlay
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+.table-value.table-filter .filter-overlay .filter-chip
+{
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+    opacity: 0;
+    transition: all var(--roulette-bets-end-transition-time) ease;
+}
+
+.table-value.table-filter.active .filter-overlay .filter-chip
+{
+    opacity: 1 !important;
+    border-radius: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.table-value.table-filter.active.chip-purple .filter-overlay .filter-chip
+{
+    background-image: url(../../../assets/Elements/coin_purple.png);
+}
+
+.table-value.table-filter.active.chip-green .filter-overlay .filter-chip
+{
+    background-image: url(../../../assets/Elements/coin_green.png);
+}
+
+.table-value.table-filter.active.chip-pink .filter-overlay .filter-chip
+{
+    background-image: url(../../../assets/Elements/coin_pink.png);
+}
+
+.table-value.table-filter.active.chip-blue .filter-overlay .filter-chip
+{
+    background-image: url(../../../assets/Elements/coin_blue.png);
+}
+
+.table-value.table-filter.active.chip-black .filter-overlay .filter-chip
+{
+    background-image: url(../../../assets/Elements/coin_black.png);
+}
+
+.table-value.table-filter:hover .filter-overlay .filter-chip
+{
+    background-color: white;
+    opacity: 0.5;
+    border-radius: 50%;
+}
+
+.roulette-wrapper.bets-end .table-value
+{
+    font-weight: bold;
 }
 
 .width-1-3rd
@@ -710,6 +945,7 @@
 {
     flex: 50px;
     max-width: 50px;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 .bottom-table-spacer .table-value
@@ -723,6 +959,7 @@
     flex-direction: row;
     align-items: center;
     align-content: center;
+    transition: flex var(--roulette-bets-end-transition-time) ease;
 }
 
 #left-table .table-value
@@ -731,28 +968,234 @@
     align-content: center;
     align-items: center;
     display: flex;
-    height: calc(100% - 30px);
+    height: calc(100% - 32px);
+    max-height: 118px;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 #left-table .table-value div
 {
     margin: 0 auto;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 #left-table, #right-table
 {
     flex: 50px;
     max-width: 50px;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 #table-numbers
 {
     flex: 1 1 auto;
+    transition: all var(--roulette-bets-end-transition-time) ease;
+}
+
+#table-numbers.filter-applied .table-value
+{
+    opacity: 0.1;
+}
+
+#table-numbers.first-12 #number-1,
+#table-numbers.first-12 #number-2,
+#table-numbers.first-12 #number-3,
+#table-numbers.first-12 #number-4,
+#table-numbers.first-12 #number-5,
+#table-numbers.first-12 #number-6,
+#table-numbers.first-12 #number-7,
+#table-numbers.first-12 #number-8,
+#table-numbers.first-12 #number-9,
+#table-numbers.first-12 #number-10,
+#table-numbers.first-12 #number-11,
+#table-numbers.first-12 #number-12,
+
+#table-numbers.second-12 #number-13,
+#table-numbers.second-12 #number-14,
+#table-numbers.second-12 #number-15,
+#table-numbers.second-12 #number-16,
+#table-numbers.second-12 #number-17,
+#table-numbers.second-12 #number-18,
+#table-numbers.second-12 #number-19,
+#table-numbers.second-12 #number-20,
+#table-numbers.second-12 #number-21,
+#table-numbers.second-12 #number-22,
+#table-numbers.second-12 #number-23,
+#table-numbers.second-12 #number-24,
+
+#table-numbers.third-12 #number-25,
+#table-numbers.third-12 #number-26,
+#table-numbers.third-12 #number-27,
+#table-numbers.third-12 #number-28,
+#table-numbers.third-12 #number-29,
+#table-numbers.third-12 #number-30,
+#table-numbers.third-12 #number-31,
+#table-numbers.third-12 #number-32,
+#table-numbers.third-12 #number-33,
+#table-numbers.third-12 #number-34,
+#table-numbers.third-12 #number-35,
+#table-numbers.third-12 #number-36,
+
+#table-numbers.first-18 #number-1,
+#table-numbers.first-18 #number-2,
+#table-numbers.first-18 #number-3,
+#table-numbers.first-18 #number-4,
+#table-numbers.first-18 #number-5,
+#table-numbers.first-18 #number-6,
+#table-numbers.first-18 #number-7,
+#table-numbers.first-18 #number-8,
+#table-numbers.first-18 #number-9,
+#table-numbers.first-18 #number-10,
+#table-numbers.first-18 #number-11,
+#table-numbers.first-18 #number-12,
+#table-numbers.first-18 #number-13,
+#table-numbers.first-18 #number-14,
+#table-numbers.first-18 #number-15,
+#table-numbers.first-18 #number-16,
+#table-numbers.first-18 #number-17,
+#table-numbers.first-18 #number-18,
+
+#table-numbers.second-18 #number-19,
+#table-numbers.second-18 #number-20,
+#table-numbers.second-18 #number-21,
+#table-numbers.second-18 #number-22,
+#table-numbers.second-18 #number-23,
+#table-numbers.second-18 #number-24,
+#table-numbers.second-18 #number-25,
+#table-numbers.second-18 #number-26,
+#table-numbers.second-18 #number-27,
+#table-numbers.second-18 #number-28,
+#table-numbers.second-18 #number-29,
+#table-numbers.second-18 #number-30,
+#table-numbers.second-18 #number-31,
+#table-numbers.second-18 #number-32,
+#table-numbers.second-18 #number-33,
+#table-numbers.second-18 #number-34,
+#table-numbers.second-18 #number-35,
+#table-numbers.second-18 #number-36,
+
+#table-numbers.even #number-2,
+#table-numbers.even #number-4,
+#table-numbers.even #number-6,
+#table-numbers.even #number-8,
+#table-numbers.even #number-10,
+#table-numbers.even #number-12,
+#table-numbers.even #number-14,
+#table-numbers.even #number-16,
+#table-numbers.even #number-18,
+#table-numbers.even #number-20,
+#table-numbers.even #number-22,
+#table-numbers.even #number-24,
+#table-numbers.even #number-26,
+#table-numbers.even #number-28,
+#table-numbers.even #number-30,
+#table-numbers.even #number-32,
+#table-numbers.even #number-34,
+#table-numbers.even #number-36,
+
+#table-numbers.odd #number-1,
+#table-numbers.odd #number-3,
+#table-numbers.odd #number-5,
+#table-numbers.odd #number-7,
+#table-numbers.odd #number-9,
+#table-numbers.odd #number-11,
+#table-numbers.odd #number-13,
+#table-numbers.odd #number-15,
+#table-numbers.odd #number-17,
+#table-numbers.odd #number-19,
+#table-numbers.odd #number-21,
+#table-numbers.odd #number-23,
+#table-numbers.odd #number-25,
+#table-numbers.odd #number-27,
+#table-numbers.odd #number-29,
+#table-numbers.odd #number-31,
+#table-numbers.odd #number-33,
+#table-numbers.odd #number-35,
+
+#table-numbers.filter-color-red #number-1,
+#table-numbers.filter-color-red #number-3,
+#table-numbers.filter-color-red #number-5,
+#table-numbers.filter-color-red #number-7,
+#table-numbers.filter-color-red #number-9,
+#table-numbers.filter-color-red #number-12,
+#table-numbers.filter-color-red #number-14,
+#table-numbers.filter-color-red #number-16,
+#table-numbers.filter-color-red #number-18,
+#table-numbers.filter-color-red #number-19,
+#table-numbers.filter-color-red #number-21,
+#table-numbers.filter-color-red #number-23,
+#table-numbers.filter-color-red #number-25,
+#table-numbers.filter-color-red #number-27,
+#table-numbers.filter-color-red #number-30,
+#table-numbers.filter-color-red #number-32,
+#table-numbers.filter-color-red #number-34,
+#table-numbers.filter-color-red #number-36,
+
+#table-numbers.filter-color-black #number-2,
+#table-numbers.filter-color-black #number-4,
+#table-numbers.filter-color-black #number-6,
+#table-numbers.filter-color-black #number-8,
+#table-numbers.filter-color-black #number-10,
+#table-numbers.filter-color-black #number-11,
+#table-numbers.filter-color-black #number-13,
+#table-numbers.filter-color-black #number-15,
+#table-numbers.filter-color-black #number-17,
+#table-numbers.filter-color-black #number-20,
+#table-numbers.filter-color-black #number-22,
+#table-numbers.filter-color-black #number-24,
+#table-numbers.filter-color-black #number-26,
+#table-numbers.filter-color-black #number-28,
+#table-numbers.filter-color-black #number-29,
+#table-numbers.filter-color-black #number-31,
+#table-numbers.filter-color-black #number-33,
+#table-numbers.filter-color-black #number-35,
+
+#table-numbers.first-row #number-3,
+#table-numbers.first-row #number-6,
+#table-numbers.first-row #number-9,
+#table-numbers.first-row #number-12,
+#table-numbers.first-row #number-15,
+#table-numbers.first-row #number-18,
+#table-numbers.first-row #number-21,
+#table-numbers.first-row #number-24,
+#table-numbers.first-row #number-27,
+#table-numbers.first-row #number-30,
+#table-numbers.first-row #number-33,
+#table-numbers.first-row #number-36,
+
+#table-numbers.second-row #number-2,
+#table-numbers.second-row #number-5,
+#table-numbers.second-row #number-8,
+#table-numbers.second-row #number-11,
+#table-numbers.second-row #number-14,
+#table-numbers.second-row #number-17,
+#table-numbers.second-row #number-20,
+#table-numbers.second-row #number-23,
+#table-numbers.second-row #number-26,
+#table-numbers.second-row #number-29,
+#table-numbers.second-row #number-32,
+#table-numbers.second-row #number-35,
+
+#table-numbers.third-row #number-1,
+#table-numbers.third-row #number-4,
+#table-numbers.third-row #number-7,
+#table-numbers.third-row #number-10,
+#table-numbers.third-row #number-13,
+#table-numbers.third-row #number-16,
+#table-numbers.third-row #number-19,
+#table-numbers.third-row #number-22,
+#table-numbers.third-row #number-25,
+#table-numbers.third-row #number-28,
+#table-numbers.third-row #number-31,
+#table-numbers.third-row #number-34
+{
+    opacity: 1;
 }
 
 #bottom-center-table
 {
     flex: 1 1 auto;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 #numbers-table-wrapper
@@ -760,6 +1203,7 @@
     display: flex;
     flex: 1 1 auto;
     position: relative;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 #numbers-overlay
@@ -775,8 +1219,8 @@
 #numbers-overlay .row
 {
     flex: calc(100% / 7);
-    opacity: 0.5;
     display: flex;
+    transition: all var(--roulette-bets-end-transition-time) ease;
 }
 
 #numbers-overlay .row.spacer
@@ -789,6 +1233,12 @@
     display: flex;
     flex-direction: column;
     flex: calc(100% / 27);
+    transition: all var(--roulette-bets-end-transition-time) ease;
+}
+
+#numbers-overlay .row .inner-row div
+{
+    opacity: 0;
 }
 
 #numbers-overlay .row .inner-row.spacer
@@ -799,6 +1249,7 @@
 #numbers-overlay .row .inner-row:hover
 {
     background-color: white;
+    opacity: 0.5;
     border-radius: 50px;
 }
 
@@ -809,7 +1260,191 @@
 
 #numbers-overlay .row .inner-row.active
 {
-    background-color: red;
+    color: black;
+    opacity: 1;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    border-radius: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#numbers-overlay .row .inner-row.active.purple.two-d
+{
+    background-image: url(../../../assets/Elements/coin_purple.png);
+}
+
+#numbers-overlay .row .inner-row.active.green.two-d
+{
+    background-image: url(../../../assets/Elements/coin_green.png);
+}
+
+#numbers-overlay .row .inner-row.active.pink.two-d
+{
+    background-image: url(../../../assets/Elements/coin_pink.png);
+}
+
+#numbers-overlay .row .inner-row.active.blue.two-d
+{
+    background-image: url(../../../assets/Elements/coin_blue.png);
+}
+
+#numbers-overlay .row .inner-row.active.black.two-d
+{
+    background-image: url(../../../assets/Elements/coin_black.png);
+}
+
+#numbers-overlay .row .inner-row.active.purple.three-d
+{
+    background-image: url(../../../assets/Elements/coin_100.png);
+}
+
+#numbers-overlay .row .inner-row.active.green.three-d
+{
+    background-image: url(../../../assets/Elements/coin_500.png);
+}
+
+#numbers-overlay .row .inner-row.active.pink.three-d
+{
+    background-image: url(../../../assets/Elements/coin_2k5.png);
+}
+
+#numbers-overlay .row .inner-row.active.blue.three-d
+{
+    background-image: url(../../../assets/Elements/coin_10k.png);
+}
+
+#numbers-overlay .row .inner-row.active.black.three-d
+{
+    background-image: url(../../../assets/Elements/coin_50k.png);
+}
+
+#numbers-overlay .row .inner-row.active.three-d
+{
+    background-size: contain;
+}
+
+#numbers-overlay .row .inner-row.active div
+{
+    margin: 0 auto;
+    /* opacity: 1; */
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	height: calc(100% - 9px);
+	width: 100%;
+	padding-top: 7px;
+	/* background-color: #ffffff66; */
+	border-radius: 50%;
+    text-align: center;
+}
+
+#roulette-table-chips
+{
+    margin-top: 20px;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+}
+
+#roulette-table-chips .table-chip-wrapper
+{
+    flex: calc(100% / 5);
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    transition: all var(--roulette-bets-end-transition-time) ease;
+}
+
+#roulette-table-chips .table-chip-wrapper:hover .table-chip
+{
+    width: 80px;
+    height: 80px;
+}
+
+#roulette-table-chips .table-chip-wrapper.active .table-chip
+{
+    width: 100px;
+    height: 100px;
+}
+
+#roulette-table-chips .table-chip
+{
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: all var(--roulette-bets-end-transition-time) ease;
+    cursor: pointer;
+}
+
+.roulette-wrapper.bets-end .roulette-wheel-content-wrapper, .roulette-wrapper .roulette-table-content-wrapper
+{
+    flex: 25% 1;
+}
+
+.roulette-wrapper.bets-end #table-wrapper
+{
+    max-width: 1200px;
+}
+
+.roulette-wrapper.bets-end .table-value
+{
+    padding: 25px 10px;
+    margin: 3px;
+}
+
+.roulette-wrapper.bets-end #numbers-overlay .row.spacer
+{
+    max-height: 15px;
+}
+
+.roulette-wrapper.bets-end #left-table, .roulette-wrapper.bets-end #right-table
+{
+    flex: 70px 1;
+    max-width: 71px;
+    max-height: 222px;
+}
+
+.roulette-wrapper.bets-end #numbers-overlay .row .inner-row.spacer
+{
+    max-width: 10px;
+    background-color: transparent;
+}
+
+.roulette-wrapper.bets-end .bottom-table-spacer
+{
+    flex: 70px 1;
+    max-width: 70px;
+}
+
+.roulette-wrapper.bets-end #numbers-overlay
+{
+    width: calc(100% - 14px);
+    margin: 5px 7px;
+}
+
+.roulette-wrapper.bets-end .roulette-table-content-wrapper
+{
+    flex: 75%;
+}
+
+.roulette-wrapper.bets-end .roulette-wheel-content-wrapper
+{
+    transform: scale(0.5);
+}
+
+.roulette-wrapper.bets-end #left-table > div:nth-child(1)
+{
+    max-height: 166px;
+    max-width: 70px;
+    padding: 25px 19px;
 }
 
 @media all and (max-width: 992px)
@@ -819,8 +1454,6 @@
         flex-direction: column;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     .roulette-wheel-content-wrapper {
         padding-top: 0px;
         transform: scale(0.75);
@@ -828,19 +1461,13 @@
         max-height: 400px;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     .roulette-wrapper {
         min-height: 1000px;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     .roulette-table-content-wrapper {
         flex: 1 1 auto;
     }
-
-    /* Element | http://localhost:3000/games/roulette */
 
     #table-wrapper {
         flex-direction: row;
@@ -848,92 +1475,62 @@
         margin: 50px 0px;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     #top-row {
         flex-direction: column;
     }
-
-    /* Element | http://localhost:3000/games/roulette */
 
     #right-table {
         flex-direction: row;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     #table-numbers {
         flex-direction: row-reverse;
     }
-
-    /* Element | http://localhost:3000/games/roulette */
 
     #first-row {
         flex-direction: column;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     #second-row {
         flex-direction: column;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     #third-row {
         flex-direction: column;
     }
-
-    /* Inline #10 | http://localhost:3000/games/roulette */
 
     .table-value {
         /* padding: 10px 0px; */
         padding: 10px 10px;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     #bottom-row {
         flex-direction: column;
     }
-
-    /* Element | http://localhost:3000/games/roulette */
 
     #bottom-center-table {
         flex-direction: row;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     #center-top-row {
         flex-direction: column;
     }
-
-    /* Element | http://localhost:3000/games/roulette */
 
     #center-bottom-row {
         flex-direction: column;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     #left-table {
         max-width: 100%;
     }
-
-    /* Element | http://localhost:3000/games/roulette */
 
     div.bottom-table-spacer:nth-child(1) {
         max-height: 50px;
     }
 
-    /* Element | http://localhost:3000/games/roulette */
-
     div.bottom-table-spacer:nth-child(3) {
         max-height: 50px;
     }
-
-    /* Element | http://localhost:3000/games/roulette */
 
     .roulette-table-content {
         display: flex;
@@ -941,4 +1538,14 @@
         align-content: center;
         align-items: center;
     }
+
+    .bottom-buttons-container {
+        margin: 0 auto;
+    }
+
+    .buttons-temporal-spacer {
+        padding: 20px;
+    }
+
+    
 }
