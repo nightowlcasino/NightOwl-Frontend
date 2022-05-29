@@ -143,17 +143,13 @@ const Roulette = () => {
     num_val1st: [],
     num_val2nd: [],
     num_val3rd: [],
-
     num_val_first_12: [],
     num_val_second_12: [],
     num_val_third_12: [],
-
     num_val_first_18: [],
     num_val_second_18: [],
-
     num_val_red: [],
     num_val_black: [],
-
     num_val_even: [],
     num_val_odd: [],
   };
@@ -353,18 +349,15 @@ const Roulette = () => {
     }
   }
   function spinTheWheel() {
+    
     innerRef.current.setAttribute("data-spinto", "");
     innerRef.current.classList.remove("stop-spin");
     innerRef.current.classList.remove("default-spin");
+    innerRef.current.classList.add("waiting-for-respond");
     if (!firstSpin) {
       setRevealData(false);
     }
-    var randomNumber = Math.floor(Math.random() * 36);
     var color = null;
-    setTimeout(() => {
-      innerRef.current.setAttribute("data-spinto", randomNumber);
-    }, 50);
-
     setTimeout(() => {
       bets_end_toggle(true);
     }, 20);
@@ -373,41 +366,60 @@ const Roulette = () => {
 
     set_overlay_string(overlay_default);
 
-    // setTimeout(() => {
-    //   setMaskText(maskDefault);
-    // }, timer + 540);
-
-    // remove the disabled attribute when the ball has stopped
+    // gets value from blockhain
+    var randomNumber = 0;
     setTimeout(() => {
-      setSpinAvailable(true);
+      randomNumber = Math.floor(Math.random() * 36);
+    }, Math.floor(Math.random() * 10) * 1000);
 
-      if (randomNumber === 0) {
-        color = "green";
-      } else if (red.indexOf(randomNumber) !== -1) {
-        color = "red";
-      } else {
-        color = "black";
+    var waiting_for_respond_animation_delay = setInterval(() => {
+      if(randomNumber != 0)
+      {
+        clearInterval(waiting_for_respond_animation_delay);
+        innerRef.current.classList.remove("waiting-for-respond");
+
+        setTimeout(() => {
+          innerRef.current.setAttribute("data-spinto", randomNumber);
+        }, 50);
+
+        // setTimeout(() => {
+        //   setMaskText(maskDefault);
+        // }, timer + 540);
+
+        // // remove the disabled attribute when the ball has stopped
+        setInterval(() => {
+          setSpinAvailable(true);
+
+          if (randomNumber === 0) {
+            color = "green";
+          } else if (red.indexOf(randomNumber) !== -1) {
+            color = "red";
+          } else {
+            color = "black";
+          }
+
+          // setTimeout(() => {
+          //   set_overlay_string("");
+          // }, 400);
+
+          setTimeout(() => {
+            bets_end_toggle(false);
+            resetBets();
+            addLastResult(randomNumber);
+          }, 2500);
+
+          setResultNumber(randomNumber);
+          setResultColor(color);
+          setRevealData(true);
+          setRandomNumber(randomNumber);
+          if (firstSpin) setFirstSpin(false);
+        }, timer + 50);
+        setTimeout(() => {
+          innerRef.current.classList.add("stop-spin");
+        }, timer * 0.7);
       }
-
-      // setTimeout(() => {
-      //   set_overlay_string("");
-      // }, 400);
-
-      setTimeout(() => {
-        bets_end_toggle(false);
-        resetBets();
-        addLastResult(randomNumber);
-      }, 2500);
-
-      setResultNumber(randomNumber);
-      setResultColor(color);
-      setRevealData(true);
-      setRandomNumber(randomNumber);
-      if (firstSpin) setFirstSpin(false);
-    }, timer + 50);
-    setTimeout(() => {
-      innerRef.current.classList.add("stop-spin");
-    }, timer * 0.7);
+    }, 1000);
+    // above value needs to be same as animation duration in css file for "#fuckinginner.waiting-for-respond::before" in ms
   }
 
   function globalUndo() {
@@ -1425,38 +1437,40 @@ const Roulette = () => {
             ></div>
           </div>
         </div>
-        <center className="bottom-buttons-container">
-          <button
-            type="button"
-            className={spinAvailable ? "btn" : "btn disabled"}
-            id="globalUndo"
-            onClick={() => globalUndo()}
-          >
-            <span className="btn-label">Undo</span>
-          </button>
-          <span className="buttons-temporal-spacer">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </span>
-          <button
-            type="button"
-            className={spinAvailable ? "btn" : "btn disabled"}
-            id="spin"
-            onClick={() => spinTheWheel()}
-          >
-            <span className="btn-label">Spin</span>
-          </button>
-          <span className="buttons-temporal-spacer">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </span>
-          <button
-            type="button"
-            className={spinAvailable ? "btn" : "btn disabled"}
-            id="resetBetsButton"
-            onClick={() => resetBets()}
-          >
-            <span className="btn-label">Clear all</span>
-          </button>
-        </center>
+        <div id="bottom-buttons-container">
+          <div className="spacer"></div>
+          <div className="button-container">
+            <button
+              type="button"
+              className={spinAvailable ? "btn" : "btn disabled"}
+              id="globalUndo"
+              onClick={() => globalUndo()}
+            >
+              <span className="btn-label">Undo</span>
+            </button>
+          </div>
+          <div className="button-container">
+            <button
+              type="button"
+              className={spinAvailable ? "btn" : "btn disabled"}
+              id="spin"
+              onClick={() => spinTheWheel()}
+            >
+              <span className="btn-label">Spin</span>
+            </button>
+          </div>
+          <div className="button-container">
+            <button
+              type="button"
+              className={spinAvailable ? "btn" : "btn disabled"}
+              id="resetBetsButton"
+              onClick={() => resetBets()}
+            >
+              <span className="btn-label">Clear all</span>
+            </button>
+          </div>
+          <div className="spacer"></div>
+        </div>
         <div id="table-overlay">
           <div id="table-overlay-text">{overlay_string}</div>
         </div>
