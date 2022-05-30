@@ -1,4 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
+import { connect, StringCodec } from "nats.ws";
+import StateContext from "../../Context";
+import axios from "axios";
 import "./Roulette.css";
 import outterWheel1 from "../../../assets/Elements/behind2.png";
 
@@ -7,6 +10,11 @@ import coin_500 from "../../../assets/Elements/coin_500.png";
 import coin_2k5 from "../../../assets/Elements/coin_2k5.png";
 import coin_10k from "../../../assets/Elements/coin_10k.png";
 import coin_50k from "../../../assets/Elements/coin_50k.png";
+
+const TOKENID_NO_TEST = "afd0d6cb61e86d15f2a0adc1e7e23df532ba3ff35f8ba88bed16729cae933032";
+const TOKENID_ERG = "0000000000000000000000000000000000000000000000000000000000000000";
+const MINER_FEE_VALUE = 1100000;
+const MIN_BOX_VALUE = 1000000;
 
 const Roulette = () => {
   var red = [32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3];
@@ -158,7 +166,7 @@ const Roulette = () => {
   const [revealData, setRevealData] = useState(false);
   const [resultNumber, setResultNumber] = useState(null);
   const [resultColor, setResultColor] = useState(null);
-  const [randomNumber, setRandomNumber] = useState(null);
+  const [randomNumber, setRandomNumber] = useState(-1);
   const [firstSpin, setFirstSpin] = useState(true);
   const [chipSelected, setChipSelected] = useState(100);
   const [totalBet, setTotalBet] = useState(0);
@@ -167,6 +175,11 @@ const Roulette = () => {
   const [latestBets, setLatestBets] = useState([]);
   const [bets_end, bets_end_toggle] = useState(false);
   const [table_filter_value, table_filter_set] = useState("");
+  const [natsConn, setNatsConn] = useState(false);
+  const {ergoWallet, defaultAddress} = useContext(StateContext);
+  const checkWallet = localStorage.getItem("walletConnected");
+  let sub
+  const sc = StringCodec();
 
   var arrayWithNumVals = [
     "num_val0",
@@ -307,6 +320,29 @@ const Roulette = () => {
 
   const innerRef = useRef();
 
+  const wsConnect = () => {
+    connect({ servers: "ws://0.0.0.0:9222" })
+      .then(async function (nc) {
+        if (checkWallet === "true") {
+          sub = nc.subscribe(`roulette.${localStorage.getItem("walletAddress")}`);
+          console.log(`subscribed to roulette.${localStorage.getItem("walletAddress")}`);
+          (async () => {
+            for await (const m of sub) {
+              let rnString = sc.decode(m.data)
+              const randNum = Number("0x"+rnString)%37
+              console.log(randNum)
+              setRandomNumber(randNum)
+            }
+            console.log("subscription closed");
+          })();
+          setNatsConn(true)
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   function addBetToObject(e) {
     var numbers = e.target.getAttribute("num-val");
     console.log(e.target);
@@ -349,6 +385,127 @@ const Roulette = () => {
     }
   }
   function spinTheWheel() {
+    if (!natsConn) {
+      wsConnect()
+    }
+
+    let utxos = [];
+    let boxId = "";
+    const minERG = MIN_BOX_VALUE + MIN_BOX_VALUE + MINER_FEE_VALUE + MIN_BOX_VALUE/2;
+
+    //txFee:
+    //  minBoxValue    = 1000000 * (# of bets)
+    //  minerFee       = 1100000
+    //  changeBoxValue = 1000000
+    //  payoutFee      =  500000 * (# of bets)
+
+    //roulette bet for even
+    const board = {
+      txFee: minERG,
+      totalWager: 10,
+      bets: [
+        {
+          r4: 1,
+          r5: 0,
+          multiplier: 1,
+          amount: 10,
+        }
+      ]
+    }
+
+    // Get utxo for ERGs
+    ergoWallet.get_utxos(minERG, TOKENID_ERG).then((utxosResponse) => {
+      if (utxosResponse.length === 0) {
+        console.log("NO ERG UTXOS");
+        return;
+      } else {
+        utxos = JSON.parse(JSON.stringify(utxosResponse));
+        ergoWallet.get_utxos(board.totalWager, TOKENID_NO_TEST)
+          .then((utxosResponse) => {
+            if (utxosResponse.length === 0) {
+              console.log("NO OWL UTXOS");
+              return;
+            } else {
+              utxosResponse.forEach((owlBox) => {
+                let found = false;
+                utxos.forEach((box) => {
+                  // Check if any matching boxIds
+                  // TODO: Add a break/continue
+                  if (owlBox.boxId == box.boxId) {
+                    found = true;
+                  }
+                });
+                // Found none
+                if (!found) {
+                  utxos.push(owlBox);
+                }
+              });
+              console.log(utxos);
+              // send bet data structure to backend for the bet tx to be built
+              axios.post(`/api/v1/roulette/bet-tx`, {
+                board: board,
+                senderAddr: `${localStorage.getItem("walletAddress")}`,
+                utxos: utxos
+              })
+              .then(async function (response) {
+                // sign tx
+                const signedTx = await signTx(response.data);
+                console.log("signedTx", signedTx)
+                // Get a BoxId to use for the random number call
+                boxId = signedTx.outputs[2].boxId
+                // submit to node
+                submitTx(signedTx)
+                .then(async (txId) => {
+                  if (!txId) {
+                    console.log(`No submitted tx ID`);
+                    return null;
+                  }
+                  console.log(`Transaction submitted - ${txId.data}`);
+                  // call rng service with wallet address and box id to get our random number
+                  axios
+                    .get(`http://127.0.0.1:8089/random-number/roulette?walletAddr=${localStorage.getItem("walletAddress")}&boxId=${boxId}`)
+                    .then(async function (resp) {
+                      console.log('GET /random-number/roulette', {resp})
+                    })
+                    .catch(function (error) {
+                      console.log(error);
+                    });
+                })
+                .catch((err) => {
+                  console.log(err)
+                })
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+            }
+          })
+      }
+    })
+
+    async function signTx(txToBeSigned) {
+      try {
+        return await ergoWallet.sign_tx(txToBeSigned)
+      } catch (err) {
+        const msg = `[signTx] Error: ${JSON.stringify(err)}`
+        console.error(msg, err)
+        return null
+      }
+   }
+  
+    async function submitTx(txToBeSubmitted) {
+      try {
+        return await axios.post(`/api/v1/transactions`, {
+          senderAddr: `${localStorage.getItem("walletAddress")}`,
+          game: "roulette",
+          tx: txToBeSubmitted
+        })
+      } catch (err) {
+        const msg = `[submitTx] Error: ${JSON.stringify(err)}`
+        console.error(msg, err)
+        return null
+      }
+    }
     
     innerRef.current.setAttribute("data-spinto", "");
     innerRef.current.classList.remove("stop-spin");
@@ -367,13 +524,14 @@ const Roulette = () => {
     set_overlay_string(overlay_default);
 
     // gets value from blockhain
-    var randomNumber = 0;
-    setTimeout(() => {
-      randomNumber = Math.floor(Math.random() * 36);
-    }, Math.floor(Math.random() * 10) * 1000);
+    //var randomNumber = -1;
+    //setTimeout(() => {
+    //  randomNumber = Math.floor(Math.random() * 36);
+    //}, Math.floor(Math.random() * 10) * 1000);
 
     var waiting_for_respond_animation_delay = setInterval(() => {
-      if(randomNumber != 0)
+      console.log(`random number - ${randomNumber}`)
+      if(randomNumber != -1)
       {
         clearInterval(waiting_for_respond_animation_delay);
         innerRef.current.classList.remove("waiting-for-respond");
