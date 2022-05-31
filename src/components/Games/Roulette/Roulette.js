@@ -166,7 +166,7 @@ const Roulette = () => {
   const [revealData, setRevealData] = useState(false);
   const [resultNumber, setResultNumber] = useState(null);
   const [resultColor, setResultColor] = useState(null);
-  const [randomNumber, setRandomNumber] = useState(-1);
+  const [randomNumber, setRandomNumber] = useState(null);
   const [firstSpin, setFirstSpin] = useState(true);
   const [chipSelected, setChipSelected] = useState(100);
   const [totalBet, setTotalBet] = useState(0);
@@ -175,11 +175,14 @@ const Roulette = () => {
   const [latestBets, setLatestBets] = useState([]);
   const [bets_end, bets_end_toggle] = useState(false);
   const [table_filter_value, table_filter_set] = useState("");
+  const [stopSpin, setStopSpin] = useState(false);
+  const [newRandomNumber, setNewRandomNumber] = useState(false);
   const [natsConn, setNatsConn] = useState(false);
   const {ergoWallet, defaultAddress} = useContext(StateContext);
   const checkWallet = localStorage.getItem("walletConnected");
   let sub
   const sc = StringCodec();
+  //const waiting_for_respond_animation_delay = setInterval(() => {}, 1000);
 
   var arrayWithNumVals = [
     "num_val0",
@@ -331,7 +334,9 @@ const Roulette = () => {
               let rnString = sc.decode(m.data)
               const randNum = Number("0x"+rnString)%37
               console.log(randNum)
-              setRandomNumber(randNum)
+              setStopSpin(true);
+              setRandomNumber(randNum);
+              setNewRandomNumber(true);
             }
             console.log("subscription closed");
           })();
@@ -342,6 +347,48 @@ const Roulette = () => {
         console.log(error);
       });
   }
+
+  useEffect(() => {
+    if (stopSpin) {
+      setStopSpin(false)
+      setNewRandomNumber(!newRandomNumber)
+      let color = null;
+      innerRef.current.classList.remove("waiting-for-respond");
+
+      setTimeout(() => {
+        innerRef.current.setAttribute("data-spinto", randomNumber);
+      }, 50);
+
+      // remove the disabled attribute when the ball has stopped
+      //setInterval(() => {
+      setTimeout(() => {
+        setSpinAvailable(true);
+
+        if (randomNumber === 0) {
+          color = "green";
+        } else if (red.indexOf(randomNumber) !== -1) {
+          color = "red";
+        } else {
+          color = "black";
+        }
+
+        setTimeout(() => {
+          bets_end_toggle(false);
+          resetBets();
+          addLastResult(randomNumber);
+        }, 2500);
+
+        setResultNumber(randomNumber);
+        setResultColor(color);
+        setRevealData(true);
+        setRandomNumber(randomNumber);
+        if (firstSpin) setFirstSpin(false);
+      }, timer + 50);
+      setTimeout(() => {
+        innerRef.current.classList.add("stop-spin");
+      }, timer * 0.7);
+    }
+  }, [newRandomNumber])
 
   function addBetToObject(e) {
     var numbers = e.target.getAttribute("num-val");
@@ -375,7 +422,7 @@ const Roulette = () => {
   }
 
   function fromNumberToColor(number) {
-    console.log("el numero es" + number);
+    //console.log("el numero es" + number);
     if (number === 0) {
       return "green";
     } else if (red.indexOf(number) !== -1) {
@@ -514,7 +561,6 @@ const Roulette = () => {
     if (!firstSpin) {
       setRevealData(false);
     }
-    var color = null;
     setTimeout(() => {
       bets_end_toggle(true);
     }, 20);
@@ -522,62 +568,6 @@ const Roulette = () => {
     setSpinAvailable(false);
 
     set_overlay_string(overlay_default);
-
-    // gets value from blockhain
-    //var randomNumber = -1;
-    //setTimeout(() => {
-    //  randomNumber = Math.floor(Math.random() * 36);
-    //}, Math.floor(Math.random() * 10) * 1000);
-
-    var waiting_for_respond_animation_delay = setInterval(() => {
-      console.log(`random number - ${randomNumber}`)
-      if(randomNumber != -1)
-      {
-        clearInterval(waiting_for_respond_animation_delay);
-        innerRef.current.classList.remove("waiting-for-respond");
-
-        setTimeout(() => {
-          innerRef.current.setAttribute("data-spinto", randomNumber);
-        }, 50);
-
-        // setTimeout(() => {
-        //   setMaskText(maskDefault);
-        // }, timer + 540);
-
-        // // remove the disabled attribute when the ball has stopped
-        setInterval(() => {
-          setSpinAvailable(true);
-
-          if (randomNumber === 0) {
-            color = "green";
-          } else if (red.indexOf(randomNumber) !== -1) {
-            color = "red";
-          } else {
-            color = "black";
-          }
-
-          // setTimeout(() => {
-          //   set_overlay_string("");
-          // }, 400);
-
-          setTimeout(() => {
-            bets_end_toggle(false);
-            resetBets();
-            addLastResult(randomNumber);
-          }, 2500);
-
-          setResultNumber(randomNumber);
-          setResultColor(color);
-          setRevealData(true);
-          setRandomNumber(randomNumber);
-          if (firstSpin) setFirstSpin(false);
-        }, timer + 50);
-        setTimeout(() => {
-          innerRef.current.classList.add("stop-spin");
-        }, timer * 0.7);
-      }
-    }, 1000);
-    // above value needs to be same as animation duration in css file for "#fuckinginner.waiting-for-respond::before" in ms
   }
 
   function globalUndo() {
