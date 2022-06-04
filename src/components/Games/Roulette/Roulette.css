@@ -145,6 +145,13 @@
     position: relative;
 }
 
+.roulette-table-content-wrapper.insufficient-funds #table-overlay
+{
+    height: calc(100% - 80px);
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
 .plate {
     background-color: gray;
     width: 350px;
