@@ -26,6 +26,8 @@ import { useLocation } from "react-router-dom";
 import Header from "./components/Header/Header.js";
 import BodyContent from "./components/BodyContent/BodyContent.js"
 import ComingSoon from "./components/ComingSoon/ComingSoon.js";
+import darkBackground from "./assets/Elements/background_dark.png";
+
 // import LeftSideBar from "./components/LeftSideBar/LeftSideBar";
 // import logo from "./assets/Elements/logo.png";
 // import Swap from "./components/Swap/Swap";
@@ -43,7 +45,7 @@ function App() {
 	const path = location.pathname;
 	// console.log(path)
 	return (
-		<div className="App">
+		<div className="App" style={{backgroundImage: path.includes('/games') ? `url(${darkBackground})` : "none"}}>
 				{path.includes('/soon') ? <ComingSoon /> : 
 				<StateContext.Provider value={{ergoWallet, setErgoWallet, defaultAddress, setDefaultAddress}}>
 					<Header />
