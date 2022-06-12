@@ -11,6 +11,7 @@ import Stake from "../Stake/Stake.js";
 import Swap from "../Swap/Swap.js";
 import Coinflip from "../Games/Coinflip/Coinflip.js";
 import Roulette from "../Games/Roulette/Roulette";
+import AboutUs from "../AboutUs/AboutUs";
 
 function BodyContent({setIsLoading,setSwapTransaction}) {
     const location = useLocation();
@@ -40,6 +41,7 @@ function BodyContent({setIsLoading,setSwapTransaction}) {
                     <Route path="/swap" element={<Swap setIsLoading={setIsLoading} setSwapTransaction={setSwapTransaction} />} />
                     <Route path="/games/coinflip" element={<Coinflip />} />
                     <Route path="/games/roulette" element={<Roulette />} />
+                    <Route path="/aboutus" element={<AboutUs />} />
                 </Routes>
             </div>
         </div>
