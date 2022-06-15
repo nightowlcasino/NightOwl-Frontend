@@ -1,4 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
+import { connect, StringCodec } from "nats.ws";
+import StateContext from "../../Context";
+import axios from "axios";
 import "./Roulette.css";
 import outterWheel1 from "../../../assets/Elements/behind2.png";
 
@@ -7,6 +10,11 @@ import coin_500 from "../../../assets/Elements/coin_500.png";
 import coin_2k5 from "../../../assets/Elements/coin_2k5.png";
 import coin_10k from "../../../assets/Elements/coin_10k.png";
 import coin_50k from "../../../assets/Elements/coin_50k.png";
+
+const TOKENID_NO_TEST = "afd0d6cb61e86d15f2a0adc1e7e23df532ba3ff35f8ba88bed16729cae933032";
+const TOKENID_ERG = "0000000000000000000000000000000000000000000000000000000000000000";
+const MINER_FEE_VALUE = 1100000;
+const MIN_BOX_VALUE = 1000000;
 
 const Roulette = () => {
   var red = [32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3];
@@ -143,17 +151,13 @@ const Roulette = () => {
     num_val1st: [],
     num_val2nd: [],
     num_val3rd: [],
-
     num_val_first_12: [],
     num_val_second_12: [],
     num_val_third_12: [],
-
     num_val_first_18: [],
     num_val_second_18: [],
-
     num_val_red: [],
     num_val_black: [],
-
     num_val_even: [],
     num_val_odd: [],
   };
@@ -171,6 +175,16 @@ const Roulette = () => {
   const [latestBets, setLatestBets] = useState([]);
   const [bets_end, bets_end_toggle] = useState(false);
   const [table_filter_value, table_filter_set] = useState("");
+  const [stopSpin, setStopSpin] = useState(false);
+  const [newRandomNumber, setNewRandomNumber] = useState(false);
+  const [natsConn, setNatsConn] = useState(false);
+  const {ergoWallet, defaultAddress} = useContext(StateContext);
+  const checkWallet = localStorage.getItem("walletConnected");
+  let sub
+  const sc = StringCodec();
+  //const waiting_for_respond_animation_delay = setInterval(() => {}, 1000);
+
+  const [insufficient_funds_notification, insufficient_funds_notification_set] = useState(false);
 
   var arrayWithNumVals = [
     "num_val0",
@@ -311,6 +325,73 @@ const Roulette = () => {
 
   const innerRef = useRef();
 
+  const wsConnect = () => {
+    connect({ servers: "ws://0.0.0.0:9222" })
+      .then(async function (nc) {
+        if (checkWallet === "true") {
+          sub = nc.subscribe(`roulette.${localStorage.getItem("walletAddress")}`);
+          console.log(`subscribed to roulette.${localStorage.getItem("walletAddress")}`);
+          (async () => {
+            for await (const m of sub) {
+              let rnString = sc.decode(m.data)
+              const randNum = Number("0x"+rnString)%37
+              console.log(randNum)
+              setStopSpin(true);
+              setRandomNumber(randNum);
+              setNewRandomNumber(true);
+            }
+            console.log("subscription closed");
+          })();
+          setNatsConn(true)
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    if (stopSpin) {
+      setStopSpin(false)
+      setNewRandomNumber(!newRandomNumber)
+      let color = null;
+      innerRef.current.classList.remove("waiting-for-respond");
+
+      setTimeout(() => {
+        innerRef.current.setAttribute("data-spinto", randomNumber);
+      }, 50);
+
+      // remove the disabled attribute when the ball has stopped
+      //setInterval(() => {
+      setTimeout(() => {
+        setSpinAvailable(true);
+
+        if (randomNumber === 0) {
+          color = "green";
+        } else if (red.indexOf(randomNumber) !== -1) {
+          color = "red";
+        } else {
+          color = "black";
+        }
+
+        setTimeout(() => {
+          bets_end_toggle(false);
+          resetBets();
+          addLastResult(randomNumber);
+        }, 2500);
+
+        setResultNumber(randomNumber);
+        setResultColor(color);
+        setRevealData(true);
+        setRandomNumber(randomNumber);
+        if (firstSpin) setFirstSpin(false);
+      }, timer + 50);
+      setTimeout(() => {
+        innerRef.current.classList.add("stop-spin");
+      }, timer * 0.7);
+    }
+  }, [newRandomNumber])
+
   function addBetToObject(e) {
     var numbers = e.target.getAttribute("num-val");
     console.log(e.target);
@@ -343,7 +424,7 @@ const Roulette = () => {
   }
 
   function fromNumberToColor(number) {
-    console.log("el numero es" + number);
+    //console.log("el numero es" + number);
     if (number === 0) {
       return "green";
     } else if (red.indexOf(number) !== -1) {
@@ -353,18 +434,135 @@ const Roulette = () => {
     }
   }
   function spinTheWheel() {
+    if (!natsConn) {
+      wsConnect()
+    }
+
+    let utxos = [];
+    let boxId = "";
+    const minERG = MIN_BOX_VALUE + MIN_BOX_VALUE + MINER_FEE_VALUE + MIN_BOX_VALUE/2;
+    
+    //txFee:
+    //  minBoxValue    = 1000000 * (# of bets)
+    //  minerFee       = 1100000
+    //  changeBoxValue = 1000000
+    //  payoutFee      =  500000 * (# of bets)
+
+    //roulette bet for even
+    const board = {
+      txFee: minERG,
+      totalWager: 10,
+      bets: [
+        {
+          r4: 1,
+          r5: 0,
+          multiplier: 1,
+          amount: 10,
+        }
+      ]
+    }
+
+    // Get utxo for ERGs
+    ergoWallet.get_utxos(minERG, TOKENID_ERG).then((utxosResponse) => {
+      if (utxosResponse.length === 0) {
+        console.log("NO ERG UTXOS");
+        return;
+      } else {
+        utxos = JSON.parse(JSON.stringify(utxosResponse));
+        ergoWallet.get_utxos(board.totalWager, TOKENID_NO_TEST)
+          .then((utxosResponse) => {
+            if (utxosResponse.length === 0) {
+              console.log("NO OWL UTXOS");
+              return;
+            } else {
+              utxosResponse.forEach((owlBox) => {
+                let found = false;
+                utxos.forEach((box) => {
+                  // Check if any matching boxIds
+                  // TODO: Add a break/continue
+                  if (owlBox.boxId == box.boxId) {
+                    found = true;
+                  }
+                });
+                // Found none
+                if (!found) {
+                  utxos.push(owlBox);
+                }
+              });
+              console.log(utxos);
+              // send bet data structure to backend for the bet tx to be built
+              axios.post(`/api/v1/roulette/bet-tx`, {
+                board: board,
+                senderAddr: `${localStorage.getItem("walletAddress")}`,
+                utxos: utxos
+              })
+              .then(async function (response) {
+                // sign tx
+                const signedTx = await signTx(response.data);
+                console.log("signedTx", signedTx)
+                // Get a BoxId to use for the random number call
+                boxId = signedTx.outputs[2].boxId
+                // submit to node
+                submitTx(signedTx)
+                .then(async (txId) => {
+                  if (!txId) {
+                    console.log(`No submitted tx ID`);
+                    return null;
+                  }
+                  console.log(`Transaction submitted - ${txId.data}`);
+                  // call rng service with wallet address and box id to get our random number
+                  axios
+                    .get(`http://127.0.0.1:8089/random-number/roulette?walletAddr=${localStorage.getItem("walletAddress")}&boxId=${boxId}`)
+                    .then(async function (resp) {
+                      console.log('GET /random-number/roulette', {resp})
+                    })
+                    .catch(function (error) {
+                      console.log(error);
+                    });
+                })
+                .catch((err) => {
+                  console.log(err)
+                })
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+            }
+          })
+      }
+    })
+
+    async function signTx(txToBeSigned) {
+      try {
+        return await ergoWallet.sign_tx(txToBeSigned)
+      } catch (err) {
+        const msg = `[signTx] Error: ${JSON.stringify(err)}`
+        console.error(msg, err)
+        return null
+      }
+   }
+  
+    async function submitTx(txToBeSubmitted) {
+      try {
+        return await axios.post(`/api/v1/transactions`, {
+          senderAddr: `${localStorage.getItem("walletAddress")}`,
+          game: "roulette",
+          tx: txToBeSubmitted
+        })
+      } catch (err) {
+        const msg = `[submitTx] Error: ${JSON.stringify(err)}`
+        console.error(msg, err)
+        return null
+      }
+    }
+    
     innerRef.current.setAttribute("data-spinto", "");
     innerRef.current.classList.remove("stop-spin");
     innerRef.current.classList.remove("default-spin");
+    innerRef.current.classList.add("waiting-for-respond");
     if (!firstSpin) {
       setRevealData(false);
     }
-    var randomNumber = Math.floor(Math.random() * 36);
-    var color = null;
-    setTimeout(() => {
-      innerRef.current.setAttribute("data-spinto", randomNumber);
-    }, 50);
-
     setTimeout(() => {
       bets_end_toggle(true);
     }, 20);
@@ -372,45 +570,19 @@ const Roulette = () => {
     setSpinAvailable(false);
 
     set_overlay_string(overlay_default);
+  }
 
-    // setTimeout(() => {
-    //   setMaskText(maskDefault);
-    // }, timer + 540);
-
-    // remove the disabled attribute when the ball has stopped
+  function insufficient_funds_popup()
+  {
+    set_overlay_string("Insufficient funds");
+    insufficient_funds_notification_set(true);
     setTimeout(() => {
-      setSpinAvailable(true);
-
-      if (randomNumber === 0) {
-        color = "green";
-      } else if (red.indexOf(randomNumber) !== -1) {
-        color = "red";
-      } else {
-        color = "black";
-      }
-
-      // setTimeout(() => {
-      //   set_overlay_string("");
-      // }, 400);
-
-      setTimeout(() => {
-        bets_end_toggle(false);
-        resetBets();
-        addLastResult(randomNumber);
-      }, 2500);
-
-      setResultNumber(randomNumber);
-      setResultColor(color);
-      setRevealData(true);
-      setRandomNumber(randomNumber);
-      if (firstSpin) setFirstSpin(false);
-    }, timer + 50);
-    setTimeout(() => {
-      innerRef.current.classList.add("stop-spin");
-    }, timer * 0.7);
+      insufficient_funds_notification_set(false);
+    }, 3000);
   }
 
   function globalUndo() {
+    insufficient_funds_popup();
     let lastBet = latestBets.pop();
     if (lastBet === undefined) {
       return;
@@ -711,7 +883,7 @@ const Roulette = () => {
           </div>
         </div>
       </div>
-      <div className="roulette-table-content-wrapper">
+      <div className={insufficient_funds_notification ? "roulette-table-content-wrapper insufficient-funds" : "roulette-table-content-wrapper"}>
         <div id="before-table">
           <div id="table-total-bet">
             Total bet <span>{totalBet} OWL</span>
@@ -1425,38 +1597,40 @@ const Roulette = () => {
             ></div>
           </div>
         </div>
-        <center className="bottom-buttons-container">
-          <button
-            type="button"
-            className={spinAvailable ? "btn" : "btn disabled"}
-            id="globalUndo"
-            onClick={() => globalUndo()}
-          >
-            <span className="btn-label">Undo</span>
-          </button>
-          <span className="buttons-temporal-spacer">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </span>
-          <button
-            type="button"
-            className={spinAvailable ? "btn" : "btn disabled"}
-            id="spin"
-            onClick={() => spinTheWheel()}
-          >
-            <span className="btn-label">Spin</span>
-          </button>
-          <span className="buttons-temporal-spacer">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </span>
-          <button
-            type="button"
-            className={spinAvailable ? "btn" : "btn disabled"}
-            id="resetBetsButton"
-            onClick={() => resetBets()}
-          >
-            <span className="btn-label">Clear all</span>
-          </button>
-        </center>
+        <div id="bottom-buttons-container">
+          <div className="spacer"></div>
+          <div className="button-container">
+            <button
+              type="button"
+              className={spinAvailable ? "btn" : "btn disabled"}
+              id="globalUndo"
+              onClick={() => globalUndo()}
+            >
+              <span className="btn-label">Undo</span>
+            </button>
+          </div>
+          <div className="button-container">
+            <button
+              type="button"
+              className={spinAvailable ? "btn" : "btn disabled"}
+              id="spin"
+              onClick={() => spinTheWheel()}
+            >
+              <span className="btn-label">Spin</span>
+            </button>
+          </div>
+          <div className="button-container">
+            <button
+              type="button"
+              className={spinAvailable ? "btn" : "btn disabled"}
+              id="resetBetsButton"
+              onClick={() => resetBets()}
+            >
+              <span className="btn-label">Clear all</span>
+            </button>
+          </div>
+          <div className="spacer"></div>
+        </div>
         <div id="table-overlay">
           <div id="table-overlay-text">{overlay_string}</div>
         </div>

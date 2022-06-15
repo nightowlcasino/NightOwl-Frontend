@@ -145,6 +145,13 @@
     position: relative;
 }
 
+.roulette-table-content-wrapper.insufficient-funds #table-overlay
+{
+    height: calc(100% - 80px);
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
 .plate {
     background-color: gray;
     width: 350px;
@@ -229,6 +236,20 @@
     padding-top: 55px;
     padding-left: 55px;
     transition: padding 2s ease, transform 9s ease-out;
+}
+
+#fuckinginner.waiting-for-respond::before
+{
+    animation-name: spin-ball-forever;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes spin-ball-forever
+{
+    0%{transform: rotateZ(360deg);}
+    100%{transform: rotateZ(0deg);}
 }
 
 .behindlol {
@@ -687,12 +708,6 @@
     border-radius: 10px;
 }
 
-#table-outter td
-{
-    padding: 5px;
-    background-color: red;
-    text-align: center;
-}
 #table-history .history-number.red
 {
     background-color: #bf2125;
@@ -712,13 +727,6 @@
 {
     padding: 5px;
 }
-
-#numbers-table td
-{
-    margin: 10px;
-    background-color: #009700;
-} 
-
 
 #table-wrapper
 {
@@ -1447,6 +1455,27 @@
     padding: 25px 19px;
 }
 
+#bottom-buttons-container
+{
+    display: flex;
+    flex-direction: row;
+}
+
+#bottom-buttons-container .spacer
+{
+    flex: 71px;
+    max-width: 71px;
+}
+
+#bottom-buttons-container .button-container
+{
+    flex: 30%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
 @media all and (max-width: 992px)
 {
     .roulette-wrapper
@@ -1539,13 +1568,7 @@
         align-items: center;
     }
 
-    .bottom-buttons-container {
+    #bottom-buttons-container {
         margin: 0 auto;
     }
-
-    .buttons-temporal-spacer {
-        padding: 20px;
-    }
-
-    
 }

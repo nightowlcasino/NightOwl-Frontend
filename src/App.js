@@ -31,6 +31,8 @@ import green_check from "./assets/Elements/green_checkmark.png"
 import { IoClose } from 'react-icons/io5'
 import successTick from './assets/Elements/successTick.png'
 import Footer from "./components/Footer/Footer";
+import darkBackground from "./assets/Elements/background_dark.png";
+
 // import LeftSideBar from "./components/LeftSideBar/LeftSideBar";
 // import logo from "./assets/Elements/logo.png";
 // import Swap from "./components/Swap/Swap";
@@ -50,7 +52,7 @@ function App() {
 	const path = location.pathname;
 	// console.log(path)
 	return (
-		<div className={(swapTransaction || isLoading) ? "App overlay" : "App"}>
+		<div className={(swapTransaction || isLoading) ? "App overlay" : "App"} style={{backgroundImage: path.includes('/games') ? `url(${darkBackground})` : "none"}}>
 			{/* need to add class 'overlay' to app in order to have blurred content in case swap overlay is active */}
 				{path.includes('/soon') ? <ComingSoon /> : 
 				<StateContext.Provider value={{ergoWallet, setErgoWallet, defaultAddress, setDefaultAddress}}>

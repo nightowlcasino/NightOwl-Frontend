@@ -89,7 +89,7 @@ h1-leader{
 .App.overlay #header-wrapper,
 .App.overlay #body-content-wrapper
 {
-  filter: blur(5px);
+  filter: blur(6px);
 }
 
 .App.overlay #overlay
