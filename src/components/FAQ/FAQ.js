@@ -22,7 +22,7 @@ export default function FAQ() {
 							<div id="home-page-inner-wrapper">
 								<div style={{width: "100%", textAlign: "center", marginBottom: 20}}>
 									<h1 style={{fontWeight:'900', fontSize:'50px',marginBottom:'0'}}><span style={{color:'white'}}>F</span><span style={{color:'#d70a84'}}>A</span><span style={{color:'white'}}>Q</span></h1>
-									<p style={{color:'white'}}>Frequently asked questions regarding the Night Owl project.</p>
+									<p style={{color:'white', fontSize: "20px", padding: 8}}>Frequently asked questions regarding the Night Owl project.</p>
 								</div>
 							</div>
 						</div>
@@ -30,7 +30,6 @@ export default function FAQ() {
 				</div>
 			</div>
 			<div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gridGap: 4 }}>
-
 				<div style={{width: "100%"}}>
 					<FAQItem title="Why do we exist in the first place" description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"}/>
 				</div>
