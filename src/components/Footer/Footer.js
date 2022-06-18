@@ -1,15 +1,16 @@
 import logo from "../../assets/Elements/logo.png";
 import textLogo from "../../assets/Elements/textlogo.png";
+import './Footer.css'
 
 export default function Footer() {
     return(
-        <div style={{marginTop:'30px', marginBottom:'30px', paddingTop:'25px', width:'100%', display:'flex', margin:'auto', maxWidth: '1335px', justifyContent:'space-between', alignItems:'center', borderTop:'2px solid #d70a84', color:'rgb(162, 162, 168)', lineHeight: '1.4', fontSize:'14px'}}>
+        <div id='footer' style={{marginTop:'30px', marginBottom:'30px', paddingTop:'25px', width:'100%', display:'flex', margin:'auto', maxWidth: '1400px', justifyContent:'space-between', alignItems:'center', borderTop:'2px solid #d70a84', color:'rgb(162, 162, 168)', lineHeight: '1.4', fontSize:'14px'}}>
             {/* <img src={logo} style={{width:'120px'}} /> */}
             <div style={{flex: '25% 1', display: 'flex', flexDirection: 'row', maxWidth: '450px', alignContent: 'center', alignItems: 'center', marginLeft:'12px'}}>
 				{/* <div style={{ backgroundImage: `url(${textLogo})`, height: '50px', flex: '100% 1', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain', margin: '0 auto'}}></div> */}
 				<img src={textLogo} style={{ flex: '100% 2', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain', margin: '0 auto'}} />
 			</div>
-            <div style={{display:'flex',width:'100%', justifyContent:'center', gap:'100px'}}>
+            <div id='footerContent' style={{display:'flex',width:'100%', justifyContent:'center', gap:'100px'}}>
                 <ul style={{listStyleType:'none'}}>
                     <li style={{fontWeight:'normal', color:'rgb(244, 244, 245)', lineHeight: '1.5'}}>Night Owl</li>
                     <span style={{cursor:'pointer'}}>

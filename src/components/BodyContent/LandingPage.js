@@ -52,7 +52,7 @@ function LandingPage() {
                                             <th>Tx ID</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody style={{display:'flex'}}>
                                         <tr>
                                             <td>2hRSbF...FKbhnz</td>
                                             <td className="transaction-amount">1534 ERG</td>
