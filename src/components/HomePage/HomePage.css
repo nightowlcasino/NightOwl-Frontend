@@ -54,8 +54,6 @@ th span{
 }
 
 tr td{
-    display: flex;
-    justify-content: center;
     gap: 6rem;
     font-size: small;
 }
