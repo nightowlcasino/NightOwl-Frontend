@@ -13,6 +13,7 @@ import Coinflip from "../Games/Coinflip/Coinflip.js";
 import Roulette from "../Games/Roulette/Roulette";
 import AboutUs from "../AboutUs/AboutUs";
 import FAQ from "../FAQ/FAQ";
+import LiquidityProvision from "../LiquidityProvision/LiquidityProvision";
 
 function BodyContent({setIsLoading,setSwapTransaction}) {
     const location = useLocation();
@@ -44,6 +45,7 @@ function BodyContent({setIsLoading,setSwapTransaction}) {
                     <Route path="/games/roulette" element={<Roulette />} />
                     <Route path="/aboutus" element={<AboutUs />} />
                     <Route path="/faq" element={<FAQ />} />
+                    <Route path="/liquidity" element={<LiquidityProvision />} />
                 </Routes>
             </div>
         </div>

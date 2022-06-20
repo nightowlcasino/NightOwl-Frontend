@@ -1,11 +1,3 @@
-import image1 from "../../assets/Elements/Design-2_0000_Layer-21.png";
-import "../HomePage/HomePage.css";
-import "../BodyContent/BodyContent.css";
-
-import home_trending from "../../assets/Elements/home_trending.png";
-import leaderboard_icon from "../../assets/Elements/leaderboard_icon.png";
-import slots from "../../assets/Elements/slots.png";
-import roulette from "../../assets/Elements/roulette.png";
 import FAQItem from "./FAQItem";
 
 
