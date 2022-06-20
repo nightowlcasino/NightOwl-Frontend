@@ -184,6 +184,8 @@ const Roulette = () => {
   const sc = StringCodec();
   //const waiting_for_respond_animation_delay = setInterval(() => {}, 1000);
 
+  const [insufficient_funds_notification, insufficient_funds_notification_set] = useState(false);
+
   var arrayWithNumVals = [
     "num_val0",
     "num_val0_3",
@@ -576,7 +578,17 @@ const Roulette = () => {
     set_overlay_string(overlay_default);
   }
 
+  function insufficient_funds_popup()
+  {
+    set_overlay_string("Insufficient funds");
+    insufficient_funds_notification_set(true);
+    setTimeout(() => {
+      insufficient_funds_notification_set(false);
+    }, 3000);
+  }
+
   function globalUndo() {
+    insufficient_funds_popup();
     let lastBet = latestBets.pop();
     if (lastBet === undefined) {
       return;
@@ -877,7 +889,7 @@ const Roulette = () => {
           </div>
         </div>
       </div>
-      <div className="roulette-table-content-wrapper">
+      <div className={`${insufficient_funds_notification ? "roulette-table-content-wrapper insufficient-funds" : "roulette-table-content-wrapper"}`}>
         <div id="before-table">
           <div id="table-total-bet">
             Total bet <span>{totalBet} OWL</span>

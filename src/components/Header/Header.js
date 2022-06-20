@@ -3,8 +3,11 @@ import React from "react";
 import "./Header.css";
 
 import logo from "../../assets/Elements/logo.png";
+import logo_glow from "../../assets/Elements/logo_glow.png";
 import magnifier from "../../assets/Elements/magnifier.png";
 import AddWallet from "../ConnectWallet/AddWallet";
+
+import { useLocation } from "react-router-dom";
 
 // import { Link } from "react-router-dom";
 // import { useTranslation } from "react-i18next";
@@ -26,6 +29,8 @@ import AddWallet from "../ConnectWallet/AddWallet";
 const Header = () => {
 	// const currentLanguageCode = cookies.get("i18next") || "en";
 	// const { t } = useTranslation();
+	const location = useLocation();
+	const path = location.pathname;
 
 	window.addEventListener("scroll", () => 
 	{
@@ -43,7 +48,7 @@ const Header = () => {
 		<div id="header-wrapper">
 			<div id="header-content">
 				<div id="logo-wrapper">
-					<div id="logo" style={{ backgroundImage: `url(${logo})`}}></div>
+					<div id="logo" style={{ backgroundImage: `url(${path.includes("game") ? logo_glow : logo})`}}></div>
 				</div>
 				<div id="header-items">
 					<div id="header-search-wrapper">
