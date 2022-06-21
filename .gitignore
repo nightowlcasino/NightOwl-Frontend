@@ -2,3 +2,4 @@
 /build
 .env
 /.vs
+package-lock.json
