@@ -22,9 +22,9 @@ function liquidity({ setIsLoading, setliquidityTransaction }) {
 
 
 	return (
-		<div id="liquidity-wrapper" style={{marginTop: 30}}>
-			<div id="liquidity-content-wrapper">
-				<div id="liquidity-content-inner-wrapper">
+		<div className="liquidity-container" style={{marginTop: 30}}>
+			<div  style={{width: "30%"}}>
+				<div className="house-wrapper">
 					<form id="liquidity-content" style={{position: "relative"}}>
 						<div className="liquidity-corner-dropdown">
 							<DotsHorizontalIcon color="white" width={24}/>
@@ -38,7 +38,7 @@ function liquidity({ setIsLoading, setliquidityTransaction }) {
 						</div>
 					</form>
 				</div>
-				<div id="liquidity-content-inner-wrapper" style={{marginTop: 28}}>
+				<div className="house-wrapper" style={{marginTop: 28}}>
 					<form id="liquidity-content" style={{position: "relative"}}>
 						<div className="liquidity-corner-dropdown">
 							<DotsHorizontalIcon color="white" width={24}/>
@@ -52,7 +52,7 @@ function liquidity({ setIsLoading, setliquidityTransaction }) {
 						</div>
 					</form>
 				</div>
-				<div id="liquidity-content-inner-wrapper" style={{marginTop: 28}}>
+				<div className="house-wrapper" style={{marginTop: 28}}>
 					<form id="liquidity-content" style={{position: "relative"}}>
 						<div className="liquidity-corner-dropdown">
 							<DotsHorizontalIcon color="white" width={24}/>
@@ -88,22 +88,38 @@ function liquidity({ setIsLoading, setliquidityTransaction }) {
 					</form>
 				</div>
 			</div>
-			<div id="liquidity-content-wrapper">
-				<div id="liquidity-content-inner-wrapper" style={{padding: 18}}>
-					<form id="liquidity-content" style={{position: "relative"}}>
-						<div className="liquidity-corner-dropdown">
-							<DotsHorizontalIcon color="white" width={24}/>
-						</div>
-						<div id="liquidity-header">
-							<div style={{display: "inline-flex"}}>
-								<h1 style={{marginBottom: 0, marginTop: 0}}>You are a house!</h1>
+			<div style={{width: "70%"}}>
+				<div className="house-wrapper" >
+					<div>
+						<form  style={{position: "relative"}}>
+							<div className="liquidity-corner-dropdown">
+								<DotsHorizontalIcon color="white" width={24}/>
 							</div>
-							<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>By staking your coins you are providing liquidity for other people to play their favorite games and have fun.</p>
-						</div>
-					</form>
+							<div>
+								<div style={{display: "inline-flex"}}>
+									<h1 style={{marginBottom: 0, marginTop: 0}}>You are a house!</h1>
+								</div>
+								<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>By staking your coins you are providing liquidity for other people to play their favorite games and have fun.</p>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div className="house-wrapper" style={{height: "700px"}}>
+					<div>
+						<form  style={{position: "relative"}}>
+							<div className="liquidity-corner-dropdown">
+								<DotsHorizontalIcon color="white" width={24}/>
+							</div>
+							<div>
+								<div style={{display: "inline-flex"}}>
+									<h1 style={{marginBottom: 0, marginTop: 0}}>You are a house!</h1>
+								</div>
+								<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>By staking your coins you are providing liquidity for other people to play their favorite games and have fun.</p>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
-
 		</div>
 	);
 }

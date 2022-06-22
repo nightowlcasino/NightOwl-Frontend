@@ -5,10 +5,17 @@
     flex-direction: row;
 }
 
+.liquidity-container
+{
+    flex: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
 #liquidity-wrapper #liquidity-content-wrapper,
 #liquidity-wrapper #liquidity-image-wrapper
 {
-    flex: 50%;
+    /* flex: 50%; */
     display: flex;
     align-items: center;
     align-content: center;
@@ -28,6 +35,22 @@
     display: flex;
     flex-direction: column;
     padding-bottom: 0;
+    padding: 8px;
+}
+
+.house-wrapper
+{
+    /* width: 100%; */
+    /* max-width: 400px; */
+    border-radius: 30px;
+    box-shadow: 0px 0px 15px -5px black;
+    /* margin: 0 30px; */
+    background-color: #5b0084;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    margin: 20px
 }
 
 #liquidity-wrapper #liquidity-content-wrapper #liquidity-content-inner-wrapper #liquidity-content
@@ -47,7 +70,7 @@
 {
     color: white;
     margin: 10px;
-    font-size: 45px;
+    font-size: 32px;
 }
 
 #liquidity-subheader
@@ -59,12 +82,12 @@
 
 #liquidity-wrapper #liquidity-content-wrapper #liquidity-content-inner-wrapper #liquidity-content #liquidity-input-fields-wrapper
 {
-    display: flex;
+    /* display: flex; */
     flex-direction: row;
     width: 90%;
     max-width: 300px;
     margin: 0 auto;
-    flex: 0 1 auto;
+    /* flex: 0 1 auto; */
     align-items: center;
     align-content: center;
 }
@@ -89,7 +112,7 @@ input[type=number] {
 
 #liquidity-wrapper #liquidity-content-wrapper #liquidity-content-inner-wrapper #liquidity-content #liquidity-input-fields-wrapper #liquidity-input-fields .input-field
 {
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     margin: 0 auto;
     position: relative;
@@ -131,7 +154,7 @@ input[type=number] {
 #liquidity-wrapper #liquidity-content-wrapper #liquidity-content-inner-wrapper #liquidity-content #liquidity-input-fields-wrapper #liquidity-input-fields #input-separator-wrapper
 {
     text-align: center;
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
 }
 
@@ -291,7 +314,7 @@ input[type=number] {
 {
     #liquidity-wrapper
     {
-        flex-direction: column;
+        /* flex-direction: column; */
     }
 
     #liquidity-wrapper #liquidity-image-wrapper
@@ -311,6 +334,6 @@ input[type=number] {
 /* PARTS QUOKKA ADDED */
 .liquidity-corner-dropdown {
     position: absolute;
-    top: 5px;
-    right: 20px
+    top: -10px;
+    right: -10px
 }
