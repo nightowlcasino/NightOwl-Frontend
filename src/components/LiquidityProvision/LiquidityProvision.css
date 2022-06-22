@@ -50,6 +50,13 @@
     font-size: 45px;
 }
 
+#liquidity-subheader
+{
+    text-align: center;
+    font-size: 22px;
+    font-weight: lighter;
+}
+
 #liquidity-wrapper #liquidity-content-wrapper #liquidity-content-inner-wrapper #liquidity-content #liquidity-input-fields-wrapper
 {
     display: flex;

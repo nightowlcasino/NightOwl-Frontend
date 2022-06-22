@@ -52,9 +52,7 @@ function liquidity({ setIsLoading, setliquidityTransaction }) {
 						</div>
 					</form>
 				</div>
-			</div>
-			<div id="liquidity-content-wrapper">
-				<div id="liquidity-content-inner-wrapper">
+				<div id="liquidity-content-inner-wrapper" style={{marginTop: 28}}>
 					<form id="liquidity-content" style={{position: "relative"}}>
 						<div className="liquidity-corner-dropdown">
 							<DotsHorizontalIcon color="white" width={24}/>
@@ -62,9 +60,45 @@ function liquidity({ setIsLoading, setliquidityTransaction }) {
 						<div id="liquidity-header">
 							<div style={{display: "inline-flex"}}>
 								<ChevronUpIcon color="red" width={24}/>
-								<h1 style={{marginBottom: 0, marginTop: 0}}>1 WEEK</h1>
+								<h1 style={{marginBottom: 0, marginTop: 0}}>STATAS</h1>
 							</div>
-							<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>You have been staking for.</p>
+							<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>Inspect details on staking.</p>
+						</div>
+						<div id="liquidity-subheader">
+							<div>
+								<p style={{marginBottom: 0, marginTop: 0, display: "inline-block"}}>100,151</p>
+								<p style={{marginBottom: 0, marginTop: 0, display: "inline-block", fontSize: 12}}>OWL</p>
+							</div>
+							<p style={{marginTop: 2, fontSize: 12, opacity: 0.8}}>Total Earned</p>
+						</div>
+						<div id="liquidity-subheader">
+							<div>
+								<p style={{marginBottom: 0, marginTop: 0, display: "inline-block"}}>5,123,151</p>
+								<p style={{marginBottom: 0, marginTop: 0, display: "inline-block", fontSize: 12}}>OWL</p>
+							</div>
+							<p style={{marginTop: 2, fontSize: 12, opacity: 0.8}}>Estimated Profit</p>
+						</div>
+						<div id="liquidity-subheader" style={{marginBottom: 12}}>
+							<div>
+								<p style={{marginBottom: 0, marginTop: 0, display: "inline-block"}}>5,010,151</p>
+								<p style={{marginBottom: 0, marginTop: 0, display: "inline-block", fontSize: 12}}>OWL</p>
+							</div>
+							<p style={{marginTop: 2, fontSize: 12, opacity: 0.8}}>Staked</p>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div id="liquidity-content-wrapper">
+				<div id="liquidity-content-inner-wrapper" style={{padding: 18}}>
+					<form id="liquidity-content" style={{position: "relative"}}>
+						<div className="liquidity-corner-dropdown">
+							<DotsHorizontalIcon color="white" width={24}/>
+						</div>
+						<div id="liquidity-header">
+							<div style={{display: "inline-flex"}}>
+								<h1 style={{marginBottom: 0, marginTop: 0}}>You are a house!</h1>
+							</div>
+							<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>By staking your coins you are providing liquidity for other people to play their favorite games and have fun.</p>
 						</div>
 					</form>
 				</div>
