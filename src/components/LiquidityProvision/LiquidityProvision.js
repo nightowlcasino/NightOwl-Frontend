@@ -30,37 +30,37 @@ function liquidity({ setIsLoading, setliquidityTransaction }) {
 						<div className="liquidity-corner-dropdown">
 							<DotsHorizontalIcon color="white" width={24}/>
 						</div>
-						<div id="liquidity-header">
+						<div id="liquidity-header" style={{textAlign: "center"}}>
 							<div style={{display: "inline-flex"}}>
-								<ChevronUpIcon color="red" width={24}/>
+								<ChevronUpIcon color="red" width={24} style={{marginLeft: -12}}/>
 								<h1 style={{marginBottom: 0, marginTop: 0}}>1 WEEK</h1>
 							</div>
 							<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>You have been staking for.</p>
 						</div>
 					</form>
 				</div>
-				<div className="house-wrapper" style={{marginTop: 28}}>
+				<div className="house-wrapper" style={{marginTop: 28, textAlign: "center"}}>
 					<form id="liquidity-content" style={{position: "relative"}}>
 						<div className="liquidity-corner-dropdown">
 							<DotsHorizontalIcon color="white" width={24}/>
 						</div>
 						<div id="liquidity-header">
 							<div style={{display: "inline-flex"}}>
-								<ChevronUpIcon color="red" width={24}/>
+								<ChevronUpIcon color="red" width={24} style={{marginLeft: -12}}/>
 								<h1 style={{marginBottom: 0, marginTop: 0}}>7% APY</h1>
 							</div>
 							<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>You have been staking for.</p>
 						</div>
 					</form>
 				</div>
-				<div className="house-wrapper" style={{marginTop: 28}}>
+				<div className="house-wrapper" style={{marginTop: 28, textAlign: "center"}}>
 					<form id="liquidity-content" style={{position: "relative"}}>
 						<div className="liquidity-corner-dropdown">
 							<DotsHorizontalIcon color="white" width={24}/>
 						</div>
 						<div id="liquidity-header">
 							<div style={{display: "inline-flex"}}>
-								<ChevronUpIcon color="red" width={24}/>
+								<ChevronUpIcon color="red" width={24} style={{marginLeft: -12}}/>
 								<h1 style={{marginBottom: 0, marginTop: 0}}>STATAS</h1>
 							</div>
 							<p style={{marginTop: 0, marginBottom: 12, opacity: "0.8"}}>Inspect details on staking.</p>

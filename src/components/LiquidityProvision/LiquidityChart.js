@@ -88,7 +88,7 @@ function chartOptions() {
         global: {
           responsive: true,
           maintainAspectRatio: false,
-          defaultColor: "rgb(255, 255, 255, 0.8)",
+          defaultColor: "rgb(255, 255, 255, 0.9)",
           defaultFontColor: "rgb(255, 255, 255, 0.9)",
           defaultFontFamily: "inherit",
           defaultFontSize: 14,
