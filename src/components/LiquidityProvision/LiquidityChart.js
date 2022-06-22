@@ -14,7 +14,7 @@ export default function FloorChart(props) {
             parseOptions(Chart, chartOptions());
         }
           
-    })
+    },[window.Chart])
 
 
     //------ Chart Info ------
@@ -61,7 +61,9 @@ export default function FloorChart(props) {
                 <div>
                     <Line
                         data={data}
-                        // options={options}
+                        redraw
+                        options={options}
+                        height={"400"}
                         // id="chart-sales"
                         // className="chart-canvas"
                     />
