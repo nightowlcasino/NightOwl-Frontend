@@ -4,6 +4,7 @@ import StateContext from "../Context";
 //import { WalletContext } from "../Header/Header";
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/solid'
 import { DotsHorizontalIcon } from '@heroicons/react/solid'
+import LiquidityChart from './LiquidityChart'
 
 import "./LiquidityProvision.css";
 import "../BodyContent/BodyContent.css";
@@ -62,7 +63,7 @@ function liquidity({ setIsLoading, setliquidityTransaction }) {
 								<ChevronUpIcon color="red" width={24}/>
 								<h1 style={{marginBottom: 0, marginTop: 0}}>STATAS</h1>
 							</div>
-							<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>Inspect details on staking.</p>
+							<p style={{marginTop: 0, marginBottom: 12, opacity: "0.8"}}>Inspect details on staking.</p>
 						</div>
 						<div id="liquidity-subheader">
 							<div>
@@ -104,19 +105,9 @@ function liquidity({ setIsLoading, setliquidityTransaction }) {
 						</form>
 					</div>
 				</div>
-				<div className="house-wrapper" style={{height: "700px"}}>
+				<div className="house-wrapper">
 					<div>
-						<form  style={{position: "relative"}}>
-							<div className="liquidity-corner-dropdown">
-								<DotsHorizontalIcon color="white" width={24}/>
-							</div>
-							<div>
-								<div style={{display: "inline-flex"}}>
-									<h1 style={{marginBottom: 0, marginTop: 0}}>You are a house!</h1>
-								</div>
-								<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>By staking your coins you are providing liquidity for other people to play their favorite games and have fun.</p>
-							</div>
-						</form>
+						<LiquidityChart />
 					</div>
 				</div>
 			</div>
