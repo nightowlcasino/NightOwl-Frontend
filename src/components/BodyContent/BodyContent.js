@@ -18,7 +18,7 @@ import LiquidityProvision from "../LiquidityProvision/LiquidityProvision";
 function BodyContent({setIsLoading,setSwapTransaction}) {
     const location = useLocation();
     const path = location.pathname;
-
+    const [sidebarToggled, setSidebarToggled] = useState(false);
     var body_content_game_class = "";
 
     console.log(path.toLocaleLowerCase().match("games"));
@@ -34,7 +34,7 @@ function BodyContent({setIsLoading,setSwapTransaction}) {
 
 	return (
         <div id="body-content-wrapper" className={body_content_game_class}>
-            <Sidebars />
+            <Sidebars sidebarToggled={sidebarToggled} setSidebarToggled={setSidebarToggled}/>
             <div id="body-content">
                 <Routes>
                     <Route path="/" element={<LandingPage />} />
@@ -42,7 +42,7 @@ function BodyContent({setIsLoading,setSwapTransaction}) {
                     <Route path="/stake" element={<Stake />} />
                     <Route path="/swap" element={<Swap setIsLoading={setIsLoading} setSwapTransaction={setSwapTransaction} />} />
                     <Route path="/games/coinflip" element={<Coinflip />} />
-                    <Route path="/games/roulette" element={<Roulette />} />
+                    <Route path="/games/roulette" element={<Roulette sidebarToggled={sidebarToggled}/>} />
                     <Route path="/aboutus" element={<AboutUs />} />
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/liquidity" element={<LiquidityProvision />} />
