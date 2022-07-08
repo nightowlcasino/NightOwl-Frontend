@@ -11,7 +11,7 @@ import coin_2k5 from "../../../assets/Elements/coin_2k5.png";
 import coin_10k from "../../../assets/Elements/coin_10k.png";
 import coin_50k from "../../../assets/Elements/coin_50k.png";
 
-const TOKENID_NO_TEST = "afd0d6cb61e86d15f2a0adc1e7e23df532ba3ff35f8ba88bed16729cae933032";
+const TOKENID_NO_TEST = "473041c7e13b5f5947640f79f00d3c5df22fad4841191260350bb8c526f9851f";
 const TOKENID_ERG = "0000000000000000000000000000000000000000000000000000000000000000";
 const MINER_FEE_VALUE = 1100000;
 const MIN_BOX_VALUE = 1000000;
@@ -178,7 +178,7 @@ const Roulette = () => {
   const [stopSpin, setStopSpin] = useState(false);
   const [newRandomNumber, setNewRandomNumber] = useState(false);
   const [natsConn, setNatsConn] = useState(false);
-  const {ergoWallet, defaultAddress} = useContext(StateContext);
+  const { ergoWallet, defaultAddress } = useContext(StateContext);
   const checkWallet = localStorage.getItem("walletConnected");
   let sub
   const sc = StringCodec();
@@ -326,7 +326,7 @@ const Roulette = () => {
   const innerRef = useRef();
 
   const wsConnect = () => {
-    connect({ servers: "ws://0.0.0.0:9222" })
+    connect({ servers: "ws://127.0.0.1:9222" })
       .then(async function (nc) {
         if (checkWallet === "true") {
           sub = nc.subscribe(`roulette.${localStorage.getItem("walletAddress")}`);
@@ -334,7 +334,7 @@ const Roulette = () => {
           (async () => {
             for await (const m of sub) {
               let rnString = sc.decode(m.data)
-              const randNum = Number("0x"+rnString)%37
+              const randNum = Number("0x" + rnString) % 37
               console.log(randNum)
               setStopSpin(true);
               setRandomNumber(randNum);
@@ -440,13 +440,13 @@ const Roulette = () => {
 
     let utxos = [];
     let boxId = "";
-    const minERG = MIN_BOX_VALUE + MIN_BOX_VALUE + MINER_FEE_VALUE + MIN_BOX_VALUE/2;
-    
+    const minERG = MIN_BOX_VALUE + MIN_BOX_VALUE + MINER_FEE_VALUE + MIN_BOX_VALUE;
+
     //txFee:
     //  minBoxValue    = 1000000 * (# of bets)
     //  minerFee       = 1100000
     //  changeBoxValue = 1000000
-    //  payoutFee      =  500000 * (# of bets)
+    //  payoutFee      = 1000000 * (# of bets)
 
     //roulette bet for even
     const board = {
@@ -496,37 +496,37 @@ const Roulette = () => {
                 senderAddr: `${localStorage.getItem("walletAddress")}`,
                 utxos: utxos
               })
-              .then(async function (response) {
-                // sign tx
-                const signedTx = await signTx(response.data);
-                console.log("signedTx", signedTx)
-                // Get a BoxId to use for the random number call
-                boxId = signedTx.outputs[2].boxId
-                // submit to node
-                submitTx(signedTx)
-                .then(async (txId) => {
-                  if (!txId) {
-                    console.log(`No submitted tx ID`);
-                    return null;
-                  }
-                  console.log(`Transaction submitted - ${txId.data}`);
-                  // call rng service with wallet address and box id to get our random number
-                  axios
-                    .get(`http://127.0.0.1:8089/random-number/roulette?walletAddr=${localStorage.getItem("walletAddress")}&boxId=${boxId}`)
-                    .then(async function (resp) {
-                      console.log('GET /random-number/roulette', {resp})
+                .then(async function (response) {
+                  // sign tx
+                  const signedTx = await signTx(response.data);
+                  console.log("signedTx", signedTx)
+                  // Get a BoxId to use for the random number call
+                  boxId = signedTx.outputs[2].boxId
+                  // submit to node
+                  submitTx(signedTx)
+                    .then(async (txId) => {
+                      if (!txId) {
+                        console.log(`No submitted tx ID`);
+                        return null;
+                      }
+                      console.log(`Transaction submitted - ${txId.data}`);
+                      // call rng service with wallet address and box id to get our random number
+                      axios
+                        .get(`http://127.0.0.1:8089/random-number/roulette?walletAddr=${localStorage.getItem("walletAddress")}&boxId=${boxId}`)
+                        .then(async function (resp) {
+                          console.log('GET /random-number/roulette', { resp })
+                        })
+                        .catch(function (error) {
+                          console.log(error);
+                        });
                     })
-                    .catch(function (error) {
-                      console.log(error);
-                    });
+                    .catch((err) => {
+                      console.log(err)
+                    })
                 })
-                .catch((err) => {
-                  console.log(err)
-                })
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+                .catch(function (error) {
+                  console.log(error);
+                });
             }
           })
       }
@@ -540,8 +540,8 @@ const Roulette = () => {
         console.error(msg, err)
         return null
       }
-   }
-  
+    }
+
     async function submitTx(txToBeSubmitted) {
       try {
         return await axios.post(`/api/v1/transactions`, {
@@ -555,7 +555,7 @@ const Roulette = () => {
         return null
       }
     }
-    
+
     innerRef.current.setAttribute("data-spinto", "");
     innerRef.current.classList.remove("stop-spin");
     innerRef.current.classList.remove("default-spin");
@@ -572,8 +572,7 @@ const Roulette = () => {
     set_overlay_string(overlay_default);
   }
 
-  function insufficient_funds_popup()
-  {
+  function insufficient_funds_popup() {
     set_overlay_string("Insufficient funds");
     insufficient_funds_notification_set(true);
     setTimeout(() => {
@@ -1126,12 +1125,12 @@ const Roulette = () => {
                         className={
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
-                                index
-                              )} ${check_if_zero(
-                                val.split("l")[1]
-                              )} ${fromChipValueToColor(
-                                betObject[val][betObject[val].length - 1]
-                              )} two-d`
+                              index
+                            )} ${check_if_zero(
+                              val.split("l")[1]
+                            )} ${fromChipValueToColor(
+                              betObject[val][betObject[val].length - 1]
+                            )} two-d`
                             : "inner-row number-center"
                         }
                         num-val={val.split("l")[1]}
@@ -1147,12 +1146,12 @@ const Roulette = () => {
                         className={
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
-                                index
-                              )} ${check_if_zero(
-                                val.split("l")[1]
-                              )} ${fromChipValueToColor(
-                                betObject[val][betObject[val].length - 1]
-                              )} two-d`
+                              index
+                            )} ${check_if_zero(
+                              val.split("l")[1]
+                            )} ${fromChipValueToColor(
+                              betObject[val][betObject[val].length - 1]
+                            )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
                         }
                         num-val={val.split("l")[1]}
@@ -1168,10 +1167,10 @@ const Roulette = () => {
                         className={
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
-                                index
-                              )} active ${fromChipValueToColor(
-                                betObject[val][betObject[val].length - 1]
-                              )} two-d`
+                              index
+                            )} active ${fromChipValueToColor(
+                              betObject[val][betObject[val].length - 1]
+                            )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
                         }
                         num-val={val.split("l")[1]}
@@ -1187,12 +1186,12 @@ const Roulette = () => {
                         className={
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
-                                index
-                              )} ${check_if_zero(
-                                val.split("l")[1]
-                              )} ${fromChipValueToColor(
-                                betObject[val][betObject[val].length - 1]
-                              )} two-d`
+                              index
+                            )} ${check_if_zero(
+                              val.split("l")[1]
+                            )} ${fromChipValueToColor(
+                              betObject[val][betObject[val].length - 1]
+                            )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
                         }
                         num-val={val.split("l")[1]}
@@ -1208,12 +1207,12 @@ const Roulette = () => {
                         className={
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
-                                index
-                              )} ${check_if_zero(
-                                val.split("l")[1]
-                              )} ${fromChipValueToColor(
-                                betObject[val][betObject[val].length - 1]
-                              )} two-d`
+                              index
+                            )} ${check_if_zero(
+                              val.split("l")[1]
+                            )} ${fromChipValueToColor(
+                              betObject[val][betObject[val].length - 1]
+                            )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
                         }
                         num-val={val.split("l")[1]}
@@ -1237,8 +1236,8 @@ const Roulette = () => {
                   className={
                     betObject.num_val1st.length > 0
                       ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
-                          betObject.num_val1st[betObject.num_val1st.length - 1]
-                        )} active`
+                        betObject.num_val1st[betObject.num_val1st.length - 1]
+                      )} active`
                       : "table-value table-filter width-1-3rd"
                   }
                 >
@@ -1259,8 +1258,8 @@ const Roulette = () => {
                   className={
                     betObject.num_val2nd.length > 0
                       ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
-                          betObject.num_val2nd[betObject.num_val2nd.length - 1]
-                        )} active`
+                        betObject.num_val2nd[betObject.num_val2nd.length - 1]
+                      )} active`
                       : "table-value table-filter width-1-3rd"
                   }
                 >
@@ -1284,8 +1283,8 @@ const Roulette = () => {
                   className={
                     betObject.num_val3rd.length > 0
                       ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
-                          betObject.num_val3rd[betObject.num_val3rd.length - 1]
-                        )} active`
+                        betObject.num_val3rd[betObject.num_val3rd.length - 1]
+                      )} active`
                       : "table-value table-filter width-1-3rd"
                   }
                 >
@@ -1314,10 +1313,10 @@ const Roulette = () => {
                     className={
                       betObject.num_val_first_12.length > 0
                         ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
-                            betObject.num_val_first_12[
-                              betObject.num_val_first_12.length - 1
-                            ]
-                          )} active`
+                          betObject.num_val_first_12[
+                          betObject.num_val_first_12.length - 1
+                          ]
+                        )} active`
                         : "table-value table-filter width-1-3rd"
                     }
                   >
@@ -1338,10 +1337,10 @@ const Roulette = () => {
                     className={
                       betObject.num_val_second_12.length > 0
                         ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
-                            betObject.num_val_second_12[
-                              betObject.num_val_second_12.length - 1
-                            ]
-                          )} active`
+                          betObject.num_val_second_12[
+                          betObject.num_val_second_12.length - 1
+                          ]
+                        )} active`
                         : "table-value table-filter width-1-3rd"
                     }
                   >
@@ -1362,10 +1361,10 @@ const Roulette = () => {
                     className={
                       betObject.num_val_third_12.length > 0
                         ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
-                            betObject.num_val_third_12[
-                              betObject.num_val_third_12.length - 1
-                            ]
-                          )} active`
+                          betObject.num_val_third_12[
+                          betObject.num_val_third_12.length - 1
+                          ]
+                        )} active`
                         : "table-value table-filter width-1-3rd"
                     }
                   >
@@ -1381,7 +1380,7 @@ const Roulette = () => {
                 </div>
                 <div id="center-bottom-row" className="table-row">
                   <div
-                  style={{borderBottomLeftRadius: "8px"}}
+                    style={{ borderBottomLeftRadius: "8px" }}
                     onMouseEnter={() =>
                       table_filter_set("filter-applied first-18")
                     }
@@ -1389,10 +1388,10 @@ const Roulette = () => {
                     className={
                       betObject.num_val_first_18.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
-                            betObject.num_val_first_18[
-                              betObject.num_val_first_18.length - 1
-                            ]
-                          )} active`
+                          betObject.num_val_first_18[
+                          betObject.num_val_first_18.length - 1
+                          ]
+                        )} active`
                         : "table-value table-filter width-1-6th"
                     }
                   >
@@ -1411,10 +1410,10 @@ const Roulette = () => {
                     className={
                       betObject.num_val_even.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
-                            betObject.num_val_even[
-                              betObject.num_val_even.length - 1
-                            ]
-                          )} active`
+                          betObject.num_val_even[
+                          betObject.num_val_even.length - 1
+                          ]
+                        )} active`
                         : "table-value table-filter width-1-6th"
                     }
                   >
@@ -1435,10 +1434,10 @@ const Roulette = () => {
                     className={
                       betObject.num_val_red.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
-                            betObject.num_val_red[
-                              betObject.num_val_red.length - 1
-                            ]
-                          )} active romboid`
+                          betObject.num_val_red[
+                          betObject.num_val_red.length - 1
+                          ]
+                        )} active romboid`
                         : "table-value table-filter width-1-6th romboid"
                     }
                   >
@@ -1459,10 +1458,10 @@ const Roulette = () => {
                     className={
                       betObject.num_val_black.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
-                            betObject.num_val_black[
-                              betObject.num_val_black.length - 1
-                            ]
-                          )} active romboid`
+                          betObject.num_val_black[
+                          betObject.num_val_black.length - 1
+                          ]
+                        )} active romboid`
                         : "table-value table-filter width-1-6th romboid"
                     }
                   >
@@ -1481,10 +1480,10 @@ const Roulette = () => {
                     className={
                       betObject.num_val_odd.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
-                            betObject.num_val_odd[
-                              betObject.num_val_odd.length - 1
-                            ]
-                          )} active`
+                          betObject.num_val_odd[
+                          betObject.num_val_odd.length - 1
+                          ]
+                        )} active`
                         : "table-value table-filter width-1-6th"
                     }
                   >
@@ -1498,7 +1497,7 @@ const Roulette = () => {
                     </div>
                   </div>
                   <div
-                  style={{ borderBottomRightRadius: "8px"}}
+                    style={{ borderBottomRightRadius: "8px" }}
                     onMouseEnter={() =>
                       table_filter_set("filter-applied second-18")
                     }
@@ -1506,10 +1505,10 @@ const Roulette = () => {
                     className={
                       betObject.num_val_second_18.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
-                            betObject.num_val_second_18[
-                              betObject.num_val_second_18.length - 1
-                            ]
-                          )} active`
+                          betObject.num_val_second_18[
+                          betObject.num_val_second_18.length - 1
+                          ]
+                        )} active`
                         : "table-value table-filter width-1-6th"
                     }
                   >
