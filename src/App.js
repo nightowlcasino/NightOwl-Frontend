@@ -58,7 +58,7 @@ function App() {
 				<StateContext.Provider value={{ergoWallet, setErgoWallet, defaultAddress, setDefaultAddress}}>
 					<Header />
 					<BodyContent setIsLoading={setIsLoading} setSwapTransaction={setSwapTransaction} />
-					<Footer />
+					{!path.includes('/games') && <Footer />}
 					{<div id="overlay">
 						<div id="overlay-background"></div>
 						<div id="overlay-content-wrapper">
