@@ -11,7 +11,7 @@ import coin_2k5 from "../../../assets/Elements/coin_2k5.png";
 import coin_10k from "../../../assets/Elements/coin_10k.png";
 import coin_50k from "../../../assets/Elements/coin_50k.png";
 
-const TOKENID_NO_TEST = "afd0d6cb61e86d15f2a0adc1e7e23df532ba3ff35f8ba88bed16729cae933032";
+const TOKENID_NO_TEST = "473041c7e13b5f5947640f79f00d3c5df22fad4841191260350bb8c526f9851f";
 const TOKENID_ERG = "0000000000000000000000000000000000000000000000000000000000000000";
 const MINER_FEE_VALUE = 1100000;
 const MIN_BOX_VALUE = 1000000;
@@ -326,7 +326,7 @@ const Roulette = ({sidebarToggled}) => {
   const innerRef = useRef();
 
   const wsConnect = () => {
-    connect({ servers: "ws://0.0.0.0:9222" })
+    connect({ servers: "ws://127.0.0.1:9222" })
       .then(async function (nc) {
         if (checkWallet === "true") {
           sub = nc.subscribe(`roulette.${localStorage.getItem("walletAddress")}`);
@@ -440,13 +440,13 @@ const Roulette = ({sidebarToggled}) => {
 
     let utxos = [];
     let boxId = "";
-    const minERG = MIN_BOX_VALUE + MIN_BOX_VALUE + MINER_FEE_VALUE + MIN_BOX_VALUE/2;
+    const minERG = MIN_BOX_VALUE + MIN_BOX_VALUE + MINER_FEE_VALUE + MIN_BOX_VALUE;
     
     //txFee:
     //  minBoxValue    = 1000000 * (# of bets)
     //  minerFee       = 1100000
     //  changeBoxValue = 1000000
-    //  payoutFee      =  500000 * (# of bets)
+    //  payoutFee      = 1000000  * (# of bets)
 
     //roulette bet for even
     const board = {
