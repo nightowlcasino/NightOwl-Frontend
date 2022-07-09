@@ -39,8 +39,7 @@ import blackjack_icon_white from "../../assets/Elements/blackjack_image_white.pn
 import random_icon_pink from "../../assets/Elements/random_image_pink.png";
 import random_icon_white from "../../assets/Elements/random_image_white.png";
 
-function LeftSideBar() {
-  const [sidebarToggled, setSidebarToggled] = useState(false);
+function LeftSideBar({sidebarToggled, setSidebarToggled}) {
   const [isSelected, setIsSelected] = useState("");
   const location = useLocation();
   const path = location.pathname;

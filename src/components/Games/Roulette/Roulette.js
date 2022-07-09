@@ -16,7 +16,7 @@ const TOKENID_ERG = "00000000000000000000000000000000000000000000000000000000000
 const MINER_FEE_VALUE = 1100000;
 const MIN_BOX_VALUE = 1000000;
 
-const Roulette = () => {
+const Roulette = ({sidebarToggled}) => {
   var red = [32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3];
 
   var overlay_default = "No more bets";
@@ -442,6 +442,7 @@ const Roulette = () => {
     let boxId = "";
     const minERG = MIN_BOX_VALUE + MIN_BOX_VALUE + MINER_FEE_VALUE + MIN_BOX_VALUE;
 
+    
     //txFee:
     //  minBoxValue    = 1000000 * (# of bets)
     //  minerFee       = 1100000
@@ -636,7 +637,7 @@ const Roulette = () => {
       className={bets_end ? "roulette-wrapper" : "roulette-wrapper bets-end"}
     >
       <div className="roulette-wheel-content-wrapper">
-        <div className="roulette-wheel-content">
+        {!sidebarToggled && (<div className="roulette-wheel-content">
           <div className="plate" id="plate">
             <img
               src={outterWheel1}
@@ -880,7 +881,7 @@ const Roulette = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div>)}
       </div>
       <div className={insufficient_funds_notification ? "roulette-table-content-wrapper insufficient-funds" : "roulette-table-content-wrapper"}>
         <div id="before-table">
