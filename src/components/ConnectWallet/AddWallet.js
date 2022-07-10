@@ -99,6 +99,10 @@ function AddWallet(props) {
       ergoWallet.get_balance().then(function (balance) {
         setErgBalance(balance / NANOERG_TO_ERG);
       });
+      // get OWL balance
+      ergoWallet.get_balance(TOKENID_NO_TEST).then(function (balance) {
+        setOwlBalance(balance);
+      });
       // get SigUSD balance
       ergoWallet.get_balance(TOKENID_SIGUSD).then(function (balance) {
         setSigUSDBalance(balance / 100);

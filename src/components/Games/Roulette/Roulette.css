@@ -502,6 +502,19 @@
     border: none;
 }
 
+.top-btn {
+    padding: 15px 20px;
+    text-align: center;
+    color: white;
+    background-image: linear-gradient(to right, #8e0081, #fa008c);
+    border-radius: 15px;
+    margin: 10px auto;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    border: none;
+}
 .btn .btn-label {
     font-size: 20px;
     font-weight: 900;
@@ -1352,7 +1365,8 @@
 
 #roulette-table-chips
 {
-    margin-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
     height: 80px;
     display: flex;
     flex-direction: row;
@@ -1474,6 +1488,17 @@
     flex-direction: row;
     align-content: center;
     align-items: center;
+}
+
+#top-buttons-container {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+#resetBetsButton {
+    margin: 0 10px 0 0;
 }
 
 @media all and (max-width: 992px)

@@ -4,19 +4,22 @@ import StateContext from "../../Context";
 import axios from "axios";
 import "./Roulette.css";
 import outterWheel1 from "../../../assets/Elements/behind2.png";
-
+import undoIcon from "../../../assets/Elements/undo.svg";
+import resetIcon from "../../../assets/Elements/clearAll.svg";
 import coin_100 from "../../../assets/Elements/coin_100.png";
 import coin_500 from "../../../assets/Elements/coin_500.png";
 import coin_2k5 from "../../../assets/Elements/coin_2k5.png";
 import coin_10k from "../../../assets/Elements/coin_10k.png";
 import coin_50k from "../../../assets/Elements/coin_50k.png";
 
-const TOKENID_NO_TEST = "473041c7e13b5f5947640f79f00d3c5df22fad4841191260350bb8c526f9851f";
-const TOKENID_ERG = "0000000000000000000000000000000000000000000000000000000000000000";
+const TOKENID_NO_TEST =
+  "473041c7e13b5f5947640f79f00d3c5df22fad4841191260350bb8c526f9851f";
+const TOKENID_ERG =
+  "0000000000000000000000000000000000000000000000000000000000000000";
 const MINER_FEE_VALUE = 1100000;
 const MIN_BOX_VALUE = 1000000;
 
-const Roulette = ({sidebarToggled}) => {
+const Roulette = ({ sidebarToggled }) => {
   var red = [32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3];
 
   var overlay_default = "No more bets";
@@ -180,11 +183,12 @@ const Roulette = ({sidebarToggled}) => {
   const [natsConn, setNatsConn] = useState(false);
   const { ergoWallet, defaultAddress } = useContext(StateContext);
   const checkWallet = localStorage.getItem("walletConnected");
-  let sub
+  let sub;
   const sc = StringCodec();
   //const waiting_for_respond_animation_delay = setInterval(() => {}, 1000);
 
-  const [insufficient_funds_notification, insufficient_funds_notification_set] = useState(false);
+  const [insufficient_funds_notification, insufficient_funds_notification_set] =
+    useState(false);
 
   var arrayWithNumVals = [
     "num_val0",
@@ -329,31 +333,35 @@ const Roulette = ({sidebarToggled}) => {
     connect({ servers: "ws://127.0.0.1:9222" })
       .then(async function (nc) {
         if (checkWallet === "true") {
-          sub = nc.subscribe(`roulette.${localStorage.getItem("walletAddress")}`);
-          console.log(`subscribed to roulette.${localStorage.getItem("walletAddress")}`);
+          sub = nc.subscribe(
+            `roulette.${localStorage.getItem("walletAddress")}`
+          );
+          console.log(
+            `subscribed to roulette.${localStorage.getItem("walletAddress")}`
+          );
           (async () => {
             for await (const m of sub) {
-              let rnString = sc.decode(m.data)
-              const randNum = Number("0x" + rnString) % 37
-              console.log(randNum)
+              let rnString = sc.decode(m.data);
+              const randNum = Number("0x" + rnString) % 37;
+              console.log(randNum);
               setStopSpin(true);
               setRandomNumber(randNum);
               setNewRandomNumber(true);
             }
             console.log("subscription closed");
           })();
-          setNatsConn(true)
+          setNatsConn(true);
         }
       })
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
 
   useEffect(() => {
     if (stopSpin) {
-      setStopSpin(false)
-      setNewRandomNumber(!newRandomNumber)
+      setStopSpin(false);
+      setNewRandomNumber(!newRandomNumber);
       let color = null;
       innerRef.current.classList.remove("waiting-for-respond");
 
@@ -390,7 +398,7 @@ const Roulette = ({sidebarToggled}) => {
         innerRef.current.classList.add("stop-spin");
       }, timer * 0.7);
     }
-  }, [newRandomNumber])
+  }, [newRandomNumber]);
 
   function addBetToObject(e) {
     var numbers = e.target.getAttribute("num-val");
@@ -435,14 +443,14 @@ const Roulette = ({sidebarToggled}) => {
   }
   function spinTheWheel() {
     if (!natsConn) {
-      wsConnect()
+      wsConnect();
     }
 
     let utxos = [];
     let boxId = "";
-    const minERG = MIN_BOX_VALUE + MIN_BOX_VALUE + MINER_FEE_VALUE + MIN_BOX_VALUE;
+    const minERG =
+      MIN_BOX_VALUE + MIN_BOX_VALUE + MINER_FEE_VALUE + MIN_BOX_VALUE;
 
-    
     //txFee:
     //  minBoxValue    = 1000000 * (# of bets)
     //  minerFee       = 1100000
@@ -459,9 +467,9 @@ const Roulette = ({sidebarToggled}) => {
           r5: 0,
           multiplier: 1,
           amount: 10,
-        }
-      ]
-    }
+        },
+      ],
+    };
 
     // Get utxo for ERGs
     ergoWallet.get_utxos(minERG, TOKENID_ERG).then((utxosResponse) => {
@@ -470,7 +478,8 @@ const Roulette = ({sidebarToggled}) => {
         return;
       } else {
         utxos = JSON.parse(JSON.stringify(utxosResponse));
-        ergoWallet.get_utxos(board.totalWager, TOKENID_NO_TEST)
+        ergoWallet
+          .get_utxos(board.totalWager, TOKENID_NO_TEST)
           .then((utxosResponse) => {
             if (utxosResponse.length === 0) {
               console.log("NO OWL UTXOS");
@@ -492,17 +501,18 @@ const Roulette = ({sidebarToggled}) => {
               });
               console.log(utxos);
               // send bet data structure to backend for the bet tx to be built
-              axios.post(`/api/v1/roulette/bet-tx`, {
-                board: board,
-                senderAddr: `${localStorage.getItem("walletAddress")}`,
-                utxos: utxos
-              })
+              axios
+                .post(`/api/v1/roulette/bet-tx`, {
+                  board: board,
+                  senderAddr: `${localStorage.getItem("walletAddress")}`,
+                  utxos: utxos,
+                })
                 .then(async function (response) {
                   // sign tx
                   const signedTx = await signTx(response.data);
-                  console.log("signedTx", signedTx)
+                  console.log("signedTx", signedTx);
                   // Get a BoxId to use for the random number call
-                  boxId = signedTx.outputs[2].boxId
+                  boxId = signedTx.outputs[2].boxId;
                   // submit to node
                   submitTx(signedTx)
                     .then(async (txId) => {
@@ -513,33 +523,37 @@ const Roulette = ({sidebarToggled}) => {
                       console.log(`Transaction submitted - ${txId.data}`);
                       // call rng service with wallet address and box id to get our random number
                       axios
-                        .get(`http://127.0.0.1:8089/random-number/roulette?walletAddr=${localStorage.getItem("walletAddress")}&boxId=${boxId}`)
+                        .get(
+                          `http://127.0.0.1:8089/random-number/roulette?walletAddr=${localStorage.getItem(
+                            "walletAddress"
+                          )}&boxId=${boxId}`
+                        )
                         .then(async function (resp) {
-                          console.log('GET /random-number/roulette', { resp })
+                          console.log("GET /random-number/roulette", { resp });
                         })
                         .catch(function (error) {
                           console.log(error);
                         });
                     })
                     .catch((err) => {
-                      console.log(err)
-                    })
+                      console.log(err);
+                    });
                 })
                 .catch(function (error) {
                   console.log(error);
                 });
             }
-          })
+          });
       }
-    })
+    });
 
     async function signTx(txToBeSigned) {
       try {
-        return await ergoWallet.sign_tx(txToBeSigned)
+        return await ergoWallet.sign_tx(txToBeSigned);
       } catch (err) {
-        const msg = `[signTx] Error: ${JSON.stringify(err)}`
-        console.error(msg, err)
-        return null
+        const msg = `[signTx] Error: ${JSON.stringify(err)}`;
+        console.error(msg, err);
+        return null;
       }
     }
 
@@ -548,12 +562,12 @@ const Roulette = ({sidebarToggled}) => {
         return await axios.post(`/api/v1/transactions`, {
           senderAddr: `${localStorage.getItem("walletAddress")}`,
           game: "roulette",
-          tx: txToBeSubmitted
-        })
+          tx: txToBeSubmitted,
+        });
       } catch (err) {
-        const msg = `[submitTx] Error: ${JSON.stringify(err)}`
-        console.error(msg, err)
-        return null
+        const msg = `[submitTx] Error: ${JSON.stringify(err)}`;
+        console.error(msg, err);
+        return null;
       }
     }
 
@@ -589,7 +603,9 @@ const Roulette = ({sidebarToggled}) => {
     }
 
     console.log(lastBet);
-    console.log("he llegado hasta aqui osea que no ha detectado como undefined");
+    console.log(
+      "he llegado hasta aqui osea que no ha detectado como undefined"
+    );
     let currentBetObjectCopy = betObject[`num_val${lastBet}`].slice();
     let chipValueUndone = currentBetObjectCopy.pop();
     setBetObject({
@@ -637,253 +653,293 @@ const Roulette = ({sidebarToggled}) => {
       className={bets_end ? "roulette-wrapper" : "roulette-wrapper bets-end"}
     >
       <div className="roulette-wheel-content-wrapper">
-        {!sidebarToggled && (<div className="roulette-wheel-content">
-          <div className="plate" id="plate">
-            <img
-              src={outterWheel1}
-              className="behindlol"
-              alt="outter-roulette-wheel"
-            />
-            <ul id="fuckinginner" className="inner default-spin" ref={innerRef}>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="32" />
-                  <span className="pit">32</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="15" />
-                  <span className="pit">15</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="19" />
-                  <span className="pit">19</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="4" />
-                  <span className="pit">4</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="21" />
-                  <span className="pit">21</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="2" />
-                  <span className="pit">2</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="25" />
-                  <span className="pit">25</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="17" />
-                  <span className="pit">17</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="34" />
-                  <span className="pit">34</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="6" />
-                  <span className="pit">6</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="27" />
-                  <span className="pit">27</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="13" />
-                  <span className="pit">13</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="36" />
-                  <span className="pit">36</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="11" />
-                  <span className="pit">11</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="30" />
-                  <span className="pit">30</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="8" />
-                  <span className="pit">8</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="23" />
-                  <span className="pit">23</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="10" />
-                  <span className="pit">10</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="5" />
-                  <span className="pit">5</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="24" />
-                  <span className="pit">24</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="16" />
-                  <span className="pit">16</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="33" />
-                  <span className="pit">33</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="1" />
-                  <span className="pit">1</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="20" />
-                  <span className="pit">20</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="14" />
-                  <span className="pit">14</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="31" />
-                  <span className="pit">31</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="9" />
-                  <span className="pit">9</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="22" />
-                  <span className="pit">22</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="18" />
-                  <span className="pit">18</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="29" />
-                  <span className="pit">29</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="7" />
-                  <span className="pit">7</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="28" />
-                  <span className="pit">28</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="12" />
-                  <span className="pit">12</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="35" />
-                  <span className="pit">35</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="3" />
-                  <span className="pit">3</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="26" />
-                  <span className="pit">26</span>
-                </label>
-              </li>
-              <li className="number">
-                <label>
-                  <input type="radio" name="pit" value="0" />
-                  <span className="pit">0</span>
-                </label>
-              </li>
-            </ul>
+        {!sidebarToggled && (
+          <div className="roulette-wheel-content">
+            <div className="plate" id="plate">
+              <img
+                src={outterWheel1}
+                className="behindlol"
+                alt="outter-roulette-wheel"
+              />
+              <ul
+                id="fuckinginner"
+                className="inner default-spin"
+                ref={innerRef}
+              >
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="32" />
+                    <span className="pit">32</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="15" />
+                    <span className="pit">15</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="19" />
+                    <span className="pit">19</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="4" />
+                    <span className="pit">4</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="21" />
+                    <span className="pit">21</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="2" />
+                    <span className="pit">2</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="25" />
+                    <span className="pit">25</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="17" />
+                    <span className="pit">17</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="34" />
+                    <span className="pit">34</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="6" />
+                    <span className="pit">6</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="27" />
+                    <span className="pit">27</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="13" />
+                    <span className="pit">13</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="36" />
+                    <span className="pit">36</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="11" />
+                    <span className="pit">11</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="30" />
+                    <span className="pit">30</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="8" />
+                    <span className="pit">8</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="23" />
+                    <span className="pit">23</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="10" />
+                    <span className="pit">10</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="5" />
+                    <span className="pit">5</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="24" />
+                    <span className="pit">24</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="16" />
+                    <span className="pit">16</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="33" />
+                    <span className="pit">33</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="1" />
+                    <span className="pit">1</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="20" />
+                    <span className="pit">20</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="14" />
+                    <span className="pit">14</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="31" />
+                    <span className="pit">31</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="9" />
+                    <span className="pit">9</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="22" />
+                    <span className="pit">22</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="18" />
+                    <span className="pit">18</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="29" />
+                    <span className="pit">29</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="7" />
+                    <span className="pit">7</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="28" />
+                    <span className="pit">28</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="12" />
+                    <span className="pit">12</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="35" />
+                    <span className="pit">35</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="3" />
+                    <span className="pit">3</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="26" />
+                    <span className="pit">26</span>
+                  </label>
+                </li>
+                <li className="number">
+                  <label>
+                    <input type="radio" name="pit" value="0" />
+                    <span className="pit">0</span>
+                  </label>
+                </li>
+              </ul>
 
-            <div className={revealData ? "data reveal" : "data"}>
-              <div className="data-inner">
-                <div
-                  className="result"
-                  style={{ backgroundColor: resultColor }}
-                >
-                  <div className="result-number">{resultNumber}</div>
-                  <div className="result-color">{resultColor}</div>
+              <div className={revealData ? "data reveal" : "data"}>
+                <div className="data-inner">
+                  <div
+                    className="result"
+                    style={{ backgroundColor: resultColor }}
+                  >
+                    <div className="result-number">{resultNumber}</div>
+                    <div className="result-color">{resultColor}</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>)}
+        )}
       </div>
-      <div className={insufficient_funds_notification ? "roulette-table-content-wrapper insufficient-funds" : "roulette-table-content-wrapper"}>
+      <div
+        className={
+          insufficient_funds_notification
+            ? "roulette-table-content-wrapper insufficient-funds"
+            : "roulette-table-content-wrapper"
+        }
+      >
+        <div id="top-buttons-container">
+          <div className="top-button-container">
+            <button
+              type="button"
+              className={spinAvailable ? "top-btn" : "btn disabled"}
+              id="resetBetsButton"
+              onClick={() => resetBets()}
+            >
+              <span className="btn-label"><img
+                src={resetIcon}
+                alt="Reset Bets"
+              /></span>
+            </button>
+          </div>
+          <div className="top-button-container">
+            <button
+              type="button"
+              className={spinAvailable ? "top-btn" : "btn disabled"}
+              id="globalUndo"
+              onClick={() => globalUndo()}
+            >
+              <span className="btn-label"><img
+                src={undoIcon}
+                alt="Undo"
+              /></span>
+            </button>
+          </div>
+        </div>
         <div id="before-table">
           <div id="table-total-bet">
             Total bet <span>{totalBet} OWL</span>
@@ -1126,12 +1182,12 @@ const Roulette = ({sidebarToggled}) => {
                         className={
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
-                              index
-                            )} ${check_if_zero(
-                              val.split("l")[1]
-                            )} ${fromChipValueToColor(
-                              betObject[val][betObject[val].length - 1]
-                            )} two-d`
+                                index
+                              )} ${check_if_zero(
+                                val.split("l")[1]
+                              )} ${fromChipValueToColor(
+                                betObject[val][betObject[val].length - 1]
+                              )} two-d`
                             : "inner-row number-center"
                         }
                         num-val={val.split("l")[1]}
@@ -1147,12 +1203,12 @@ const Roulette = ({sidebarToggled}) => {
                         className={
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
-                              index
-                            )} ${check_if_zero(
-                              val.split("l")[1]
-                            )} ${fromChipValueToColor(
-                              betObject[val][betObject[val].length - 1]
-                            )} two-d`
+                                index
+                              )} ${check_if_zero(
+                                val.split("l")[1]
+                              )} ${fromChipValueToColor(
+                                betObject[val][betObject[val].length - 1]
+                              )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
                         }
                         num-val={val.split("l")[1]}
@@ -1168,10 +1224,10 @@ const Roulette = ({sidebarToggled}) => {
                         className={
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
-                              index
-                            )} active ${fromChipValueToColor(
-                              betObject[val][betObject[val].length - 1]
-                            )} two-d`
+                                index
+                              )} active ${fromChipValueToColor(
+                                betObject[val][betObject[val].length - 1]
+                              )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
                         }
                         num-val={val.split("l")[1]}
@@ -1187,12 +1243,12 @@ const Roulette = ({sidebarToggled}) => {
                         className={
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
-                              index
-                            )} ${check_if_zero(
-                              val.split("l")[1]
-                            )} ${fromChipValueToColor(
-                              betObject[val][betObject[val].length - 1]
-                            )} two-d`
+                                index
+                              )} ${check_if_zero(
+                                val.split("l")[1]
+                              )} ${fromChipValueToColor(
+                                betObject[val][betObject[val].length - 1]
+                              )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
                         }
                         num-val={val.split("l")[1]}
@@ -1208,12 +1264,12 @@ const Roulette = ({sidebarToggled}) => {
                         className={
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
-                              index
-                            )} ${check_if_zero(
-                              val.split("l")[1]
-                            )} ${fromChipValueToColor(
-                              betObject[val][betObject[val].length - 1]
-                            )} two-d`
+                                index
+                              )} ${check_if_zero(
+                                val.split("l")[1]
+                              )} ${fromChipValueToColor(
+                                betObject[val][betObject[val].length - 1]
+                              )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
                         }
                         num-val={val.split("l")[1]}
@@ -1237,8 +1293,8 @@ const Roulette = ({sidebarToggled}) => {
                   className={
                     betObject.num_val1st.length > 0
                       ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
-                        betObject.num_val1st[betObject.num_val1st.length - 1]
-                      )} active`
+                          betObject.num_val1st[betObject.num_val1st.length - 1]
+                        )} active`
                       : "table-value table-filter width-1-3rd"
                   }
                 >
@@ -1259,8 +1315,8 @@ const Roulette = ({sidebarToggled}) => {
                   className={
                     betObject.num_val2nd.length > 0
                       ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
-                        betObject.num_val2nd[betObject.num_val2nd.length - 1]
-                      )} active`
+                          betObject.num_val2nd[betObject.num_val2nd.length - 1]
+                        )} active`
                       : "table-value table-filter width-1-3rd"
                   }
                 >
@@ -1284,8 +1340,8 @@ const Roulette = ({sidebarToggled}) => {
                   className={
                     betObject.num_val3rd.length > 0
                       ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
-                        betObject.num_val3rd[betObject.num_val3rd.length - 1]
-                      )} active`
+                          betObject.num_val3rd[betObject.num_val3rd.length - 1]
+                        )} active`
                       : "table-value table-filter width-1-3rd"
                   }
                 >
@@ -1314,10 +1370,10 @@ const Roulette = ({sidebarToggled}) => {
                     className={
                       betObject.num_val_first_12.length > 0
                         ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
-                          betObject.num_val_first_12[
-                          betObject.num_val_first_12.length - 1
-                          ]
-                        )} active`
+                            betObject.num_val_first_12[
+                              betObject.num_val_first_12.length - 1
+                            ]
+                          )} active`
                         : "table-value table-filter width-1-3rd"
                     }
                   >
@@ -1338,10 +1394,10 @@ const Roulette = ({sidebarToggled}) => {
                     className={
                       betObject.num_val_second_12.length > 0
                         ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
-                          betObject.num_val_second_12[
-                          betObject.num_val_second_12.length - 1
-                          ]
-                        )} active`
+                            betObject.num_val_second_12[
+                              betObject.num_val_second_12.length - 1
+                            ]
+                          )} active`
                         : "table-value table-filter width-1-3rd"
                     }
                   >
@@ -1362,10 +1418,10 @@ const Roulette = ({sidebarToggled}) => {
                     className={
                       betObject.num_val_third_12.length > 0
                         ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
-                          betObject.num_val_third_12[
-                          betObject.num_val_third_12.length - 1
-                          ]
-                        )} active`
+                            betObject.num_val_third_12[
+                              betObject.num_val_third_12.length - 1
+                            ]
+                          )} active`
                         : "table-value table-filter width-1-3rd"
                     }
                   >
@@ -1389,10 +1445,10 @@ const Roulette = ({sidebarToggled}) => {
                     className={
                       betObject.num_val_first_18.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
-                          betObject.num_val_first_18[
-                          betObject.num_val_first_18.length - 1
-                          ]
-                        )} active`
+                            betObject.num_val_first_18[
+                              betObject.num_val_first_18.length - 1
+                            ]
+                          )} active`
                         : "table-value table-filter width-1-6th"
                     }
                   >
@@ -1411,10 +1467,10 @@ const Roulette = ({sidebarToggled}) => {
                     className={
                       betObject.num_val_even.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
-                          betObject.num_val_even[
-                          betObject.num_val_even.length - 1
-                          ]
-                        )} active`
+                            betObject.num_val_even[
+                              betObject.num_val_even.length - 1
+                            ]
+                          )} active`
                         : "table-value table-filter width-1-6th"
                     }
                   >
@@ -1435,10 +1491,10 @@ const Roulette = ({sidebarToggled}) => {
                     className={
                       betObject.num_val_red.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
-                          betObject.num_val_red[
-                          betObject.num_val_red.length - 1
-                          ]
-                        )} active romboid`
+                            betObject.num_val_red[
+                              betObject.num_val_red.length - 1
+                            ]
+                          )} active romboid`
                         : "table-value table-filter width-1-6th romboid"
                     }
                   >
@@ -1459,10 +1515,10 @@ const Roulette = ({sidebarToggled}) => {
                     className={
                       betObject.num_val_black.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
-                          betObject.num_val_black[
-                          betObject.num_val_black.length - 1
-                          ]
-                        )} active romboid`
+                            betObject.num_val_black[
+                              betObject.num_val_black.length - 1
+                            ]
+                          )} active romboid`
                         : "table-value table-filter width-1-6th romboid"
                     }
                   >
@@ -1481,10 +1537,10 @@ const Roulette = ({sidebarToggled}) => {
                     className={
                       betObject.num_val_odd.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
-                          betObject.num_val_odd[
-                          betObject.num_val_odd.length - 1
-                          ]
-                        )} active`
+                            betObject.num_val_odd[
+                              betObject.num_val_odd.length - 1
+                            ]
+                          )} active`
                         : "table-value table-filter width-1-6th"
                     }
                   >
@@ -1506,10 +1562,10 @@ const Roulette = ({sidebarToggled}) => {
                     className={
                       betObject.num_val_second_18.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
-                          betObject.num_val_second_18[
-                          betObject.num_val_second_18.length - 1
-                          ]
-                        )} active`
+                            betObject.num_val_second_18[
+                              betObject.num_val_second_18.length - 1
+                            ]
+                          )} active`
                         : "table-value table-filter width-1-6th"
                     }
                   >
@@ -1603,32 +1659,13 @@ const Roulette = ({sidebarToggled}) => {
             <button
               type="button"
               className={spinAvailable ? "btn" : "btn disabled"}
-              id="globalUndo"
-              onClick={() => globalUndo()}
-            >
-              <span className="btn-label">Undo</span>
-            </button>
-          </div>
-          <div className="button-container">
-            <button
-              type="button"
-              className={spinAvailable ? "btn" : "btn disabled"}
               id="spin"
               onClick={() => spinTheWheel()}
             >
               <span className="btn-label">Spin</span>
             </button>
           </div>
-          <div className="button-container">
-            <button
-              type="button"
-              className={spinAvailable ? "btn" : "btn disabled"}
-              id="resetBetsButton"
-              onClick={() => resetBets()}
-            >
-              <span className="btn-label">Clear all</span>
-            </button>
-          </div>
+
           <div className="spacer"></div>
         </div>
         <div id="table-overlay">

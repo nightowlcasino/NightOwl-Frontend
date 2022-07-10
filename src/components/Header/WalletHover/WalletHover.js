@@ -1,15 +1,5 @@
 import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import {
-  ArchiveIcon,
-  ArrowCircleRightIcon,
-  ChevronDownIcon,
-  DuplicateIcon,
-  HeartIcon,
-  PencilAltIcon,
-  TrashIcon,
-  UserAddIcon,
-} from "@heroicons/react/solid";
 
 import SigRSVicon from "../../../assets/Elements/sigrsv-icon.png";
 import ERGicon from "../../../assets/Elements/ergo-icon.png";
