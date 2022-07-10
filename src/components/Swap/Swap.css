@@ -78,11 +78,12 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+/*change the margin px to separate both elements between the arrows icon more*/
 #swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-input-fields-wrapper #swap-input-fields .input-field
 {
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
+    margin: 20px auto;
     position: relative;
 }
 
@@ -126,17 +127,11 @@ input[type=number] {
     flex-direction: column;
 }
 
-#swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-input-fields-wrapper #swap-input-fields #input-separator-wrapper::before,
-#swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-input-fields-wrapper #swap-input-fields #input-separator-wrapper::after
-{
-    content: ":";
-    font-size: 20px;
-}
 
 #swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-input-fields-wrapper #swap-input-fields #input-separator-wrapper #input-seperator
 {
     background-color: #ab0d82;
-    width: 40px;
+    padding: 5px;
     margin: 0 auto;
     border-radius: 10px;
 }
