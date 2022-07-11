@@ -16,6 +16,7 @@ import coin_50k from "../../../assets/Elements/coin_50k.png";
 
 import loopSound from "../../../assets/Sounds/loop.mp3";
 import endSound from "../../../assets/Sounds/end.mp3";
+import clangEndSound from "../../../assets/Sounds/clangEnd.mp3";
 import startSound from "../../../assets/Sounds/start.mp3";
 import ReactHowler from "react-howler";
 
@@ -196,7 +197,7 @@ const Roulette = ({ sidebarToggled }) => {
   const sc = StringCodec();
   //const waiting_for_respond_animation_delay = setInterval(() => {}, 1000);
 
-  const endAudio = new Audio(endSound);
+  const endAudio = new Audio(clangEndSound);
 
   const [insufficient_funds_notification, insufficient_funds_notification_set] =
     useState(false);
@@ -407,9 +408,12 @@ const Roulette = ({ sidebarToggled }) => {
       }, timer + 50);
       setTimeout(() => {
         setLoopSound(false);
-        endAudio.play();
         innerRef.current.classList.add("stop-spin");
       }, timer * 0.7);
+      setTimeout(() => {
+        endAudio.play();
+      }, timer * 0.6);
+      
     }
   }, [newRandomNumber]);
 
