@@ -503,12 +503,12 @@
 }
 
 .top-btn {
-    padding: 15px 20px;
+    padding: 5px 10px;
     text-align: center;
     color: white;
     background-image: linear-gradient(to right, #8e0081, #fa008c);
-    border-radius: 15px;
-    margin: 10px auto;
+    border-radius: 10px;
+    margin: 5px auto;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -581,6 +581,7 @@
     padding-top: 36px;
     display: none;
 }
+
 .data .result {
     background-color: green;
     color: white;
@@ -1213,6 +1214,7 @@
     opacity: 1;
 }
 
+
 #bottom-center-table
 {
     flex: 1 1 auto;
@@ -1495,6 +1497,7 @@
     flex-direction: row;
     align-content: center;
     align-items: center;
+    visibility: hidden;
 }
 
 #resetBetsButton {

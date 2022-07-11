@@ -6,11 +6,18 @@ import "./Roulette.css";
 import outterWheel1 from "../../../assets/Elements/behind2.png";
 import undoIcon from "../../../assets/Elements/undo.svg";
 import resetIcon from "../../../assets/Elements/clearAll.svg";
+import clearAll1 from "../../../assets/Elements/clearAll1.svg";
+import clearAll2 from "../../../assets/Elements/clearAll2.svg";
 import coin_100 from "../../../assets/Elements/coin_100.png";
 import coin_500 from "../../../assets/Elements/coin_500.png";
 import coin_2k5 from "../../../assets/Elements/coin_2k5.png";
 import coin_10k from "../../../assets/Elements/coin_10k.png";
 import coin_50k from "../../../assets/Elements/coin_50k.png";
+
+import loopSound from "../../../assets/Sounds/loop.mp3";
+import endSound from "../../../assets/Sounds/end.mp3";
+import startSound from "../../../assets/Sounds/start.mp3";
+import ReactHowler from "react-howler";
 
 const TOKENID_NO_TEST =
   "473041c7e13b5f5947640f79f00d3c5df22fad4841191260350bb8c526f9851f";
@@ -180,12 +187,16 @@ const Roulette = ({ sidebarToggled }) => {
   const [table_filter_value, table_filter_set] = useState("");
   const [stopSpin, setStopSpin] = useState(false);
   const [newRandomNumber, setNewRandomNumber] = useState(false);
+  const [isLoopSound, setLoopSound] = useState(false);
+  const [isEndSound, setEndSound] = useState(false);
   const [natsConn, setNatsConn] = useState(false);
   const { ergoWallet, defaultAddress } = useContext(StateContext);
   const checkWallet = localStorage.getItem("walletConnected");
   let sub;
   const sc = StringCodec();
   //const waiting_for_respond_animation_delay = setInterval(() => {}, 1000);
+
+  const endAudio = new Audio(endSound);
 
   const [insufficient_funds_notification, insufficient_funds_notification_set] =
     useState(false);
@@ -395,6 +406,8 @@ const Roulette = ({ sidebarToggled }) => {
         if (firstSpin) setFirstSpin(false);
       }, timer + 50);
       setTimeout(() => {
+        setLoopSound(false);
+        endAudio.play();
         innerRef.current.classList.add("stop-spin");
       }, timer * 0.7);
     }
@@ -402,8 +415,6 @@ const Roulette = ({ sidebarToggled }) => {
 
   function addBetToObject(e) {
     var numbers = e.target.getAttribute("num-val");
-    console.log(e.target);
-    console.log(numbers);
     let currentArrayCopy = betObject[`num_val${numbers}`].slice();
     currentArrayCopy.push(chipSelected);
     setBetObject({
@@ -442,6 +453,7 @@ const Roulette = ({ sidebarToggled }) => {
     }
   }
   function spinTheWheel() {
+    setLoopSound(true);
     if (!natsConn) {
       wsConnect();
     }
@@ -458,118 +470,124 @@ const Roulette = ({ sidebarToggled }) => {
     //  payoutFee      = 1000000 * (# of bets)
 
     //roulette bet for even
-    const board = {
-      txFee: minERG,
-      totalWager: 10,
-      bets: [
-        {
-          r4: 1,
-          r5: 0,
-          multiplier: 1,
-          amount: 10,
-        },
-      ],
-    };
+    // const board = {
+    //   txFee: minERG,
+    //   totalWager: 10,
+    //   bets: [
+    //     {
+    //       r4: 1,
+    //       r5: 0,
+    //       multiplier: 1,
+    //       amount: 10,
+    //     },
+    //   ],
+    // };
 
-    // Get utxo for ERGs
-    ergoWallet.get_utxos(minERG, TOKENID_ERG).then((utxosResponse) => {
-      if (utxosResponse.length === 0) {
-        console.log("NO ERG UTXOS");
-        return;
-      } else {
-        utxos = JSON.parse(JSON.stringify(utxosResponse));
-        ergoWallet
-          .get_utxos(board.totalWager, TOKENID_NO_TEST)
-          .then((utxosResponse) => {
-            if (utxosResponse.length === 0) {
-              console.log("NO OWL UTXOS");
-              return;
-            } else {
-              utxosResponse.forEach((owlBox) => {
-                let found = false;
-                utxos.forEach((box) => {
-                  // Check if any matching boxIds
-                  // TODO: Add a break/continue
-                  if (owlBox.boxId == box.boxId) {
-                    found = true;
-                  }
-                });
-                // Found none
-                if (!found) {
-                  utxos.push(owlBox);
-                }
-              });
-              console.log(utxos);
-              // send bet data structure to backend for the bet tx to be built
-              axios
-                .post(`/api/v1/roulette/bet-tx`, {
-                  board: board,
-                  senderAddr: `${localStorage.getItem("walletAddress")}`,
-                  utxos: utxos,
-                })
-                .then(async function (response) {
-                  // sign tx
-                  const signedTx = await signTx(response.data);
-                  console.log("signedTx", signedTx);
-                  // Get a BoxId to use for the random number call
-                  boxId = signedTx.outputs[2].boxId;
-                  // submit to node
-                  submitTx(signedTx)
-                    .then(async (txId) => {
-                      if (!txId) {
-                        console.log(`No submitted tx ID`);
-                        return null;
-                      }
-                      console.log(`Transaction submitted - ${txId.data}`);
-                      // call rng service with wallet address and box id to get our random number
-                      axios
-                        .get(
-                          `http://127.0.0.1:8089/random-number/roulette?walletAddr=${localStorage.getItem(
-                            "walletAddress"
-                          )}&boxId=${boxId}`
-                        )
-                        .then(async function (resp) {
-                          console.log("GET /random-number/roulette", { resp });
-                        })
-                        .catch(function (error) {
-                          console.log(error);
-                        });
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                    });
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
-            }
-          });
-      }
-    });
+    // // Get utxo for ERGs
+    // ergoWallet.get_utxos(minERG, TOKENID_ERG).then((utxosResponse) => {
+    //   if (utxosResponse.length === 0) {
+    //     console.log("NO ERG UTXOS");
+    //     return;
+    //   } else {
+    //     utxos = JSON.parse(JSON.stringify(utxosResponse));
+    //     ergoWallet
+    //       .get_utxos(board.totalWager, TOKENID_NO_TEST)
+    //       .then((utxosResponse) => {
+    //         if (utxosResponse.length === 0) {
+    //           console.log("NO OWL UTXOS");
+    //           return;
+    //         } else {
+    //           utxosResponse.forEach((owlBox) => {
+    //             let found = false;
+    //             utxos.forEach((box) => {
+    //               // Check if any matching boxIds
+    //               // TODO: Add a break/continue
+    //               if (owlBox.boxId == box.boxId) {
+    //                 found = true;
+    //               }
+    //             });
+    //             // Found none
+    //             if (!found) {
+    //               utxos.push(owlBox);
+    //             }
+    //           });
+    //           console.log(utxos);
+    //           // send bet data structure to backend for the bet tx to be built
+    //           axios
+    //             .post(`/api/v1/roulette/bet-tx`, {
+    //               board: board,
+    //               senderAddr: `${localStorage.getItem("walletAddress")}`,
+    //               utxos: utxos,
+    //             })
+    //             .then(async function (response) {
+    //               // sign tx
+    //               const signedTx = await signTx(response.data);
+    //               console.log("signedTx", signedTx);
+    //               // Get a BoxId to use for the random number call
+    //               boxId = signedTx.outputs[2].boxId;
+    //               // submit to node
+    //               submitTx(signedTx)
+    //                 .then(async (txId) => {
+    //                   if (!txId) {
+    //                     console.log(`No submitted tx ID`);
+    //                     return null;
+    //                   }
+    //                   console.log(`Transaction submitted - ${txId.data}`);
+    //                   // call rng service with wallet address and box id to get our random number
+    //                   axios
+    //                     .get(
+    //                       `http://127.0.0.1:8089/random-number/roulette?walletAddr=${localStorage.getItem(
+    //                         "walletAddress"
+    //                       )}&boxId=${boxId}`
+    //                     )
+    //                     .then(async function (resp) {
+    //                       console.log("GET /random-number/roulette", { resp });
+    //                     })
+    //                     .catch(function (error) {
+    //                       console.log(error);
+    //                     });
+    //                 })
+    //                 .catch((err) => {
+    //                   console.log(err);
+    //                 });
+    //             })
+    //             .catch(function (error) {
+    //               console.log(error);
+    //             });
+    //         }
+    //       });
+    //   }
+    // });
 
-    async function signTx(txToBeSigned) {
-      try {
-        return await ergoWallet.sign_tx(txToBeSigned);
-      } catch (err) {
-        const msg = `[signTx] Error: ${JSON.stringify(err)}`;
-        console.error(msg, err);
-        return null;
-      }
-    }
+    // async function signTx(txToBeSigned) {
+    //   try {
+    //     return await ergoWallet.sign_tx(txToBeSigned);
+    //   } catch (err) {
+    //     const msg = `[signTx] Error: ${JSON.stringify(err)}`;
+    //     console.error(msg, err);
+    //     return null;
+    //   }
+    // }
 
-    async function submitTx(txToBeSubmitted) {
-      try {
-        return await axios.post(`/api/v1/transactions`, {
-          senderAddr: `${localStorage.getItem("walletAddress")}`,
-          game: "roulette",
-          tx: txToBeSubmitted,
-        });
-      } catch (err) {
-        const msg = `[submitTx] Error: ${JSON.stringify(err)}`;
-        console.error(msg, err);
-        return null;
-      }
-    }
+    // async function submitTx(txToBeSubmitted) {
+    //   try {
+    //     return await axios.post(`/api/v1/transactions`, {
+    //       senderAddr: `${localStorage.getItem("walletAddress")}`,
+    //       game: "roulette",
+    //       tx: txToBeSubmitted,
+    //     });
+    //   } catch (err) {
+    //     const msg = `[submitTx] Error: ${JSON.stringify(err)}`;
+    //     console.error(msg, err);
+    //     return null;
+    //   }
+    // }
+
+    /* REMOVE THIS ONEREMOVE THIS ONEREMOVE THIS ONEREMOVE THIS ONEREMOVE THIS  */
+    setStopSpin(true);
+    setRandomNumber(10);
+    setNewRandomNumber(true);
+    /* REMOVE THIS ONEREMOVE THIS ONEREMOVE THIS ONEREMOVE THIS ONEREMOVE THIS  */
 
     innerRef.current.setAttribute("data-spinto", "");
     innerRef.current.classList.remove("stop-spin");
@@ -583,7 +601,6 @@ const Roulette = ({ sidebarToggled }) => {
     }, 20);
 
     setSpinAvailable(false);
-
     set_overlay_string(overlay_default);
   }
 
@@ -602,10 +619,6 @@ const Roulette = ({ sidebarToggled }) => {
       return;
     }
 
-    console.log(lastBet);
-    console.log(
-      "he llegado hasta aqui osea que no ha detectado como undefined"
-    );
     let currentBetObjectCopy = betObject[`num_val${lastBet}`].slice();
     let chipValueUndone = currentBetObjectCopy.pop();
     setBetObject({
@@ -652,6 +665,7 @@ const Roulette = ({ sidebarToggled }) => {
     <div
       className={bets_end ? "roulette-wrapper" : "roulette-wrapper bets-end"}
     >
+      <ReactHowler src={loopSound} playing={isLoopSound} loop={true}/>
       <div className="roulette-wheel-content-wrapper">
         {!sidebarToggled && (
           <div className="roulette-wheel-content">
@@ -912,7 +926,10 @@ const Roulette = ({ sidebarToggled }) => {
             : "roulette-table-content-wrapper"
         }
       >
-        <div id="top-buttons-container">
+        <div
+          id="top-buttons-container"
+          style={{ visibility: totalBet > 0 ? "visible" : "hidden" }}
+        >
           <div className="top-button-container">
             <button
               type="button"
@@ -920,10 +937,9 @@ const Roulette = ({ sidebarToggled }) => {
               id="resetBetsButton"
               onClick={() => resetBets()}
             >
-              <span className="btn-label"><img
-                src={resetIcon}
-                alt="Reset Bets"
-              /></span>
+              <span className="btn-label">
+                <img src={clearAll2} alt="Reset Bets" />
+              </span>
             </button>
           </div>
           <div className="top-button-container">
@@ -933,10 +949,9 @@ const Roulette = ({ sidebarToggled }) => {
               id="globalUndo"
               onClick={() => globalUndo()}
             >
-              <span className="btn-label"><img
-                src={undoIcon}
-                alt="Undo"
-              /></span>
+              <span className="btn-label">
+                <img src={undoIcon} alt="Undo" />
+              </span>
             </button>
           </div>
         </div>

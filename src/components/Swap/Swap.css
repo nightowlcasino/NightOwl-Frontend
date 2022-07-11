@@ -131,9 +131,10 @@ input[type=number] {
 #swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-input-fields-wrapper #swap-input-fields #input-separator-wrapper #input-seperator
 {
     background-color: #ab0d82;
-    padding: 5px;
+    padding: 7px;
     margin: 0 auto;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 #swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-buttons

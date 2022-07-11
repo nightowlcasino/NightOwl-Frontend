@@ -193,9 +193,9 @@ function Swap({ setIsLoading, setSwapTransaction }) {
                 <div id="input-separator-wrapper">
                   <div id="input-seperator" onClick={handleChangeSwapCurrency}>
                     <img
-                      src={sortArrows3}
+                      src={sortArrows1}
                       alt="Switch tokens"
-					  style={{width:"30px", height:"30px"}}
+                      style={{ width: "25px", height: "25px" }}
                     />
                   </div>
                 </div>
