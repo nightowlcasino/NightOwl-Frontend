@@ -8,17 +8,30 @@ import undoIcon from "../../../assets/Elements/undo.svg";
 import resetIcon from "../../../assets/Elements/clearAll.svg";
 import clearAll1 from "../../../assets/Elements/clearAll1.svg";
 import clearAll2 from "../../../assets/Elements/clearAll2.svg";
+import infoLogo from "../../../assets/Elements/infologo.svg";
+import infoLogo1 from "../../../assets/Elements/infologo1.svg";
+import infoLogo2 from "../../../assets/Elements/infologo2.svg";
 import coin_100 from "../../../assets/Elements/coin_100.png";
 import coin_500 from "../../../assets/Elements/coin_500.png";
 import coin_2k5 from "../../../assets/Elements/coin_2k5.png";
 import coin_10k from "../../../assets/Elements/coin_10k.png";
 import coin_50k from "../../../assets/Elements/coin_50k.png";
+import closeModalIcon from "../../../assets/Elements/closeModal.svg";
+import Modal from "../../Modal/Modal";
 
 import loopSound from "../../../assets/Sounds/loop.mp3";
-import endSound from "../../../assets/Sounds/end.mp3";
 import clangEndSound from "../../../assets/Sounds/clangEnd.mp3";
 import startSound from "../../../assets/Sounds/start.mp3";
+
+import moneySound1 from "../../../assets/Sounds/moneySound1.mp3";
+import moneySound2 from "../../../assets/Sounds/moneySound2.mp3";
+import moneySound3 from "../../../assets/Sounds/moneySound3.mp3";
+import moneySound4 from "../../../assets/Sounds/moneySound4.mp3";
+import moneySound5 from "../../../assets/Sounds/moneySound5.mp3";
+import moneySound6 from "../../../assets/Sounds/moneySound6.mp3";
 import ReactHowler from "react-howler";
+
+import { clear } from "@testing-library/user-event/dist/clear";
 
 const TOKENID_NO_TEST =
   "473041c7e13b5f5947640f79f00d3c5df22fad4841191260350bb8c526f9851f";
@@ -30,7 +43,6 @@ const MIN_BOX_VALUE = 1000000;
 const Roulette = ({ sidebarToggled }) => {
   var red = [32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3];
 
-  var overlay_default = "No more bets";
   var timer = 9000;
   let betObjectInitialValue = {
     num_val0: [],
@@ -172,7 +184,7 @@ const Roulette = ({ sidebarToggled }) => {
     num_val_even: [],
     num_val_odd: [],
   };
-  const [overlay_string, set_overlay_string] = useState(overlay_default);
+  const [overlayString, setOverlayString] = useState("No more bets");
   const [spinAvailable, setSpinAvailable] = useState(true);
   const [revealData, setRevealData] = useState(false);
   const [resultNumber, setResultNumber] = useState(null);
@@ -184,13 +196,17 @@ const Roulette = ({ sidebarToggled }) => {
   const [betObject, setBetObject] = useState(betObjectInitialValue);
   const [latestResults, setLatestResults] = useState([]);
   const [latestBets, setLatestBets] = useState([]);
-  const [bets_end, bets_end_toggle] = useState(false);
+  const [betsEnded, setBetsEnded] = useState(false);
   const [table_filter_value, table_filter_set] = useState("");
   const [stopSpin, setStopSpin] = useState(false);
   const [newRandomNumber, setNewRandomNumber] = useState(false);
   const [isLoopSound, setLoopSound] = useState(false);
   const [isEndSound, setEndSound] = useState(false);
   const [natsConn, setNatsConn] = useState(false);
+  const [informationAboutGameIsPressed, setInformationAboutGameIsPressed] =
+    useState(false);
+  const [insufficient_funds_notification, insufficient_funds_notification_set] =
+    useState(false);
   const { ergoWallet, defaultAddress } = useContext(StateContext);
   const checkWallet = localStorage.getItem("walletConnected");
   let sub;
@@ -198,9 +214,12 @@ const Roulette = ({ sidebarToggled }) => {
   //const waiting_for_respond_animation_delay = setInterval(() => {}, 1000);
 
   const endAudio = new Audio(clangEndSound);
-
-  const [insufficient_funds_notification, insufficient_funds_notification_set] =
-    useState(false);
+  const moneySound1Audio = new Audio(moneySound1);
+  const moneySound2Audio = new Audio(moneySound2);
+  const moneySound3Audio = new Audio(moneySound3);
+  const moneySound4Audio = new Audio(moneySound4);
+  const moneySound5Audio = new Audio(moneySound5);
+  const moneySound6Audio = new Audio(moneySound6);
 
   var arrayWithNumVals = [
     "num_val0",
@@ -371,6 +390,9 @@ const Roulette = ({ sidebarToggled }) => {
   };
 
   useEffect(() => {
+    innerRef.current.setAttribute("data-spinto", "");
+    innerRef.current.classList.remove("stop-spin");
+    innerRef.current.classList.remove("default-spin");
     if (stopSpin) {
       setStopSpin(false);
       setNewRandomNumber(!newRandomNumber);
@@ -378,8 +400,9 @@ const Roulette = ({ sidebarToggled }) => {
       innerRef.current.classList.remove("waiting-for-respond");
 
       setTimeout(() => {
+        setLoopSound(true);
         innerRef.current.setAttribute("data-spinto", randomNumber);
-      }, 50);
+      }, 500);
 
       // remove the disabled attribute when the ball has stopped
       //setInterval(() => {
@@ -395,15 +418,17 @@ const Roulette = ({ sidebarToggled }) => {
         }
 
         setTimeout(() => {
-          bets_end_toggle(false);
+          setBetsEnded(false);
           resetBets();
           addLastResult(randomNumber);
+          moneySound2Audio.play();
         }, 2500);
 
         setResultNumber(randomNumber);
         setResultColor(color);
         setRevealData(true);
         setRandomNumber(randomNumber);
+
         if (firstSpin) setFirstSpin(false);
       }, timer + 50);
       setTimeout(() => {
@@ -412,8 +437,7 @@ const Roulette = ({ sidebarToggled }) => {
       }, timer * 0.7);
       setTimeout(() => {
         endAudio.play();
-      }, timer * 0.6);
-      
+      }, timer * 0.65);
     }
   }, [newRandomNumber]);
 
@@ -446,6 +470,8 @@ const Roulette = ({ sidebarToggled }) => {
     setLatestBets(latestBetsCopy);
   }
 
+  console.log(ergoWallet);
+
   function fromNumberToColor(number) {
     //console.log("el numero es" + number);
     if (number === 0) {
@@ -457,7 +483,10 @@ const Roulette = ({ sidebarToggled }) => {
     }
   }
   function spinTheWheel() {
-    setLoopSound(true);
+    if (!totalBet) {
+      insufficient_funds_popup();
+      return;
+    }
     if (!natsConn) {
       wsConnect();
     }
@@ -466,6 +495,15 @@ const Roulette = ({ sidebarToggled }) => {
     let boxId = "";
     const minERG =
       MIN_BOX_VALUE + MIN_BOX_VALUE + MINER_FEE_VALUE + MIN_BOX_VALUE;
+
+
+      innerRef.current.classList.add("waiting-for-respond");
+      if (!firstSpin) {
+        setRevealData(false);
+      }
+      setBetsEnded(true);
+      setSpinAvailable(false);
+      setOverlayString("Waiting for result to be received from the blockchain");
 
     //txFee:
     //  minBoxValue    = 1000000 * (# of bets)
@@ -592,24 +630,10 @@ const Roulette = ({ sidebarToggled }) => {
     setRandomNumber(10);
     setNewRandomNumber(true);
     /* REMOVE THIS ONEREMOVE THIS ONEREMOVE THIS ONEREMOVE THIS ONEREMOVE THIS  */
-
-    innerRef.current.setAttribute("data-spinto", "");
-    innerRef.current.classList.remove("stop-spin");
-    innerRef.current.classList.remove("default-spin");
-    innerRef.current.classList.add("waiting-for-respond");
-    if (!firstSpin) {
-      setRevealData(false);
-    }
-    setTimeout(() => {
-      bets_end_toggle(true);
-    }, 20);
-
-    setSpinAvailable(false);
-    set_overlay_string(overlay_default);
   }
 
   function insufficient_funds_popup() {
-    set_overlay_string("Insufficient funds");
+    setOverlayString("Insufficient funds");
     insufficient_funds_notification_set(true);
     setTimeout(() => {
       insufficient_funds_notification_set(false);
@@ -617,7 +641,7 @@ const Roulette = ({ sidebarToggled }) => {
   }
 
   function globalUndo() {
-    insufficient_funds_popup();
+    
     let lastBet = latestBets.pop();
     if (lastBet === undefined) {
       return;
@@ -667,10 +691,23 @@ const Roulette = ({ sidebarToggled }) => {
 
   return (
     <div
-      className={bets_end ? "roulette-wrapper" : "roulette-wrapper bets-end"}
+      className={betsEnded ? "roulette-wrapper" : "roulette-wrapper bets-end"}
     >
-      <ReactHowler src={loopSound} playing={isLoopSound} loop={true}/>
-      <div className="roulette-wheel-content-wrapper">
+      <ReactHowler src={loopSound} playing={isLoopSound} loop={true} />
+      {informationAboutGameIsPressed && (
+        <Modal
+          link="https://medium.com/@NightOwlCasino/the-pioneers-night-owls-first-four-games-31dc6406a5f8"
+          linkText="Link to medium article"
+          setModalOff={setInformationAboutGameIsPressed}
+          firstText="Roulette is a dynamic game where you can win your bets by putting
+        your chips in the appropiate spots"
+          secondText="You can get more info here:"
+        />
+      )}
+      <div
+        className="roulette-wheel-content-wrapper"
+        style={{ pointerEvents: informationAboutGameIsPressed ? "none" : "" }}
+      >
         {!sidebarToggled && (
           <div className="roulette-wheel-content">
             <div className="plate" id="plate">
@@ -929,7 +966,25 @@ const Roulette = ({ sidebarToggled }) => {
             ? "roulette-table-content-wrapper insufficient-funds"
             : "roulette-table-content-wrapper"
         }
+        style={{ pointerEvents: informationAboutGameIsPressed ? "none" : "" }}
       >
+        <div className="info-btn-container">
+          <button
+            type="button"
+            id="info-btn"
+            onClick={() => {
+              setInformationAboutGameIsPressed(true);
+            }}
+          >
+            <span className="btn-label">
+              <img
+                src={infoLogo}
+                alt="Reset Bets"
+                style={{ width: "30px", height: "30px" }}
+              />
+            </span>
+          </button>
+        </div>
         <div
           id="top-buttons-container"
           style={{ visibility: totalBet > 0 ? "visible" : "hidden" }}
@@ -1688,7 +1743,7 @@ const Roulette = ({ sidebarToggled }) => {
           <div className="spacer"></div>
         </div>
         <div id="table-overlay">
-          <div id="table-overlay-text">{overlay_string}</div>
+          <div id="table-overlay-text">{overlayString}</div>
         </div>
       </div>
     </div>
