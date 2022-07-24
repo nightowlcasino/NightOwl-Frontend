@@ -2,6 +2,15 @@ import React, { useEffect, useRef, useState, useContext } from "react";
 import { connect, StringCodec } from "nats.ws";
 import StateContext from "../../Context";
 import axios from "axios";
+import {
+  TwitterShareButton,
+  TwitterIcon,
+  FacebookShareButton,
+  FacebookIcon,
+  TelegramShareButton,
+  TelegramIcon,
+} from "react-share";
+
 import "./Roulette.css";
 import outterWheel1 from "../../../assets/Elements/behind2.png";
 import undoIcon from "../../../assets/Elements/undo.svg";
@@ -11,6 +20,7 @@ import clearAll2 from "../../../assets/Elements/clearAll2.svg";
 import infoLogo from "../../../assets/Elements/infologo.svg";
 import infoLogo1 from "../../../assets/Elements/infologo1.svg";
 import infoLogo2 from "../../../assets/Elements/infologo2.svg";
+import shareLogo from "../../../assets/Elements/share.svg";
 import coin_100 from "../../../assets/Elements/coin_100.png";
 import coin_500 from "../../../assets/Elements/coin_500.png";
 import coin_2k5 from "../../../assets/Elements/coin_2k5.png";
@@ -20,18 +30,9 @@ import closeModalIcon from "../../../assets/Elements/closeModal.svg";
 import Modal from "../../Modal/Modal";
 
 import loopSound from "../../../assets/Sounds/loop.mp3";
-import clangEndSound from "../../../assets/Sounds/clangEnd.mp3";
-import startSound from "../../../assets/Sounds/start.mp3";
-
-import moneySound1 from "../../../assets/Sounds/moneySound1.mp3";
-import moneySound2 from "../../../assets/Sounds/moneySound2.mp3";
-import moneySound3 from "../../../assets/Sounds/moneySound3.mp3";
-import moneySound4 from "../../../assets/Sounds/moneySound4.mp3";
-import moneySound5 from "../../../assets/Sounds/moneySound5.mp3";
-import moneySound6 from "../../../assets/Sounds/moneySound6.mp3";
 import ReactHowler from "react-howler";
 
-import { clear } from "@testing-library/user-event/dist/clear";
+import { singleNumberFields, doubleNumberFields, fromNumberToColor, red, timer, betObjectInitialValue, endAudio, winningSounds, arrayWithNumVals, arrayWithNumVals1, arrayWithNumVals2, arrayWithNumVals3, arrayWithNumVals4, checkIfZero, centerOrBetween, fromChipValueToColor } from "./RouletteUtils";
 
 const TOKENID_NO_TEST =
   "473041c7e13b5f5947640f79f00d3c5df22fad4841191260350bb8c526f9851f";
@@ -41,149 +42,7 @@ const MINER_FEE_VALUE = 1100000;
 const MIN_BOX_VALUE = 1000000;
 
 const Roulette = ({ sidebarToggled }) => {
-  var red = [32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3];
 
-  var timer = 9000;
-  let betObjectInitialValue = {
-    num_val0: [],
-    num_val0_3: [],
-    num_val3: [],
-    num_val3_6: [],
-    num_val6: [],
-    num_val6_9: [],
-    num_val9: [],
-    num_val9_12: [],
-    num_val12: [],
-    num_val12_15: [],
-    num_val15: [],
-    num_val15_18: [],
-    num_val18: [],
-    num_val18_21: [],
-    num_val21: [],
-    num_val21_24: [],
-    num_val24: [],
-    num_val24_27: [],
-    num_val27: [],
-    num_val27_30: [],
-    num_val30: [],
-    num_val30_33: [],
-    num_val33: [],
-    num_val33_36: [],
-    num_val36: [],
-
-    num_val0_2_3: [],
-    num_val2_3: [],
-    num_val2_3_5_6: [],
-    num_val5_6: [],
-    num_val5_6_8_9: [],
-    num_val8_9: [],
-    num_val8_9_11_12: [],
-    num_val11_12: [],
-    num_val11_12_14_15: [],
-    num_val14_15: [],
-    num_val14_15_17_18: [],
-    num_val17_18: [],
-    num_val17_18_20_21: [],
-    num_val20_21: [],
-    num_val20_21_23_24: [],
-    num_val23_24: [],
-    num_val23_24_26_27: [],
-    num_val26_27: [],
-    num_val26_27_29_30: [],
-    num_val29_30: [],
-    num_val29_30_32_33: [],
-    num_val32_33: [],
-    num_val32_33_35_36: [],
-    num_val35_36: [],
-
-    num_val0_2: [],
-    num_val2: [],
-    num_val2_5: [],
-    num_val5: [],
-    num_val5_8: [],
-    num_val8: [],
-    num_val8_11: [],
-    num_val11: [],
-    num_val11_14: [],
-    num_val14: [],
-    num_val14_17: [],
-    num_val17: [],
-    num_val17_20: [],
-    num_val20: [],
-    num_val20_23: [],
-    num_val23: [],
-    num_val23_26: [],
-    num_val26: [],
-    num_val26_29: [],
-    num_val29: [],
-    num_val29_32: [],
-    num_val32: [],
-    num_val32_35: [],
-    num_val35: [],
-
-    num_val0_1_2: [],
-    num_val1_2: [],
-    num_val1_2_4_5: [],
-    num_val4_5: [],
-    num_val4_5_7_8: [],
-    num_val7_8: [],
-    num_val7_8_10_11: [],
-    num_val10_11: [],
-    num_val10_11_13_14: [],
-    num_val13_14: [],
-    num_val13_14_16_17: [],
-    num_val16_17: [],
-    num_val16_17_19_20: [],
-    num_val19_20: [],
-    num_val19_20_22_23: [],
-    num_val22_23: [],
-    num_val22_23_25_26: [],
-    num_val25_26: [],
-    num_val25_26_28_29: [],
-    num_val28_29: [],
-    num_val28_29_31_32: [],
-    num_val31_32: [],
-    num_val31_32_34_35: [],
-    num_val34_35: [],
-
-    num_val0_1: [],
-    num_val1: [],
-    num_val1_4: [],
-    num_val4: [],
-    num_val4_7: [],
-    num_val7: [],
-    num_val7_10: [],
-    num_val10: [],
-    num_val10_13: [],
-    num_val13: [],
-    num_val13_16: [],
-    num_val16: [],
-    num_val16_19: [],
-    num_val19: [],
-    num_val19_22: [],
-    num_val22: [],
-    num_val22_25: [],
-    num_val25: [],
-    num_val25_28: [],
-    num_val28: [],
-    num_val28_31: [],
-    num_val31: [],
-    num_val31_34: [],
-    num_val34: [],
-
-    num_val1st: [],
-    num_val2nd: [],
-    num_val3rd: [],
-    num_val_first_12: [],
-    num_val_second_12: [],
-    num_val_third_12: [],
-    num_val_first_18: [],
-    num_val_second_18: [],
-    num_val_red: [],
-    num_val_black: [],
-    num_val_even: [],
-    num_val_odd: [],
-  };
   const [overlayString, setOverlayString] = useState("No more bets");
   const [spinAvailable, setSpinAvailable] = useState(true);
   const [revealData, setRevealData] = useState(false);
@@ -205,160 +64,27 @@ const Roulette = ({ sidebarToggled }) => {
   const [natsConn, setNatsConn] = useState(false);
   const [informationAboutGameIsPressed, setInformationAboutGameIsPressed] =
     useState(false);
-  const [insufficient_funds_notification, insufficient_funds_notification_set] =
-    useState(false);
+  const [notification, setNotification] = useState(false);
+  const [winningNotification, setWinningNotification] = useState(false);
   const { ergoWallet, defaultAddress } = useContext(StateContext);
   const checkWallet = localStorage.getItem("walletConnected");
   let sub;
   const sc = StringCodec();
   //const waiting_for_respond_animation_delay = setInterval(() => {}, 1000);
 
-  const endAudio = new Audio(clangEndSound);
-  const moneySound1Audio = new Audio(moneySound1);
-  const moneySound2Audio = new Audio(moneySound2);
-  const moneySound3Audio = new Audio(moneySound3);
-  const moneySound4Audio = new Audio(moneySound4);
-  const moneySound5Audio = new Audio(moneySound5);
-  const moneySound6Audio = new Audio(moneySound6);
-
-  var arrayWithNumVals = [
-    "num_val0",
-    "num_val0_3",
-    "num_val3",
-    "num_val3_6",
-    "num_val6",
-    "num_val6_9",
-    "num_val9",
-    "num_val9_12",
-    "num_val12",
-    "num_val12_15",
-    "num_val15",
-    "num_val15_18",
-    "num_val18",
-    "num_val18_21",
-    "num_val21",
-    "num_val21_24",
-    "num_val24",
-    "num_val24_27",
-    "num_val27",
-    "num_val27_30",
-    "num_val30",
-    "num_val30_33",
-    "num_val33",
-    "num_val33_36",
-    "num_val36",
-  ];
-  var arrayWithNumVals1 = [
-    "num_val0",
-    "num_val0_2_3",
-    "num_val2_3",
-    "num_val2_3_5_6",
-    "num_val5_6",
-    "num_val5_6_8_9",
-    "num_val8_9",
-    "num_val8_9_11_12",
-    "num_val11_12",
-    "num_val11_12_14_15",
-    "num_val14_15",
-    "num_val14_15_17_18",
-    "num_val17_18",
-    "num_val17_18_20_21",
-    "num_val20_21",
-    "num_val20_21_23_24",
-    "num_val23_24",
-    "num_val23_24_26_27",
-    "num_val26_27",
-    "num_val26_27_29_30",
-    "num_val29_30",
-    "num_val29_30_32_33",
-    "num_val32_33",
-    "num_val32_33_35_36",
-    "num_val35_36",
-  ];
-  var arrayWithNumVals2 = [
-    "num_val0",
-    "num_val0_2",
-    "num_val2",
-    "num_val2_5",
-    "num_val5",
-    "num_val5_8",
-    "num_val8",
-    "num_val8_11",
-    "num_val11",
-    "num_val11_14",
-    "num_val14",
-    "num_val14_17",
-    "num_val17",
-    "num_val17_20",
-    "num_val20",
-    "num_val20_23",
-    "num_val23",
-    "num_val23_26",
-    "num_val26",
-    "num_val26_29",
-    "num_val29",
-    "num_val29_32",
-    "num_val32",
-    "num_val32_35",
-    "num_val35",
-  ];
-  var arrayWithNumVals3 = [
-    "num_val0",
-    "num_val0_1_2",
-    "num_val1_2",
-    "num_val1_2_4_5",
-    "num_val4_5",
-    "num_val4_5_7_8",
-    "num_val7_8",
-    "num_val7_8_10_11",
-    "num_val10_11",
-    "num_val10_11_13_14",
-    "num_val13_14",
-    "num_val13_14_16_17",
-    "num_val16_17",
-    "num_val16_17_19_20",
-    "num_val19_20",
-    "num_val19_20_22_23",
-    "num_val22_23",
-    "num_val22_23_25_26",
-    "num_val25_26",
-    "num_val25_26_28_29",
-    "num_val28_29",
-    "num_val28_29_31_32",
-    "num_val31_32",
-    "num_val31_32_34_35",
-    "num_val34_35",
-  ];
-
-  var arrayWithNumVals4 = [
-    "num_val0",
-    "num_val0_1",
-    "num_val1",
-    "num_val1_4",
-    "num_val4",
-    "num_val4_7",
-    "num_val7",
-    "num_val7_10",
-    "num_val10",
-    "num_val10_13",
-    "num_val13",
-    "num_val13_16",
-    "num_val16",
-    "num_val16_19",
-    "num_val19",
-    "num_val19_22",
-    "num_val22",
-    "num_val22_25",
-    "num_val25",
-    "num_val25_28",
-    "num_val28",
-    "num_val28_31",
-    "num_val31",
-    "num_val31_34",
-    "num_val34",
-  ];
-
   const innerRef = useRef();
+
+  // const betIsWon = () => {
+  //   Object.values(betObject).forEach((betArray, index) => {
+  //     if (betArray.length) {
+  //       let amountBetted;
+  //       amountBetted = betArray.reduce((x, y) => x + y);
+  //       let aux = betIsWithinWinningFields(index, randomNumber);
+  //       if (aux) {}
+  //       console.log(index);
+  //     }
+  //   });
+  // };
 
   const wsConnect = () => {
     connect({ servers: "ws://127.0.0.1:9222" })
@@ -418,10 +144,13 @@ const Roulette = ({ sidebarToggled }) => {
         }
 
         setTimeout(() => {
+          // if (betIsWon()) {
+          playRandomWinningSound();
+          notifyWin();
+          // }
           setBetsEnded(false);
           resetBets();
           addLastResult(randomNumber);
-          moneySound2Audio.play();
         }, 2500);
 
         setResultNumber(randomNumber);
@@ -441,7 +170,71 @@ const Roulette = ({ sidebarToggled }) => {
     }
   }, [newRandomNumber]);
 
+  function playRandomWinningSound() {
+    let randomSound = Math.floor(Math.random() * winningSounds.length);
+    winningSounds[randomSound].play();
+  }
+  function buildBackendBetObject() {
+    let betObject = {
+      totalWager: totalBet,
+      bets: [
+        // Red/Black
+        {
+          r4: 0,
+          r5: 0,
+          multiplier: 1,
+          amount: 10,
+        },
+        // Odd/Even
+        {
+          r4: 1,
+          r5: 0,
+          multiplier: 1,
+          amount: 10,
+        },
+        // Lower Half/Upper Half
+        {
+          r4: 2,
+          r5: 10,
+          multiplier: 1,
+          amount: 10,
+        },
+        // Columns
+        {
+          r4: 3,
+          r5: 1,
+          multiplier: 2,
+          amount: 10,
+        },
+        // Lower third/ Mid third/ Upper third
+        {
+          r4: 4,
+          r5: 6,
+          multiplier: 2,
+          amount: 10,
+        },
+        // Exact numbers
+        singleNumberFields.map((field) => {
+          return {
+            r4: 5,
+            r5: field.slice(7),
+            multiplier: 35,
+            amount: 10, //owl amount
+          };
+        }),
+      ],
+    };
+
+    return betObject;
+  }
+
   function addBetToObject(e) {
+    // Test wether the bet amount has reached a maximum value and if so, warn the user about it.
+    // if (totalBet > APICallRetrievingMaxPossibleBet) {
+    //   notifySomething("You have reached the maximum bet amount.");
+    //   return;
+    // }
+
     var numbers = e.target.getAttribute("num-val");
     let currentArrayCopy = betObject[`num_val${numbers}`].slice();
     currentArrayCopy.push(chipSelected);
@@ -470,21 +263,10 @@ const Roulette = ({ sidebarToggled }) => {
     setLatestBets(latestBetsCopy);
   }
 
-  console.log(ergoWallet);
-
-  function fromNumberToColor(number) {
-    //console.log("el numero es" + number);
-    if (number === 0) {
-      return "green";
-    } else if (red.indexOf(number) !== -1) {
-      return "red";
-    } else {
-      return "black";
-    }
-  }
+  
   function spinTheWheel() {
     if (!totalBet) {
-      insufficient_funds_popup();
+      notifySomething("Insufficient funds");
       return;
     }
     if (!natsConn) {
@@ -496,14 +278,13 @@ const Roulette = ({ sidebarToggled }) => {
     const minERG =
       MIN_BOX_VALUE + MIN_BOX_VALUE + MINER_FEE_VALUE + MIN_BOX_VALUE;
 
-
-      innerRef.current.classList.add("waiting-for-respond");
-      if (!firstSpin) {
-        setRevealData(false);
-      }
-      setBetsEnded(true);
-      setSpinAvailable(false);
-      setOverlayString("Waiting for result to be received from the blockchain");
+    innerRef.current.classList.add("waiting-for-respond");
+    if (!firstSpin) {
+      setRevealData(false);
+    }
+    setBetsEnded(true);
+    setSpinAvailable(false);
+    setOverlayString("Waiting for result to be received from the blockchain");
 
     //txFee:
     //  minBoxValue    = 1000000 * (# of bets)
@@ -625,23 +406,32 @@ const Roulette = ({ sidebarToggled }) => {
     //   }
     // }
 
-    /* REMOVE THIS ONEREMOVE THIS ONEREMOVE THIS ONEREMOVE THIS ONEREMOVE THIS  */
+    //send the backend the bet object using buildBackendBetObject();
+
+    /* REMOVE THIS ONE AFTER BACKEND CALLS ARE PROPERLY WORKING */
     setStopSpin(true);
     setRandomNumber(10);
     setNewRandomNumber(true);
-    /* REMOVE THIS ONEREMOVE THIS ONEREMOVE THIS ONEREMOVE THIS ONEREMOVE THIS  */
+    /* REMOVE THIS ONE AFTER BACKEND CALLS ARE PROPERLY WORKING */
   }
 
-  function insufficient_funds_popup() {
-    setOverlayString("Insufficient funds");
-    insufficient_funds_notification_set(true);
+  function notifySomething(messageString) {
+    setOverlayString(messageString);
+    setNotification(true);
     setTimeout(() => {
-      insufficient_funds_notification_set(false);
+      setNotification(false);
     }, 3000);
   }
 
+  function notifyWin() {
+    setOverlayString("You won!");
+    setWinningNotification(true);
+    setTimeout(() => {
+      setWinningNotification(false);
+    }, 4000);
+  }
+
   function globalUndo() {
-    
     let lastBet = latestBets.pop();
     if (lastBet === undefined) {
       return;
@@ -654,39 +444,6 @@ const Roulette = ({ sidebarToggled }) => {
       [`num_val${lastBet}`]: currentBetObjectCopy,
     });
     setTotalBet(totalBet - chipValueUndone);
-  }
-
-  function fromChipValueToColor(number) {
-    switch (number) {
-      case 100:
-        return "purple";
-      case 500:
-        return "green";
-      case 2500:
-        return "pink";
-      case 10000:
-        return "blue";
-      case 50000:
-        return "black";
-      default:
-        return "";
-    }
-  }
-
-  function check_if_zero(number) {
-    if (number != 0) {
-      return "active";
-    } else {
-      return "";
-    }
-  }
-
-  function centerOrBetween(index) {
-    if (index % 2 === 0) {
-      return "center";
-    } else {
-      return "between";
-    }
   }
 
   return (
@@ -962,34 +719,17 @@ const Roulette = ({ sidebarToggled }) => {
       </div>
       <div
         className={
-          insufficient_funds_notification
-            ? "roulette-table-content-wrapper insufficient-funds"
+          notification || winningNotification
+            ? "roulette-table-content-wrapper notification"
             : "roulette-table-content-wrapper"
         }
         style={{ pointerEvents: informationAboutGameIsPressed ? "none" : "" }}
       >
-        <div className="info-btn-container">
-          <button
-            type="button"
-            id="info-btn"
-            onClick={() => {
-              setInformationAboutGameIsPressed(true);
-            }}
+        <div id="top-buttons-container">
+          <div
+            className="top-button-container"
+            style={{ visibility: totalBet > 0 ? "visible" : "hidden" }}
           >
-            <span className="btn-label">
-              <img
-                src={infoLogo}
-                alt="Reset Bets"
-                style={{ width: "30px", height: "30px" }}
-              />
-            </span>
-          </button>
-        </div>
-        <div
-          id="top-buttons-container"
-          style={{ visibility: totalBet > 0 ? "visible" : "hidden" }}
-        >
-          <div className="top-button-container">
             <button
               type="button"
               className={spinAvailable ? "top-btn" : "btn disabled"}
@@ -1001,7 +741,10 @@ const Roulette = ({ sidebarToggled }) => {
               </span>
             </button>
           </div>
-          <div className="top-button-container">
+          <div
+            className="top-button-container"
+            style={{ visibility: totalBet > 0 ? "visible" : "hidden" }}
+          >
             <button
               type="button"
               className={spinAvailable ? "top-btn" : "btn disabled"}
@@ -1010,6 +753,23 @@ const Roulette = ({ sidebarToggled }) => {
             >
               <span className="btn-label">
                 <img src={undoIcon} alt="Undo" />
+              </span>
+            </button>
+          </div>
+          <div className="info-btn-container">
+            <button
+              type="button"
+              id="info-btn"
+              onClick={() => {
+                setInformationAboutGameIsPressed(true);
+              }}
+            >
+              <span className="btn-label">
+                <img
+                  src={infoLogo}
+                  alt="Game info"
+                  style={{ width: "30px", height: "30px" }}
+                />
               </span>
             </button>
           </div>
@@ -1257,7 +1017,7 @@ const Roulette = ({ sidebarToggled }) => {
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
                                 index
-                              )} ${check_if_zero(
+                              )} ${checkIfZero(
                                 val.split("l")[1]
                               )} ${fromChipValueToColor(
                                 betObject[val][betObject[val].length - 1]
@@ -1278,7 +1038,7 @@ const Roulette = ({ sidebarToggled }) => {
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
                                 index
-                              )} ${check_if_zero(
+                              )} ${checkIfZero(
                                 val.split("l")[1]
                               )} ${fromChipValueToColor(
                                 betObject[val][betObject[val].length - 1]
@@ -1318,7 +1078,7 @@ const Roulette = ({ sidebarToggled }) => {
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
                                 index
-                              )} ${check_if_zero(
+                              )} ${checkIfZero(
                                 val.split("l")[1]
                               )} ${fromChipValueToColor(
                                 betObject[val][betObject[val].length - 1]
@@ -1339,7 +1099,7 @@ const Roulette = ({ sidebarToggled }) => {
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
                                 index
-                              )} ${check_if_zero(
+                              )} ${checkIfZero(
                                 val.split("l")[1]
                               )} ${fromChipValueToColor(
                                 betObject[val][betObject[val].length - 1]
@@ -1743,7 +1503,59 @@ const Roulette = ({ sidebarToggled }) => {
           <div className="spacer"></div>
         </div>
         <div id="table-overlay">
-          <div id="table-overlay-text">{overlayString}</div>
+          <div
+            id="table-overlay-text"
+            style={
+              winningNotification
+                ? {
+                    width: "8vw",
+                    height: "8vh",
+                    textAlign: "center",
+                    display: "flex",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                    flexDirection: "column",
+                  }
+                : {}
+            }
+          >
+            {overlayString}
+            {winningNotification && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  width: "100%",
+                }}
+              >
+                <TwitterShareButton
+                  url={
+                    "I have just won 100000 OWLs (1000$) via dev.nightowlcasino.io\n\n"
+                  }
+                  hashtags={["NightOwl"]}
+                >
+                  <TwitterIcon size={32} round />
+                </TwitterShareButton>
+                <TelegramShareButton
+                  url={"https://web.telegram.org/k/"}
+                  title={
+                    "I have just won 100000 OWLs (1000$) via dev.nightowlcasino.io"
+                  }
+                >
+                  <TelegramIcon size={32} round />
+                </TelegramShareButton>
+                <FacebookShareButton
+                  url={"https://dev.nightowlcasino.io/"}
+                  quote={
+                    "I have just won 100000 OWLs (1000$) via dev.nightowlcasino.io"
+                  }
+                  hashtags={"I just won 100000 OWLs (1000$)"}
+                >
+                  <FacebookIcon size={32} round />
+                </FacebookShareButton>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
