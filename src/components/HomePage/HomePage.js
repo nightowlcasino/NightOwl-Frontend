@@ -8,7 +8,7 @@ const HomePage = () => {
 		<div className="mx-2 lg:mx-0 max-w-full flex flex-col justify-center xl:items-start xl:ml-20 items-center ">
 			<header
 				style={{
-					backgroundImage: "linear-gradient(to bottom right, #190551,#420d7c)",
+					backgroundColor: "green",
 				}}
 				className="border-4 border-[#bd0b83] rounded-[25px] max-w-[1400px] w-[80%] 2xl:w-[90%] flex flex-col lg:flex-row lg:gap-0 xl:gap-12 justify-evenly lg:justify-between items-center object-contain rounded-3xl h-[600px] text-white"
 			>

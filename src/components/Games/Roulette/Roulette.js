@@ -26,13 +26,31 @@ import coin_500 from "../../../assets/Elements/coin_500.png";
 import coin_2k5 from "../../../assets/Elements/coin_2k5.png";
 import coin_10k from "../../../assets/Elements/coin_10k.png";
 import coin_50k from "../../../assets/Elements/coin_50k.png";
+import rouletteMascot from "../../../assets/Elements/rouletteMascot.png";
 import closeModalIcon from "../../../assets/Elements/closeModal.svg";
 import Modal from "../../Modal/Modal";
 
 import loopSound from "../../../assets/Sounds/loop.mp3";
 import ReactHowler from "react-howler";
 
-import { singleNumberFields, doubleNumberFields, fromNumberToColor, red, timer, betObjectInitialValue, endAudio, winningSounds, arrayWithNumVals, arrayWithNumVals1, arrayWithNumVals2, arrayWithNumVals3, arrayWithNumVals4, checkIfZero, centerOrBetween, fromChipValueToColor } from "./RouletteUtils";
+import {
+  singleNumberFields,
+  doubleNumberFields,
+  fromNumberToColor,
+  red,
+  timer,
+  betObjectInitialValue,
+  endAudio,
+  winningSounds,
+  arrayWithNumVals,
+  arrayWithNumVals1,
+  arrayWithNumVals2,
+  arrayWithNumVals3,
+  arrayWithNumVals4,
+  checkIfZero,
+  centerOrBetween,
+  fromChipValueToColor,
+} from "./RouletteUtils";
 
 const TOKENID_NO_TEST =
   "473041c7e13b5f5947640f79f00d3c5df22fad4841191260350bb8c526f9851f";
@@ -42,7 +60,6 @@ const MINER_FEE_VALUE = 1100000;
 const MIN_BOX_VALUE = 1000000;
 
 const Roulette = ({ sidebarToggled }) => {
-
   const [overlayString, setOverlayString] = useState("No more bets");
   const [spinAvailable, setSpinAvailable] = useState(true);
   const [revealData, setRevealData] = useState(false);
@@ -231,7 +248,7 @@ const Roulette = ({ sidebarToggled }) => {
   function addBetToObject(e) {
     // Test wether the bet amount has reached a maximum value and if so, warn the user about it.
     // if (totalBet > APICallRetrievingMaxPossibleBet) {
-    //   notifySomething("You have reached the maximum bet amount.");
+    //   notifySomething("You have reached the maximum bet amount.", 3);
     //   return;
     // }
 
@@ -263,10 +280,9 @@ const Roulette = ({ sidebarToggled }) => {
     setLatestBets(latestBetsCopy);
   }
 
-  
   function spinTheWheel() {
     if (!totalBet) {
-      notifySomething("Insufficient funds");
+      notifySomething("Insufficient funds", 3);
       return;
     }
     if (!natsConn) {
@@ -279,6 +295,7 @@ const Roulette = ({ sidebarToggled }) => {
       MIN_BOX_VALUE + MIN_BOX_VALUE + MINER_FEE_VALUE + MIN_BOX_VALUE;
 
     innerRef.current.classList.add("waiting-for-respond");
+
     if (!firstSpin) {
       setRevealData(false);
     }
@@ -410,21 +427,46 @@ const Roulette = ({ sidebarToggled }) => {
 
     /* REMOVE THIS ONE AFTER BACKEND CALLS ARE PROPERLY WORKING */
     setStopSpin(true);
-    setRandomNumber(10);
-    setNewRandomNumber(true);
-    /* REMOVE THIS ONE AFTER BACKEND CALLS ARE PROPERLY WORKING */
+
+    //This literally triggers the spin to stop, so this next two lines should only be executed when the number is retrieved from the blockchain
+    // setRandomNumber(10);
+    // setNewRandomNumber(true);
+
+    // SIMULATION OF THE WAITING FOR THE 2 MINUTES LIMIT.
+    fetchData();
   }
 
-  function notifySomething(messageString) {
+  const promiseTimeout = new Promise((resolve) =>
+    setTimeout(() => resolve(false), 10000)
+  );
+
+  const fetchData = async () => {
+    console.log("a saber");
+    const response = await Promise.race([promiseTimeout]); // I want to await max 10 seconds here, if not next line should be executed
+    if (!response) {
+      // warn user that the random number was not retrieved properly
+      setBetsEnded(false);
+      innerRef.current.classList.remove("waiting-for-respond");
+      notifySomething(
+        "Random number couldn't be retrieved from the blockchain",
+        5
+      );
+    } else {
+      //Treatment of the number returned.
+    }
+  };
+
+  function notifySomething(messageString, secondsAmount) {
     setOverlayString(messageString);
     setNotification(true);
     setTimeout(() => {
       setNotification(false);
-    }, 3000);
+      setSpinAvailable(true);
+    }, secondsAmount * 1000);
   }
 
   function notifyWin() {
-    setOverlayString("You won!");
+    setOverlayString("You won x OWL (y $)!");
     setWinningNotification(true);
     setTimeout(() => {
       setWinningNotification(false);
@@ -717,13 +759,16 @@ const Roulette = ({ sidebarToggled }) => {
           </div>
         )}
       </div>
+
       <div
         className={
           notification || winningNotification
             ? "roulette-table-content-wrapper notification"
             : "roulette-table-content-wrapper"
         }
-        style={{ pointerEvents: informationAboutGameIsPressed ? "none" : "" }}
+        style={{
+          pointerEvents: informationAboutGameIsPressed ? "none" : "",
+        }}
       >
         <div id="top-buttons-container">
           <div
@@ -1503,56 +1548,65 @@ const Roulette = ({ sidebarToggled }) => {
           <div className="spacer"></div>
         </div>
         <div id="table-overlay">
-          <div
-            id="table-overlay-text"
-            style={
-              winningNotification
-                ? {
-                    width: "8vw",
-                    height: "8vh",
-                    textAlign: "center",
-                    display: "flex",
-                    justifyContent: "space-around",
-                    alignItems: "center",
-                    flexDirection: "column",
-                  }
-                : {}
-            }
-          >
+          {(notification || winningNotification || betsEnded) && (
+            <img
+              src={rouletteMascot}
+              style={{
+                width: !betsEnded ? "350px" : "275px",
+                height: !betsEnded ? "350px": "275px",
+                position: "absolute",
+                zIndex: 1,
+                right: "2%",
+                bottom: "2%",
+              }}
+              id="roulette-mascot"
+            />
+          )}
+          <div id="table-overlay-text" className="bubble-bottom-right" style={{
+            fontSize: !betsEnded ? "1.5rem" : "1.2rem",
+            padding: "24px",
+          }}>
             {overlayString}
-            {winningNotification && (
+            {(winningNotification ) && (
               <div
                 style={{
+                  paddingTop: "10px",
                   display: "flex",
-                  justifyContent: "space-evenly",
                   width: "100%",
+                  justifyContent: "center",
                 }}
               >
-                <TwitterShareButton
-                  url={
-                    "I have just won 100000 OWLs (1000$) via dev.nightowlcasino.io\n\n"
-                  }
-                  hashtags={["NightOwl"]}
-                >
-                  <TwitterIcon size={32} round />
-                </TwitterShareButton>
-                <TelegramShareButton
-                  url={"https://web.telegram.org/k/"}
-                  title={
-                    "I have just won 100000 OWLs (1000$) via dev.nightowlcasino.io"
-                  }
-                >
-                  <TelegramIcon size={32} round />
-                </TelegramShareButton>
-                <FacebookShareButton
-                  url={"https://dev.nightowlcasino.io/"}
-                  quote={
-                    "I have just won 100000 OWLs (1000$) via dev.nightowlcasino.io"
-                  }
-                  hashtags={"I just won 100000 OWLs (1000$)"}
-                >
-                  <FacebookIcon size={32} round />
-                </FacebookShareButton>
+                <div className="shareIcon">
+                  <TwitterShareButton
+                    url={
+                      "I have just won 100000 OWLs (1000$) via dev.nightowlcasino.io\n\n"
+                    }
+                    hashtags={["NightOwl"]}
+                  >
+                    <TwitterIcon size={40} round />
+                  </TwitterShareButton>
+                </div>
+                <div className="shareIcon">
+                  <TelegramShareButton
+                    url={"https://web.telegram.org/k/"}
+                    title={
+                      "I have just won 100000 OWLs (1000$) via dev.nightowlcasino.io"
+                    }
+                  >
+                    <TelegramIcon size={40} round />
+                  </TelegramShareButton>
+                </div>
+                <div className="shareIcon">
+                  <FacebookShareButton
+                    url={"https://dev.nightowlcasino.io/"}
+                    quote={
+                      "I have just won 100000 OWLs (1000$) via dev.nightowlcasino.io"
+                    }
+                    hashtags={"I just won 100000 OWLs (1000$)"}
+                  >
+                    <FacebookIcon size={40} round />
+                  </FacebookShareButton>
+                </div>
               </div>
             )}
           </div>

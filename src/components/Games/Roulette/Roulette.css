@@ -154,6 +154,10 @@
     opacity: 1 !important;
 }
 
+.shareIcon{
+    margin: 0px 10px;
+}
+
 .plate {
     background-color: gray;
     width: 350px;
@@ -783,7 +787,7 @@
     align-content: center;
     align-items: center;
     border-radius: 20px;
-    background-color: #343434aa;
+    background-color: #161616ee;
     transition: all 0.4s ease;
 }
 
@@ -795,12 +799,28 @@
 
 #table-overlay #table-overlay-text
 {
-    margin: 0 auto;
-    color: white;
-    background-color: #A739FF;
-    padding: 20px;
-    border-radius: 20px;
+    position: relative;
+  line-height: 24px;
+  width: 300px;
+  margin: 0 auto;
+  background: #A739FF;
+  border-radius: 40px;
+  text-align: center;
+  color: white;
 }
+
+.bubble-bottom-right:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-right: 48px solid #A739FF;
+    border-left: 12px solid transparent;
+    border-top: 12px solid #A739FF;
+    border-bottom: 20px solid transparent;
+    left: 82%;
+    bottom: -8px;
+  }
 
 #table-wrapper,
 #top-row,
