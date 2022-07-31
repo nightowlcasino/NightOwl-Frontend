@@ -1,0 +1,254 @@
+#coinflip-game-wrapper
+{
+    display: flex;
+    flex: 100%;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper
+{
+    flex: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 20px;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content
+{
+    width: 100%;
+    max-width: 400px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 15px -5px black;
+    margin: 0 auto;
+    background-color: #5b0084;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #coinflip-header-wrapper
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #coinflip-header-wrapper #coinflip-header
+{
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    align-items: center;
+    align-content: center;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #coinflip-header-wrapper #coinflip-header #spacer
+{
+    flex: 20px;
+    min-width: 30px;
+    text-align: center;
+    user-select: none;
+    font-size: 45px;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #coinflip-header .side-selector
+{
+    font-size: 20px;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #coinflip-header .side-selector .side-selector-name
+{
+    color: white;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #coinflip-header .side-selector input
+{
+    display: none;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #coinflip-header .side-selector input[type=radio]:checked ~ .side-selector-name
+{
+    color: #d70a84;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #currently-selected-wrapper
+{
+    display: flex;
+    flex-direction: row;
+    user-select: none;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #currently-selected-wrapper #currently-selected
+{
+    flex: 1 1 auto;
+    text-align: left;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #currently-selected-wrapper #currently-selected #currently-selected-placeholder .hiden
+{
+    display: none;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #currently-selected-wrapper #reward
+{
+    flex: 1 1 auto;
+    text-align: right;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content .wrapper
+{
+    text-align: center;
+    padding: 30px 0px;
+    user-select: none;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #input-wrapper
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #input-wrapper #input
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    user-select: none;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #input-wrapper #input .bet-button-change
+{
+    display: block;
+    font-size: 40px;
+    padding: 0px 10px;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #input-wrapper #input input
+{
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid white;
+    padding: 0px;
+    color: white;
+    font-size: 25px;
+    flex: 175px;
+    max-width: 175px;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #input-wrapper #input #input-unit
+{
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #bet-button-wrapper
+{
+    margin: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    padding: 30px 0px 20px 0px;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #bet-button-wrapper button
+{
+    padding: 15px 20px;
+    border-radius: 50px;
+    background-image: linear-gradient(to right, #5b0084, #ab0d82);
+    color: white;
+    font-size: 18px;
+    border: none;
+    width: calc(100% - 50px);
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #transaction-id-wrapper
+{
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+.color-pink
+{
+    color: #d70a84;
+}
+
+#coinflip-game-wrapper #coin-wrapper
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    flex: 40%;
+    position: relative;
+}
+
+#coinflip-game-wrapper #coin-wrapper #platform
+{
+    position: relative;
+    width: 100vw;
+    max-width: 600px;
+    min-height: 600px;
+    background-image: url(../../../assets/Elements/pyramid.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#coinflip-game-wrapper #coin-wrapper #platform #coin
+{
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    background-image: url(../../../assets/Elements/swap_coin.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation-name: coin-hover;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes coin-hover
+{
+    from {top: 15%}
+    to {top: 20%}
+}
+
+@media all and (max-width: 992px)
+{
+    #coinflip-game-wrapper
+    {
+        flex-direction: column;
+    }
+
+    #coinflip-game-wrapper #coin-wrapper
+    {
+        z-index: -1;
+    }
+
+    #coinflip-game-wrapper #coin-wrapper #platform
+    {
+        width: calc(100vw - 20px);
+        min-width: auto;
+    }
+}
