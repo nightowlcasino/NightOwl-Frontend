@@ -4,7 +4,7 @@ import "./Swap.css";
 import StateContext from "../Context";
 import sortArrows1 from "../../assets/Elements/sortArrows1.svg";
 import sortArrows3 from "../../assets/Elements/sortArrows3.svg";
-//import { WalletContext } from "../Header/Header";
+import sigUSDicon from "../../assets/Elements/SigUSD.svg";
 
 const TOKENID_NO_TEST =
   "afd0d6cb61e86d15f2a0adc1e7e23df532ba3ff35f8ba88bed16729cae933032";
@@ -16,12 +16,15 @@ const FEE_VALUE = 1100000;
 const MIN_BOX_VALUE = 1000000;
 
 function Swap({ setIsLoading, setSwapTransaction }) {
-  const [swap1, setSwap1] = useState(false);
-  const [swap2, setSwap2] = useState(false);
+  const [swap1, setSwap1] = useState("SigUSD");
+  const [swap2, setSwap2] = useState("OWL");
+  const [swap1Amount, setSwap1Amount] = useState();
+  const [swap2Amount, setSwap2Amount] = useState();
   const [swapSelect1, setSwapSelect1] = useState("SigUSD");
-  const [swapCurrencyInput, setSwapCurrencyInput] = useState(false);
   const { ergoWallet, defaultAddress } = useContext(StateContext);
 
+  console.log(ergoWallet);
+  
   //const [wallet, setWallet] = useContext(WalletContext)
   const backend = process.env.BACKEND_FQDN || "localhost";
 
@@ -122,25 +125,34 @@ function Swap({ setIsLoading, setSwapTransaction }) {
     }
   }
 
-  const handleChangeSwapCurrency = () => {
-    setSwapCurrencyInput((prev) => !prev);
-  };
+  function handleSwapCurrencies() {
+    const temp1 = swap1;
+    const temp2 = swap2;
+    setSwap1(temp2);
+    setSwap2(temp1);
+  }
 
-  const handleSwapSelect = (option) => {
-    setSwapSelect1(option);
-  };
+  function getCorrectFactorMultiplier(swapNumber) {
+    if (swapNumber === "SigUSD") {
+      return 100;
+    } else if (swapNumber === "OWL") {
+      return 0.01;
+    }
+  }
 
-  const handleSwap1 = (value) => {
-    setSwap1(value);
-    if (!value) setSwap2(false);
-    else setSwap2(value * 100);
-  };
-
-  const handleSwap2 = (value) => {
-    setSwap2(value);
-    if (!value) setSwap1(false);
-    else setSwap1(value / 100);
-  };
+  function handleChangeSwapAmount(value,swapNumber) {
+    if (value === "") {
+      setSwap1Amount("");
+      setSwap2Amount("");
+    }
+    else if (swapNumber == 0) {
+      setSwap1Amount(value);
+      setSwap2Amount(value * getCorrectFactorMultiplier(swap1));
+    } else if (swapNumber == 1) {
+      setSwap2Amount(value);
+      setSwap1Amount(value * getCorrectFactorMultiplier(swap2));
+    }
+  }
 
   return (
     <div id="swap-wrapper">
@@ -149,85 +161,51 @@ function Swap({ setIsLoading, setSwapTransaction }) {
           <form id="swap-content">
             <div id="swap-header">
               <h1>Swap</h1>
-              <span>
-                {swapCurrencyInput
-                  ? `Swap Owl for ${swapSelect1}`
-                  : `Swap ${swapSelect1} for Owl`}
-              </span>
             </div>
             <div id="swap-input-fields-wrapper">
-              <div id="swap-input-fields">
-                <div className="input-field">
-                  <select
-                    value={swapSelect1}
-                    onChange={(e) => handleSwapSelect(e.target.value)}
-                    style={{
-                      color: "white",
-                      outline: "none",
-                      width: swapCurrencyInput ? "" : "29%",
-                    }}
-                  >
-                    {swapCurrencyInput ? (
-                      <option value="owl">OWL</option>
-                    ) : (
-                      <option value="SigUSD">SigUSD</option>
-                    )}
-                    {/* <option value="ERG">ERG</option> */}
-                  </select>
-                  <input
-                    type="number"
-                    step="0.01"
-                    name="swap1"
-                    placeholder={
-                      swapCurrencyInput ? "OWL amount" : `${swapSelect1} amount`
-                    }
-                    value={swapCurrencyInput ? swap2 : swap1}
-                    onChange={(e) =>
-                      swapCurrencyInput
-                        ? handleSwap2(e.target.value)
-                        : handleSwap1(e.target.value)
-                    }
-                    style={{ outline: "none" }}
-                  />
-                </div>
-                <div id="input-separator-wrapper">
-                  <div id="input-seperator" onClick={handleChangeSwapCurrency}>
-                    <img
-                      src={sortArrows3}
-                      alt="Switch tokens"
-					  style={{width:"30px", height:"30px"}}
+              <div id="swap-input-fields" >
+                <div className="swap-input">
+                  <div id="swap-input-select">
+                    <img src={sigUSDicon} alt= "Token icon" style={{verticalAlign:"middle", width: "40px", height: "40px"}} />
+                    <span>{swap1}</span>
+                  </div>
+                  <div id="swap-input-amount-input">
+                    <input 
+                      type="number"
+                      placeholder={
+                        `${swap1} amount`
+                      }
+                      value={swap1Amount}
+                      onChange={(e) => handleChangeSwapAmount(e.target.value, 0)}
                     />
                   </div>
                 </div>
-                <div className="input-field">
-                  <select
-                    style={{
-                      color: "white",
-                      outline: "none",
-                      width: swapCurrencyInput ? "29%" : "",
-                    }}
-                  >
-                    {swapCurrencyInput ? (
-                      <option value="SigUSD">SigUSD</option>
-                    ) : (
-                      <option value="owl">OWL</option>
-                    )}
-                  </select>
-                  <input
-                    type="number"
-                    name="swap2"
-                    placeholder={
-                      swapCurrencyInput ? `${swapSelect1} amount` : "OWL amount"
-                    }
-                    value={swapCurrencyInput ? swap1 : swap2}
-                    onChange={(e) =>
-                      swapCurrencyInput
-                        ? handleSwap1(e.target.value)
-                        : handleSwap2(e.target.value)
-                    }
-                    style={{ outline: "none" }}
-                  />
+                <div id="input-separator-wrapper">
+                  <div id="input-seperator" onClick={handleSwapCurrencies}>
+                    <img
+                      src={sortArrows1}
+                      alt="Switch tokens"
+                      style={{ width: "25px", height: "25px" }}
+                    />
+                  </div>
                 </div>
+                <div className="swap-input" >
+                  <div id="swap-input-select">
+                    <img src={sigUSDicon} alt= "Token icon" style={{verticalAlign:"middle", width: "40px", height: "40px"}} />
+                    <span>{swap2}</span>
+                  </div>
+                  <div id="swap-input-amount-input">
+                    <input 
+                      type="number"
+                      placeholder={
+                        `${swap2} amount`
+                      }
+                      value={swap2Amount}
+                      onChange={(e) => handleChangeSwapAmount(e.target.value, 1)}
+                    />
+                  </div>
+                </div>
+
               </div>
             </div>
             <div id="swap-buttons">

@@ -129,6 +129,7 @@
     align-content: center;
     flex-direction: column;
     transition: all var(--roulette-bets-end-transition-time) ease;
+    top: 100px;
 }
 
 .roulette-wrapper .roulette-wheel-content-wrapper,
@@ -143,13 +144,18 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    bottom: 30px;
 }
 
-.roulette-table-content-wrapper.insufficient-funds #table-overlay
+.roulette-table-content-wrapper.notification #table-overlay
 {
     height: calc(100% - 80px);
     visibility: visible !important;
     opacity: 1 !important;
+}
+
+.shareIcon{
+    margin: 0px 10px;
 }
 
 .plate {
@@ -503,17 +509,35 @@
 }
 
 .top-btn {
-    padding: 15px 20px;
+    padding: 5px 10px;
     text-align: center;
     color: white;
     background-image: linear-gradient(to right, #8e0081, #fa008c);
-    border-radius: 15px;
-    margin: 10px auto;
+    border-radius: 10px;
+    margin: 5px auto;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
     cursor: pointer;
     border: none;
+}
+
+#info-btn {
+    padding: 5px 10px;
+    text-align: center;
+    color: white;
+    background-image: linear-gradient(to right, #8e0081, #fa008c);
+    border-radius: 10px;
+    margin: 0px auto;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    border: none;
+}
+
+.info-btn-container {
+    margin-left: auto;  
 }
 .btn .btn-label {
     font-size: 20px;
@@ -581,6 +605,7 @@
     padding-top: 36px;
     display: none;
 }
+
 .data .result {
     background-color: green;
     color: white;
@@ -762,7 +787,7 @@
     align-content: center;
     align-items: center;
     border-radius: 20px;
-    background-color: #343434aa;
+    background-color: #161616ee;
     transition: all 0.4s ease;
 }
 
@@ -774,12 +799,28 @@
 
 #table-overlay #table-overlay-text
 {
-    margin: 0 auto;
-    color: white;
-    background-color: #A739FF;
-    padding: 20px;
-    border-radius: 20px;
+    position: relative;
+  line-height: 24px;
+  width: 300px;
+  margin: 0 auto;
+  background: #A739FF;
+  border-radius: 40px;
+  text-align: center;
+  color: white;
 }
+
+.bubble-bottom-right:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-right: 48px solid #A739FF;
+    border-left: 12px solid transparent;
+    border-top: 12px solid #A739FF;
+    border-bottom: 20px solid transparent;
+    left: 82%;
+    bottom: -8px;
+  }
 
 #table-wrapper,
 #top-row,
@@ -790,6 +831,7 @@
 #bottom-row
 {
     display: flex;
+
 }
 
 #top-row,
@@ -1213,6 +1255,7 @@
     opacity: 1;
 }
 
+
 #bottom-center-table
 {
     flex: 1 1 auto;
@@ -1418,7 +1461,8 @@
 
 .roulette-wrapper.bets-end .table-value
 {
-    padding: 25px 10px;
+    padding: 18px 10px;
+    font-size: 1.75em;
     margin: 3px;
 }
 
@@ -1495,6 +1539,7 @@
     flex-direction: row;
     align-content: center;
     align-items: center;
+    margin-top: 20px;
 }
 
 #resetBetsButton {
