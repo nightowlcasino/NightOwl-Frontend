@@ -11,6 +11,9 @@ import { useTranslation } from "react-i18next";
 import { Menu, Transition } from "@headlessui/react";
 import { ArchiveIcon } from "@heroicons/react/solid";
 import "../Header/WalletHover/WalletHover.css";
+import {
+  ThreeDots,
+} from "react-loader-spinner";
 import StateContext from "../Context";
 
 const backend = process.env.BACKEND_FQDN || "localhost";
@@ -37,8 +40,8 @@ const TOKENID_PAIDEIA =
   "1fd6e032e8476c4aa54c18c1a308dce83940e8f4a28f576440513ed7326ad489";
 
 function AddWallet(props) {
-  const [ergoWallet, setErgoWallet] = useState();
-
+  const { ergoWallet, setErgoWallet, defaultAddress, setDefaultAddress } =
+    useContext(StateContext);
   const [ergBalance, setErgBalance] = useState(0);
   const [sigUSDBalance, setSigUSDBalance] = useState(0);
   const [sigRSVBalance, setSigRSVBalance] = useState(0);
@@ -48,9 +51,9 @@ function AddWallet(props) {
   const [owlBalance, setOwlBalance] = useState(0);
 
   const [walletConnected, setWalletConnected] = useState(false);
+  const [loadingWalletConnection, setLoadingWalletConnection] = useState(false);
   const [showSelector, setShowSelector] = useState(false);
   const [walletHover, setWalletHover] = useState(false);
-  const [defaultAddress, setDefaultAddress] = useState();
 
   window.addEventListener("ergo_wallet_disconnected", () => {
     disconnectWallet();
@@ -134,6 +137,7 @@ function AddWallet(props) {
         setDefaultAddress(truncate(address, 12, "..."));
         localStorage.setItem("walletConnected", "true");
       });
+      setLoadingWalletConnection(false);
     }
   }, [ergoWallet]);
 
@@ -237,6 +241,7 @@ function AddWallet(props) {
   }
 
   const connectNautilus = () => {
+    setLoadingWalletConnection(true);
     if (!window.ergoConnector) {
       return;
     }
@@ -266,6 +271,7 @@ function AddWallet(props) {
   };
 
   const connectSafew = () => {
+    setLoadingWalletConnection(true);
     if (!window.ergoConnector) {
       return;
     }
@@ -321,9 +327,7 @@ function AddWallet(props) {
               className="mainMenuItem"
               style={{ left: "10px", marginTop: "3.5rem" }}
             >
-              <div
-                style={{fontWeight: "bold"}}
-              >
+              <div style={{ fontWeight: "bold" }}>
                 <Menu.Item onClick={connectNautilus}>
                   {({ active }) => (
                     <a
@@ -337,7 +341,7 @@ function AddWallet(props) {
                         src={nautilusIcon}
                         style={{ height: "30px", marginRight: "3rem" }}
                       />
-                      <span style={{marginLeft:"5px"}}>Nautilus</span>
+                      <span style={{ marginLeft: "5px" }}>Nautilus</span>
                     </a>
                   )}
                 </Menu.Item>
@@ -357,7 +361,8 @@ function AddWallet(props) {
                           marginRight: "3.5rem",
                           marginLeft: "0.2rem",
                         }}
-                      />SAFEW
+                      />
+                      SAFEW
                     </a>
                   )}
                 </Menu.Item>
@@ -369,7 +374,7 @@ function AddWallet(props) {
 
       <div id="header-wallet-wrapper" onClick={handleWalletTrue}>
         <div id="header-wallet">
-          {!walletConnected && (
+          {!walletConnected && !loadingWalletConnection && (
             <img src={ergoWalletIcon} id="header-wallet-image" />
           )}
           <div id="wallet-connect">
@@ -403,18 +408,31 @@ function AddWallet(props) {
                       gap: "3px",
                     }}
                   >
-                    <img src={
+                    <img
+                      src={
                         localStorage.getItem("walletUsed") == "nautilus"
                           ? nautilusIcon
                           : localStorage.getItem("walletUsed") == "safew"
                           ? safewIcon
                           : null
-                      } style={{ height: "20px" }} />
+                      }
+                      style={{ height: "20px" }}
+                    />
                     <p>{defaultAddress}</p>
                   </span>
                 </span>
+              ) : loadingWalletConnection ? (
+                <ThreeDots
+                  height={80}
+                  width={35}
+                  radius="9"
+                  color="#8e0081"
+                  ariaLabel="three-dots-loading"
+                />
               ) : (
-                <span style={{color: "black", fontWeight: 550}}>Connect Wallet</span>
+                <span style={{ color: "black", fontWeight: 550 }}>
+                  Connect Wallet
+                </span>
               )}
             </span>
           </div>

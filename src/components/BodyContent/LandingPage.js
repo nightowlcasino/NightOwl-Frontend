@@ -10,7 +10,7 @@ function LandingPage() {
                 <div id="home-page-hot">
                     <div id="home-page-hot-border">
                         <div id="home-page-hot-content-background">
-                            <div id="home-page-inner-wrapper">
+                            <div id="home-page-inner-wrapper" >
                                 <div id="home-page-inner-left">
                                     <div id="top" >
                                         <span>Hot right<br />now</span>

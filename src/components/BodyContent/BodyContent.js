@@ -21,8 +21,6 @@ function BodyContent({setIsLoading,setSwapTransaction}) {
     const [sidebarToggled, setSidebarToggled] = useState(false);
     var body_content_game_class = "";
 
-    console.log(path.toLocaleLowerCase().match("games"));
-
 	if(path.toLocaleLowerCase().match("games"))
 	{
 		body_content_game_class = "game";
