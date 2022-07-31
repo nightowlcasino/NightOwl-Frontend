@@ -12,16 +12,6 @@ import { Menu, Transition } from "@headlessui/react";
 import { ArchiveIcon } from "@heroicons/react/solid";
 import "../Header/WalletHover/WalletHover.css";
 import {
-  Audio,
-  BallTriangle,
-  Bars,
-  Circles,
-  Grid,
-  Hearts,
-  Oval,
-  Puff,
-  Rings,
-  TailSpin,
   ThreeDots,
 } from "react-loader-spinner";
 import StateContext from "../Context";

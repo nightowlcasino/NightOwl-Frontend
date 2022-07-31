@@ -25,7 +25,7 @@
     color: white;
     display: flex;
     flex-direction: column;
-    padding-bottom: 25px;
+    padding-bottom: 20px;
     position: relative;
 
 }
@@ -40,7 +40,8 @@
     z-index: -1;
     margin: -5px;
     border-radius: inherit;
-    background-image: linear-gradient(to bottom right, #D60A84, #D60A84);
+    /* background-image: linear-gradient(to bottom right, #D60A84, #D60A84); */
+    background-color: #D60A84;
   }
 
 #swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content
@@ -52,7 +53,7 @@
 #swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-header
 {
     text-align: center;
-    margin-bottom: 35px;
+    margin-bottom: 10px;
 }
 
 #swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-header h1
@@ -60,6 +61,8 @@
     color: white;
     margin: 10px;
     font-size: 45px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #D60A84;
 }
 
 #swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-input-fields-wrapper
@@ -92,59 +95,56 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-/*change the margin px to separate both elements between the arrows icon more*/
-#swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-input-fields-wrapper #swap-input-fields .input-field
-{
+#swap-input-fields {
     display: flex;
     flex-direction: column;
-    margin: 20px auto;
-    position: relative;
+    justify-content: space-evenly;
+    height: 280px;
 }
 
-#swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-input-fields-wrapper #swap-input-fields .input-field select,
-#swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-input-fields-wrapper #swap-input-fields .input-field input
-{
+.swap-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 95px;
+
+}
+
+#swap-input-select {
+    display: flex;
+    align-items: center;
+}
+
+#swap-input-amount-input input {
+    border-radius: 10px;
+    border: none;
     width: 100%;
-    margin: 0 auto;
+    height: 40px;
+    background-color: white;
+    padding-right:10px;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: end;
 }
 
-#swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-input-fields-wrapper #swap-input-fields .input-field select
-{
-    width: 60px;
-    padding: 10px 0px;
-    margin-left: 0;
-    background: transparent;
-    border: none;
-    color: #ab0d82;
-    font-weight: bold;
-    font-size: 18px;
-    position: absolute;
-    top: -35px;
-    left: 0px;
+#swap-input-select span{
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 8px;
 }
 
-#swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-input-fields-wrapper #swap-input-fields .input-field input::placeholder,
-#swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-input-fields-wrapper #swap-input-fields .input-field input
-{
-    border: none;
-    background: transparent; 
-    border-bottom: 2px solid white;
-    padding: 5px 0px;
-    color: white;
-    font-size: 25px;
-}
-
-#swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-input-fields-wrapper #swap-input-fields #input-separator-wrapper
+#input-separator-wrapper
 {
     text-align: center;
     display: flex;
     flex-direction: column;
+    margin-top: 5px;
 }
 
 
-#swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-input-fields-wrapper #swap-input-fields #input-separator-wrapper #input-seperator
+#input-separator-wrapper #input-seperator
 {
-    background-color: #ab0d82;
+    background-color: #da2f95;
     padding: 7px;
     margin: 0 auto;
     border-radius: 10px;
@@ -153,7 +153,9 @@ input[type=number] {
 
 #swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-buttons
 {
-    flex: 100px;
+    flex: 70px;
+    padding-top: 20px;
+    
 }
 
 #swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-buttons .container
@@ -237,11 +239,11 @@ input[type=number] {
 {
     padding: 15px 20px;
     border-radius: 50px;
-    background-image: linear-gradient(to right, #5b0084, #ab0d82);
+    background-color: #ed3da7;
     color: white;
     font-size: 25px;
     border: none;
-    width: calc(100% - 50px);
+    width: calc(100% - 120px);
     margin: 0 auto;
 }
 #swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-buttons #swap-slippage

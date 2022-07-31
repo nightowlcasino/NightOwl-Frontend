@@ -84,6 +84,8 @@ const Roulette = ({ sidebarToggled }) => {
   const [notification, setNotification] = useState(false);
   const [winningNotification, setWinningNotification] = useState(false);
   const { ergoWallet, defaultAddress } = useContext(StateContext);
+
+  console.log(ergoWallet);
   const checkWallet = localStorage.getItem("walletConnected");
   let sub;
   const sc = StringCodec();
