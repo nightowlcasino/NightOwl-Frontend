@@ -14,6 +14,7 @@ import Roulette from "../Games/Roulette/Roulette";
 import AboutUs from "../AboutUs/AboutUs";
 import FAQ from "../FAQ/FAQ";
 import LiquidityProvision from "../LiquidityProvision/LiquidityProvision";
+import Lottery from "../Lottery/Lottery";
 
 function BodyContent({setIsLoading,setSwapTransaction}) {
     const location = useLocation();
@@ -46,6 +47,7 @@ function BodyContent({setIsLoading,setSwapTransaction}) {
                     <Route path="/aboutus" element={<AboutUs />} />
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/liquidity" element={<LiquidityProvision />} />
+                    <Route path="/games/lottery" element={<Lottery />} />
                 </Routes>
             </div>
         </div>
