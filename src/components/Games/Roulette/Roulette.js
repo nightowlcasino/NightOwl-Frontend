@@ -363,7 +363,7 @@ const Roulette = ({ sidebarToggled }) => {
                 })
                 .then(async function (response) {
                   // sign tx
-                  const signedTx = await signTx(response.data);
+                  const signedTx = await signTx(response.data.unsignedTx);
                   console.log("signedTx", signedTx);
                   // Get a BoxId to use for the random number call
                   boxId = signedTx.outputs[2].boxId;
@@ -432,7 +432,7 @@ const Roulette = ({ sidebarToggled }) => {
     //send the backend the bet object using buildBackendBetObject();
 
     /* REMOVE THIS ONE AFTER BACKEND CALLS ARE PROPERLY WORKING */
-    setStopSpin(true);
+    //setStopSpin(true);
 
     //This literally triggers the spin to stop, so this next two lines should only be executed when the number is retrieved from the blockchain
     // setRandomNumber(10);
