@@ -312,18 +312,18 @@ const Roulette = ({ sidebarToggled }) => {
     //  payoutFee      = 1000000 * (# of bets)
 
     //roulette bet for even
-    // const board = {
-    //   txFee: minERG,
-    //   totalWager: 10,
-    //   bets: [
-    //     {
-    //       r4: 1,
-    //       r5: 0,
-    //       multiplier: 1,
-    //       amount: 10,
-    //     },
-    //   ],
-    // };
+    const board = {
+      txFee: minERG,
+      totalWager: 10,
+      bets: [
+        {
+          r4: 1,
+          r5: 0,
+          multiplier: 1,
+          amount: 10,
+        },
+      ],
+    };
 
     // Get utxo for ERGs
     ergoWallet.get_utxos(minERG, TOKENID_ERG).then((utxosResponse) => {
@@ -404,15 +404,15 @@ const Roulette = ({ sidebarToggled }) => {
       }
     });
 
-    // async function signTx(txToBeSigned) {
-    //   try {
-    //     return await ergoWallet.sign_tx(txToBeSigned);
-    //   } catch (err) {
-    //     const msg = `[signTx] Error: ${JSON.stringify(err)}`;
-    //     console.error(msg, err);
-    //     return null;
-    //   }
-    // }
+    async function signTx(txToBeSigned) {
+      try {
+        return await ergoWallet.sign_tx(txToBeSigned);
+      } catch (err) {
+        const msg = `[signTx] Error: ${JSON.stringify(err)}`;
+        console.error(msg, err);
+        return null;
+      }
+    }
 
     async function submitTx(txToBeSubmitted, sessionId) {
       try {
@@ -1067,12 +1067,12 @@ const Roulette = ({ sidebarToggled }) => {
                         className={
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
-                                index
-                              )} ${checkIfZero(
-                                val.split("l")[1]
-                              )} ${fromChipValueToColor(
-                                betObject[val][betObject[val].length - 1]
-                              )} two-d`
+                              index
+                            )} ${checkIfZero(
+                              val.split("l")[1]
+                            )} ${fromChipValueToColor(
+                              betObject[val][betObject[val].length - 1]
+                            )} two-d`
                             : "inner-row number-center"
                         }
                         num-val={val.split("l")[1]}
@@ -1088,12 +1088,12 @@ const Roulette = ({ sidebarToggled }) => {
                         className={
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
-                                index
-                              )} ${checkIfZero(
-                                val.split("l")[1]
-                              )} ${fromChipValueToColor(
-                                betObject[val][betObject[val].length - 1]
-                              )} two-d`
+                              index
+                            )} ${checkIfZero(
+                              val.split("l")[1]
+                            )} ${fromChipValueToColor(
+                              betObject[val][betObject[val].length - 1]
+                            )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
                         }
                         num-val={val.split("l")[1]}
@@ -1128,12 +1128,12 @@ const Roulette = ({ sidebarToggled }) => {
                         className={
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
-                                index
-                              )} ${checkIfZero(
-                                val.split("l")[1]
-                              )} ${fromChipValueToColor(
-                                betObject[val][betObject[val].length - 1]
-                              )} two-d`
+                              index
+                            )} ${checkIfZero(
+                              val.split("l")[1]
+                            )} ${fromChipValueToColor(
+                              betObject[val][betObject[val].length - 1]
+                            )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
                         }
                         num-val={val.split("l")[1]}
@@ -1149,12 +1149,12 @@ const Roulette = ({ sidebarToggled }) => {
                         className={
                           betObject[val].length > 0
                             ? `inner-row number-${centerOrBetween(
-                                index
-                              )} ${checkIfZero(
-                                val.split("l")[1]
-                              )} ${fromChipValueToColor(
-                                betObject[val][betObject[val].length - 1]
-                              )} two-d`
+                              index
+                            )} ${checkIfZero(
+                              val.split("l")[1]
+                            )} ${fromChipValueToColor(
+                              betObject[val][betObject[val].length - 1]
+                            )} two-d`
                             : `inner-row number-${centerOrBetween(index)}`
                         }
                         num-val={val.split("l")[1]}
@@ -1559,7 +1559,7 @@ const Roulette = ({ sidebarToggled }) => {
               src={rouletteMascot}
               style={{
                 width: !betsEnded ? "350px" : "275px",
-                height: !betsEnded ? "350px": "275px",
+                height: !betsEnded ? "350px" : "275px",
                 position: "absolute",
                 zIndex: 1,
                 right: "2%",
@@ -1573,7 +1573,7 @@ const Roulette = ({ sidebarToggled }) => {
             padding: "24px",
           }}>
             {overlayString}
-            {(winningNotification ) && (
+            {(winningNotification) && (
               <div
                 style={{
                   paddingTop: "10px",
