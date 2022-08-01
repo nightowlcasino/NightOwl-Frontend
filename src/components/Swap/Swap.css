@@ -245,6 +245,7 @@ input[type=number] {
     border: none;
     width: calc(100% - 120px);
     margin: 0 auto;
+    cursor: pointer;
 }
 #swap-wrapper #swap-content-wrapper #swap-content-inner-wrapper #swap-content #swap-buttons #swap-slippage
 {

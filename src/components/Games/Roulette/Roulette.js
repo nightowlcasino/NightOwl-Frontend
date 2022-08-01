@@ -28,7 +28,7 @@ import coin_10k from "../../../assets/Elements/coin_10k.png";
 import coin_50k from "../../../assets/Elements/coin_50k.png";
 import rouletteMascot from "../../../assets/Elements/rouletteMascot.png";
 import closeModalIcon from "../../../assets/Elements/closeModal.svg";
-import Modal from "../../Modal/Modal";
+import Modal from "../../Modals/Modal";
 
 import loopSound from "../../../assets/Sounds/loop.mp3";
 import ReactHowler from "react-howler";
