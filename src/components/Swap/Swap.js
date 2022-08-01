@@ -5,6 +5,8 @@ import StateContext from "../Context";
 import sortArrows1 from "../../assets/Elements/sortArrows1.svg";
 import sortArrows3 from "../../assets/Elements/sortArrows3.svg";
 import sigUSDicon from "../../assets/Elements/SigUSD.svg";
+import WarningModal from "../Modals/WarningModal";
+import swapMascot from "../../assets/Elements/blackjackMascot.png";
 
 const TOKENID_NO_TEST =
   "afd0d6cb61e86d15f2a0adc1e7e23df532ba3ff35f8ba88bed16729cae933032";
@@ -21,10 +23,9 @@ function Swap({ setIsLoading, setSwapTransaction }) {
   const [swap1Amount, setSwap1Amount] = useState();
   const [swap2Amount, setSwap2Amount] = useState();
   const [swapSelect1, setSwapSelect1] = useState("SigUSD");
+  const [warningText, setWarningText] = useState("");
   const { ergoWallet, defaultAddress } = useContext(StateContext);
 
-  console.log(ergoWallet);
-  
   //const [wallet, setWallet] = useContext(WalletContext)
   const backend = process.env.BACKEND_FQDN || "localhost";
 
@@ -130,6 +131,8 @@ function Swap({ setIsLoading, setSwapTransaction }) {
     const temp2 = swap2;
     setSwap1(temp2);
     setSwap2(temp1);
+    setSwap1Amount(swap2Amount);
+    setSwap2Amount(swap1Amount);
   }
 
   function getCorrectFactorMultiplier(swapNumber) {
@@ -154,9 +157,18 @@ function Swap({ setIsLoading, setSwapTransaction }) {
     }
   }
 
+  function handleWarningTriggered(e,warningText, seconds) {
+    e.preventDefault();
+    setWarningText(warningText);
+    setTimeout(() => {
+      setWarningText("");
+    }, seconds * 1000);
+  }
+  
   return (
     <div id="swap-wrapper">
-      <div id="swap-content-wrapper">
+      {warningText && (<WarningModal warningText={warningText} gameMascotImg={swapMascot}/>)}
+      <div id="swap-content-wrapper" style={{ pointerEvents: warningText ? "none" : "" }}>
         <div id="swap-content-inner-wrapper">
           <form id="swap-content">
             <div id="swap-header">
@@ -210,7 +222,8 @@ function Swap({ setIsLoading, setSwapTransaction }) {
             </div>
             <div id="swap-buttons">
               <div id="swap-button">
-                <button onClick={swapTokens}>Swap</button>
+                {/* <button onClick={swapTokens}>Swap</button> */}
+                <button onClick={(e) => handleWarningTriggered(e,"Swap failed", 4)}>Swap</button>
               </div>
               {/* <div id="swap-slippage">Slippage <span id="swap-slippage-value">0.5</span>%</div> */}
             </div>

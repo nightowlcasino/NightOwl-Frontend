@@ -1,0 +1,56 @@
+.warning-modal-wrapper {
+  transition: all 2s ease;
+}
+
+.show {
+  opacity: 1;
+}
+
+.hide {
+    opacity: 0;
+  }
+
+#overlay-popup
+{
+    position: fixed;
+    z-index: 1;
+    margin: 0 auto;
+    top: 40%;
+    background-color: #822169;
+    
+}
+
+#overlay-popup:before
+{
+        content: "";
+        position: absolute;
+        border-right: 100px solid #822169;
+        border-left: 12px solid transparent;
+        border-top: 12px solid #822169;
+        border-bottom: 30px solid transparent;
+        left: 80%;
+        bottom: -20px;
+      
+}
+
+#mascotImg {
+    position: fixed;
+    z-index: 1;
+    width: 22vw;
+    height: 22vw;
+    top: 50%;
+    left: 68%;
+}
+#overlay-text
+{
+  margin: 35px 2vw;
+}
+
+#overlay-text span
+{
+  display: block;
+  text-align: center;
+  margin: 5px;
+  color: white;
+  font-size: 20px;
+}
