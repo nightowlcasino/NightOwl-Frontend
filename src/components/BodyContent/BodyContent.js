@@ -14,6 +14,7 @@ import Roulette from "../Games/Roulette/Roulette";
 import AboutUs from "../AboutUs/AboutUs";
 import FAQ from "../FAQ/FAQ";
 import LiquidityProvision from "../LiquidityProvision/LiquidityProvision";
+import GamesDashboard from "../Games";
 
 function BodyContent({setIsLoading,setSwapTransaction}) {
     const location = useLocation();
@@ -21,7 +22,13 @@ function BodyContent({setIsLoading,setSwapTransaction}) {
     const [sidebarToggled, setSidebarToggled] = useState(false);
     var body_content_game_class = "";
 
-	if(path.toLocaleLowerCase().match("games"))
+    console.log(path);
+
+    if(path === '/availableGames')
+    {
+        body_content_game_class = "";
+    }
+	else if(path.toLocaleLowerCase().match("games"))
 	{
 		body_content_game_class = "game";
 	}
@@ -41,6 +48,7 @@ function BodyContent({setIsLoading,setSwapTransaction}) {
                     <Route path="/swap" element={<Swap setIsLoading={setIsLoading} setSwapTransaction={setSwapTransaction} />} />
                     <Route path="/games/coinflip" element={<Coinflip />} />
                     <Route path="/games/roulette" element={<Roulette sidebarToggled={sidebarToggled}/>} />
+                    <Route path="/availableGames" element={<GamesDashboard />} />
                     <Route path="/aboutus" element={<AboutUs />} />
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/liquidity" element={<LiquidityProvision />} />
