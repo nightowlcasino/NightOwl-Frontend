@@ -1,19 +1,21 @@
 .warning-modal-wrapper {
-  transition: all 2s ease;
+  transition: all 0.4s ease;
+  z-index: 3;
 }
 
 .show {
+  visibility: visible;
   opacity: 1;
 }
 
 .hide {
+  visibility: hidden;
     opacity: 0;
   }
 
 #overlay-popup
 {
     position: fixed;
-    z-index: 1;
     margin: 0 auto;
     top: 40%;
     background-color: #822169;
