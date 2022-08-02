@@ -143,12 +143,11 @@ function Swap({ setIsLoading, setSwapTransaction }) {
     }
   }
 
-  function handleChangeSwapAmount(value,swapNumber) {
+  function handleChangeSwapAmount(value, swapNumber) {
     if (value === "") {
       setSwap1Amount("");
       setSwap2Amount("");
-    }
-    else if (swapNumber == 0) {
+    } else if (swapNumber == 0) {
       setSwap1Amount(value);
       setSwap2Amount(value * getCorrectFactorMultiplier(swap1));
     } else if (swapNumber == 1) {
@@ -157,38 +156,49 @@ function Swap({ setIsLoading, setSwapTransaction }) {
     }
   }
 
-  function handleWarningTriggered(e,warningText, seconds) {
+  function handleWarningTriggered(e, warningText, seconds) {
     e.preventDefault();
     setWarningText(warningText);
     setTimeout(() => {
       setWarningText("");
     }, seconds * 1000);
   }
-  
+
   return (
     <div id="swap-wrapper">
-      {warningText && (<WarningModal warningText={warningText} gameMascotImg={swapMascot}/>)}
-      <div id="swap-content-wrapper" style={{ pointerEvents: warningText ? "none" : "" }}>
+      <WarningModal warningText={warningText} gameMascotImg={swapMascot} />
+      <div
+        id="swap-content-wrapper"
+        style={{ pointerEvents: warningText ? "none" : "" }}
+      >
         <div id="swap-content-inner-wrapper">
           <form id="swap-content">
             <div id="swap-header">
               <h1>Swap</h1>
             </div>
             <div id="swap-input-fields-wrapper">
-              <div id="swap-input-fields" >
+              <div id="swap-input-fields">
                 <div className="swap-input">
                   <div id="swap-input-select">
-                    <img src={sigUSDicon} alt= "Token icon" style={{verticalAlign:"middle", width: "40px", height: "40px"}} />
+                    <img
+                      src={sigUSDicon}
+                      alt="Token icon"
+                      style={{
+                        verticalAlign: "middle",
+                        width: "40px",
+                        height: "40px",
+                      }}
+                    />
                     <span>{swap1}</span>
                   </div>
                   <div id="swap-input-amount-input">
-                    <input 
+                    <input
                       type="number"
-                      placeholder={
-                        `${swap1} amount`
-                      }
+                      placeholder={`${swap1} amount`}
                       value={swap1Amount}
-                      onChange={(e) => handleChangeSwapAmount(e.target.value, 0)}
+                      onChange={(e) =>
+                        handleChangeSwapAmount(e.target.value, 0)
+                      }
                     />
                   </div>
                 </div>
@@ -201,29 +211,40 @@ function Swap({ setIsLoading, setSwapTransaction }) {
                     />
                   </div>
                 </div>
-                <div className="swap-input" >
+                <div className="swap-input">
                   <div id="swap-input-select">
-                    <img src={sigUSDicon} alt= "Token icon" style={{verticalAlign:"middle", width: "40px", height: "40px"}} />
+                    <img
+                      src={sigUSDicon}
+                      alt="Token icon"
+                      style={{
+                        verticalAlign: "middle",
+                        width: "40px",
+                        height: "40px",
+                      }}
+                    />
                     <span>{swap2}</span>
                   </div>
                   <div id="swap-input-amount-input">
-                    <input 
+                    <input
                       type="number"
-                      placeholder={
-                        `${swap2} amount`
-                      }
+                      placeholder={`${swap2} amount`}
                       value={swap2Amount}
-                      onChange={(e) => handleChangeSwapAmount(e.target.value, 1)}
+                      onChange={(e) =>
+                        handleChangeSwapAmount(e.target.value, 1)
+                      }
                     />
                   </div>
                 </div>
-
               </div>
             </div>
             <div id="swap-buttons">
               <div id="swap-button">
                 {/* <button onClick={swapTokens}>Swap</button> */}
-                <button onClick={(e) => handleWarningTriggered(e,"Swap failed", 4)}>Swap</button>
+                <button
+                  onClick={(e) => handleWarningTriggered(e, "Swap failed", 4)}
+                >
+                  Swap
+                </button>
               </div>
               {/* <div id="swap-slippage">Slippage <span id="swap-slippage-value">0.5</span>%</div> */}
             </div>
