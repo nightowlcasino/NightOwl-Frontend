@@ -111,7 +111,7 @@ const Roulette = ({ sidebarToggled }) => {
         if (checkWallet === "true") {
           sub = nc.subscribe(
             `roulette.${localStorage.getItem("walletAddress")}`
-          );
+          )
           console.log(
             `subscribed to roulette.${localStorage.getItem("walletAddress")}`
           );
@@ -355,50 +355,50 @@ const Roulette = ({ sidebarToggled }) => {
               });
               console.log(utxos);
               // send bet data structure to backend for the bet tx to be built
+              //axios
+              //  .post(`/api/v1/roulette/bet-tx`, {
+              //    board: board,
+              //    senderAddr: `${localStorage.getItem("walletAddress")}`,
+              //    utxos: utxos,
+              //  })
+              //  .then(async function (response) {
+              //    // sign tx
+              //    const signedTx = await signTx(response.data.unsignedTx);
+              //    console.log("signedTx", signedTx);
+              //    // Get a BoxId to use for the random number call
+              //    boxId = signedTx.outputs[2].boxId;
+              //    // submit to node
+              //    submitTx(signedTx, response.data.sessionId)
+              //      .then(async (txId) => {
+              //        if (!txId) {
+              //          console.log(`No submitted tx ID`);
+              //          return null;
+              //        }
+              //        console.log(`Transaction submitted - ${txId.data}`);
+              // call rng service with wallet address and box id to get our random number
               axios
-                .post(`/api/v1/roulette/bet-tx`, {
-                  board: board,
-                  senderAddr: `${localStorage.getItem("walletAddress")}`,
-                  utxos: utxos,
+                .get(
+                  `https://dev.nightowlcasino.io/api/v1/test/random-number/roulette?walletAddr=${localStorage.getItem(
+                    "walletAddress"
+                  )}&boxId=${boxId}`, {
+                  headers: {
+                    'owl-session-id': `${response.data.sessionId}`,
+                  }
                 })
-                .then(async function (response) {
-                  // sign tx
-                  const signedTx = await signTx(response.data.unsignedTx);
-                  console.log("signedTx", signedTx);
-                  // Get a BoxId to use for the random number call
-                  boxId = signedTx.outputs[2].boxId;
-                  // submit to node
-                  submitTx(signedTx, response.data.sessionId)
-                    .then(async (txId) => {
-                      if (!txId) {
-                        console.log(`No submitted tx ID`);
-                        return null;
-                      }
-                      console.log(`Transaction submitted - ${txId.data}`);
-                      // call rng service with wallet address and box id to get our random number
-                      axios
-                        .get(
-                          `https://dev.nightowlcasino.io/api/v1/random-number/roulette?walletAddr=${localStorage.getItem(
-                            "walletAddress"
-                          )}&boxId=${boxId}`, {
-                          headers: {
-                            'owl-session-id': `${response.data.sessionId}`,
-                          }
-                        })
-                        .then(async function (resp) {
-                          console.log("GET api/v1/random-number/roulette", { resp });
-                        })
-                        .catch(function (error) {
-                          console.log(error);
-                        });
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                    });
+                .then(async function (resp) {
+                  console.log("GET api/v1/random-number/roulette", { resp });
                 })
                 .catch(function (error) {
                   console.log(error);
                 });
+              //      })
+              //      .catch((err) => {
+              //        console.log(err);
+              //      });
+              //  })
+              //  .catch(function (error) {
+              //    console.log(error);
+              //  });
             }
           });
       }
@@ -435,20 +435,20 @@ const Roulette = ({ sidebarToggled }) => {
     //setStopSpin(true);
 
     //This literally triggers the spin to stop, so this next two lines should only be executed when the number is retrieved from the blockchain
-    // setRandomNumber(10);
-    // setNewRandomNumber(true);
+    //setRandomNumber(10);
+    //setNewRandomNumber(true);
 
     // SIMULATION OF THE WAITING FOR THE 2 MINUTES LIMIT.
     fetchData();
   }
 
-  const promiseTimeout = new Promise((resolve) =>
+  const randNumTimeout = new Promise((resolve) => {
     setTimeout(() => resolve(false), 120000)
-  );
+  });
 
   const fetchData = async () => {
     console.log("a saber");
-    const response = await Promise.race([promiseTimeout]);
+    const response = await Promise.race([randNumTimeout]);
     if (!response) {
       // warn user that the random number was not retrieved properly
       setBetsEnded(false);
@@ -458,6 +458,7 @@ const Roulette = ({ sidebarToggled }) => {
         5
       );
     } else {
+      console.log("random number came successfully")
       //Treatment of the number returned.
     }
   };
