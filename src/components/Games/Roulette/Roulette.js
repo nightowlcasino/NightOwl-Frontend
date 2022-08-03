@@ -443,12 +443,12 @@ const Roulette = ({ sidebarToggled }) => {
   }
 
   const promiseTimeout = new Promise((resolve) =>
-    setTimeout(() => resolve(false), 10000)
+    setTimeout(() => resolve(false), 120000)
   );
 
   const fetchData = async () => {
     console.log("a saber");
-    const response = await Promise.race([promiseTimeout]); // I want to await max 10 seconds here, if not next line should be executed
+    const response = await Promise.race([promiseTimeout]);
     if (!response) {
       // warn user that the random number was not retrieved properly
       setBetsEnded(false);
