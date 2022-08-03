@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./Header.css";
 
@@ -11,7 +11,8 @@ import musicOnIcon from "../../assets/Elements/musicon.svg";
 import Switch from "react-switch";
 import { useLocation } from "react-router-dom";
 import ReactHowler from "react-howler";
-import audios from "../utils/sounds";
+import sounds from "../utils/sounds";
+import { Bars } from "react-loader-spinner";
 
 // import { Link } from "react-router-dom";
 // import { useTranslation } from "react-i18next";
@@ -34,6 +35,7 @@ const Header = () => {
   // const currentLanguageCode = cookies.get("i18next") || "en";
   // const { t } = useTranslation();
   const [musicState, setMusicState] = useState(false);
+  const [currentSong, setCurrentSong] = useState(sounds[getRandomSong()]);
 
   const location = useLocation();
   const path = location.pathname;
@@ -52,14 +54,25 @@ const Header = () => {
     setMusicState(e);
   }
 
+  function getRandomSong() {
+    const keys = Object.keys(sounds);
+    const prop = keys[Math.floor(Math.random() * keys.length)];
+    return prop;
+  }
+
+  function handleMusicFinished() {
+    setCurrentSong(sounds[getRandomSong()]);
+  }
+
   return (
     <div id="header-wrapper">
       <ReactHowler
-        src={audios.lofi3}
-        playing={musicState}
-        loop={true}
+        src={currentSong}
+        mute={!musicState}
+        playing={true}
         htm5={true}
         volume={0.7}
+        onEnd={handleMusicFinished}
       />
       <div id="header-content">
         <div id="logo-wrapper">
@@ -87,6 +100,26 @@ const Header = () => {
               checked={musicState}
               offColor="#333"
               onColor="#440f83"
+              width={56}
+              height={28}
+              checkedHandleIcon={
+                <div
+                  style={{
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Bars
+                    height={42}
+                    width={18}
+                    radius="9"
+                    color="#8e0081"
+                    ariaLabel="three-dots-loading"
+                  />
+                </div>
+              }
               uncheckedIcon={
                 <div
                   style={{
