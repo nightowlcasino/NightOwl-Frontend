@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import "./Swap.css";
 import StateContext from "../Context";
@@ -20,13 +20,35 @@ const MIN_BOX_VALUE = 1000000;
 function Swap({ setIsLoading, setSwapTransaction }) {
   const [swap1, setSwap1] = useState("SigUSD");
   const [swap2, setSwap2] = useState("OWL");
-  const [swap1Amount, setSwap1Amount] = useState();
-  const [swap2Amount, setSwap2Amount] = useState();
+  const [swap1Amount, setSwap1Amount] = useState("");
+  const [swap2Amount, setSwap2Amount] = useState("");
   const [swapSelect1, setSwapSelect1] = useState("SigUSD");
   const [warningText, setWarningText] = useState("");
+  const [owlBalance, setOwlBalance] = useState();
+  const [sigUSDBalance, setSigUSDBalance] = useState();
   const { ergoWallet, defaultAddress } = useContext(StateContext);
 
-  //const [wallet, setWallet] = useContext(WalletContext)
+  const TOKENID_NO_TEST =
+    "afd0d6cb61e86d15f2a0adc1e7e23df532ba3ff35f8ba88bed16729cae933032";
+
+  const TOKENID_SIGUSD =
+    "03faf2cb329f2e90d6d23b58d91bbb6c046aa143261cc21f52fbe2824bfcbf04";
+
+  useEffect(() => {
+    async function getBalance() {
+      console.log("hola");
+      ergoWallet.get_balance(TOKENID_NO_TEST).then(function (balance) {
+        setOwlBalance(balance);
+      });
+
+      // get SigUSD balance
+      ergoWallet.get_balance(TOKENID_SIGUSD).then(function (balance) {
+        setSigUSDBalance(balance / 100);
+      });
+    }
+    if (ergoWallet) getBalance();
+  }, [ergoWallet]);
+
   const backend = process.env.BACKEND_FQDN || "localhost";
 
   const swapTokens = (e) => {
@@ -142,6 +164,19 @@ function Swap({ setIsLoading, setSwapTransaction }) {
       return 0.01;
     }
   }
+  useEffect(() => {
+    if (swap1Amount == 0) {
+      setSwap1Amount("");
+      setSwap2Amount("");
+    } else setSwap2Amount(swap1Amount * getCorrectFactorMultiplier(swap1));
+  }, [swap1Amount]);
+
+  useEffect(() => {
+    if (swap2Amount == 0) {
+      setSwap1Amount("");
+      setSwap2Amount("");
+    } else setSwap1Amount(swap2Amount * getCorrectFactorMultiplier(swap2));
+  }, [swap2Amount]);
 
   function handleChangeSwapAmount(value, swapNumber) {
     if (value === "") {
@@ -162,6 +197,14 @@ function Swap({ setIsLoading, setSwapTransaction }) {
     setTimeout(() => {
       setWarningText("");
     }, seconds * 1000);
+  }
+
+  function handleCopyPasteBalance(swapToken, tokenNumber) {
+    if (swapToken == "SigUSD") {
+      tokenNumber == 1 ? setSwap1Amount(Math.round(sigUSDBalance * 100) / 100) : setSwap2Amount(Math.round(sigUSDBalance * 100) / 100);
+    } else if (swapToken == "OWL") {
+      tokenNumber == 1 ? setSwap1Amount(Math.round(owlBalance * 100) / 100) : setSwap2Amount(Math.round(owlBalance * 100) / 100);
+    }
   }
 
   return (
@@ -190,6 +233,22 @@ function Swap({ setIsLoading, setSwapTransaction }) {
                       }}
                     />
                     <span>{swap1}</span>
+                    <div className="tokenBalance">
+                      <span style={{ fontSize: "14px" }}>
+                        Balance:{" "}
+                        <span
+                          style={{
+                            color: "#da2f95",
+                            fontSize: "15px",
+                            marginLeft: "0px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleCopyPasteBalance(swap1, 1)}
+                        >
+                          {swap1 == "SigUSD" ? sigUSDBalance : owlBalance}
+                        </span>
+                      </span>
+                    </div>
                   </div>
                   <div id="swap-input-amount-input">
                     <input
@@ -223,6 +282,22 @@ function Swap({ setIsLoading, setSwapTransaction }) {
                       }}
                     />
                     <span>{swap2}</span>
+                    <div className="tokenBalance">
+                      <span style={{ fontSize: "14px" }}>
+                        Balance:{" "}
+                        <span
+                          style={{
+                            color: "#da2f95",
+                            fontSize: "15px",
+                            marginLeft: "0px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleCopyPasteBalance(swap2, 2)}
+                        >
+                          {swap2 == "SigUSD" ? sigUSDBalance : owlBalance}
+                        </span>
+                      </span>
+                    </div>
                   </div>
                   <div id="swap-input-amount-input">
                     <input

@@ -112,6 +112,13 @@ input[type=number] {
 #swap-input-select {
     display: flex;
     align-items: center;
+    width: 100%;
+}
+
+.tokenBalance {
+    margin-left: auto;
+    margin-right: -10px;
+    color: white;
 }
 
 #swap-input-amount-input input {

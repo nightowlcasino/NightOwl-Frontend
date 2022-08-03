@@ -50,6 +50,13 @@
     flex-direction: row;
 }
 
+#music-switch-container {
+    display: flex;
+    align-items: center;
+    /* margin-right: 25px; */
+}
+
+
 #header-wrapper #header-items #header-search-wrapper,
 #header-wrapper #header-items #header-seperator,
 #header-wrapper #header-items #header-language,

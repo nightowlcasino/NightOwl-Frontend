@@ -156,6 +156,7 @@
     width: calc(100% - 50px);
     max-width: 200px;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 #coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #transaction-id-wrapper

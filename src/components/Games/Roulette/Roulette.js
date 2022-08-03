@@ -106,7 +106,7 @@ const Roulette = ({ sidebarToggled }) => {
   // };
 
   const wsConnect = () => {
-    connect({ servers: "ws://127.0.0.1:9222" })
+    connect({ servers: "wss://nats.nightowlcasino.io:9222" })
       .then(async function (nc) {
         if (checkWallet === "true") {
           sub = nc.subscribe(
@@ -145,7 +145,6 @@ const Roulette = ({ sidebarToggled }) => {
       innerRef.current.classList.remove("waiting-for-respond");
 
       setTimeout(() => {
-        setLoopSound(true);
         innerRef.current.setAttribute("data-spinto", randomNumber);
       }, 500);
 
@@ -304,7 +303,7 @@ const Roulette = ({ sidebarToggled }) => {
     setBetsEnded(true);
     setSpinAvailable(false);
     setOverlayString("Waiting for result to be received from the blockchain");
-
+    setLoopSound(true);
     //txFee:
     //  minBoxValue    = 1000000 * (# of bets)
     //  minerFee       = 1100000
@@ -429,13 +428,8 @@ const Roulette = ({ sidebarToggled }) => {
 
     /* REMOVE THIS ONE AFTER BACKEND CALLS ARE PROPERLY WORKING */
     setStopSpin(true);
-
-    //This literally triggers the spin to stop, so this next two lines should only be executed when the number is retrieved from the blockchain
-    // setRandomNumber(10);
-    // setNewRandomNumber(true);
-
     // SIMULATION OF THE WAITING FOR THE 2 MINUTES LIMIT.
-    fetchData();
+    // fetchData();
   }
 
   const promiseTimeout = new Promise((resolve) =>
@@ -443,7 +437,6 @@ const Roulette = ({ sidebarToggled }) => {
   );
 
   const fetchData = async () => {
-    console.log("a saber");
     const response = await Promise.race([promiseTimeout]); // I want to await max 10 seconds here, if not next line should be executed
     if (!response) {
       // warn user that the random number was not retrieved properly
@@ -455,6 +448,9 @@ const Roulette = ({ sidebarToggled }) => {
       );
     } else {
       //Treatment of the number returned.
+      //This literally triggers the spin to stop, so this next two lines should only be executed when the number is retrieved from the blockchain
+      // setRandomNumber(10);
+      // setNewRandomNumber(true);
     }
   };
 
@@ -1555,7 +1551,7 @@ const Roulette = ({ sidebarToggled }) => {
               src={rouletteMascot}
               style={{
                 width: !betsEnded ? "350px" : "275px",
-                height: !betsEnded ? "350px": "275px",
+                height: !betsEnded ? "350px" : "275px",
                 position: "absolute",
                 zIndex: 1,
                 right: "2%",
@@ -1564,12 +1560,16 @@ const Roulette = ({ sidebarToggled }) => {
               id="roulette-mascot"
             />
           )}
-          <div id="table-overlay-text" className="bubble-bottom-right" style={{
-            fontSize: !betsEnded ? "1.5rem" : "1.2rem",
-            padding: "24px",
-          }}>
+          <div
+            id="table-overlay-text"
+            className="bubble-bottom-right"
+            style={{
+              fontSize: !betsEnded ? "1.5rem" : "1.2rem",
+              padding: "24px",
+            }}
+          >
             {overlayString}
-            {(winningNotification ) && (
+            {winningNotification && (
               <div
                 style={{
                   paddingTop: "10px",
