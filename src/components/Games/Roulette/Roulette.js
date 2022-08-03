@@ -380,11 +380,12 @@ const Roulette = ({ sidebarToggled }) => {
                 .get(
                   `https://dev.nightowlcasino.io/api/v1/test/random-number/roulette?walletAddr=${localStorage.getItem(
                     "walletAddress"
-                  )}&boxId=${boxId}`, {
-                  headers: {
-                    'owl-session-id': `${response.data.sessionId}`,
-                  }
-                })
+                  )}`//&boxId=${boxId}`, {
+                  //headers: {
+                  //  'owl-session-id': `${response.data.sessionId}`,
+                  //}
+                  //}
+                )
                 .then(async function (resp) {
                   console.log("GET api/v1/random-number/roulette", { resp });
                 })
