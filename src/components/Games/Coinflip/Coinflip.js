@@ -1,8 +1,19 @@
 import React, { useState } from "react";
 import "./Coinflip.css";
 import sigUSDicon from "../../../assets/Elements/SigUSD.svg";
+import headIcon from "../../../assets/Elements/head.png";
+import tailsIcon from "../../../assets/Elements/tails.png";
 
 const Coinflip = () => {
+
+  function rewardMinusHouseFee(value) {
+    return value + (value - (value * 0.025));
+  }
+
+  function handleBetPlaced() {
+    console.log("bet placed");
+  }
+
   const [sideSelected, setSideSelected] = useState("Heads");
   const [bettingAmount, setBettingAmount] = useState("");
   console.log(sideSelected);
@@ -15,7 +26,7 @@ const Coinflip = () => {
           </div>
           <div className="coinflip-select-bet">
             <img
-              src={sigUSDicon}
+              src={headIcon}
               alt="Select heads"
               onClick={() => setSideSelected("Heads")}
               style={
@@ -30,7 +41,7 @@ const Coinflip = () => {
               }
             />
             <img
-              src={sigUSDicon}
+              src={tailsIcon}
               alt="Select tails"
               onClick={() => setSideSelected("Tails")}
               style={
@@ -61,10 +72,10 @@ const Coinflip = () => {
           </div>
           <h3>
             <span style={{ color: "#d70a84" }}>Possible reward: </span>
-            {bettingAmount * 2} OWL
+            {rewardMinusHouseFee(Number(bettingAmount))} OWL
           </h3>
           <div id="bet-button-wrapper">
-            <button>Place bet</button>
+            <button onClick={handleBetPlaced}>Place bet</button>
           </div>
         </div>
       </div>
