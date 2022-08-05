@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./Coinflip.css";
 import sigUSDicon from "../../../assets/Elements/SigUSD.svg";
+import headIcon from "../../../assets/Elements/head.png";
+import tailsIcon from "../../../assets/Elements/tails.png";
 
 const Coinflip = () => {
 
@@ -24,7 +26,7 @@ const Coinflip = () => {
           </div>
           <div className="coinflip-select-bet">
             <img
-              src={sigUSDicon}
+              src={headIcon}
               alt="Select heads"
               onClick={() => setSideSelected("Heads")}
               style={
@@ -39,7 +41,7 @@ const Coinflip = () => {
               }
             />
             <img
-              src={sigUSDicon}
+              src={tailsIcon}
               alt="Select tails"
               onClick={() => setSideSelected("Tails")}
               style={
