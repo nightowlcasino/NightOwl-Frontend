@@ -106,7 +106,7 @@ const Roulette = ({ sidebarToggled }) => {
   // };
 
   const wsConnect = () => {
-    connect({ servers: "wss://nats.nightowlcasino.io:9222" })
+    connect({ servers: "ws://127.0.0.1:9222" })
       .then(async function (nc) {
         if (checkWallet === "true") {
           sub = nc.subscribe(

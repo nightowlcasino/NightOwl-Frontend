@@ -225,7 +225,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
                 <div className="swap-input">
                   <div id="swap-input-select">
                     <img
-                      src={sigUSDicon}
+                      src={swap1 == "SigUSD" ? sigUSDicon : OWLicon}
                       alt="Token icon"
                       style={{
                         verticalAlign: "middle",
@@ -274,7 +274,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
                 <div className="swap-input">
                   <div id="swap-input-select">
                     <img
-                      src={OWLicon}
+                      src={swap2 == "SigUSD" ? sigUSDicon : OWLicon}
                       alt="Token icon"
                       style={{
                         verticalAlign: "middle",

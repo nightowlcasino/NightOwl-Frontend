@@ -1,6 +1,7 @@
 import logo from "../../assets/Elements/logo.png";
 import textLogo from "../../assets/Elements/textlogo.png";
 import "./Footer.css";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -85,7 +86,14 @@ export default function Footer() {
           </li>
           <span style={{ cursor: "pointer" }}>
             <li>Documentation</li>
-            <li>FAQ</li>
+            <Link
+              to="/faq"
+              className="footer-link"
+            ><li style={{
+              fontWeight: "normal",
+              color: "rgb(244, 244, 245)",
+              lineHeight: "1.5",
+            }}>FAQ</li></Link>
           </span>
         </ul>
 

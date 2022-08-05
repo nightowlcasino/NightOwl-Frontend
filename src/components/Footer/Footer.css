@@ -1,3 +1,7 @@
+.footer-link {
+    text-decoration: none;
+}
+
 @media all and (max-width: 992px) {
     #footer {
         flex-direction: column;
