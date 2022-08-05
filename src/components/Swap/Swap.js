@@ -5,6 +5,7 @@ import StateContext from "../Context";
 import sortArrows1 from "../../assets/Elements/sortArrows1.svg";
 import sortArrows3 from "../../assets/Elements/sortArrows3.svg";
 import sigUSDicon from "../../assets/Elements/SigUSD.svg";
+import OWLicon from "../../assets/Elements/head.png";
 import WarningModal from "../Modals/WarningModal";
 import swapMascot from "../../assets/Elements/blackjackMascot.png";
 
@@ -273,7 +274,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
                 <div className="swap-input">
                   <div id="swap-input-select">
                     <img
-                      src={sigUSDicon}
+                      src={OWLicon}
                       alt="Token icon"
                       style={{
                         verticalAlign: "middle",
