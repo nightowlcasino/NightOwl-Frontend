@@ -311,133 +311,140 @@ const Roulette = ({ sidebarToggled }) => {
     //  payoutFee      = 1000000 * (# of bets)
 
     //roulette bet for even
-    // const board = {
-    //   txFee: minERG,
-    //   totalWager: 10,
-    //   bets: [
-    //     {
-    //       r4: 1,
-    //       r5: 0,
-    //       multiplier: 1,
-    //       amount: 10,
-    //     },
-    //   ],
-    // };
+    const board = {
+      txFee: minERG,
+      totalWager: 10,
+      bets: [
+        {
+          r4: 1,
+          r5: 0,
+          multiplier: 1,
+          amount: 10,
+        },
+      ],
+    };
 
-    // // Get utxo for ERGs
-    // ergoWallet.get_utxos(minERG, TOKENID_ERG).then((utxosResponse) => {
-    //   if (utxosResponse.length === 0) {
-    //     console.log("NO ERG UTXOS");
-    //     return;
-    //   } else {
-    //     utxos = JSON.parse(JSON.stringify(utxosResponse));
-    //     ergoWallet
-    //       .get_utxos(board.totalWager, TOKENID_NO_TEST)
-    //       .then((utxosResponse) => {
-    //         if (utxosResponse.length === 0) {
-    //           console.log("NO OWL UTXOS");
-    //           return;
-    //         } else {
-    //           utxosResponse.forEach((owlBox) => {
-    //             let found = false;
-    //             utxos.forEach((box) => {
-    //               // Check if any matching boxIds
-    //               // TODO: Add a break/continue
-    //               if (owlBox.boxId == box.boxId) {
-    //                 found = true;
-    //               }
-    //             });
-    //             // Found none
-    //             if (!found) {
-    //               utxos.push(owlBox);
-    //             }
-    //           });
-    //           console.log(utxos);
-    //           // send bet data structure to backend for the bet tx to be built
-    //           axios
-    //             .post(`/api/v1/roulette/bet-tx`, {
-    //               board: board,
-    //               senderAddr: `${localStorage.getItem("walletAddress")}`,
-    //               utxos: utxos,
-    //             })
-    //             .then(async function (response) {
-    //               // sign tx
-    //               const signedTx = await signTx(response.data);
-    //               console.log("signedTx", signedTx);
-    //               // Get a BoxId to use for the random number call
-    //               boxId = signedTx.outputs[2].boxId;
-    //               // submit to node
-    //               submitTx(signedTx)
-    //                 .then(async (txId) => {
-    //                   if (!txId) {
-    //                     console.log(`No submitted tx ID`);
-    //                     return null;
-    //                   }
-    //                   console.log(`Transaction submitted - ${txId.data}`);
-    //                   // call rng service with wallet address and box id to get our random number
-    //                   axios
-    //                     .get(
-    //                       `http://127.0.0.1:8089/random-number/roulette?walletAddr=${localStorage.getItem(
-    //                         "walletAddress"
-    //                       )}&boxId=${boxId}`
-    //                     )
-    //                     .then(async function (resp) {
-    //                       console.log("GET /random-number/roulette", { resp });
-    //                     })
-    //                     .catch(function (error) {
-    //                       console.log(error);
-    //                     });
-    //                 })
-    //                 .catch((err) => {
-    //                   console.log(err);
-    //                 });
-    //             })
-    //             .catch(function (error) {
-    //               console.log(error);
-    //             });
-    //         }
-    //       });
-    //   }
-    // });
+    // Get utxo for ERGs
+    ergoWallet.get_utxos(minERG, TOKENID_ERG).then((utxosResponse) => {
+      if (utxosResponse.length === 0) {
+        console.log("NO ERG UTXOS");
+        return;
+      } else {
+        utxos = JSON.parse(JSON.stringify(utxosResponse));
+        ergoWallet
+          .get_utxos(board.totalWager, TOKENID_NO_TEST)
+          .then((utxosResponse) => {
+            if (utxosResponse.length === 0) {
+              console.log("NO OWL UTXOS");
+              return;
+            } else {
+              utxosResponse.forEach((owlBox) => {
+                let found = false;
+                utxos.forEach((box) => {
+                  // Check if any matching boxIds
+                  // TODO: Add a break/continue
+                  if (owlBox.boxId == box.boxId) {
+                    found = true;
+                  }
+                });
+                // Found none
+                if (!found) {
+                  utxos.push(owlBox);
+                }
+              });
+              console.log(utxos);
+              // send bet data structure to backend for the bet tx to be built
+              //axios
+              //  .post(`/api/v1/roulette/bet-tx`, {
+              //    board: board,
+              //    senderAddr: `${localStorage.getItem("walletAddress")}`,
+              //    utxos: utxos,
+              //  })
+              //  .then(async function (response) {
+              //    // sign tx
+              //    const signedTx = await signTx(response.data.unsignedTx);
+              //    console.log("signedTx", signedTx);
+              //    // Get a BoxId to use for the random number call
+              //    boxId = signedTx.outputs[2].boxId;
+              //    // submit to node
+              //    submitTx(signedTx, response.data.sessionId)
+              //      .then(async (txId) => {
+              //        if (!txId) {
+              //          console.log(`No submitted tx ID`);
+              //          return null;
+              //        }
+              //        console.log(`Transaction submitted - ${txId.data}`);
+              // call rng service with wallet address and box id to get our random number
+              axios
+                .get(
+                  `http://127.0.0.1:8089/api/v1/test/random-number/roulette?walletAddr=${localStorage.getItem(
+                    "walletAddress"
+                  )}`
+                )
+                .then(async function (resp) {
+                  console.log("GET api/v1/random-number/roulette", { resp });
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+              //      })
+              //      .catch((err) => {
+              //        console.log(err);
+              //      });
+              //  })
+              //  .catch(function (error) {
+              //    console.log(error);
+              //  });
+            }
+          });
+      }
+    });
 
-    // async function signTx(txToBeSigned) {
-    //   try {
-    //     return await ergoWallet.sign_tx(txToBeSigned);
-    //   } catch (err) {
-    //     const msg = `[signTx] Error: ${JSON.stringify(err)}`;
-    //     console.error(msg, err);
-    //     return null;
-    //   }
-    // }
+    async function signTx(txToBeSigned) {
+      try {
+        return await ergoWallet.sign_tx(txToBeSigned);
+      } catch (err) {
+        const msg = `[signTx] Error: ${JSON.stringify(err)}`;
+        console.error(msg, err);
+        return null;
+      }
+    }
 
-    // async function submitTx(txToBeSubmitted) {
-    //   try {
-    //     return await axios.post(`/api/v1/transactions`, {
-    //       senderAddr: `${localStorage.getItem("walletAddress")}`,
-    //       game: "roulette",
-    //       tx: txToBeSubmitted,
-    //     });
-    //   } catch (err) {
-    //     const msg = `[submitTx] Error: ${JSON.stringify(err)}`;
-    //     console.error(msg, err);
-    //     return null;
-    //   }
-    // }
+    async function submitTx(txToBeSubmitted, sessionId) {
+      try {
+        return await axios.post(`/api/v1/transactions`, {
+          senderAddr: `${localStorage.getItem("walletAddress")}`,
+          game: "roulette",
+          sessionId: sessionId,
+          tx: txToBeSubmitted,
+        });
+      } catch (err) {
+        const msg = `[submitTx] Error: ${JSON.stringify(err)}`;
+        console.error(msg, err);
+        return null;
+      }
+    }
 
     //send the backend the bet object using buildBackendBetObject();
 
     /* REMOVE THIS ONE AFTER BACKEND CALLS ARE PROPERLY WORKING */
-    setStopSpin(true);
+    //setStopSpin(true);
+
+    //This literally triggers the spin to stop, so this next two lines should only be executed when the number is retrieved from the blockchain
+    //setRandomNumber(10);
+    //setNewRandomNumber(true);
+
     // SIMULATION OF THE WAITING FOR THE 2 MINUTES LIMIT.
     // fetchData();
   }
 
-  const promiseTimeout = new Promise((resolve) =>
-    setTimeout(() => resolve(false), 10000)
-  );
+  const randNumTimeout = new Promise((resolve) => {
+    setTimeout(() => resolve(false), 120000);
+  });
 
   const fetchData = async () => {
-    const response = await Promise.race([promiseTimeout]); // I want to await max 10 seconds here, if not next line should be executed
+    console.log("a saber");
+    const response = await Promise.race([randNumTimeout]);
     if (!response) {
       // warn user that the random number was not retrieved properly
       setBetsEnded(false);
@@ -447,6 +454,7 @@ const Roulette = ({ sidebarToggled }) => {
         5
       );
     } else {
+      console.log("random number came successfully");
       //Treatment of the number returned.
       //This literally triggers the spin to stop, so this next two lines should only be executed when the number is retrieved from the blockchain
       // setRandomNumber(10);

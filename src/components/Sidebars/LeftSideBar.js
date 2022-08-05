@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-// import Homepage from "../../assets/Elements/Design-2_0039_Layer-5.png";
-// import Games from "../../assets/Elements/Design-2_0037_Layer-7.png";
-// import Bonuses from "../../assets/Elements/Design-2_0036_Layer-8.png";
-// import Rules from "../../assets/Elements/Design-2_0035_Layer-9.png";
-// import P2P from "../../assets/Elements/Design-2_0038_Layer-6.png";
-// import Coinflip from "../../assets/Elements/Design-2_0051_Layer-11.png";
-// import Blackjack from "../../assets/Elements/Design-2_0050_Layer-12.png";
-// import Random from "../../assets/Elements/Design-2_0049_Layer-13.png";
-// import Swapicon from "../../assets/Elements/swap-icon.png";
-// import { useTranslation } from "react-i18next";
 
 import home_icon_pink from "../../assets/Elements/home_image_pink.png";
 import home_icon_white from "../../assets/Elements/home_image_white.png";
@@ -18,29 +8,24 @@ import home_icon_white from "../../assets/Elements/home_image_white.png";
 import games_icon_pink from "../../assets/Elements/games_image_pink.png";
 import games_icon_white from "../../assets/Elements/games_image_white.png";
 
-import bonuses_icon_pink from "../../assets/Elements/bonuses_image_pink.png";
-import bonuses_icon_white from "../../assets/Elements/bonuses_image_white.png";
+// import swap1_icon_pink from "../../assets/Elements/swap2.svg";
+import swap1_icon_white from "../../assets/Elements/swap5.svg";
+import swap1_icon_pink from "../../assets/Elements/swap5pink.svg";
 
-import rules_icon_pink from "../../assets/Elements/rules_image_pink.png";
-import rules_icon_white from "../../assets/Elements/rules_image_white.png";
+import bank_icon_white from "../../assets/Elements/bank2.svg";
+import bank_icon_pink from "../../assets/Elements/bank2pink.svg";
 
-import casino_icon_pink from "../../assets/Elements/casino_image_pink.png";
-import casino_icon_white from "../../assets/Elements/casino_image_white.png";
+import roulette_icon_white from "../../assets/Elements/roulette3.svg";
+import roulette_icon_pink from "../../assets/Elements/roulette3pink.svg";
 
-import p2p_icon_pink from "../../assets/Elements/p2p_image_pink.png";
-import p2p_icon_white from "../../assets/Elements/p2p_image_white.png";
+import lottery_icon_white from "../../assets/Elements/lottery4.svg";
+import lottery_icon_pink from "../../assets/Elements/lottery4pink.svg";
 
 import coinflip_icon_pink from "../../assets/Elements/coinflip_image_pink.png";
 import coinflip_icon_white from "../../assets/Elements/coinflip_image_white.png";
 
-import blackjack_icon_pink from "../../assets/Elements/blackjack_image_pink.png";
-import blackjack_icon_white from "../../assets/Elements/blackjack_image_white.png";
-
-import random_icon_pink from "../../assets/Elements/random_image_pink.png";
-import random_icon_white from "../../assets/Elements/random_image_white.png";
 
 function LeftSideBar({ sidebarToggled, setSidebarToggled }) {
-  const [isSelected, setIsSelected] = useState("");
   const location = useLocation();
   const path = location.pathname;
 
@@ -56,28 +41,16 @@ function LeftSideBar({ sidebarToggled, setSidebarToggled }) {
     games_page_class += " active";
   }
 
-  var bonuses_page_class = "side-navigation-large-item-wrapper";
+  var swap_page_class = "side-navigation-large-item-wrapper";
 
-  if (path === "/bonuses/" || path === "/bonuses") {
-    bonuses_page_class += " active";
+  if (path === "/swap/" || path === "/swap") {
+    swap_page_class += " active";
   }
 
-  var rules_page_class = "side-navigation-large-item-wrapper";
+  var liquidity_page_class = "side-navigation-large-item-wrapper";
 
-  if (path === "/rules/" || path === "/rules") {
-    rules_page_class += " active";
-  }
-
-  var casino_page_class = "side-navigation-large-item-wrapper";
-
-  if (path === "/casino/" || path === "/casino") {
-    casino_page_class += " active";
-  }
-
-  var p2p_page_class = "side-navigation-large-item-wrapper";
-
-  if (path === "/p2p/" || path === "/p2p") {
-    p2p_page_class += " active";
+  if (path === "/liquidity/" || path === "/liquidity") {
+    liquidity_page_class += " active";
   }
 
   var coinflip_page_class = "side-navigation-large-item-wrapper";
@@ -86,20 +59,16 @@ function LeftSideBar({ sidebarToggled, setSidebarToggled }) {
     coinflip_page_class += " active";
   }
 
-  var blackjack_page_class = "side-navigation-large-item-wrapper";
+  var roulette_page_class = "side-navigation-large-item-wrapper";
 
-  if (path === "/games/blackjack/" || path === "/games/blackjack") {
-    blackjack_page_class += " active";
+  if (path === "/games/roulette/" || path === "/games/roulette") {
+    roulette_page_class += " active";
   }
 
-  var random_page_class = "side-navigation-large-item-wrapper";
+  var lottery_page_class = "side-navigation-large-item-wrapper";
 
-  if (path === "/games/random/" || path === "/games/random") {
-    random_page_class += " active";
-  }
-
-  function changeSelection(element) {
-    setIsSelected(element);
+  if (path === "/games/lottery/" || path === "/games/lottery") {
+    lottery_page_class += " active";
   }
 
   return (
@@ -148,86 +117,105 @@ function LeftSideBar({ sidebarToggled, setSidebarToggled }) {
           </div>
         </Link>
         <Link
-          to="/stake"
-          onClick={() => setSidebarToggled(false)}
-          className={bonuses_page_class}
-        >
-          <div className="item-content">
-            <div className="item-icon-wrapper">
-              <div
-                className="item-icon-white"
-                style={{ backgroundImage: `url(${bonuses_icon_white})` }}
-              ></div>
-              <div
-                className="item-icon-pink"
-                style={{ backgroundImage: `url(${bonuses_icon_pink})` }}
-              ></div>
-            </div>
-            <span className="item-text">Bonuses</span>
-          </div>
-        </Link>
-        <Link
           to="/swap"
           onClick={() => setSidebarToggled(false)}
-          className={rules_page_class}
+          className={swap_page_class}
         >
           <div className="item-content">
             <div className="item-icon-wrapper">
               <div
                 className="item-icon-white"
-                style={{ backgroundImage: `url(${rules_icon_white})` }}
+                style={{ backgroundImage: `url(${swap1_icon_white})` }}
               ></div>
               <div
                 className="item-icon-pink"
-                style={{ backgroundImage: `url(${rules_icon_pink})` }}
+                style={{ backgroundImage: `url(${swap1_icon_pink})` }}
               ></div>
             </div>
             <span className="item-text">Swap</span>
           </div>
         </Link>
         <Link
-          to="/soon"
+          to="/liquidity"
           onClick={() => setSidebarToggled(false)}
-          className={casino_page_class}
+          className={liquidity_page_class}
         >
           <div className="item-content">
             <div className="item-icon-wrapper">
               <div
                 className="item-icon-white"
-                style={{ backgroundImage: `url(${casino_icon_white})` }}
+                style={{ backgroundImage: `url(${bank_icon_white})` }}
               ></div>
               <div
                 className="item-icon-pink"
-                style={{ backgroundImage: `url(${casino_icon_pink})` }}
+                style={{ backgroundImage: `url(${bank_icon_pink})` }}
               ></div>
             </div>
-            <span className="item-text">Casino</span>
+            <span className="item-text">The House</span>
           </div>
         </Link>
-        <Link
-          to="/soon"
+        {/* <Link
+          to="/aboutus"
           onClick={() => setSidebarToggled(false)}
-          className={p2p_page_class}
+          className={aboutus_page_class}
         >
           <div className="item-content">
             <div className="item-icon-wrapper">
               <div
                 className="item-icon-white"
-                style={{ backgroundImage: `url(${p2p_icon_white})` }}
+                style={{ backgroundImage: `url(${aboutus_icon_white})` }}
               ></div>
               <div
                 className="item-icon-pink"
-                style={{ backgroundImage: `url(${p2p_icon_pink})` }}
+                style={{ backgroundImage: `url(${aboutus_icon_pink})` }}
               ></div>
             </div>
-            <span className="item-text">P2P Betting</span>
+            <span className="item-text">About us</span>
           </div>
-        </Link>
+        </Link> */}
+        {/* <Link
+          to="/faq"
+          onClick={() => setSidebarToggled(false)}
+          className={faq_page_class}
+        >
+          <div className="item-content">
+            <div className="item-icon-wrapper">
+              <div
+                className="item-icon-white"
+                style={{ backgroundImage: `url(${faq_icon_white})` }}
+              ></div>
+              <div
+                className="item-icon-pink"
+                style={{ backgroundImage: `url(${faq_icon_pink})` }}
+              ></div>
+            </div>
+            <span className="item-text">FAQ</span>
+          </div>
+        </Link> */}
         <div className="side-navigation-large-item-wrapper-string">
           <div className="item-content">
             <span>Popular games</span>
           </div>
         </div>
+        <Link
+          to="/games/roulette"
+          onClick={() => setSidebarToggled(false)}
+          className={roulette_page_class}
+        >
+          <div className="item-content">
+            <div className="item-icon-wrapper">
+              <div
+                className="item-icon-white"
+                style={{ backgroundImage: `url(${roulette_icon_white})` }}
+              ></div>
+              <div
+                className="item-icon-pink"
+                style={{ backgroundImage: `url(${roulette_icon_pink})` }}
+              ></div>
+            </div>
+            <span className="item-text">Roulette</span>
+          </div>
+        </Link>
         <Link
           to="/games/coinflip"
           onClick={() => setSidebarToggled(false)}
@@ -248,41 +236,22 @@ function LeftSideBar({ sidebarToggled, setSidebarToggled }) {
           </div>
         </Link>
         <Link
-          to="/games/roulette"
+          to="/games/lottery"
           onClick={() => setSidebarToggled(false)}
-          className={blackjack_page_class}
+          className={lottery_page_class}
         >
           <div className="item-content">
             <div className="item-icon-wrapper">
               <div
                 className="item-icon-white"
-                style={{ backgroundImage: `url(${blackjack_icon_white})` }}
+                style={{ backgroundImage: `url(${lottery_icon_white})` }}
               ></div>
               <div
                 className="item-icon-pink"
-                style={{ backgroundImage: `url(${blackjack_icon_pink})` }}
+                style={{ backgroundImage: `url(${lottery_icon_pink})` }}
               ></div>
             </div>
-            <span className="item-text">Roulette</span>
-          </div>
-        </Link>
-        <Link
-          to="/soon"
-          onClick={() => setSidebarToggled(false)}
-          className={random_page_class}
-        >
-          <div className="item-content">
-            <div className="item-icon-wrapper">
-              <div
-                className="item-icon-white"
-                style={{ backgroundImage: `url(${random_icon_white})` }}
-              ></div>
-              <div
-                className="item-icon-pink"
-                style={{ backgroundImage: `url(${random_icon_pink})` }}
-              ></div>
-            </div>
-            <span className="item-text">Random</span>
+            <span className="item-text">Lottery</span>
           </div>
         </Link>
         <div id="left-side-bar-show-button-wrapper">
