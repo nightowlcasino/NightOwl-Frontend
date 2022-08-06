@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Coinflip.css";
 import sigUSDicon from "../../../assets/Elements/SigUSD.svg";
 import headIcon from "../../../assets/Elements/head.png";
+// import headIcon from "../../../assets/Elements/headpermant.svg";
 import tailsIcon from "../../../assets/Elements/tails.png";
 
 const Coinflip = () => {

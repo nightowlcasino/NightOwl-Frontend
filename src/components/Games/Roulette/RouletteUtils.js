@@ -6,8 +6,20 @@ import moneySound5 from "../../../assets/Sounds/moneySound5.mp3";
 import moneySound6 from "../../../assets/Sounds/moneySound6.mp3";
 import clangEndSound from "../../../assets/Sounds/clangEnd.mp3";
 import startSound from "../../../assets/Sounds/start.mp3";
+import spinButtonSound from "../../../assets/Sounds/spinButtonSound.mp3";
+import errorSound from "../../../assets/Sounds/errorSound.wav";
+import bigChipSound from "../../../assets/Sounds/bigChipSound.mp3";
+import smallChipSound from "../../../assets/Sounds/smallChipSound.mp3";
+import numberRevealSound from "../../../assets/Sounds/numberRevealSound.mp3";
+import rouletteHoverSound from "../../../assets/Sounds/rouletteHoverSound.mp3";
 
 const endAudio = new Audio(clangEndSound);
+const spinButtonAudio = new Audio(spinButtonSound);
+const errorAudio = new Audio(errorSound);
+const choosingChip = new Audio(bigChipSound);
+const placingChip = new Audio(smallChipSound);
+const numberRevealAudio = new Audio(numberRevealSound);
+const rouletteHoverAudio = new Audio(rouletteHoverSound);
 
 const winningSounds = [
   new Audio(moneySound1),
@@ -447,4 +459,4 @@ const arrayWithNumVals4 = [
   "num_val34",
 ];
 
-export { singleNumberFields, doubleNumberFields, fromNumberToColor, red, timer, betObjectInitialValue, endAudio, winningSounds, arrayWithNumVals, arrayWithNumVals1, arrayWithNumVals2, arrayWithNumVals3, arrayWithNumVals4, fromChipValueToColor,checkIfZero, centerOrBetween };
+export {rouletteHoverAudio, numberRevealAudio,choosingChip, placingChip ,spinButtonAudio, errorAudio, singleNumberFields, doubleNumberFields, fromNumberToColor, red, timer, betObjectInitialValue, endAudio, winningSounds, arrayWithNumVals, arrayWithNumVals1, arrayWithNumVals2, arrayWithNumVals3, arrayWithNumVals4, fromChipValueToColor,checkIfZero, centerOrBetween };

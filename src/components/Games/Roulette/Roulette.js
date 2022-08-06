@@ -28,7 +28,7 @@ import coin_10k from "../../../assets/Elements/coin_10k.png";
 import coin_50k from "../../../assets/Elements/coin_50k.png";
 import rouletteMascot from "../../../assets/Elements/rouletteMascot.png";
 import closeModalIcon from "../../../assets/Elements/closeModal.svg";
-import Modal from "../../Modals/Modal";
+import RouletteModal from "../../Modals/RouletteModal";
 
 import loopSound from "../../../assets/Sounds/loop.mp3";
 import ReactHowler from "react-howler";
@@ -50,6 +50,12 @@ import {
   checkIfZero,
   centerOrBetween,
   fromChipValueToColor,
+  spinButtonAudio,
+  errorAudio,
+  choosingChip,
+  placingChip,
+  numberRevealAudio,
+  rouletteHoverAudio,
 } from "./RouletteUtils";
 
 const TOKENID_NO_TEST =
@@ -73,7 +79,7 @@ const Roulette = ({ sidebarToggled }) => {
   const [latestResults, setLatestResults] = useState([]);
   const [latestBets, setLatestBets] = useState([]);
   const [betsEnded, setBetsEnded] = useState(false);
-  const [table_filter_value, table_filter_set] = useState("");
+  const [tableFilter, setTableFilter] = useState("");
   const [stopSpin, setStopSpin] = useState(false);
   const [newRandomNumber, setNewRandomNumber] = useState(false);
   const [isLoopSound, setLoopSound] = useState(false);
@@ -134,6 +140,19 @@ const Roulette = ({ sidebarToggled }) => {
       });
   };
 
+  function handleChipSelected(chipValue) {
+    console.log("what")
+    setChipSelected(chipValue);
+    choosingChip.currentTime = 0;
+    choosingChip.play();
+  }
+
+  function handleTableFilter(filter) {
+    setTableFilter(filter);
+    rouletteHoverAudio.currentTime = 0;
+    rouletteHoverAudio.play();
+  }
+
   useEffect(() => {
     innerRef.current.setAttribute("data-spinto", "");
     innerRef.current.classList.remove("stop-spin");
@@ -146,6 +165,7 @@ const Roulette = ({ sidebarToggled }) => {
 
       setTimeout(() => {
         innerRef.current.setAttribute("data-spinto", randomNumber);
+        setLoopSound(true);
       }, 500);
 
       // remove the disabled attribute when the ball has stopped
@@ -175,7 +195,7 @@ const Roulette = ({ sidebarToggled }) => {
         setResultColor(color);
         setRevealData(true);
         setRandomNumber(randomNumber);
-
+        numberRevealAudio.play();
         if (firstSpin) setFirstSpin(false);
       }, timer + 50);
       setTimeout(() => {
@@ -262,6 +282,8 @@ const Roulette = ({ sidebarToggled }) => {
     });
     addLatestBet(numbers);
     setTotalBet(totalBet + chipSelected);
+    placingChip.currentTime = 0;
+    placingChip.play();
   }
 
   function resetBets() {
@@ -284,8 +306,10 @@ const Roulette = ({ sidebarToggled }) => {
   function spinTheWheel() {
     if (!totalBet) {
       notifySomething("Insufficient funds", 3);
+      errorAudio.play();
       return;
     }
+    spinButtonAudio.play();
     if (!natsConn) {
       wsConnect();
     }
@@ -303,7 +327,6 @@ const Roulette = ({ sidebarToggled }) => {
     setBetsEnded(true);
     setSpinAvailable(false);
     setOverlayString("Waiting for result to be received from the blockchain");
-    setLoopSound(true);
     //txFee:
     //  minBoxValue    = 1000000 * (# of bets)
     //  minerFee       = 1100000
@@ -428,11 +451,11 @@ const Roulette = ({ sidebarToggled }) => {
     //send the backend the bet object using buildBackendBetObject();
 
     /* REMOVE THIS ONE AFTER BACKEND CALLS ARE PROPERLY WORKING */
-    //setStopSpin(true);
+    setStopSpin(true);
 
     //This literally triggers the spin to stop, so this next two lines should only be executed when the number is retrieved from the blockchain
-    //setRandomNumber(10);
-    //setNewRandomNumber(true);
+    setRandomNumber(10);
+    setNewRandomNumber(true);
 
     // SIMULATION OF THE WAITING FOR THE 2 MINUTES LIMIT.
     // fetchData();
@@ -499,16 +522,7 @@ const Roulette = ({ sidebarToggled }) => {
       className={betsEnded ? "roulette-wrapper" : "roulette-wrapper bets-end"}
     >
       <ReactHowler src={loopSound} playing={isLoopSound} loop={true} />
-      {informationAboutGameIsPressed && (
-        <Modal
-          link="https://medium.com/@NightOwlCasino/the-pioneers-night-owls-first-four-games-31dc6406a5f8"
-          linkText="Link to medium article"
-          setModalOff={setInformationAboutGameIsPressed}
-          firstText="Roulette is a dynamic game where you can win your bets by putting
-        your chips in the appropiate spots"
-          secondText="You can get more info here:"
-        />
-      )}
+      <RouletteModal gameMascotImg={rouletteMascot} showModal={informationAboutGameIsPressed} setModalOff={setInformationAboutGameIsPressed}/>
       <div
         className="roulette-wheel-content-wrapper"
         style={{ pointerEvents: informationAboutGameIsPressed ? "none" : "" }}
@@ -849,7 +863,7 @@ const Roulette = ({ sidebarToggled }) => {
                     <div>0</div>
                   </div>
                 </div>
-                <div className={table_filter_value} id="table-numbers">
+                <div className={tableFilter} id="table-numbers">
                   <div id="first-row" className="table-row">
                     <div id="number-3" className="table-value width-1-12th red">
                       3
@@ -1172,9 +1186,9 @@ const Roulette = ({ sidebarToggled }) => {
                     borderTopRightRadius: "8px",
                   }}
                   onMouseEnter={() =>
-                    table_filter_set("filter-applied first-row")
+                    handleTableFilter("filter-applied first-row")
                   }
-                  onMouseLeave={() => table_filter_set("")}
+                  onMouseLeave={() => handleTableFilter("")}
                   className={
                     betObject.num_val1st.length > 0
                       ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
@@ -1194,9 +1208,9 @@ const Roulette = ({ sidebarToggled }) => {
                 </div>
                 <div
                   onMouseEnter={() =>
-                    table_filter_set("filter-applied second-row")
+                    handleTableFilter("filter-applied second-row")
                   }
-                  onMouseLeave={() => table_filter_set("")}
+                  onMouseLeave={() => handleTableFilter("")}
                   className={
                     betObject.num_val2nd.length > 0
                       ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
@@ -1219,9 +1233,9 @@ const Roulette = ({ sidebarToggled }) => {
                     borderBottomRightRadius: "8px",
                   }}
                   onMouseEnter={() =>
-                    table_filter_set("filter-applied third-row")
+                    handleTableFilter("filter-applied third-row")
                   }
-                  onMouseLeave={() => table_filter_set("")}
+                  onMouseLeave={() => handleTableFilter("")}
                   className={
                     betObject.num_val3rd.length > 0
                       ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
@@ -1249,9 +1263,9 @@ const Roulette = ({ sidebarToggled }) => {
                 <div id="center-top-row" className="table-row">
                   <div
                     onMouseEnter={() =>
-                      table_filter_set("filter-applied first-12")
+                      handleTableFilter("filter-applied first-12")
                     }
-                    onMouseLeave={() => table_filter_set("")}
+                    onMouseLeave={() => handleTableFilter("")}
                     className={
                       betObject.num_val_first_12.length > 0
                         ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
@@ -1273,9 +1287,9 @@ const Roulette = ({ sidebarToggled }) => {
                   </div>
                   <div
                     onMouseEnter={() =>
-                      table_filter_set("filter-applied second-12")
+                      handleTableFilter("filter-applied second-12")
                     }
-                    onMouseLeave={() => table_filter_set("")}
+                    onMouseLeave={() => handleTableFilter("")}
                     className={
                       betObject.num_val_second_12.length > 0
                         ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
@@ -1297,9 +1311,9 @@ const Roulette = ({ sidebarToggled }) => {
                   </div>
                   <div
                     onMouseEnter={() =>
-                      table_filter_set("filter-applied third-12")
+                      handleTableFilter("filter-applied third-12")
                     }
-                    onMouseLeave={() => table_filter_set("")}
+                    onMouseLeave={() => handleTableFilter("")}
                     className={
                       betObject.num_val_third_12.length > 0
                         ? `table-value table-filter width-1-3rd chip-${fromChipValueToColor(
@@ -1324,9 +1338,9 @@ const Roulette = ({ sidebarToggled }) => {
                   <div
                     style={{ borderBottomLeftRadius: "8px" }}
                     onMouseEnter={() =>
-                      table_filter_set("filter-applied first-18")
+                      handleTableFilter("filter-applied first-18")
                     }
-                    onMouseLeave={() => table_filter_set("")}
+                    onMouseLeave={() => handleTableFilter("")}
                     className={
                       betObject.num_val_first_18.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
@@ -1347,8 +1361,8 @@ const Roulette = ({ sidebarToggled }) => {
                     </div>
                   </div>
                   <div
-                    onMouseEnter={() => table_filter_set("filter-applied even")}
-                    onMouseLeave={() => table_filter_set("")}
+                    onMouseEnter={() => handleTableFilter("filter-applied even")}
+                    onMouseLeave={() => handleTableFilter("")}
                     className={
                       betObject.num_val_even.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
@@ -1370,9 +1384,9 @@ const Roulette = ({ sidebarToggled }) => {
                   </div>
                   <div
                     onMouseEnter={() =>
-                      table_filter_set("filter-applied filter-color-red")
+                      handleTableFilter("filter-applied filter-color-red")
                     }
-                    onMouseLeave={() => table_filter_set("")}
+                    onMouseLeave={() => handleTableFilter("")}
                     className={
                       betObject.num_val_red.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
@@ -1394,9 +1408,9 @@ const Roulette = ({ sidebarToggled }) => {
                   </div>
                   <div
                     onMouseEnter={() =>
-                      table_filter_set("filter-applied filter-color-black")
+                      handleTableFilter("filter-applied filter-color-black")
                     }
-                    onMouseLeave={() => table_filter_set("")}
+                    onMouseLeave={() => handleTableFilter("")}
                     className={
                       betObject.num_val_black.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
@@ -1417,8 +1431,8 @@ const Roulette = ({ sidebarToggled }) => {
                     </div>
                   </div>
                   <div
-                    onMouseEnter={() => table_filter_set("filter-applied odd")}
-                    onMouseLeave={() => table_filter_set("")}
+                    onMouseEnter={() => handleTableFilter("filter-applied odd")}
+                    onMouseLeave={() => handleTableFilter("")}
                     className={
                       betObject.num_val_odd.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
@@ -1441,9 +1455,9 @@ const Roulette = ({ sidebarToggled }) => {
                   <div
                     style={{ borderBottomRightRadius: "8px" }}
                     onMouseEnter={() =>
-                      table_filter_set("filter-applied second-18")
+                      handleTableFilter("filter-applied second-18")
                     }
-                    onMouseLeave={() => table_filter_set("")}
+                    onMouseLeave={() => handleTableFilter("")}
                     className={
                       betObject.num_val_second_18.length > 0
                         ? `table-value table-filter width-1-6th chip-${fromChipValueToColor(
@@ -1473,7 +1487,7 @@ const Roulette = ({ sidebarToggled }) => {
         </div>
         <div id="roulette-table-chips">
           <div
-            onClick={() => setChipSelected(100)}
+            onClick={() => handleChipSelected(100)}
             className={
               chipSelected === 100
                 ? "table-chip-wrapper active"
@@ -1486,7 +1500,7 @@ const Roulette = ({ sidebarToggled }) => {
             ></div>
           </div>
           <div
-            onClick={() => setChipSelected(500)}
+            onClick={() => handleChipSelected(500)}
             className={
               chipSelected === 500
                 ? "table-chip-wrapper active"
@@ -1499,7 +1513,7 @@ const Roulette = ({ sidebarToggled }) => {
             ></div>
           </div>
           <div
-            onClick={() => setChipSelected(2500)}
+            onClick={() => handleChipSelected(2500)}
             className={
               chipSelected === 2500
                 ? "table-chip-wrapper active"
@@ -1512,7 +1526,7 @@ const Roulette = ({ sidebarToggled }) => {
             ></div>
           </div>
           <div
-            onClick={() => setChipSelected(10000)}
+            onClick={() => handleChipSelected(10000)}
             className={
               chipSelected === 10000
                 ? "table-chip-wrapper active"
@@ -1525,7 +1539,7 @@ const Roulette = ({ sidebarToggled }) => {
             ></div>
           </div>
           <div
-            onClick={() => setChipSelected(50000)}
+            onClick={() => handleChipSelected(50000)}
             className={
               chipSelected === 50000
                 ? "table-chip-wrapper active"
