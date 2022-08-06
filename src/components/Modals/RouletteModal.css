@@ -1,8 +1,8 @@
 .warning-modal-wrapper {
-    box-shadow: 0 0 0 1000px rgba(0, 0, 0, .9);
+    box-shadow: 0 0 0 1000px rgba(0, 0, 0, .95);
       
     /* For other browsers */
-    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .9);
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .95);
   transition: all 0.4s ease;
   z-index: 3;
 }

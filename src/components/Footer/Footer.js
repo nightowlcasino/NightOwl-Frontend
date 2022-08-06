@@ -89,11 +89,7 @@ export default function Footer() {
             <Link
               to="/faq"
               className="footer-link"
-            ><li style={{
-              fontWeight: "normal",
-              color: "rgb(244, 244, 245)",
-              lineHeight: "1.5",
-            }}>FAQ</li></Link>
+            ><li>FAQ</li></Link>
           </span>
         </ul>
 

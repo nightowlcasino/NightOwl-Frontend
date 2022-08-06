@@ -305,7 +305,7 @@ const Roulette = ({ sidebarToggled }) => {
 
   function spinTheWheel() {
     if (!totalBet) {
-      notifySomething("Insufficient funds", 3);
+      notifySomething("Before spinning the wheel, please make your bet by adding chips to the table!", 3);
       errorAudio.play();
       return;
     }
@@ -326,7 +326,7 @@ const Roulette = ({ sidebarToggled }) => {
     }
     setBetsEnded(true);
     setSpinAvailable(false);
-    setOverlayString("Waiting for result to be received from the blockchain");
+    setOverlayString("Waiting for the random number to be generated…");
     //txFee:
     //  minBoxValue    = 1000000 * (# of bets)
     //  minerFee       = 1100000
@@ -495,7 +495,7 @@ const Roulette = ({ sidebarToggled }) => {
   }
 
   function notifyWin() {
-    setOverlayString("You won x OWL (y $)!");
+    setOverlayString("Congrats! You won xyz OWL!");
     setWinningNotification(true);
     setTimeout(() => {
       setWinningNotification(false);

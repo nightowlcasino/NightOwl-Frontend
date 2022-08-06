@@ -5,6 +5,31 @@
     align-items: center;
     align-content: center;
     flex-direction: row;
+
+}
+
+#info-btn {
+    padding: 5px 10px;
+    text-align: center;
+    color: white;
+    background-image: linear-gradient(to right, #8e0081, #fa008c);
+    border-radius: 10px;
+    margin: 0px auto;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    border: none;
+}
+
+.info-btn-container {
+    margin-left: auto;  
+}
+.btn .btn-label {
+    font-size: 20px;
+    font-weight: 900;
+    padding: 12px;
+    white-space: nowrap;
 }
 
 #coinflip-game-wrapper #coinflip-content-wrapper

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import "./Header.css";
 
@@ -34,11 +34,12 @@ import { Bars } from "react-loader-spinner";
 const Header = () => {
   // const currentLanguageCode = cookies.get("i18next") || "en";
   // const { t } = useTranslation();
-  const [musicState, setMusicState] = useState(false);
-  const [currentSong, setCurrentSong] = useState(sounds[getRandomSong()]);
 
   const location = useLocation();
   const path = location.pathname;
+
+  const [musicState, setMusicState] = useState(path.toLocaleLowerCase().match("games") ? true : false);
+  const [currentSong, setCurrentSong] = useState(sounds[getRandomSong()]);
 
   window.addEventListener("scroll", () => {
     if (window.scrollY > 0) {
@@ -68,8 +69,7 @@ const Header = () => {
     <div id="header-wrapper">
       <ReactHowler
         src={currentSong}
-        mute={!musicState}
-        playing={true}
+        playing={musicState}
         htm5={true}
         volume={0.7}
         onEnd={handleMusicFinished}

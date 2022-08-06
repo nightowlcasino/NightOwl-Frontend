@@ -1,0 +1,88 @@
+.warning-modal-wrapper {
+    box-shadow: 0 0 0 1000px rgba(0, 0, 0, .95);
+      
+    /* For other browsers */
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .95);
+  transition: all 0.4s ease;
+  z-index: 3;
+}
+
+.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.hide {
+  visibility: hidden;
+    opacity: 0;
+  }
+
+#overlay-popup
+{
+  position: fixed;
+  margin: 0 auto;
+    top: 35%;
+    height: auto;
+    background-color: #822169;
+    /* For Internet Explorer */
+    background-color: #822169;
+    
+}
+
+#overlay-text .subtitle
+{
+  display: block;
+  text-align: left;
+  color: black;
+  font-size: 1.3em;
+  margin: 15px;
+  font-weight: bold;
+}
+
+#overlay-text #subtitle-text {
+  display: block;
+  text-align: left;
+  color: white;
+  font-size: 1em;
+  margin: 10px;
+  margin-left: 1.3em;
+}
+
+/* #overlay-popup:before
+{
+        content: "";
+        position: fixed;
+        border-right: 30px solid white;
+        border-left: 12px solid transparent;
+        border-top: 12px solid #822169;
+        border-bottom: 30px solid transparent;
+        left: 80%;
+        bottom: -20px;
+} */
+
+#mascotImg {
+    position: absolute;
+    z-index: 1;
+    width: 22vw;
+    height: 22vw;
+    top: 50%;
+    left: 68%;
+}
+#overlay-text
+{
+  margin: 10px 2vw;
+}
+
+#overlay-close
+{
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
