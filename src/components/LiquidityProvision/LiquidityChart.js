@@ -9,16 +9,26 @@ export default function FloorChart(props) {
 
     // const chartComponent = useRef(null);
 
+    const chartRef = useRef();
+
     React.useEffect(()=> {
         if (window.Chart) {
-            parseOptions(Chart, chartOptions());
+            // parseOptions(Chart, chartOptions());
         }
           
     },[window.Chart])
 
 
     //------ Chart Info ------
-    const options = {
+    const options1 = {
+      maintainAspectRatio: false,
+
+      defaultColor: "rgb(255, 255, 255, 0.9)",
+      defaultFontColor: "rgb(255, 255, 255, 0.9)",
+      defaultFontFamily: "inherit",
+      defaultFontSize: 14,
+ 
+
         scales: {
           yAxes: [
             {
@@ -43,27 +53,127 @@ export default function FloorChart(props) {
         },
       }
 
-      const data ={
-        labels: ["A", "B", "C", "D", "E", "F", "G", "H"],
-        datasets: [
-          {
-            label: "Total",
-            data: [0, 20, 10, 30, 15, 40, 20, 60],
-          },
-        ],
-      }
+
+      const options = {
+        // defaults: {
+          // global: {
+            responsive: true,
+            maintainAspectRatio: false,
+            defaultColor: "rgb(255, 255, 255, 0.9)",
+            // defaultFontColor: "rgb(255, 255, 255, 0.9)",
+            defaultFontFamily: "inherit",
+            defaultFontSize: 14,
+            layout: {
+              padding: 0,
+            },
+            legend: {
+              display: false,
+              position: "bottom",
+              labels: {
+                usePointStyle: true,
+                padding: 16,
+              },
+            },
+            elements: {
+              point: {
+                radius: 0,
+                backgroundColor: theme["primary"],
+              },
+              line: {
+                tension: 0.3,
+                borderWidth: 3,
+                borderColor: theme["primary"],
+                backgroundColor: "transparent",
+                borderCapStyle: "rounded",
+              },
+              rectangle: {
+                backgroundColor: theme["warning"],
+              },
+              arc: {
+                backgroundColor: theme["primary"],
+                borderColor: "white",
+                borderWidth: 4,
+              },
+            },
+            tooltips: {
+              enabled: true,
+              mode: "index",
+              intersect: false,
+            },
+
+            scales: {
+              yAxes: [
+                {
+                  gridLines: {
+                    zeroLineColor: "transparent",
+                    color: "#5b0084",
+
+                  },
+                  ticks: {
+                    fontColor: "#FFFFFF",
+                    // padding: 12,
+                    // fontSize: 16
+                  },
+                  label: "none"
+                },
+              ],
+              xAxes: [
+                {
+                  gridLines: {
+                    // color: "#5b0084",
+                    zeroLineColor: "transparent",
+                    // lineWidth: 2,
+                    
+                  },
+                  ticks: {
+                    fontColor: "#FFFFFF",
+                    // display: ""
+
+                  },
+                },
+              ],
+            },
+
+            // plugins: {
+            //   title: {
+            //     text: "Ass",
+            //     color: "#000000"
+            //   }
+            // }
+    
+
+          // },
+          // },
+        // },
+      };
+  
+
+
+
+    const data ={
+      labels: ["A", "B", "C", "D", "E", "F", "G", "H"],
+      datasets: [
+        {
+          label: "Total",
+          data: [0, 20, 10, 30, 15, 40, 20, 60],
+        },
+      ],
+    }
 
     return (
         <Fragment>
             {/* <Button onClick={onToggle}>See Floor Chart</Button>           */}
 
             {/* <Collapse in={isOpen} animateOpacity unmountOnExit> */}
-                <div>
+                <div 
+                  style={{height: 400, marginRight: 12, marginTop: 12}}
+                >
                     <Line
+                        ref={chartRef}
                         data={data}
-                        redraw
+                        // redraw
                         options={options}
-                        height={"400"}
+                        height={"400px"}
                         // id="chart-sales"
                         // className="chart-canvas"
                     />
