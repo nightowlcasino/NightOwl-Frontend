@@ -1,8 +1,8 @@
 .warning-modal-wrapper {
-    box-shadow: 0 0 0 1000px rgba(0, 0, 0, .95);
-      
-    /* For other browsers */
-    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .95);
+  box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.95);
+
+  /* For other browsers */
+  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.95);
   transition: all 0.4s ease;
   z-index: 3;
 }
@@ -14,23 +14,36 @@
 
 .hide {
   visibility: hidden;
-    opacity: 0;
-  }
-
-#overlay-popup
-{
-  position: fixed;
-  margin: 0 auto;
-    top: 35%;
-    height: auto;
-    background-color: #822169;
-    /* For Internet Explorer */
-    background-color: #822169;
-    
+  opacity: 0;
 }
 
-#overlay-text .subtitle
-{
+#overlay-popup-coinflip {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+  width: 35vw;
+  background-color: #822169;
+  /* For Internet Explorer */
+  background-color: #822169;
+  border-radius: 10px;
+}
+
+#overlay-popup-lottery {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+  width: 35vw;
+  background-color: #822169;
+  /* For Internet Explorer */
+  background-color: #822169;
+  border-radius: 10px;
+}
+
+#overlay-text .subtitle {
   display: block;
   text-align: left;
   color: black;
@@ -61,20 +74,18 @@
 } */
 
 #mascotImg {
-    position: absolute;
-    z-index: 1;
-    width: 22vw;
-    height: 22vw;
-    top: 50%;
-    left: 68%;
+  position: absolute;
+  z-index: 1;
+  width: 22vw;
+  height: 22vw;
+  top: 50%;
+  left: 68%;
 }
-#overlay-text
-{
+#overlay-text {
   margin: 10px 2vw;
 }
 
-#overlay-close
-{
+#overlay-close {
   color: white;
   position: absolute;
   top: 10px;

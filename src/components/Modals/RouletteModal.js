@@ -4,7 +4,7 @@ import closeModalIcon from "../../assets/Elements/closeModal.svg";
 const RouletteModal = ({ showModal, setModalOff, gameMascotImg }) => {
   return (
     <div className={`warning-modal-wrapper ${showModal ? "show" : "hide"}`}>
-      <div id="overlay-popup" style={{ margin: "0 auto" }}>
+      <div id="overlay-popup" style={{ margin: "0 auto", height:"100%" }}>
         <div id="overlay-close" onClick={() => setModalOff(false)}>
           <img
             src={closeModalIcon}
