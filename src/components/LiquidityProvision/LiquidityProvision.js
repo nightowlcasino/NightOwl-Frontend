@@ -27,105 +27,102 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 
 	return (
 		<div>
-
-		<div className="liquidity-container" style={{marginTop: 30}}>
-			<div  style={{width: "30%"}}>
-				<div className="house-wrapper">
-					<form id="liquidity-content" style={{position: "relative"}}>
-						<div className="liquidity-corner-dropdown">
-							<DotsHorizontalIcon color="white" width={24}/>
-						</div>
-						<div id="liquidity-header" style={{textAlign: "center"}}>
-							<div style={{display: "inline-flex"}}>
-								{/* <ChevronUpIcon color="red" width={24} style={{marginLeft: -12}}/> */}
-								<h1 style={{marginBottom: 8, marginTop: 0}}>1 WEEK</h1>
-							</div>
-							<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>Total time providing liquidity </p>
-						</div>
-					</form>
-				</div>
-				<div className="house-wrapper" style={{marginTop: 10, textAlign: "center"}}>
-					<form id="liquidity-content" style={{position: "relative"}}>
-						<div className="liquidity-corner-dropdown">
-							<DotsHorizontalIcon color="white" width={24}/>
-						</div>
-						<div id="liquidity-header">
-							<div style={{display: "inline-flex"}}>
-								{/* <ChevronUpIcon color="red" width={24} style={{marginLeft: -12}}/> */}
-								<h1 style={{marginBottom: 8, marginTop: 0}}>7% APY</h1>
-							</div>
-							<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>Approximate Annual Percentage Yield (APY)</p>
-						</div>
-					</form>
-				</div>
-				<div className="house-wrapper" style={{marginTop: 10, textAlign: "center"}}>
-					<form id="liquidity-content" style={{position: "relative"}}>
-						<div className="liquidity-corner-dropdown">
-							<DotsHorizontalIcon color="white" width={24}/>
-						</div>
-						<div id="liquidity-header">
-							<div style={{display: "inline-flex"}}>
-								{/* <ChevronUpIcon color="red" width={24} style={{marginLeft: -12}}/> */}
-								<h1 style={{marginBottom: 8, marginTop: 0}}>Statistics</h1>
-							</div>
-						</div>
-						<div id="liquidity-subheader">
-							<div>
-								<p style={{marginBottom: 0, marginTop: 0, display: "inline-block"}}>100,151</p>
-								<p style={{marginBottom: 0, marginTop: 0, marginLeft: 2, display: "inline-block", fontSize: 13}}> OWL</p>
-							</div>
-							<p style={{marginTop: 2, fontSize: 12, opacity: 0.8}}>Total Earned</p>
-						</div>
-						<div id="liquidity-subheader">
-							<div>
-								<p style={{marginBottom: 0, marginTop: 0, display: "inline-block"}}>5,123,151</p>
-								<p style={{marginBottom: 0, marginTop: 0, marginLeft: 2, display: "inline-block", fontSize: 13}}> OWL</p>
-							</div>
-							<p style={{marginTop: 2, fontSize: 12, opacity: 0.8}}>Estimated Profit</p>
-						</div>
-						<div id="liquidity-subheader" style={{marginBottom: 12}}>
-							<div>
-								<p style={{marginBottom: 0, marginTop: 0, display: "inline-block"}}>5,010,151</p>
-								<p style={{marginBottom: 0, marginTop: 0, marginLeft: 2, display: "inline-block", fontSize: 13}}>OWL</p>
-							</div>
-							<p style={{marginTop: 2, fontSize: 12, opacity: 0.8}}>Staked</p>
-						</div>
-					</form>
-					<p className="withdraw-button" onClick={()=>setOpenModal(true)}>Stats</p>
-
-				</div>
-			</div>
-			<div style={{width: "70%"}}>
-				<div className="house-wrapper" >
-					<div>
-						<form  style={{position: "relative"}}>
+			<div className="liquidity-container" style={{marginTop: 30}}>
+				<div  style={{width: "30%"}}>
+					<div className="house-wrapper">
+						<form id="liquidity-content" style={{position: "relative"}}>
 							<div className="liquidity-corner-dropdown">
 								<DotsHorizontalIcon color="white" width={24}/>
 							</div>
-							<div>
+							<div id="liquidity-header" style={{textAlign: "center"}}>
 								<div style={{display: "inline-flex"}}>
-									<h1 style={{marginBottom: 8, marginTop: 0}}>You are the ‘House’!</h1>
+									{/* <ChevronUpIcon color="red" width={24} style={{marginLeft: -12}}/> */}
+									<h1 style={{marginBottom: 8, marginTop: 0}}>1 WEEK</h1>
 								</div>
-								<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>You are funding the casino by providing liquidity, essentially acting as ‘the house,’ and earning a passive return over time!</p>
-							</div>
-							<div>
-								<p className="withdraw-button" onClick={()=>console.log("withdraw")}>Withdraw</p>
+								<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>Total time providing liquidity </p>
 							</div>
 						</form>
 					</div>
-				</div>
-				<div className="house-wrapper">
-					<div>
-						<LiquidityChart />
+					<div className="house-wrapper" style={{marginTop: 10, textAlign: "center"}}>
+						<form id="liquidity-content" style={{position: "relative"}}>
+							<div className="liquidity-corner-dropdown">
+								<DotsHorizontalIcon color="white" width={24}/>
+							</div>
+							<div id="liquidity-header">
+								<div style={{display: "inline-flex"}}>
+									{/* <ChevronUpIcon color="red" width={24} style={{marginLeft: -12}}/> */}
+									<h1 style={{marginBottom: 8, marginTop: 0}}>7% APY</h1>
+								</div>
+								<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>Approximate Annual Percentage Yield (APY)</p>
+							</div>
+						</form>
+					</div>
+					<div className="house-wrapper" style={{marginTop: 10, textAlign: "center"}}>
+						<form id="liquidity-content" style={{position: "relative"}}>
+							<div className="liquidity-corner-dropdown">
+								<DotsHorizontalIcon color="white" width={24}/>
+							</div>
+							<div id="liquidity-header">
+								<div style={{display: "inline-flex"}}>
+									{/* <ChevronUpIcon color="red" width={24} style={{marginLeft: -12}}/> */}
+									<h1 style={{marginBottom: 8, marginTop: 0}}>Statistics</h1>
+								</div>
+							</div>
+							<div id="liquidity-subheader">
+								<div>
+									<p style={{marginBottom: 0, marginTop: 0, display: "inline-block"}}>100,151</p>
+									<p style={{marginBottom: 0, marginTop: 0, marginLeft: 2, display: "inline-block", fontSize: 13}}> OWL</p>
+								</div>
+								<p style={{marginTop: 2, fontSize: 12, opacity: 0.8}}>Total Earned</p>
+							</div>
+							<div id="liquidity-subheader">
+								<div>
+									<p style={{marginBottom: 0, marginTop: 0, display: "inline-block"}}>5,123,151</p>
+									<p style={{marginBottom: 0, marginTop: 0, marginLeft: 2, display: "inline-block", fontSize: 13}}> OWL</p>
+								</div>
+								<p style={{marginTop: 2, fontSize: 12, opacity: 0.8}}>Estimated Profit</p>
+							</div>
+							<div id="liquidity-subheader" style={{marginBottom: 12}}>
+								<div>
+									<p style={{marginBottom: 0, marginTop: 0, display: "inline-block"}}>5,010,151</p>
+									<p style={{marginBottom: 0, marginTop: 0, marginLeft: 2, display: "inline-block", fontSize: 13}}>OWL</p>
+								</div>
+								<p style={{marginTop: 2, fontSize: 12, opacity: 0.8}}>Staked</p>
+							</div>
+						</form>
+						<p className="withdraw-button" onClick={()=>setOpenModal(true)}>Stats</p>
+
 					</div>
 				</div>
+				<div style={{width: "70%"}}>
+					<div className="house-wrapper" >
+						<div>
+							<form  style={{position: "relative"}}>
+								<div className="liquidity-corner-dropdown">
+									<DotsHorizontalIcon color="white" width={24}/>
+								</div>
+								<div>
+									<div style={{display: "inline-flex"}}>
+										<h1 style={{marginBottom: 8, marginTop: 0}}>You are the ‘House’!</h1>
+									</div>
+									<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>You are funding the casino by providing liquidity, essentially acting as ‘the house,’ and earning a passive return over time!</p>
+								</div>
+								<div>
+									<p className="withdraw-button" onClick={()=>console.log("withdraw")}>Withdraw</p>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div className="house-wrapper">
+						<div>
+							<LiquidityChart />
+						</div>
+					</div>
+				</div>
+
+			{/* <LiquidityModal showModal={openModal} setModalOff={setOpenModal}/> */}
+
 			</div>
-
-		<LiquidityModal showModal={openModal} setModalOff={setOpenModal}/>
-
-		</div>
-
-
 		</div>
 
 	);
