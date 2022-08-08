@@ -24,7 +24,7 @@ const Coinflip = () => {
 
   return (
     <div style={{width:"100%"}} >
-      <div className="info-btn-container" style={{marginLeft: "94%", marginBottom: "9vh"}}>
+      <div className="info-btn-container" style={{marginLeft: "94%", marginBottom: "6vh"}}>
         <button
           type="button"
           id="info-btn"

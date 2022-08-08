@@ -39,6 +39,7 @@
     margin: 0 auto;
 }
 
+
 #header-wrapper #header-items
 {
     height: calc(100% - 50px);
@@ -66,10 +67,14 @@
     position: relative;
 }
 
+input {
+    font-size: 20px;
+}
+
 #header-wrapper #header-items #header-search-wrapper
 {
-    flex: 400px;
-    max-width: 400px;
+    flex: 350px;
+    max-width: 350px;
 }
 
 #header-wrapper #header-items #header-seperator
@@ -112,13 +117,12 @@
 #header-wrapper #header-items #header-search-wrapper #magnifier
 {
 	position: absolute;
-	width: 50px;
-	height: 100%;
+	width: 35px;
+	height: 35px;
+    margin-top: 6.25px;
+    margin-right: 1em;
 	top: 0;
 	right: 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
 }
 
 #header-wrapper #header-items #header-balance-wrapper
