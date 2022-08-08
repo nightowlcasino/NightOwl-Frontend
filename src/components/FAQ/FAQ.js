@@ -1,8 +1,30 @@
+import { useEffect, useState } from 'react';
 import FAQItem from "./FAQItem";
 
+
+const faqItemStyle= {
+  width: "100%",
+  zIndex: 1
+}
+
 export default function FAQ() {
+
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
+
   return (
-    <div id="page-content-wrapper" style={{ position: "relative" }}>
+    <div id="page-content-wrapper" style={{ position: "relative", maxHeight: 10000, marginBottom: 40}}>
       <div id="home-page-hot-wrapper" style={{ flex: "none" }}>
         <div id="home-page-hot">
           <div id="home-page-hot-border">
@@ -41,11 +63,11 @@ export default function FAQ() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(2, 1fr)",
+          gridTemplateColumns: windowSize.innerWidth > 700 ? "repeat(2, 1fr)" : "repeat(1, 1fr)",
           gridGap: 4,
         }}
       >
-        <div style={{ width: "100%" }}>
+        <div style={faqItemStyle}>
           <FAQItem
             title="What is Night Owl?"
             description={
@@ -53,13 +75,13 @@ export default function FAQ() {
             }
           />
         </div>
-        <div style={{ width: "100%" }}>
+        <div style={faqItemStyle}>
           <FAQItem
             title="What blockchain is Night Owl on?"
             description={"Night Owl decided to build on Ergo blockchain due to the rich, smart contract capabilities, security, and most importantly, the ideology. Ergo conducted no premine, presales, ICO, or team allocation during its inception, meaning it’s as fair as it gets. Following the Ergo Manifesto, Night Owl will uphold these beliefs and carry them onto our platform. This allows Night Owl to become the world’s fairest and most decentralized casino! "}
           />
         </div>
-        <div style={{ width: "100%" }}>
+        <div style={faqItemStyle}>
           <FAQItem
             title="Is Night Owl open-source?"
             description={
@@ -67,40 +89,45 @@ export default function FAQ() {
             }
           />
         </div>
-        <div style={{ width: "100%" }}>
+        <div style={faqItemStyle}>
           <FAQItem
             title="What token does Night Owl use? "
             description={"Night Owl has its own token, OWL, which is pegged to stablecoins (SigUSD to start). The pegging to a stable asset allows for OWL itself to be stable. This will enable investors providing liquidity to the pool to gain passive returns over time. 100 OWL = 1 SigUSD."}
           />
         </div>
-        <div>
+        <div style={faqItemStyle}>
           <FAQItem
             title="What is the OWL token allocation?"
             description="Night Owl has no token allocation (including to the team). Liquidity providers will provide liquidity for returns. Night Owl team and marketing initiatives get paid on fees. This prevents the ever-present ‘rug pull’ that dominates the crypto space. We were built on Ergo ideologies, and this option brings the most security and utility to the user’s funds."
           />
         </div>
-        <div>
+        <div style={faqItemStyle}>
           <FAQItem title="How can I get the OWL token?" description="You can obtain OWL on Night Owl’s swap page. All you must do is connect your wallet and submit a transaction exchanging SigUSD for OWL. " />
         </div>
-        <div>
+        <div style={faqItemStyle}>
           <FAQItem
             title="How are house profits split?"
             description="House profits are split 75% to the liquidity providers and 25% towards the Night Owl platform developments."
           />
         </div>
-        <div>
+        <div style={faqItemStyle}>
           <FAQItem title="Where can I see the house advantage of all listed games?" description="You can check the house advantage per game on the House Edge page." />
         </div>
-        <div>
+        <div style={faqItemStyle}>
           <FAQItem
             title="What RNG methods are used on Night Owl?"
             description="Currently, we use two methods. One method utilizes Ergo Oracle Pools pulling Ethereum block hashes to obtain a result in ~15 seconds.  The second method utilizes Verifiable Delay Functions (VDF), which requires running a given number of sequential steps, yet the result can be efficiently verified."
           />
         </div>
-        <div>
+        <div style={faqItemStyle}>
           <FAQItem title="How do I list a game on Night Owl?" description="To submit a game for listing, please submit a form on the List a Game page." />
         </div>
       </div>
     </div>
   );
+}
+
+function getWindowSize() {
+  const {innerWidth, innerHeight} = window;
+  return {innerWidth, innerHeight};
 }
