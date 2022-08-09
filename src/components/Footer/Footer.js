@@ -1,14 +1,17 @@
-import logo from "../../assets/Elements/logo.png";
 import textLogo from "../../assets/Elements/textlogo.png";
 import "./Footer.css";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function Footer() {
+  const location = useLocation();
+  const path = location.pathname;
+
   return (
     <div
       id="footer"
       style={{
-        marginTop: "30px",
+        marginTop: path.toLocaleLowerCase().match("aboutus") ? "550px" : "30px",
         marginBottom: "30px",
         paddingTop: "25px",
         width: "100%",
@@ -38,6 +41,7 @@ export default function Footer() {
         {/* <div style={{ backgroundImage: `url(${textLogo})`, height: '50px', flex: '100% 1', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain', margin: '0 auto'}}></div> */}
         <img
           src={textLogo}
+          alt="Owl Logo"
           style={{
             flex: "100% 2",
             backgroundRepeat: "no-repeat",
@@ -86,10 +90,9 @@ export default function Footer() {
           </li>
           <span style={{ cursor: "pointer" }}>
             <li>Documentation</li>
-            <Link
-              to="/faq"
-              className="footer-link"
-            ><li>FAQ</li></Link>
+            <Link to="/faq" className="footer-link">
+              <li>FAQ</li>
+            </Link>
           </span>
         </ul>
 

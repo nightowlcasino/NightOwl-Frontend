@@ -65,11 +65,15 @@
     flex: 60%;
 }
 
+.answer-text {
+    font-size: 18px;
+}
+
 #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border
 {
     width: calc(100% - 50px);
     height: calc(100% - 45px);
-    background-image: linear-gradient(to bottom right, #D60A84, #481077);
+    background-color: #D60A84;
     border-radius: 30px;
     margin: 30px 25px;
     display: flex;
