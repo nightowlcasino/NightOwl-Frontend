@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import "./Header.css";
 
@@ -21,7 +21,7 @@ import coinflipIcon from "../../assets/Elements/coinflip_image_pink.png";
 import rouletteMascot from "../../assets/Elements/rouletteMascot.png";
 import lotteryMascot from "../../assets/Elements/lotteryMascot.png";
 import coinflipMascot from "../../assets/Elements/coinflipMascot.png";
-import { Link } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 
 // import { Link } from "react-router-dom";
 // import { useTranslation } from "react-i18next";
@@ -44,7 +44,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   // const currentLanguageCode = cookies.get("i18next") || "en";
   // const { t } = useTranslation();
-
+  let navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname;
 
@@ -62,6 +62,12 @@ const Header = () => {
       return true;
     }
   }
+
+  useEffect(() => {
+    if (!path.toLocaleLowerCase().match("/games/")) {
+      setSelectedOption(null);
+    }
+  }, [path]);
 
   window.addEventListener("scroll", () => {
     if (window.scrollY > 0) {
@@ -145,8 +151,9 @@ const Header = () => {
 
   function handleGameSelectChange(e) {
     setSelectedOption(e.value);
+    navigate(`/games/${e.value}`, { replace: true });
   }
-
+  console.log(selectedOption)
   return (
     <div id="header-wrapper">
       <ReactHowler
@@ -170,28 +177,26 @@ const Header = () => {
         <div id="header-items">
           <div id="header-search-wrapper">
             <Select
-              defaultValue={selectedOption}
+              value={selectedOption || ""}
               onChange={(e) => handleGameSelectChange(e)}
               options={gameSearchOptions}
               placeholder="Search game..."
               styles={customGameSearchStyles}
               style={{ height: "150px" }}
               getOptionLabel={(e) => (
-                <Link to={`/games/${e.value}`}>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    {e.icon}
-                    <span
-                      style={{
-                        position: "absolute",
-                        left: "70px",
-                        color: "#d70a84",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {e.label}
-                    </span>
-                  </div>
-                </Link>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  {e.icon}
+                  <span
+                    style={{
+                      position: "absolute",
+                      left: "70px",
+                      color: "#d70a84",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {e.label}
+                  </span>
+                </div>
               )}
             />
             <img id="magnifier" src={magnifier} alt="magnifier" />

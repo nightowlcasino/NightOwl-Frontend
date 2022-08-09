@@ -1,7 +1,8 @@
 import "./RouletteModal.css";
 import closeModalIcon from "../../assets/Elements/closeModal.svg";
+import gameMascotImg from "../../assets/Elements/rouletteMascot.png";
 
-const RouletteModal = ({ showModal, setModalOff, gameMascotImg }) => {
+const RouletteModal = ({ showModal, setModalOff }) => {
   return (
     <div className={`warning-modal-wrapper ${showModal ? "show" : "hide"}`}>
       <div id="overlay-popup" style={{ margin: "0 auto", height:"100%" }}>

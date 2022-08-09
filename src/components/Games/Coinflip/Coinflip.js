@@ -42,7 +42,7 @@ const Coinflip = () => {
         </button>
       </div>
       <div id="coinflip-game-wrapper" >
-      <CoinflipModal gameMascotImg={coinflipMascot} showModal={informationAboutGameIsPressed} setModalOff={setInformationAboutGameIsPressed}/>
+      <CoinflipModal showModal={informationAboutGameIsPressed} setModalOff={setInformationAboutGameIsPressed}/>
         <div id="coinflip-content-wrapper" style={{ pointerEvents: informationAboutGameIsPressed ? "none" : "" }}>
           <div id="coinflip-content">
             <div className="coinflip-header">

@@ -1,9 +1,9 @@
 import closeModalIcon from "../../assets/Elements/closeModal.svg";
-
+import gameMascotImg from "../../assets/Elements/coinflipMascot.png";
 
 import "./CoinflipModal.css";
 
-const CoinflipModal = ({ showModal, setModalOff, gameMascotImg }) => {
+const CoinflipModal = ({ showModal, setModalOff }) => {
   return (
     <div className={`warning-modal-wrapper ${showModal ? "show" : "hide"}`}>
       <div id="overlay-popup-coinflip" style={{ margin: "0 auto" }}>

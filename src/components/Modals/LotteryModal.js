@@ -1,8 +1,9 @@
 import closeModalIcon from "../../assets/Elements/closeModal.svg";
+import gameMascotImg from "../../assets/Elements/lotteryMascot.png";
 
 import "./CoinflipModal.css";
 
-const LotteryModal = ({ showModal, setModalOff, gameMascotImg }) => {
+const LotteryModal = ({ showModal, setModalOff }) => {
   return (
     <div className={`warning-modal-wrapper ${showModal ? "show" : "hide"}`}>
       <div id="overlay-popup-lottery" style={{ margin: "0 auto" }}>

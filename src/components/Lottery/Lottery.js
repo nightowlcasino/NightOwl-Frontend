@@ -16,7 +16,7 @@ function Lottery({ setIsLoading }) {
     useState(false);
   return (
     <>
-    <LotteryModal gameMascotImg={lotteryMascot} showModal={informationAboutGameIsPressed} setModalOff={setInformationAboutGameIsPressed}/>
+    <LotteryModal showModal={informationAboutGameIsPressed} setModalOff={setInformationAboutGameIsPressed}/>
     <div style={{ width: "100%" }}>
       <div
         className="info-btn-container"

@@ -15,6 +15,7 @@ import AboutUs from "../AboutUs/AboutUs";
 import FAQ from "../FAQ/FAQ";
 import LiquidityProvision from "../LiquidityProvision/LiquidityProvision";
 import GamesDashboard from "../Games";
+import Games from "../Games/GamesPage/Games.js";
 import Lottery from "../Lottery/Lottery";
 
 function BodyContent({setIsLoading,setSwapTransaction}) {
@@ -49,7 +50,7 @@ function BodyContent({setIsLoading,setSwapTransaction}) {
                     <Route path="/swap" element={<Swap setIsLoading={setIsLoading} setSwapTransaction={setSwapTransaction} />} />
                     <Route path="/games/coinflip" element={<Coinflip />} />
                     <Route path="/games/roulette" element={<Roulette sidebarToggled={sidebarToggled}/>} />
-                    <Route path="/availableGames" element={<GamesDashboard />} />
+                    <Route path="/availableGames" element={<Games />} />
                     <Route path="/aboutus" element={<AboutUs />} />
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/liquidity" element={<LiquidityProvision />} />

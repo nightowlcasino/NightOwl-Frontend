@@ -526,7 +526,6 @@ const Roulette = ({ sidebarToggled }) => {
     >
       <ReactHowler src={loopSound} playing={isLoopSound} loop={true} />
       <RouletteModal
-        gameMascotImg={rouletteMascot}
         showModal={informationAboutGameIsPressed}
         setModalOff={setInformationAboutGameIsPressed}
       />
