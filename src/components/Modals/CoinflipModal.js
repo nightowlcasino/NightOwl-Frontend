@@ -15,11 +15,11 @@ const CoinflipModal = ({ showModal, setModalOff }) => {
           />
         </div>
         <div id="overlay-text">
-          <span id="title">CoinFlip</span>
-          <span className="subtitle">Description</span>
+          <span id="title" style={{fontSize: "2.25em"}}>CoinFlip</span>
+          <span className="subtitle" style={{color: "#ed3da7"}}>Description</span>
           <span id="subtitle-text">
           CoinFlip is a game where you can test your luck by betting on either Heads or Tails. If it lands on your selection, you win!</span>
-          <span className="subtitle">More information:</span>
+          <span className="subtitle" style={{color: "#ed3da7"}}>More information:</span>
           <span id="subtitle-text">
           CoinFlip is a simple game where you can bet on either Heads or Tails. You can place a bet on either one of these two options. The Coin is tossed, and if it lands on your selection, you win the bet! This game has an included house edge of 2.6%. </span>
         </div>

@@ -14,7 +14,7 @@ const RouletteModal = ({ showModal, setModalOff }) => {
           />
         </div>
         <div id="overlay-text">
-          <span id="title">European Roulette</span>
+          <span id="title" style={{fontSize: "2.25em"}}>European Roulette</span>
           <span className="subtitle">Description</span>
           <span id="subtitle-text">
             European Roulette is a game where a ball is dropped onto a revolving

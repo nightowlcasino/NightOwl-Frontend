@@ -8,7 +8,10 @@ const GamesDashboard = () => {
 					<div>
 						<img src="https://pbs.twimg.com/media/FEaFK4OWUAAlgiV?format=jpg&name=900x900" />
 					</div>
-					
+					<div className="authorMetaData">
+						<img src="https://w7.pngwing.com/pngs/378/398/png-transparent-tokyo-ghoul-anime-manga-ghoul-black-hair-fictional-character-film-thumbnail.png" />
+						<span>Your Name</span>
+					</div>
 				</div>
 				<div
 					style={{

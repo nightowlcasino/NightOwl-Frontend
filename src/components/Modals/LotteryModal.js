@@ -15,12 +15,12 @@ const LotteryModal = ({ showModal, setModalOff }) => {
           />
         </div>
         <div id="overlay-text">
-          <span id="title">Blakiston Lottery</span>
-          <span className="subtitle">Description</span>
+          <span id="title" style={{fontSize: "2.25em", paddingBottom: "10px"}}>Blakiston Lottery</span>
+          <span className="subtitle" style={{color: "#ed3da7"}}>Description</span>
           <span id="subtitle-text">
             Blakiston Lottery is a game where you can purchase tickets and win prizes if selected in the draw! 
           </span>
-          <span className="subtitle">More information:</span>
+          <span className="subtitle" style={{color: "#ed3da7"}}>More information:</span>
           <span id="subtitle-text">
             A player can buy multiple tickets that are entered into a draw.
             5,000 tickets will be sold in total. The rules are simple, win a

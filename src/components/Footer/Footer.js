@@ -11,7 +11,7 @@ export default function Footer() {
     <div
       id="footer"
       style={{
-        marginTop: path.toLocaleLowerCase().match("aboutus") ? "550px" : "30px",
+        marginTop: path.toLocaleLowerCase().match("aboutus") ? "580px" : "30px",
         marginBottom: "30px",
         paddingTop: "25px",
         width: "100%",

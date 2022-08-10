@@ -179,7 +179,7 @@
 {
     width: calc(100% - 50px);
     height: calc(100% - 45px);
-    background-image: linear-gradient(to bottom, #4a1077, #d53a9d);
+    background-color: #D60A84;
     border-radius: 30px;
     margin: 15px 25px 30px 25px;
     display: flex;
@@ -263,7 +263,7 @@
 {
     width: calc(100% - 25px);
     height: calc(100% - 45px);
-    background-image: linear-gradient(to bottom, #4a1077, #d53a9d);
+    background-color: #D60A84;
     border-radius: 30px;
     margin: 15px 15px 30px 0px;
     display: flex;

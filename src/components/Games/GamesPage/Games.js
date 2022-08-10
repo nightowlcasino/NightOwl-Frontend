@@ -110,7 +110,7 @@ const Games = () => {
         </div>
         <div className="games-card-container">
           <div className="image-card-container">
-            <img src={dicesImage} style={{ objectPosition: "right", cursor:"pointer" }} onClick={() => handleNavigateToGame("lottery")}/>
+            <img src="https://pbs.twimg.com/media/FEaFK4OWUAAlgiV?format=jpg&name=900x900" style={{ objectPosition: "right", cursor:"pointer" }} onClick={() => handleNavigateToGame("lottery")}/>
           </div>
           <div className="text-card-container">
             <div className="text-card-header">

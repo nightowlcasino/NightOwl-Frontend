@@ -2,9 +2,10 @@
 
     display: flex;
     flex-direction: row;
-    background-color: #5b0084;
+    background: linear-gradient(112deg, rgba(24,5,80,1) 0%, rgba(68,14,131,1) 100%);
     border-radius: 20px;
-    align-items: center
+    align-items: center;
+    border: 4px solid #D60A84;
 }
 
 .prize-amount {
@@ -19,25 +20,27 @@
     flex-direction: row;
     align-items: center;
     margin-top: 20px;
+    margin-bottom: 20px;
     justify-content: space-between;
 }
 
 .tier-box {
-    background-color: #5b0084;
+    background: linear-gradient(112deg, rgba(24,5,80,1) 0%, rgba(68,14,131,1) 100%);
     border-radius: 20px;
     width: 100%;
     max-width: 300px;
+    border: 4px solid #D60A84;
 }
 
 .ticket-button 
 {
-    padding: 10px 30px;
+    padding: 20px 30px;
     border: none;
     border-radius: 20px;
     margin: 15px 0px 0px 0px;
-    background-image: linear-gradient(to right, #4a1077, #d40a84);
+    background-color: #D60A84;
     color: whitesmoke;
-    font-size: 18px;
+    font-size: 25px;
     cursor: pointer;
 
     margin-bottom: 50px;

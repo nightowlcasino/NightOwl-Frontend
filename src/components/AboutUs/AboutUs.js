@@ -16,7 +16,7 @@ export default function AboutUs() {
               style={{ backgroundColor: "rgba(24,5,80,1)" }}
             >
               <div id="home-page-inner-wrapper" style={{}}>
-                <div style={{ paddingLeft: "3rem" }}>
+                <div style={{ paddingLeft: "3rem", textAlign: "center" }}>
                   <h1
                     style={{
                       fontWeight: "900",
@@ -29,12 +29,13 @@ export default function AboutUs() {
                     <span style={{ color: "white" }}>are we</span>
                     <span style={{ color: "#d70a84" }}>?</span>
                   </h1>
-                  <p className="answer-text"
+                  <p
+                    className="answer-text"
                     style={{
                       color: "white",
-                      width: "60%",
-                      textAlign: "center",
-                      margin: "0 auto",
+                      width: "90%",
+                      display: "inline-block",
+                      textAlign: "left",
                     }}
                   >
                     Night Owl is the world’s most decentralized casino. We aim
@@ -66,7 +67,7 @@ export default function AboutUs() {
         id="page-content-wrapper"
         style={{
           position: "absolute",
-          bottom: -10,
+          bottom: 0,
           width: "100%",
           height: "60%",
         }}
@@ -76,7 +77,7 @@ export default function AboutUs() {
             <div id="home-page-hot-border">
               <div id="home-page-hot-content-background">
                 <div id="home-page-inner-wrapper">
-                  <div style={{ paddingLeft: "3rem" }}>
+                  <div style={{ paddingLeft: "3rem", textAlign: "center" }}>
                     <h1
                       style={{
                         fontWeight: "900",
@@ -89,12 +90,13 @@ export default function AboutUs() {
                       <span style={{ color: "white" }}>mission</span>
                       <span style={{ color: "#d70a84" }}>?</span>
                     </h1>
-                    <p className="answer-text"
+                    <p
+                      className="answer-text"
                       style={{
                         color: "white",
-                        width: "60%",
-                        margin: "0 auto",
-                        textAlign: "center",
+                        width: "90%",
+                        display: "inline-block",
+                        textAlign: "left",
                       }}
                     >
                       Night Owl will improve upon the traditional methods of the
@@ -113,48 +115,49 @@ export default function AboutUs() {
           id="page-content-wrapper"
           style={{
             position: "absolute",
-            bottom: "0",
+            bottom: 10,
             width: "100%",
             height: "50%",
+            
           }}
         >
           <div id="home-page-hot-wrapper">
             <div id="home-page-hot">
               <div id="home-page-hot-border">
                 <div id="home-page-hot-content-background">
-                  <div
-                    id="home-page-inner-wrapper"
-                    style={{
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <h1
-                      style={{
-                        fontWeight: "900",
-                        fontSize: "50px",
-                        marginBottom: "10px",
-                        textAlign: "center",
-                      }}
-                    >
-                      <span style={{ color: "white" }}>Why do we use the</span>{" "}
-                      <span style={{ color: "#d70a84" }}>Ergo</span>{" "}
-                      <span style={{ color: "white" }}>platform?</span>
-                    </h1>
-                    <p className="answer-text"
-                      style={{
-                        color: "white",
-                        width: "55%",
-                        textAlign: "center",
-                        paddingBottom: "90px",
-                      }}
-                    >
-                      Night Owl was built on the Ergo blockchain due to its
-                      smart contract versatility, eUTXO benefits, security, and,
-                      most importantly, its ideology. Ergo, like Night Owl,
-                      conducted no premine, ICO, no presales, or team
-                      allocations, meaning that it’s as fair as it gets.
-                    </p>
+                  <div id="home-page-inner-wrapper">
+                    <div style={{  textAlign: "center" }}>
+                      <h1
+                        style={{
+                          fontWeight: "900",
+                          fontSize: "50px",
+                          marginBottom: "15px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <span style={{ color: "white" }}>
+                          Why do we use the
+                        </span>{" "}
+                        <span style={{ color: "#d70a84" }}>Ergo</span>{" "}
+                        <span style={{ color: "white" }}>platform?</span>
+                      </h1>
+                      <p
+                        className="answer-text"
+                        style={{
+                          color: "white",
+                          width: "82%",
+                          display: "inline-block",
+                          textAlign: "left",
+                          paddingBottom: "90px",
+                        }}
+                      >
+                        Night Owl was built on the Ergo blockchain due to its
+                        smart contract versatility, eUTXO benefits, security,
+                        and, most importantly, its ideology. Ergo, like Night
+                        Owl, conducted no premine, ICO, no presales, or team
+                        allocations, meaning that it’s as fair as it gets.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -164,7 +167,7 @@ export default function AboutUs() {
             id="page-content-wrapper"
             style={{
               position: "absolute",
-              bottom: -140,
+              bottom: -130,
               width: "100%",
               height: "50%",
             }}
@@ -174,7 +177,7 @@ export default function AboutUs() {
                 <div id="home-page-hot-border">
                   <div id="home-page-hot-content-background">
                     <div id="home-page-inner-wrapper">
-                      <div style={{ paddingLeft: "3rem" }}>
+                      <div style={{ paddingLeft: "3rem", textAlign: "center" }}>
                         <h1
                           style={{
                             fontWeight: "900",
@@ -189,12 +192,13 @@ export default function AboutUs() {
                           <span style={{ color: "#d70a84" }}>currency</span>{" "}
                           <span style={{ color: "white" }}>?</span>
                         </h1>
-                        <p className="answer-text"
+                        <p
+                          className="answer-text"
                           style={{
                             color: "white",
-                            width: "60%",
-                            textAlign: "center",
-                            margin: "0 auto",
+                            width: "90%",
+                            display: "inline-block",
+                            textAlign: "left",
                             paddingBottom: "100px",
                           }}
                         >
@@ -213,7 +217,7 @@ export default function AboutUs() {
               id="page-content-wrapper"
               style={{
                 position: "absolute",
-                bottom: -190,
+                bottom: -180,
                 width: "100%",
                 height: "50%",
               }}
@@ -228,7 +232,9 @@ export default function AboutUs() {
                           flexDirection: "column",
                         }}
                       >
-                        <div style={{ paddingLeft: "3rem" }}>
+                        <div
+                          style={{ paddingLeft: "3rem", textAlign: "center" }}
+                        >
                           <h1
                             style={{
                               fontWeight: "900",
@@ -242,17 +248,17 @@ export default function AboutUs() {
                               is building Night Owl?
                             </span>
                           </h1>
-                          <p className="answer-text"
+                          <p
+                            className="answer-text"
                             style={{
                               color: "white",
-                              width: "60%",
-                              margin: "0 auto",
-                              textAlign: "center",
-                              paddingBottom: "40px",
+                              width: "90%",
+                              display: "inline-block",
+                              textAlign: "left",
+                              paddingBottom: "30px",
                             }}
                           >
                             The Night Owl team comprises community members who
-                            <br />
                             contribute to the open-source project on Github.
                           </p>
                         </div>{" "}
