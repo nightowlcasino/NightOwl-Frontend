@@ -51,6 +51,7 @@ const Coinflip = () => {
             <div className="coinflip-select-bet">
               <img
                 src={headIcon}
+                className="coinflip-select-bet-img"
                 alt="Select heads"
                 onClick={() => setSideSelected("Heads")}
                 style={
@@ -66,6 +67,7 @@ const Coinflip = () => {
               />
               <img
                 src={tailsIcon}
+                className="coinflip-select-bet-img"
                 alt="Select tails"
                 onClick={() => setSideSelected("Tails")}
                 style={

@@ -36,11 +36,12 @@
 {
     padding: 20px 30px;
     border: none;
-    border-radius: 20px;
+    border-radius: 15px;
     margin: 15px 0px 0px 0px;
-    background-color: #D60A84;
-    color: whitesmoke;
-    font-size: 25px;
+    background-image: linear-gradient(to right, #8e0081, #fa008c);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
     cursor: pointer;
 
     margin-bottom: 50px;

@@ -41,6 +41,15 @@
   border-radius: 10px;
 }
 
+#overlay-text #title {
+  display: block;
+  text-align: center;
+  color: white;
+  font-size: 1.7em;
+  padding-bottom: 10px;
+  border-bottom: 1px solid white;
+}
+
 #overlay-text .subtitle {
   display: block;
   text-align: left;

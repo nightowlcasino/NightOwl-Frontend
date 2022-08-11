@@ -10,6 +10,7 @@ import "../BodyContent/BodyContent.css";
 import image1 from "../../assets/Elements/Design-2_0000_Layer-21.png";
 import lotteryMascot from "../../assets/Elements/lotteryMascot.png";
 import LotteryModal from "../Modals/LotteryModal";
+import PurchaseTicketModal from "../Modals/PurchaseTicketModal";
 import silverCup from "../../assets/Elements/silverCup.png";
 import goldCup from "../../assets/Elements/goldCup.png";
 import bronzeCup from "../../assets/Elements/bronzeCup.png";
@@ -17,11 +18,16 @@ import bronzeCup from "../../assets/Elements/bronzeCup.png";
 function Lottery({ setIsLoading }) {
   const [informationAboutGameIsPressed, setInformationAboutGameIsPressed] =
     useState(false);
+  const [purchaseTicketPressed, setPurchaseTicketPressed] = useState(false);
   return (
     <>
       <LotteryModal
         showModal={informationAboutGameIsPressed}
         setModalOff={setInformationAboutGameIsPressed}
+      />
+      <PurchaseTicketModal
+        showModal={purchaseTicketPressed}
+        setModalOff={setPurchaseTicketPressed}
       />
       <div style={{ width: "100%" }}>
         <div
@@ -48,13 +54,15 @@ function Lottery({ setIsLoading }) {
           style={{
             color: "white",
             width: "100%",
-            maxWidth: 1000,
+            maxWidth: 1100,
             margin: "0 auto",
             display: "block",
             pointerEvents: informationAboutGameIsPressed ? "none" : "",
           }}
         >
-          <div style={{ textAlign: "center", margin: "auto", maxWidth: 900 }}>
+          <div
+            style={{ textAlign: "center", margin: "auto", maxWidth: "100%" }}
+          >
             <div>
               <p
                 style={{
@@ -84,7 +92,8 @@ function Lottery({ setIsLoading }) {
                 <span>
                   The draw will automatically begin once{" "}
                   <span style={{ color: "#ed3da7" }}>5,000</span> tickets are
-                  purchased. Good luck!
+                  purchased. Only <span style={{ color: "#ed3da7" }}>X</span>{" "}
+                  tickets left. Good luck!
                 </span>
               </p>
             </div>
@@ -254,7 +263,12 @@ function Lottery({ setIsLoading }) {
           </div>
 
           <div style={{ textAlign: "center" }}>
-            <button className="ticket-button">Get Ticket Here</button>
+            <button
+              className="ticket-button"
+              onClick={() => setPurchaseTicketPressed(true)}
+            >
+              Get Ticket Here
+            </button>
           </div>
         </div>
       </div>

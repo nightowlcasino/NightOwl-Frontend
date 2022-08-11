@@ -2,6 +2,10 @@ import "./Games.css";
 import rouletteCardImage from "../../../assets/Elements/rouletteCardImage.jpg";
 import rouletteMascot from "../../../assets/Elements/rouletteMascot.png";
 import rouletteIcon from "../../../assets/Elements/roulette3.svg";
+
+import rouletteCardImage1 from "../../../assets/Elements/wtfruleta.png";
+import rouletteCardImage2 from "../../../assets/Elements/ruletawhat.png";
+
 import infologo from "../../../assets/Elements/infologo.svg";
 import dicesImage from "../../../assets/Elements/dicesImage.jpg";
 import casinoEntrance from "../../../assets/Elements/casinoEntrance.jpg";
@@ -18,9 +22,9 @@ const Games = () => {
   const [showCoinflipModal, setCoinflipModal] = useState(false);
 
   let navigate = useNavigate();
-  
+
   function handleNavigateToGame(game) {
-	navigate(`/games/${game}`);
+    navigate(`/games/${game}`);
   }
 
   return (
@@ -48,7 +52,11 @@ const Games = () => {
       >
         <div className="games-card-container">
           <div className="image-card-container">
-            <img src={rouletteCardImage} style={{ objectPosition: "left", cursor:"pointer" }} onClick={() => handleNavigateToGame("roulette")}/>
+            <img
+              src={rouletteCardImage1}
+              style={{ objectPosition: "center", cursor: "pointer" }}
+              onClick={() => handleNavigateToGame("roulette")}
+            />
           </div>
           <div className="text-card-container">
             <div className="text-card-header">
@@ -58,28 +66,32 @@ const Games = () => {
                   fontSize: "1.75em",
                   fontWeight: "bold",
                   color: "white",
-				  cursor:"pointer"
+                  cursor: "pointer",
                 }}
-				onClick={() => handleNavigateToGame("roulette")}
+                onClick={() => handleNavigateToGame("roulette")}
               >
                 Roulette
               </span>
               <img
                 src={infologo}
                 style={{ width: "30px" }}
-                onClick={() =>setRouletteModal(true)}
+                onClick={() => setRouletteModal(true)}
               />
             </div>
             <div className="text-card-body">
-              Roulette is a game where a ball is dropped onto a
-              revolving wheel with numbered and colored components. A player can
-              bet on where the number will fall in.
+              Roulette is a game where a ball is dropped onto a revolving wheel
+              with numbered and colored components. A player can bet on where
+              the ball will fall in.
             </div>
           </div>
         </div>
         <div className="games-card-container">
           <div className="image-card-container">
-            <img src={casinoEntrance} style={{ objectPosition: "middle", cursor:"pointer" }} onClick={() => handleNavigateToGame("coinflip")}/>
+            <img
+              src={casinoEntrance}
+              style={{ objectPosition: "middle", cursor: "pointer" }}
+              onClick={() => handleNavigateToGame("coinflip")}
+            />
           </div>
           <div className="text-card-container">
             <div className="text-card-header">
@@ -89,9 +101,9 @@ const Games = () => {
                   fontSize: "1.75em",
                   fontWeight: "bold",
                   color: "white",
-				  cursor:"pointer"
+                  cursor: "pointer",
                 }}
-				onClick={() => handleNavigateToGame("coinflip")}
+                onClick={() => handleNavigateToGame("coinflip")}
               >
                 CoinFlip
               </span>
@@ -110,7 +122,11 @@ const Games = () => {
         </div>
         <div className="games-card-container">
           <div className="image-card-container">
-            <img src="https://pbs.twimg.com/media/FEaFK4OWUAAlgiV?format=jpg&name=900x900" style={{ objectPosition: "right", cursor:"pointer" }} onClick={() => handleNavigateToGame("lottery")}/>
+            <img
+              src="https://pbs.twimg.com/media/FEaFK4OWUAAlgiV?format=jpg&name=900x900"
+              style={{ objectPosition: "right", cursor: "pointer" }}
+              onClick={() => handleNavigateToGame("lottery")}
+            />
           </div>
           <div className="text-card-container">
             <div className="text-card-header">
@@ -120,9 +136,9 @@ const Games = () => {
                   fontSize: "1.75em",
                   fontWeight: "bold",
                   color: "white",
-				  cursor:"pointer"
+                  cursor: "pointer",
                 }}
-				onClick={() => handleNavigateToGame("lottery")}
+                onClick={() => handleNavigateToGame("lottery")}
               >
                 Lottery
               </span>
