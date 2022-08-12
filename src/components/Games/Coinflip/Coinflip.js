@@ -23,8 +23,11 @@ const Coinflip = () => {
   const [bettingAmount, setBettingAmount] = useState("");
 
   return (
-    <div style={{width:"100%"}} >
-      <div className="info-btn-container" style={{marginLeft: "94%", marginBottom: "6vh"}}>
+    <div style={{ width: "100%" }}>
+      <div
+        className="info-btn-container"
+        style={{ marginLeft: "94%", marginBottom: "6vh" }}
+      >
         <button
           type="button"
           id="info-btn"
@@ -41,9 +44,15 @@ const Coinflip = () => {
           </span>
         </button>
       </div>
-      <div id="coinflip-game-wrapper" >
-      <CoinflipModal showModal={informationAboutGameIsPressed} setModalOff={setInformationAboutGameIsPressed}/>
-        <div id="coinflip-content-wrapper" style={{ pointerEvents: informationAboutGameIsPressed ? "none" : "" }}>
+      <div id="coinflip-game-wrapper">
+        <CoinflipModal
+          showModal={informationAboutGameIsPressed}
+          setModalOff={setInformationAboutGameIsPressed}
+        />
+        <div
+          id="coinflip-content-wrapper"
+          style={{ pointerEvents: informationAboutGameIsPressed ? "none" : "" }}
+        >
           <div id="coinflip-content">
             <div className="coinflip-header">
               <h1>CoinFlip</h1>
@@ -90,6 +99,8 @@ const Coinflip = () => {
               <div id="coinflip-input-amount-input">
                 <input
                   type="number"
+                  id="coinflip-search"
+                  style={{ textAlign: "right" }}
                   placeholder={`OWL amount`}
                   value={bettingAmount}
                   onChange={(e) => setBettingAmount(e.target.value)}

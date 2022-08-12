@@ -89,7 +89,7 @@
   padding: 0px 10px;
   font-size: 20px;
   font-weight: 400;
-  margin: 25px 0px;
+  margin: 20px 0px;
 }
 
 .ticket-button 
@@ -102,4 +102,47 @@
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+}
+
+
+.conversion-explained{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-end;
+}
+input#inputTicket {
+  background-image: url("../../assets/Elements/lottery4pink.svg");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: 95%;
+  /* Extra Styling */
+  padding-right: 20%;
+  transition:0.3s;
+}
+input#resultOwl {
+  background-image: url("../../assets/Elements/head.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: 95%;
+  /* Extra Styling */
+  padding-right: 20%;
+  transition:0.3s;
+}
+
+#input-separator-wrapper-lottery
+{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+
+#input-separator-wrapper-lottery #input-seperator-lottery
+{
+    background-image: linear-gradient(to right, #8e0081, #fa008c);
+    padding: 7px 7px 5px 7px;
+    margin: 0 auto;
+    border-radius: 10px;
 }

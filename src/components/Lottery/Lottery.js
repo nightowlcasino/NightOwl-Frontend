@@ -11,6 +11,7 @@ import image1 from "../../assets/Elements/Design-2_0000_Layer-21.png";
 import lotteryMascot from "../../assets/Elements/lotteryMascot.png";
 import LotteryModal from "../Modals/LotteryModal";
 import PurchaseTicketModal from "../Modals/PurchaseTicketModal";
+import MyTicketsModal from "../Modals/MyTicketsModal";
 import silverCup from "../../assets/Elements/silverCup.png";
 import goldCup from "../../assets/Elements/goldCup.png";
 import bronzeCup from "../../assets/Elements/bronzeCup.png";
@@ -19,6 +20,8 @@ function Lottery({ setIsLoading }) {
   const [informationAboutGameIsPressed, setInformationAboutGameIsPressed] =
     useState(false);
   const [purchaseTicketPressed, setPurchaseTicketPressed] = useState(false);
+  const [myTicketsPressed, setMyTicketsPressed] = useState(false);
+
   return (
     <>
       <LotteryModal
@@ -29,11 +32,24 @@ function Lottery({ setIsLoading }) {
         showModal={purchaseTicketPressed}
         setModalOff={setPurchaseTicketPressed}
       />
+      <MyTicketsModal
+        showModal={myTicketsPressed}
+        setModalOff={setMyTicketsPressed}
+      />
       <div style={{ width: "100%" }}>
         <div
-          className="info-btn-container"
-          style={{ marginLeft: "94%", marginBottom: "5vh" }}
+          className="top-btn-container"
+          style={{ marginLeft: "83%", marginBottom: "5vh" }}
         >
+          <button
+            type="button"
+            id="info-btn"
+            onClick={() => {
+              setMyTicketsPressed(true);
+            }}
+          >
+            <span style={{ fontSize: "18px" }}>My tickets</span>
+          </button>
           <button
             type="button"
             id="info-btn"
@@ -100,18 +116,7 @@ function Lottery({ setIsLoading }) {
           </div>
 
           <div className="jackpot-box">
-            <div>
-              <img
-                width={150}
-                height={100}
-                style={{
-                  paddingLeft: 20,
-                  paddingRight: 20,
-                  objectFit: "cover",
-                }}
-                src={image1}
-              />
-            </div>
+            <img width={150} height={150} src={image1} style={{marginLeft:50}}/>
             <div style={{ width: "100%", textAlign: "center" }}>
               <p
                 style={{
@@ -141,18 +146,7 @@ function Lottery({ setIsLoading }) {
                 </div>
               </div>
             </div>
-            <div>
-              <img
-                width={150}
-                height={100}
-                style={{
-                  paddingLeft: 20,
-                  paddingRight: 20,
-                  objectFit: "cover",
-                }}
-                src={image1}
-              />
-            </div>
+            <img width={150} height={150} src={image1} style={{marginRight:50}}/>
           </div>
 
           <div className="tier-boxes">
@@ -267,7 +261,7 @@ function Lottery({ setIsLoading }) {
               className="ticket-button"
               onClick={() => setPurchaseTicketPressed(true)}
             >
-              Get Ticket Here
+              Buy Tickets
             </button>
           </div>
         </div>
