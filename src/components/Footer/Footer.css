@@ -2,6 +2,10 @@
     text-decoration: none;
 }
 
+span>a>li:hover, .footerLink:hover {
+    color: #fa008c !important
+}
+
 @media all and (max-width: 992px) {
     #footer {
         flex-direction: column;

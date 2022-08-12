@@ -71,10 +71,10 @@ export default function Footer() {
             <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px', fontFamily:'sans'}}>Night Owl</p>
           </li>
           <span style={{ cursor: "pointer", color:'white' }}>
-            <li style={{paddingLeft: '5px'}}>About</li>
-            <li style={{paddingLeft: '5px'}}>Token</li>
-            <li style={{paddingLeft: '5px'}}>Liquidity Provision</li>
-            <li style={{paddingLeft: '5px'}}>List a Game</li>
+            <Link to='/aboutus'><li style={{paddingLeft: '5px',color:'white'}}>About</li></Link>
+            <Link to='/swap'><li style={{paddingLeft: '5px', color:'white'}}>Token</li></Link>
+            <Link to='/liquidity'><li style={{paddingLeft: '5px', color:'white'}}>Liquidity Provision</li></Link>
+            <Link to='/availableGames'><li style={{paddingLeft: '5px',color:'white'}}>List a Game</li></Link>
           </span>
         </ul>
 
@@ -89,9 +89,9 @@ export default function Footer() {
             <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px', fontFamily:'sans'}}>Support</p>
           </li>
           <span style={{ cursor: "pointer", color:'white'  }}>
-            <li style={{paddingLeft: '5px'}}>Documentation</li>
+          <Link to="#"><li style={{paddingLeft: '5px',color:'white'}}>Documentation</li></Link>
             <Link to="/faq" className="footer-link">
-              <li style={{paddingLeft: '5px', color:'rgb(162, 162, 168)', color:'white' }}>FAQ</li>
+              <li style={{paddingLeft: '5px', color:'rgb(162, 162, 168)', color:'white' }} id='faq'>FAQ</li>
             </Link>
           </span>
         </ul>
