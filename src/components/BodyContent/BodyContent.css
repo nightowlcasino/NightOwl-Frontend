@@ -108,6 +108,10 @@
     padding: 40px;
     display: flex;
     flex-direction: column;
+    background-image: url("../../assets/Elements/rouletteHome.png");
+    background-size: cover;
+    background-position: 100% 50%;
+    border-radius: 25px;
 }
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background #home-page-inner-wrapper #home-page-inner-left #top
@@ -134,7 +138,7 @@
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background #home-page-inner-wrapper #home-page-inner-left #bottom #header h1
 {
-    font-size: 50px;
+    font-size: 48px;
     margin: 15px 0px;
 }
 
