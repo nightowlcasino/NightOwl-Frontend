@@ -139,6 +139,16 @@ const red = [32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3];
 
 const timer = 9000;
 
+const backendBetObjectInitialValue = {
+  history: [],
+  betsIndex: {},
+  backendBoard: {
+    txFee: 0,
+    totalWager: 0,
+    bets: [],
+  },
+}
+
 const betObjectInitialValue = {
   num_val0: [],
   num_val0_3: [],
@@ -306,6 +316,77 @@ function fromChipValueToColor(number) {
   }
 }
 
+function getMultiplier(spot) {
+  // 4 connected numbers
+  if (spot.length == 4) {
+    return 8
+    // 3 connected numbers
+  } else if (spot.length == 3) {
+    return 12
+    // 2 connected numbers
+  } else if (spot.length == 2) {
+    return 18
+  } else if (spot.length == 1) {
+    if (spot[0] == "red" || spot[0] == "black" || spot[0] == "even" || spot[0] == "odd" || spot[0] == "first18" || spot[0] == "second18") {
+      return 1
+    } else if (spot[0] == "1st" || spot[0] == "2nd" || spot[0] == "3rd" || spot[0] == "first12" || spot[0] == "second12" || spot[0] == "third12") {
+      return 2
+    } else {
+      // exact number
+      return 35
+    }
+  }
+}
+
+function getSpotNumber(spot) {
+  switch (spot) {
+    case "red":
+      return 0
+    case "black":
+      return 1
+    case "even":
+      return 0
+    case "odd":
+      return 1
+    case "first18":
+      return 10
+    case "second18":
+      return 28
+    case "1st":
+      return 1
+    case "2nd":
+      return 2
+    case "3rd":
+      return 3
+    case "first12":
+      return 6
+    case "second12":
+      return 18
+    case "third12":
+      return 30
+    default:
+      return Number(spot)
+  }
+}
+
+function getSubgame(spot) {
+  // remove any '_' characters
+  const s = spot.replace('_', '')
+  if (spot == "red" || spot == "black") {
+    return 0
+  } else if (spot == "even" || spot == "odd") {
+    return 1
+  } else if (spot == "first18" || spot == "second18") {
+    return 2
+  } else if (spot == "1st" || spot == "2nd" || spot == "3rd") {
+    return 3
+  } else if (spot == "first12" || spot == "second12" || spot == "third12") {
+    return 4
+  } else {
+    return 5
+  }
+}
+
 function checkIfZero(number) {
   if (number != 0) {
     return "active";
@@ -459,4 +540,4 @@ const arrayWithNumVals4 = [
   "num_val34",
 ];
 
-export {rouletteHoverAudio, numberRevealAudio,choosingChip, placingChip ,spinButtonAudio, errorAudio, singleNumberFields, doubleNumberFields, fromNumberToColor, red, timer, betObjectInitialValue, endAudio, winningSounds, arrayWithNumVals, arrayWithNumVals1, arrayWithNumVals2, arrayWithNumVals3, arrayWithNumVals4, fromChipValueToColor,checkIfZero, centerOrBetween };
+export { rouletteHoverAudio, numberRevealAudio, choosingChip, placingChip, spinButtonAudio, errorAudio, singleNumberFields, doubleNumberFields, fromNumberToColor, red, timer, betObjectInitialValue, backendBetObjectInitialValue, endAudio, winningSounds, arrayWithNumVals, arrayWithNumVals1, arrayWithNumVals2, arrayWithNumVals3, arrayWithNumVals4, fromChipValueToColor, getSubgame, getSpotNumber, getMultiplier, checkIfZero, centerOrBetween };
