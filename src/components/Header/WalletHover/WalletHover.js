@@ -6,7 +6,7 @@ import ERGicon from "../../../assets/Elements/ergo-icon.png";
 import paideiaIcon from "../../../assets/Elements/paideiaIcon.svg";
 import netaIcon from "../../../assets/Elements/netaIcon.svg";
 import ergopadIcon from "../../../assets/Elements/ergopadIcon.png";
-
+import owlIcon from "../../../assets/Elements/head.png";
 import "./WalletHover.css";
 
 function classNames(...classes) {
@@ -47,7 +47,7 @@ export default function WalletHover({
                     href="#"
                     className={classNames(active ? "item1" : "item2", "item3")}
                   >
-                    <img src={ERGicon} className="token-icon-img" />
+                    <img src={owlIcon} className="token-icon-img" />
                     <p>
                       OWL Balance:
                       <br />

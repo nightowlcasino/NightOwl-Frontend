@@ -65,11 +65,15 @@
     flex: 60%;
 }
 
+.answer-text {
+    font-size: 18px;
+}
+
 #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border
 {
     width: calc(100% - 50px);
     height: calc(100% - 45px);
-    background-image: linear-gradient(to bottom right, #D60A84, #481077);
+    background-color: #D60A84;
     border-radius: 30px;
     margin: 30px 25px;
     display: flex;
@@ -104,6 +108,10 @@
     padding: 40px;
     display: flex;
     flex-direction: column;
+    background-image: url("../../assets/Elements/rouletteHome.png");
+    background-size: cover;
+    background-position: 100% 50%;
+    border-radius: 25px;
 }
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background #home-page-inner-wrapper #home-page-inner-left #top
@@ -130,7 +138,7 @@
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background #home-page-inner-wrapper #home-page-inner-left #bottom #header h1
 {
-    font-size: 50px;
+    font-size: 48px;
     margin: 15px 0px;
 }
 
@@ -140,7 +148,7 @@
     border: none;
     border-radius: 20px;
     margin: 15px 0px 0px 0px;
-    background-image: linear-gradient(to right, #4a1077, #d40a84);
+    background-image: linear-gradient(to right, #8e0081, #fa008c);
     color: whitesmoke;
     font-size: 18px;
 }
@@ -175,7 +183,7 @@
 {
     width: calc(100% - 50px);
     height: calc(100% - 45px);
-    background-image: linear-gradient(to bottom, #4a1077, #d53a9d);
+    background-color: #D60A84;
     border-radius: 30px;
     margin: 15px 25px 30px 25px;
     display: flex;
@@ -259,7 +267,7 @@
 {
     width: calc(100% - 25px);
     height: calc(100% - 45px);
-    background-image: linear-gradient(to bottom, #4a1077, #d53a9d);
+    background-color: #D60A84;
     border-radius: 30px;
     margin: 15px 15px 30px 0px;
     display: flex;

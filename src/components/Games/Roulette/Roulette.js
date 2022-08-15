@@ -141,7 +141,7 @@ const Roulette = ({ sidebarToggled }) => {
   };
 
   function handleChipSelected(chipValue) {
-    console.log("what")
+    console.log("what");
     setChipSelected(chipValue);
     choosingChip.currentTime = 0;
     choosingChip.play();
@@ -305,7 +305,10 @@ const Roulette = ({ sidebarToggled }) => {
 
   function spinTheWheel() {
     if (!totalBet) {
-      notifySomething("Insufficient funds", 3);
+      notifySomething(
+        "Before spinning the wheel, please make your bet by adding chips to the table!",
+        3
+      );
       errorAudio.play();
       return;
     }
@@ -326,7 +329,7 @@ const Roulette = ({ sidebarToggled }) => {
     }
     setBetsEnded(true);
     setSpinAvailable(false);
-    setOverlayString("Waiting for result to be received from the blockchain");
+    setOverlayString("Waiting for the random number to be generated…");
     //txFee:
     //  minBoxValue    = 1000000 * (# of bets)
     //  minerFee       = 1100000
@@ -495,7 +498,7 @@ const Roulette = ({ sidebarToggled }) => {
   }
 
   function notifyWin() {
-    setOverlayString("You won x OWL (y $)!");
+    setOverlayString("Congrats! You won xyz OWL!");
     setWinningNotification(true);
     setTimeout(() => {
       setWinningNotification(false);
@@ -522,7 +525,10 @@ const Roulette = ({ sidebarToggled }) => {
       className={betsEnded ? "roulette-wrapper" : "roulette-wrapper bets-end"}
     >
       <ReactHowler src={loopSound} playing={isLoopSound} loop={true} />
-      <RouletteModal gameMascotImg={rouletteMascot} showModal={informationAboutGameIsPressed} setModalOff={setInformationAboutGameIsPressed}/>
+      <RouletteModal
+        showModal={informationAboutGameIsPressed}
+        setModalOff={setInformationAboutGameIsPressed}
+      />
       <div
         className="roulette-wheel-content-wrapper"
         style={{ pointerEvents: informationAboutGameIsPressed ? "none" : "" }}
@@ -1361,7 +1367,9 @@ const Roulette = ({ sidebarToggled }) => {
                     </div>
                   </div>
                   <div
-                    onMouseEnter={() => handleTableFilter("filter-applied even")}
+                    onMouseEnter={() =>
+                      handleTableFilter("filter-applied even")
+                    }
                     onMouseLeave={() => handleTableFilter("")}
                     className={
                       betObject.num_val_even.length > 0

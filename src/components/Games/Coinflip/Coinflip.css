@@ -1,87 +1,123 @@
-#coinflip-game-wrapper
-{
-    display: flex;
-    flex: 100%;
-    align-items: center;
-    align-content: center;
-    flex-direction: row;
+#coinflip-game-wrapper {
+  display: flex;
+  flex: 100%;
+  align-items: center;
+  align-content: center;
+  flex-direction: row;
 }
 
-#coinflip-game-wrapper #coinflip-content-wrapper
-{
-    flex: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
-    margin-bottom: 20px;
+#info-btn {
+  padding: 5px 10px;
+  text-align: center;
+  color: white;
+  background-image: linear-gradient(to right, #8e0081, #fa008c);
+  border-radius: 10px;
+  margin: 0px auto;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  border: none;
 }
 
-#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content
-{
-    width: 100%;
-    max-width: 400px;
-    border-radius: 30px;
-    margin: 0 auto;
-    background: linear-gradient(112deg, rgba(24,5,80,1) 0%, rgba(68,14,131,1) 100%);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    position: relative;
-    border: 5px solid #D60A84;
+.info-btn-container {
+  margin-left: auto;
+}
+.btn .btn-label {
+  font-size: 20px;
+  font-weight: 900;
+  padding: 12px;
+  white-space: nowrap;
 }
 
-.coinflip-header h1
-{
-    color: white;
-    margin: 0px 10px 10px 10px;
-    font-size: 45px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #D60A84;
-    text-align: center;
+#coinflip-game-wrapper #coinflip-content-wrapper {
+  flex: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  margin-bottom: 20px;
+}
+
+#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 30px;
+  margin: 0 auto;
+  background: linear-gradient(
+    112deg,
+    rgba(24, 5, 80, 1) 0%,
+    rgba(68, 14, 131, 1) 100%
+  );
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+  border: 5px solid #d60a84;
+}
+
+.coinflip-header h1 {
+  color: white;
+  margin: 0px 10px 10px 10px;
+  font-size: 45px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d60a84;
+  text-align: center;
 }
 
 .coinflip-select-bet {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    margin-top: 10px;
-
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 10px;
 }
 
-.coinflip-select-bet > img{
-    cursor: pointer;
-    /* -webkit-filter: drop-shadow(3px 3px 3px #ab0d82); */
+.coinflip-select-bet > img {
+  cursor: pointer;
+  /* -webkit-filter: drop-shadow(3px 3px 3px #ab0d82); */
+}
+
+.coinflip-select-bet-img:hover {
+  filter: drop-shadow(0px 5px 3px #eeff0064);
+  -webkit-filter: drop-shadow(0px 5px 3px #eeff0064);
 }
 
 #coinflip-content h3 {
-    text-align: center;
-    margin: 30px;
+  text-align: center;
+  margin: 30px;
 }
 
-
 .coinflip-input {
-    margin: 0 auto;
-    width: 80%;
+  margin: 0 auto;
+  width: 100%;
+}
+
+#coinflip-input-amount-input {
+  display: flex;
 }
 
 #coinflip-input-amount-input input {
-    border-radius: 10px;
-    border: none;
-    width: 100%;
-    height: 40px;
-    background-color: white;
-    padding-right:10px;
-    font-size: 20px;
-    font-weight: 400;
-    text-align: end;
+  background-image: url("../../../assets/Elements/head.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: 95%;
+  border-radius: 10px;
+  border: none;
+  width: 70%;
+  height: 40px;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: end;
+padding-right: 15%;
+  transition: 0.3s;
+  margin: 0 auto;
 }
 
-#coinflip-input-select span{
-    font-size: 20px;
-    font-weight: 600;
-    margin-left: 8px;
+#coinflip-input-select span {
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 8px;
 }
 
 /* #coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content::after {
@@ -98,140 +134,155 @@
         background-color: #D60A84;
 } */
 
-
-
-#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #coinflip-header-wrapper
-{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-content: center;
+#coinflip-game-wrapper
+  #coinflip-content-wrapper
+  #coinflip-content
+  #coinflip-header-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
 }
 
-#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #coinflip-header-wrapper #coinflip-header
-{
-    display: flex;
-    flex-direction: row;
-    margin: 0 auto;
-    align-items: center;
-    align-content: center;
+#coinflip-game-wrapper
+  #coinflip-content-wrapper
+  #coinflip-content
+  #coinflip-header-wrapper
+  #coinflip-header {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  align-items: center;
+  align-content: center;
 }
 
-#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #coinflip-header-wrapper #coinflip-header #spacer
-{
-    flex: 20px;
-    min-width: 30px;
-    text-align: center;
-    user-select: none;
-    font-size: 45px;
+#coinflip-game-wrapper
+  #coinflip-content-wrapper
+  #coinflip-content
+  #coinflip-header-wrapper
+  #coinflip-header
+  #spacer {
+  flex: 20px;
+  min-width: 30px;
+  text-align: center;
+  user-select: none;
+  font-size: 45px;
 }
 
-#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #coinflip-header .side-selector
-{
-    font-size: 20px;
+#coinflip-game-wrapper
+  #coinflip-content-wrapper
+  #coinflip-content
+  #coinflip-header
+  .side-selector {
+  font-size: 20px;
 }
 
-#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #coinflip-header .side-selector .side-selector-name
-{
-    color: white;
-    transition: all 0.4s ease;
-    cursor: pointer;
-    user-select: none;
+#coinflip-game-wrapper
+  #coinflip-content-wrapper
+  #coinflip-content
+  #coinflip-header
+  .side-selector
+  .side-selector-name {
+  color: white;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  user-select: none;
 }
 
 #bet-button-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #bet-button-wrapper button
-{
-    padding: 15px 20px;
-    border-radius: 50px;
-    background-color: #d70a84;
-    color: white;
-    font-size: 18px;
-    border: none;
-    width: calc(100% - 50px);
-    max-width: 200px;
-    margin: 0 auto;
-    cursor: pointer;
+#coinflip-game-wrapper
+  #coinflip-content-wrapper
+  #coinflip-content
+  #bet-button-wrapper
+  button {
+  padding: 15px 20px;
+  background-image: linear-gradient(to right, #8e0081, #fa008c);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 15px;
+  border: none;
+  width: calc(100% - 50px);
+  max-width: 200px;
+  margin: 0 auto;
+  cursor: pointer;
 }
 
-#coinflip-game-wrapper #coinflip-content-wrapper #coinflip-content #transaction-id-wrapper
-{
-    margin: 10px;
-    display: flex;
+#coinflip-game-wrapper
+  #coinflip-content-wrapper
+  #coinflip-content
+  #transaction-id-wrapper {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
+.color-pink {
+  color: #d70a84;
+}
+
+#coinflip-game-wrapper #coin-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  flex: 40%;
+  position: relative;
+}
+
+#coinflip-game-wrapper #coin-wrapper #platform {
+  position: relative;
+  width: 100vw;
+  max-width: 600px;
+  min-height: 600px;
+  background-image: url(../../../assets/Elements/pyramid.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#coinflip-game-wrapper #coin-wrapper #platform #coin {
+  position: absolute;
+  width: 100%;
+  height: 150px;
+  background-image: url(../../../assets/Elements/swap_coin.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: coin-hover;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes coin-hover {
+  from {
+    top: 15%;
+  }
+  to {
+    top: 20%;
+  }
+}
+
+@media all and (max-width: 992px) {
+  #coinflip-game-wrapper {
     flex-direction: column;
-    align-items: center;
-    align-content: center;
-}
+  }
 
-.color-pink
-{
-    color: #d70a84;
-}
+  #coinflip-game-wrapper #coin-wrapper {
+    z-index: -1;
+  }
 
-#coinflip-game-wrapper #coin-wrapper
-{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    flex: 40%;
-    position: relative;
-}
-
-#coinflip-game-wrapper #coin-wrapper #platform
-{
-    position: relative;
-    width: 100vw;
-    max-width: 600px;
-    min-height: 600px;
-    background-image: url(../../../assets/Elements/pyramid.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-#coinflip-game-wrapper #coin-wrapper #platform #coin
-{
-    position: absolute;
-    width: 100%;
-    height: 150px;
-    background-image: url(../../../assets/Elements/swap_coin.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    animation-name: coin-hover;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-timing-function: ease-in-out;
-}
-
-@keyframes coin-hover
-{
-    from {top: 15%}
-    to {top: 20%}
-}
-
-@media all and (max-width: 992px)
-{
-    #coinflip-game-wrapper
-    {
-        flex-direction: column;
-    }
-
-    #coinflip-game-wrapper #coin-wrapper
-    {
-        z-index: -1;
-    }
-
-    #coinflip-game-wrapper #coin-wrapper #platform
-    {
-        width: calc(100vw - 20px);
-        min-width: auto;
-    }
+  #coinflip-game-wrapper #coin-wrapper #platform {
+    width: calc(100vw - 20px);
+    min-width: auto;
+  }
 }

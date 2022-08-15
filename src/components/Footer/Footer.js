@@ -1,14 +1,17 @@
-import logo from "../../assets/Elements/logo.png";
 import textLogo from "../../assets/Elements/textlogo.png";
 import "./Footer.css";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function Footer() {
+  const location = useLocation();
+  const path = location.pathname;
+
   return (
     <div
       id="footer"
       style={{
-        marginTop: "30px",
+        marginTop: path.toLocaleLowerCase().match("aboutus") ? "580px" : "30px",
         marginBottom: "30px",
         paddingTop: "25px",
         width: "100%",
@@ -38,6 +41,7 @@ export default function Footer() {
         {/* <div style={{ backgroundImage: `url(${textLogo})`, height: '50px', flex: '100% 1', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'contain', margin: '0 auto'}}></div> */}
         <img
           src={textLogo}
+          alt="Owl Logo"
           style={{
             flex: "100% 2",
             backgroundRepeat: "no-repeat",
@@ -64,13 +68,13 @@ export default function Footer() {
               lineHeight: "1.5",
             }}
           >
-            Night Owl
+            <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px', fontFamily:'sans'}}>Night Owl</p>
           </li>
-          <span style={{ cursor: "pointer" }}>
-            <li>About</li>
-            <li>Token</li>
-            <li>Liquidity Provision</li>
-            <li>List a Game</li>
+          <span style={{ cursor: "pointer", color:'white' }}>
+            <Link to='/aboutus'><li style={{paddingLeft: '5px',color:'white'}}>About</li></Link>
+            <Link to='/swap'><li style={{paddingLeft: '5px', color:'white'}}>Token</li></Link>
+            <Link to='/liquidity'><li style={{paddingLeft: '5px', color:'white'}}>Liquidity Provision</li></Link>
+            <Link to='/availableGames'><li style={{paddingLeft: '5px',color:'white'}}>List a Game</li></Link>
           </span>
         </ul>
 
@@ -82,18 +86,13 @@ export default function Footer() {
               lineHeight: "1.5",
             }}
           >
-            Support
+            <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px', fontFamily:'sans'}}>Support</p>
           </li>
-          <span style={{ cursor: "pointer" }}>
-            <li>Documentation</li>
-            <Link
-              to="/faq"
-              className="footer-link"
-            ><li style={{
-              fontWeight: "normal",
-              color: "rgb(244, 244, 245)",
-              lineHeight: "1.5",
-            }}>FAQ</li></Link>
+          <span style={{ cursor: "pointer", color:'white'  }}>
+          <Link to="#"><li style={{paddingLeft: '5px',color:'white'}}>Documentation</li></Link>
+            <Link to="/faq" className="footer-link">
+              <li style={{paddingLeft: '5px', color:'rgb(162, 162, 168)', color:'white' }} id='faq'>FAQ</li>
+            </Link>
           </span>
         </ul>
 
@@ -103,9 +102,11 @@ export default function Footer() {
               fontWeight: "normal",
               color: "rgb(244, 244, 245)",
               lineHeight: "1.5",
+              display:'flex',
+              justifyContent:'center',
             }}
           >
-            Social
+            <p style={{fontWeight:900, fontSize:'26px', margin:'0', fontFamily:"sans"}}>Social</p>
           </li>
           <span
             style={{

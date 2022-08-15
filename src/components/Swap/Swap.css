@@ -150,7 +150,7 @@ input[type=number] {
 
 #input-separator-wrapper #input-seperator
 {
-    background-color: #da2f95;
+    background-image: linear-gradient(to right, #8e0081, #fa008c);
     padding: 7px;
     margin: 0 auto;
     border-radius: 10px;
@@ -245,7 +245,7 @@ input[type=number] {
 {
     padding: 15px 20px;
     border-radius: 50px;
-    background-color: #ed3da7;
+    background-image: linear-gradient(to right, #8e0081, #fa008c);
     color: white;
     font-size: 25px;
     border: none;

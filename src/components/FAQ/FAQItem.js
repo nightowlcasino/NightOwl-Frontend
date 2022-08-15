@@ -9,7 +9,7 @@ export default function FAQItem({title, description}) {
     return (
         <Fragment>
         {/* <Box> */}
-            <div id="home-page-hot-wrapper" style={{flex: "none"}}>
+            <div id="home-page-hot-wrapper" style={{flex: "none", zIndex: -1}}>
                 <div id="home-page-hot">
                     <div id="home-page-hot-border">
                         <div id="home-page-hot-content-background" style={{backgroundColor:'rgba(24,5,80,1)'}}>

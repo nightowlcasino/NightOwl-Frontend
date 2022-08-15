@@ -1,0 +1,78 @@
+.games-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.games-row-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  height: 80%;
+}
+
+.games-card-container {
+  width: 30%;
+  border-radius: 20px;
+  /* background: linear-gradient(112deg, rgba(24,5,80,1) 0%, rgba(68,14,131,1) 100%);
+  border: 4px solid #D60A84; */
+  background-image: linear-gradient(to bottom, #340580, #d70a84);
+  height: 80%;
+  position: relative;
+}
+
+.image-card-container {
+  width: 90%;
+  height: 60%;
+  margin: 0 auto;
+  margin-top: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+
+
+.image-card-container img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.text-card-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 50%;
+  margin: 0 auto;
+  margin-top: 0px;
+}
+
+.text-card-header {
+  display: flex;
+  flex-direction: row;
+  width: 92%;
+  height: 25%;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.text-card-body {
+    color:white;
+    width: 92%;
+    margin: 0 auto;
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+.text-card-header img {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}

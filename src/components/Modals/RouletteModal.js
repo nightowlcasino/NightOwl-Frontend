@@ -1,10 +1,11 @@
 import "./RouletteModal.css";
 import closeModalIcon from "../../assets/Elements/closeModal.svg";
+import gameMascotImg from "../../assets/Elements/rouletteMascot.png";
 
-const RouletteModal = ({ showModal, setModalOff, gameMascotImg }) => {
+const RouletteModal = ({ showModal, setModalOff }) => {
   return (
     <div className={`warning-modal-wrapper ${showModal ? "show" : "hide"}`}>
-      <div id="overlay-popup" style={{ margin: "0 auto" }}>
+      <div id="overlay-popup" style={{ margin: "0 auto", height:"100%" }}>
         <div id="overlay-close" onClick={() => setModalOff(false)}>
           <img
             src={closeModalIcon}
@@ -13,7 +14,7 @@ const RouletteModal = ({ showModal, setModalOff, gameMascotImg }) => {
           />
         </div>
         <div id="overlay-text">
-          <span id="title">European Roulette</span>
+          <span id="title" style={{fontSize: "2.25em"}}>European Roulette</span>
           <span className="subtitle">Description</span>
           <span id="subtitle-text">
             European Roulette is a game where a ball is dropped onto a revolving
