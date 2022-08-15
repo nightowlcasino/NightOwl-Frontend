@@ -27,7 +27,7 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 	const [hasAddedLiquidity, setHasAddedLiquidity] = useState(false);
 
 
-	if(hasAddedLiquidity) {
+	if(!hasAddedLiquidity) {
 		return (
 		<div style={{marginTop: 30, display: "flex", flexDirection: "column", color: "white", width: "100%"}}>
 			<div style={{textAlign: "center"}}>
