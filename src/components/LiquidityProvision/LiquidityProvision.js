@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import StateContext from "../Context";
 //import { WalletContext } from "../Header/Header";
-import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronUpIcon, ChevronDownIcon, QuestionMarkCircleIcon } from '@heroicons/react/solid'
 import { DotsHorizontalIcon } from '@heroicons/react/solid'
 import LiquidityChart from './LiquidityChart'
 
@@ -23,6 +23,60 @@ const MIN_BOX_VALUE = 1000000;
 function Liquidity({ setIsLoading, setliquidityTransaction }) {
 
 	const [openModal, setOpenModal] = useState(false);
+
+	const [hasAddedLiquidity, setHasAddedLiquidity] = useState(false);
+
+
+	if(hasAddedLiquidity) {
+		return (
+		<div style={{marginTop: 30, display: "flex", flexDirection: "column", color: "white", width: "100%"}}>
+			<div style={{textAlign: "center"}}>
+				<p style={{fontSize: "2rem", marginBottom: 0, marginTop: 0, fontWeight: "600"}}>The House</p>
+			</div>
+
+			<div style={{ padding: 12, borderRadius: 30, margin: 10 }}>
+				<div className="data-container">
+					<div className="data-box">
+						<div style={{display: "inline-flex", marginTop: 10}}>
+							<p className="data-title">TVL</p>
+							<QuestionMarkCircleIcon className="questionmark-icon" />
+						</div>
+						<p className="data-content">6.3m<span className="owl-text">OWL</span></p>
+					</div>
+
+					<div style={{ width: 40 }}></div>
+
+					<div className="data-box">
+						<div style={{display: "inline-flex", marginTop: 10}}>
+							<p className="data-title">Volume 24 Hrs</p>
+							<QuestionMarkCircleIcon className="questionmark-icon" />
+						</div>
+						<p className="data-content">60k</p>
+					</div>
+
+					<div style={{ width: 40 }}></div>
+
+					<div className="data-box">
+						<div style={{display: "inline-flex", marginTop: 10}}>
+							<p className="data-title">APY</p>
+							<QuestionMarkCircleIcon className="questionmark-icon" />
+						</div>
+						<p className="data-content">6%</p>
+					</div>
+				</div>
+				<div style={{ width: "100%"}} className="chart-preview">
+					<div style={{margin: 12, padding: 18}}>
+						<LiquidityChart />
+					</div>
+				</div>
+
+				<div style={{textAlign: "center"}}>
+					<p style={{width: 200, fontSize: 24}} className="withdraw-button" onClick={()=>console.log("add liquidity")}>Add Liquidity</p>
+				</div>
+			</div>
+		</div>
+		)
+	}
 
 
 	return (
