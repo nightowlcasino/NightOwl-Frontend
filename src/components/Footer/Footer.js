@@ -68,13 +68,13 @@ export default function Footer() {
               lineHeight: "1.5",
             }}
           >
-            Night Owl
+            <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px', fontFamily:'sans'}}>Night Owl</p>
           </li>
-          <span style={{ cursor: "pointer" }}>
-            <li>About</li>
-            <li>Token</li>
-            <li>Liquidity Provision</li>
-            <li>List a Game</li>
+          <span style={{ cursor: "pointer", color:'white' }}>
+            <Link to='/aboutus'><li style={{paddingLeft: '5px',color:'white'}}>About</li></Link>
+            <Link to='/swap'><li style={{paddingLeft: '5px', color:'white'}}>Token</li></Link>
+            <Link to='/liquidity'><li style={{paddingLeft: '5px', color:'white'}}>Liquidity Provision</li></Link>
+            <Link to='/availableGames'><li style={{paddingLeft: '5px',color:'white'}}>List a Game</li></Link>
           </span>
         </ul>
 
@@ -86,12 +86,12 @@ export default function Footer() {
               lineHeight: "1.5",
             }}
           >
-            Support
+            <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px', fontFamily:'sans'}}>Support</p>
           </li>
-          <span style={{ cursor: "pointer" }}>
-            <li>Documentation</li>
+          <span style={{ cursor: "pointer", color:'white'  }}>
+          <Link to="#"><li style={{paddingLeft: '5px',color:'white'}}>Documentation</li></Link>
             <Link to="/faq" className="footer-link">
-              <li>FAQ</li>
+              <li style={{paddingLeft: '5px', color:'rgb(162, 162, 168)', color:'white' }} id='faq'>FAQ</li>
             </Link>
           </span>
         </ul>
@@ -102,9 +102,11 @@ export default function Footer() {
               fontWeight: "normal",
               color: "rgb(244, 244, 245)",
               lineHeight: "1.5",
+              display:'flex',
+              justifyContent:'center',
             }}
           >
-            Social
+            <p style={{fontWeight:900, fontSize:'26px', margin:'0', fontFamily:"sans"}}>Social</p>
           </li>
           <span
             style={{
