@@ -114,7 +114,8 @@ export default function FloorChart(props) {
                     // padding: 12,
                     // fontSize: 16
                   },
-                  label: "none"
+                  // label: "OWL",
+                  // display: true
                 },
               ],
               xAxes: [
@@ -127,7 +128,8 @@ export default function FloorChart(props) {
                   },
                   ticks: {
                     fontColor: "#FFFFFF",
-                    // display: ""
+                    // fontSize: 10
+                    // display: "OWL"
 
                   },
                 },
@@ -166,7 +168,7 @@ export default function FloorChart(props) {
 
             {/* <Collapse in={isOpen} animateOpacity unmountOnExit> */}
                 <div 
-                  style={{height: 400, marginRight: 12, marginTop: 12}}
+                  style={{height: 400, width: "100%", marginTop: 10}}
                 >
                     <Line
                         ref={chartRef}
@@ -174,6 +176,7 @@ export default function FloorChart(props) {
                         // redraw
                         options={options}
                         height={"400px"}
+                        width="100%"
                         // id="chart-sales"
                         // className="chart-canvas"
                     />
