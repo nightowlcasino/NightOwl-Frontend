@@ -3,8 +3,48 @@ import leaderboard_icon from "../../assets/Elements/leaderboard_icon.png";
 import slots from "../../assets/Elements/slots.png";
 import roulette from "../../assets/Elements/roulette.png";
 import hotNowImage from "../../assets/Elements/wtfruleta.png";
+import amai from "../../assets/Elements/amai.png";
+import { useNavigate } from "react-router-dom";
+import copyIcon from "../../assets/Elements/copyIcon.svg";
+import owlIcon from "../../assets/Elements/head.png";
 
 function LandingPage() {
+  let navigate = useNavigate();
+
+  function handleNavigateToPage(e, page) {
+    e.preventDefault();
+    navigate(`/${page}`);
+  }
+
+  function handleOnCopyTxId() {
+    console.log("tx id copied");
+  }
+
+  function truncateId(id) {
+    return id.substring(0, 10) + "...";
+  }
+
+  const weekWinsObject = [
+    {
+      address:
+        "88dhgzEuTXaRQTX5KNdnaWTTX7fEZVEQRn6qP4MJotPuRnS3QpoJxYpSaXoU1y7SHp8ZXMp92TH22DBY",
+      amount: 100000000,
+      TxID: "109a6e3360661c3fc442a586521f08ee0d67f92f56a71cee8cacc4a8cac42a5e",
+    },
+    {
+      address:
+        "88dhgzEuTXaRQTX5KNdnaWTTX7fEZVEQRn6qP4MJotPuRnS3QpoJxYpSaXoU1y7SHp8ZXMp92TH22DBY",
+      amount: 100000,
+      TxID: "109a6e3360661c3fc442a586521f08ee0d67f92f56a71cee8cacc4a8cac42a5e",
+    },
+    {
+      address:
+        "88dhgzEuTXaRQTX5KNdnaWTTX7fEZVEQRn6qP4MJotPuRnS3QpoJxYpSaXoU1y7SHp8ZXMp92TH22DBY",
+      amount: 100000,
+      TxID: "109a6e3360661c3fc442a586521f08ee0d67f92f56a71cee8cacc4a8cac42a5e",
+    },
+  ];
+
   return (
     <div id="page-content-wrapper">
       <div id="home-page-hot-wrapper">
@@ -27,7 +67,12 @@ function LandingPage() {
                         Night Owl’s open-source and transparent platform!
                       </span>
                       <br />
-                      <button id="header-button">Get started!</button>
+                      <button
+                        id="header-button"
+                        onClick={(e) => handleNavigateToPage(e, "swap")}
+                      >
+                        Get started!
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -46,20 +91,54 @@ function LandingPage() {
                     id="transactions-icon"
                     style={{ backgroundImage: `url(${leaderboard_icon})` }}
                   ></div>
-                  <span id="transactions-text">Leaderboard</span>
+                  <span id="transactions-text">Biggest Wins of the Week!</span>
                 </div>
               </div>
               <div id="transactions-table-wrapper">
                 <table>
                   <thead>
                     <tr>
+                      <th></th>
                       <th>Address</th>
                       <th className="transaction-amount">Amount</th>
                       <th>Tx ID</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    {weekWinsObject.map((item, index) => (
+                      <tr key={index}>
+                        <td style={{ color: "#fa008c" }}>{index + 1}</td>
+                        <td>{truncateId(item.address)}</td>
+                        <td>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}
+                          >
+                            {item.amount}
+                            <img
+                              src={owlIcon}
+                              alt="Owl icon"
+                              className="owl-table-icon"
+                            />
+                          </div>
+                        </td>
+
+                        <td>
+                          {truncateId(item.TxID)}
+                          <img
+                            src={copyIcon}
+                            alt="Copy address"
+                            id="copy-address-img"
+                            onClick={handleOnCopyTxId}
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                    {/* <tr>
                       <td>2hRSbF...FKbhnz</td>
                       <td className="transaction-amount">1534 ERG</td>
                       <td>kjjnDS...d342sz</td>
@@ -73,7 +152,7 @@ function LandingPage() {
                       <td>2hRSbF...FKbhnz</td>
                       <td className="transaction-amount">1534 ERG</td>
                       <td>kjjnDS...d342sz</td>
-                    </tr>
+                    </tr> */}
                   </tbody>
                 </table>
               </div>
@@ -83,49 +162,28 @@ function LandingPage() {
         <div id="home-page-hot-games">
           <div id="hot-game-slots" className="hot-games-border">
             <div className="hot-games-wrapper">
-              <div className="hot-games-inner-left">
-                <div className="top">
-                  <h1 className="hot-games-top-header">Popular games</h1>
-                  <span className="hot-game-name">Slots</span>
+              <div
+                style={{
+                  width: "50%",
+                  borderRadius: 25,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  paddingLeft: 10,
+                }}
+              >
+                <div>
+                  <h2 style={{ marginBottom: 5 }}>Popular games</h2>
+                  <span>Blakiston Lottery</span>
                 </div>
-                <div className="bottom">
-                  <div className="inner-fill"></div>
-                  <div className="button-wrapper">
-                    <div className="button-background">
-                      <button className="hot-games-button">Play it now</button>
-                    </div>
-                  </div>
+                <div style={{ marginBottom: 15 }}>
+                  <button
+                    className="hot-games-button"
+                    onClick={(e) => handleNavigateToPage(e, "games/lottery")}
+                  >
+                    Play it now
+                  </button>
                 </div>
-              </div>
-              <div className="hot-games-inner-right">
-                <div
-                  className="background-image"
-                  style={{ backgroundImage: `url(${slots})` }}
-                ></div>
-              </div>
-            </div>
-          </div>
-          <div id="hot-game-roulette" className="hot-games-border">
-            <div className="hot-games-wrapper">
-              <div className="hot-games-inner-left">
-                <div className="top">
-                  <h1 className="hot-games-top-header">Popular games</h1>
-                  <span className="hot-game-name">Roulette</span>
-                </div>
-                <div className="bottom">
-                  <div className="inner-fill"></div>
-                  <div className="button-wrapper">
-                    <div className="button-background">
-                      <button className="hot-games-button">Play it now</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="hot-games-inner-right">
-                <div
-                  className="background-image"
-                  style={{ backgroundImage: `url(${roulette})` }}
-                ></div>
               </div>
             </div>
           </div>
