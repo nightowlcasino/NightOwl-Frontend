@@ -30,7 +30,7 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 	const [withdrawLiquidityModal, setWithdrawLiquidityModal] = useState(false);
 
 
-	if(!hasAddedLiquidity) {
+	if(hasAddedLiquidity) {
 		return (
 		<div style={{marginTop: 30, display: "flex", flexDirection: "column", color: "white", width: "100%"}}>
 			<AddLiquidityModal showModal={addLiquidityModal} setModalOff={setAddLiquidityModal}/>
@@ -123,6 +123,20 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 							<div id="liquidity-header">
 								<div style={{display: "inline-flex"}}>
 									{/* <ChevronUpIcon color="red" width={24} style={{marginLeft: -12}}/> */}
+									<h1 style={{marginBottom: 8, marginTop: 0}}>10 Days</h1>
+								</div>
+								<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>Amount of days left until OWL is no longer locked</p>
+							</div>
+						</form>
+					</div>
+					<div className="house-wrapper" style={{marginTop: 10, textAlign: "center"}}>
+						<form id="liquidity-content" style={{position: "relative"}}>
+							<div className="liquidity-corner-dropdown">
+								<DotsHorizontalIcon color="white" width={24}/>
+							</div>
+							<div id="liquidity-header">
+								<div style={{display: "inline-flex"}}>
+									{/* <ChevronUpIcon color="red" width={24} style={{marginLeft: -12}}/> */}
 									<h1 style={{marginBottom: 8, marginTop: 0}}>Statistics</h1>
 								</div>
 							</div>
@@ -148,8 +162,7 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 								<p style={{marginTop: 2, fontSize: 12, opacity: 0.8}}>Staked</p>
 							</div>
 						</form>
-						<div style={{textAlign: "center"}}>
-						<p className="withdraw-button" style={{padding: "15px 40px"}} onClick={()=>setOpenModal(true)}>Stats</p></div>
+
 					</div>
 				</div>
 				<div style={{width: "70%"}}>
