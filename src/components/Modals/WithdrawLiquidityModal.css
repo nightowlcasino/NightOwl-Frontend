@@ -1,0 +1,54 @@
+#overlay-popup-withdraw-liquidity {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    width: 35vw;
+    background: linear-gradient(
+      112deg,
+      rgba(24, 5, 80, 1) 0%,
+      rgba(68, 14, 131, 1) 100%
+    );
+    border: 0px solid #d60a84;
+    border-radius: 10px;
+  }
+  
+  #owl-amount-input-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #owl-amount-input-wrapper input {
+    border-radius: 10px;
+    border: none;
+    height: 40px;
+    background-color: white;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 25px 0px;
+  }
+  
+  #owl-amount-input-wrapper input#resultOwl {
+    background-image: url("../../assets/Elements/head.png");
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: 95%;
+    /* Extra Styling */
+    padding-right: 10%;
+    transition: 0.3s;
+  }
+  
+  .withdraw-button 
+  {
+      padding: 15px 30px;
+      border-radius: 15px;
+      margin: 10px 0px 0px 0px;
+      background-image: linear-gradient(to right, #8e0081, #fa008c);
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+  }
