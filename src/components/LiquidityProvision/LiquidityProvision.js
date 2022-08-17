@@ -8,8 +8,8 @@ import LiquidityChart from './LiquidityChart'
 
 import "./LiquidityProvision.css";
 import "../BodyContent/BodyContent.css";
-import LiquidityModal from './LiquidityModal'
-
+import AddLiquidityModal from "../Modals/AddLiquidityModal";
+import WithdrawLiquidityModal from "../Modals/WithdrawLiquidityModal";
 
 const TOKENID_NO_TEST =
 	"afd0d6cb61e86d15f2a0adc1e7e23df532ba3ff35f8ba88bed16729cae933032";
@@ -26,10 +26,14 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 
 	const [hasAddedLiquidity, setHasAddedLiquidity] = useState(false);
 
+	const [addLiquidityModal, setAddLiquidityModal] = useState(false);
+	const [withdrawLiquidityModal, setWithdrawLiquidityModal] = useState(false);
 
-	if(hasAddedLiquidity) {
+
+	if(!hasAddedLiquidity) {
 		return (
 		<div style={{marginTop: 30, display: "flex", flexDirection: "column", color: "white", width: "100%"}}>
+			<AddLiquidityModal showModal={addLiquidityModal} setModalOff={setAddLiquidityModal}/>
 			<div style={{textAlign: "center"}}>
 				<p style={{fontSize: "2rem", marginBottom: 0, marginTop: 0, fontWeight: "600"}}>The House</p>
 			</div>
@@ -71,18 +75,18 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 				</div>
 
 				<div style={{textAlign: "center"}}>
-					<p style={{width: 200, fontSize: 24}} className="withdraw-button" onClick={()=>console.log("add liquidity")}>Add Liquidity</p>
+					<p style={{width: "auto", fontSize: 24}} className="withdraw-button" onClick={() => setAddLiquidityModal(true)}>Add Liquidity</p>
 				</div>
 			</div>
 		</div>
 		)
 	}
 
-
 	return (
 		<div>
 			<div className="liquidity-container" style={{marginTop: 30}}>
-				<div  style={{width: "30%"}}>
+			<WithdrawLiquidityModal showModal={withdrawLiquidityModal} setModalOff={setWithdrawLiquidityModal}/>
+				<div style={{width: "30%"}}>
 					<div className="house-wrapper">
 						<form id="liquidity-content" style={{position: "relative"}}>
 							<div className="liquidity-corner-dropdown">
@@ -144,8 +148,8 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 								<p style={{marginTop: 2, fontSize: 12, opacity: 0.8}}>Staked</p>
 							</div>
 						</form>
-						<p className="withdraw-button" onClick={()=>setOpenModal(true)}>Stats</p>
-
+						<div style={{textAlign: "center"}}>
+						<p className="withdraw-button" style={{padding: "15px 40px"}} onClick={()=>setOpenModal(true)}>Stats</p></div>
 					</div>
 				</div>
 				<div style={{width: "70%"}}>
@@ -162,7 +166,7 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 									<p style={{marginTop: 0, marginBottom: 0, opacity: "0.8"}}>You are funding the casino by providing liquidity, essentially acting as ‘the house,’ and earning a passive return over time!</p>
 								</div>
 								<div>
-									<p className="withdraw-button" onClick={()=>console.log("withdraw")}>Withdraw</p>
+									<p className="withdraw-button" onClick={()=>setWithdrawLiquidityModal(true)}>Withdraw</p>
 								</div>
 							</form>
 						</div>
@@ -173,9 +177,6 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 						</div>
 					</div>
 				</div>
-
-			{/* <LiquidityModal showModal={openModal} setModalOff={setOpenModal}/> */}
-
 			</div>
 		</div>
 
