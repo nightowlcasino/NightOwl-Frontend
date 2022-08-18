@@ -57,7 +57,7 @@ export default function Footer() {
           display: "flex",
           width: "100%",
           justifyContent: "center",
-          gap: "100px",
+          gap: "106px",
         }}
       >
         <ul style={{ listStyleType: "none" }}>
@@ -68,7 +68,7 @@ export default function Footer() {
               lineHeight: "1.5",
             }}
           >
-            <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px', fontFamily:'sans'}}>Night Owl</p>
+            <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px'}}>Night Owl</p>
           </li>
           <span style={{ cursor: "pointer", color:'white' }}>
             <Link to='/aboutus'><li style={{paddingLeft: '5px',color:'white'}}>About</li></Link>
@@ -86,7 +86,7 @@ export default function Footer() {
               lineHeight: "1.5",
             }}
           >
-            <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px', fontFamily:'sans'}}>Support</p>
+            <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px'}}>Support</p>
           </li>
           <span style={{ cursor: "pointer", color:'white'  }}>
           <Link to="#"><li style={{paddingLeft: '5px',color:'white'}}>Documentation</li></Link>
@@ -106,7 +106,7 @@ export default function Footer() {
               justifyContent:'center',
             }}
           >
-            <p style={{fontWeight:900, fontSize:'26px', margin:'0', fontFamily:"sans"}}>Social</p>
+            <p style={{fontWeight:900, fontSize:'26px', margin:'0'}}>Social</p>
           </li>
           <span
             style={{
