@@ -89,9 +89,7 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 				<div style={{width: "30%"}}>
 					<div className="house-wrapper">
 						<form id="liquidity-content" style={{position: "relative"}}>
-							<div className="liquidity-corner-dropdown">
-								<DotsHorizontalIcon color="white" width={24}/>
-							</div>
+							
 							<div id="liquidity-header" style={{textAlign: "center"}}>
 								<div style={{display: "inline-flex"}}>
 									{/* <ChevronUpIcon color="red" width={24} style={{marginLeft: -12}}/> */}
@@ -103,9 +101,7 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 					</div>
 					<div className="house-wrapper" style={{marginTop: 10, textAlign: "center"}}>
 						<form id="liquidity-content" style={{position: "relative"}}>
-							<div className="liquidity-corner-dropdown">
-								<DotsHorizontalIcon color="white" width={24}/>
-							</div>
+							
 							<div id="liquidity-header">
 								<div style={{display: "inline-flex"}}>
 									{/* <ChevronUpIcon color="red" width={24} style={{marginLeft: -12}}/> */}
@@ -117,9 +113,7 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 					</div>
 					<div className="house-wrapper" style={{marginTop: 10, textAlign: "center"}}>
 						<form id="liquidity-content" style={{position: "relative"}}>
-							<div className="liquidity-corner-dropdown">
-								<DotsHorizontalIcon color="white" width={24}/>
-							</div>
+							
 							<div id="liquidity-header">
 								<div style={{display: "inline-flex"}}>
 									{/* <ChevronUpIcon color="red" width={24} style={{marginLeft: -12}}/> */}
@@ -131,9 +125,7 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 					</div>
 					<div className="house-wrapper" style={{marginTop: 10, textAlign: "center"}}>
 						<form id="liquidity-content" style={{position: "relative"}}>
-							<div className="liquidity-corner-dropdown">
-								<DotsHorizontalIcon color="white" width={24}/>
-							</div>
+							
 							<div id="liquidity-header">
 								<div style={{display: "inline-flex"}}>
 									{/* <ChevronUpIcon color="red" width={24} style={{marginLeft: -12}}/> */}
@@ -169,9 +161,7 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 					<div className="house-wrapper" >
 						<div>
 							<form  style={{position: "relative"}}>
-								<div className="liquidity-corner-dropdown">
-									<DotsHorizontalIcon color="white" width={24}/>
-								</div>
+								
 								<div>
 									<div style={{display: "inline-flex"}}>
 										<h1 style={{marginBottom: 8, marginTop: 0}}>You are the ‘House’!</h1>

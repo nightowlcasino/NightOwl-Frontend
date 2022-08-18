@@ -104,7 +104,7 @@ const Header = () => {
     },
     {
       value: "coinflip",
-      label: "Coinflip",
+      label: "CoinFlip",
       icon: (
         <img src={coinflipMascot} alt="roulette" style={{ width: "45px" }} />
       ),
@@ -146,7 +146,7 @@ const Header = () => {
       fontSize: "20px",
       color: "#d70a84",
     }),
-    valueContainer: (styles) => ({ ...styles, fontSize: "20px" }),
+    valueContainer: (styles) => ({ ...styles, fontSize: "16px" }),
   };
 
   function handleGameSelectChange(e) {

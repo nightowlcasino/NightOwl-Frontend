@@ -71,7 +71,7 @@ function LandingPage() {
                         id="header-button"
                         onClick={(e) => handleNavigateToPage(e, "swap")}
                       >
-                        Get started!
+                        Get Started!
                       </button>
                     </div>
                   </div>
@@ -91,7 +91,7 @@ function LandingPage() {
                     id="transactions-icon"
                     style={{ backgroundImage: `url(${leaderboard_icon})` }}
                   ></div>
-                  <span id="transactions-text">Biggest Wins of the Week!</span>
+                  <h2 id="transactions-text">Biggest Wins of the Week!</h2>
                 </div>
               </div>
               <div id="transactions-table-wrapper">
@@ -166,7 +166,7 @@ function LandingPage() {
                     className="hot-games-button"
                     onClick={(e) => handleNavigateToPage(e, "games/lottery")}
                   >
-                    Play it now
+                    Play Now!
                   </button>
                 </div>
               </div>

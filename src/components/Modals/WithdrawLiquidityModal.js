@@ -13,7 +13,7 @@ const WithdrawLiquidityModal = ({ showModal, setModalOff }) => {
   return (
     <div className={`warning-modal-wrapper ${showModal ? "show" : "hide"}`}>
       <div id="overlay-popup-withdraw-liquidity" style={{ margin: "0 auto" }}>
-        <div id="overlay-close" onClick={() => setModalOff(false)}>
+        <div id="overlay-close" onClick={() => setModalOff(false)} style={{justifyContent:"flex-end"}}>
           <img
             src={closeModalIcon}
             alt="Close this window"
@@ -31,14 +31,12 @@ const WithdrawLiquidityModal = ({ showModal, setModalOff }) => {
               alignItems: "center",
               justifyContent: "space-between",
               color: "white",
-              width: "100%",
+              width: "70%",
+              margin: "0 auto",
             }}
           >
             <div>
-              <span style={{ fontSize: 19 }}>
-                You have added to
-                liquidity:
-              </span>
+              <span style={{ fontSize: 19 }}>Liquidity Provided</span>
               <div
                 style={{
                   display: "flex",
@@ -47,7 +45,12 @@ const WithdrawLiquidityModal = ({ showModal, setModalOff }) => {
                   justifyContent: "center",
                 }}
               >
-                <span style={{ fontSize: 16,color: "#d60a84", cursor: "pointer" }} onClick={() => setOwlAmount(1321379)}>13214729</span>
+                <span
+                  style={{ fontSize: 17, color: "#d60a84", cursor: "pointer" }}
+                  onClick={() => setOwlAmount(1321379)}
+                >
+                  13214729
+                </span>
                 <img
                   src={owlIcon}
                   alt="Select heads"
@@ -56,16 +59,25 @@ const WithdrawLiquidityModal = ({ showModal, setModalOff }) => {
               </div>
             </div>
             <div>
-                <span style={{ fontSize: 19 }}>Days until OWL unlocked:</span>
-                <span style={{ fontSize: 16, color: "#d60a84"}}>10</span>
+              <span style={{ fontSize: 19 }}>OWL Unlocked in</span>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <span style={{ fontSize: 17, color: "#d60a84" }}>10</span>
+              </div>
             </div>
           </div>
           <div id="owl-amount-input-wrapper">
             <input
               type="number"
               id="resultOwl"
-              style={{ textAlign: "right"}}
-              placeholder={`Amount to Withdraw`}
+              style={{ textAlign: "right" }}
+              placeholder={`Withdrawal amount`}
               value={owlAmount}
               onChange={(e) => setOwlAmount(e.target.value)}
             ></input>

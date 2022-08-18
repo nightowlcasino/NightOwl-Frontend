@@ -112,7 +112,7 @@ const Coinflip = () => {
               {rewardMinusHouseFee(Number(bettingAmount))} OWL
             </h3>
             <div id="bet-button-wrapper">
-              <button onClick={handleBetPlaced}>Place bet</button>
+              <button onClick={handleBetPlaced}>Place Bet</button>
             </div>
           </div>
         </div>
