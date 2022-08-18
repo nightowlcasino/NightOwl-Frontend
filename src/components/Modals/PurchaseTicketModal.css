@@ -53,19 +53,6 @@
   left: 68%;
 }
 
-#overlay-close {
-  color: white;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 30px;
-  font-weight: bold;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: pointer;
-}
-
 .purchase-ticket-input {
   display: flex;
   flex-direction: column;

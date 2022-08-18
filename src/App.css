@@ -184,7 +184,7 @@ h1-leader{
   font-size: 12px;
 }
 
-#overlay-close
+/* #overlay-close
 {
   color: white;
   position: absolute;
@@ -195,8 +195,7 @@ h1-leader{
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  cursor: pointer;
-}
+} */
 
 .overlay-swap
 {

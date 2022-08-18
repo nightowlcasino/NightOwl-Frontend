@@ -48,7 +48,7 @@ function Lottery({ setIsLoading }) {
               setMyTicketsPressed(true);
             }}
           >
-            <span style={{ fontSize: "18px" }}>My tickets</span>
+            <span style={{ fontSize: "18px" }}>My Tickets</span>
           </button>
           <button
             type="button"

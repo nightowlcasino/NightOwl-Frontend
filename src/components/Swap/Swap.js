@@ -234,7 +234,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
                       }}
                     />
                     <span>{swap1}</span>
-                    <div className="tokenBalance">
+                    {ergoWallet && (<div className="tokenBalance">
                       <span style={{ fontSize: "14px" }}>
                         Balance:{" "}
                         <span
@@ -249,7 +249,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
                           {swap1 == "SigUSD" ? sigUSDBalance : owlBalance}
                         </span>
                       </span>
-                    </div>
+                    </div>)}
                   </div>
                   <div id="swap-input-amount-input">
                     <input
@@ -283,7 +283,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
                       }}
                     />
                     <span>{swap2}</span>
-                    <div className="tokenBalance">
+                    {ergoWallet && (<div className="tokenBalance">
                       <span style={{ fontSize: "14px" }}>
                         Balance:{" "}
                         <span
@@ -298,7 +298,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
                           {swap2 == "SigUSD" ? sigUSDBalance : owlBalance}
                         </span>
                       </span>
-                    </div>
+                    </div>)}
                   </div>
                   <div id="swap-input-amount-input">
                     <input

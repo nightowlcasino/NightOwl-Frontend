@@ -13,7 +13,7 @@ const AddLiquidityModal = ({ showModal, setModalOff }) => {
   return (
     <div className={`warning-modal-wrapper ${showModal ? "show" : "hide"}`}>
       <div id="overlay-popup-add-liquidity" style={{ margin: "0 auto" }}>
-        <div id="overlay-close" onClick={() => setModalOff(false)}>
+        <div id="overlay-close" onClick={() => setModalOff(false)} style={{justifyContent:"flex-end"}}>
           <img
             src={closeModalIcon}
             alt="Close this window"
