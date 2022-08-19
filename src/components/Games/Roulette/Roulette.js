@@ -381,80 +381,80 @@ const Roulette = ({ sidebarToggled }) => {
     //};
 
     // Get utxo for ERGs
-    ergoWallet.get_utxos(backendBetObject.backendBoard.txFee, TOKENID_ERG).then((utxosResponse) => {
-      if (utxosResponse.length === 0) {
-        console.log("NO ERG UTXOS");
-        return;
-      } else {
-        utxos = JSON.parse(JSON.stringify(utxosResponse));
-        ergoWallet
-          .get_utxos(backendBetObject.backendBoard.totalWager, TOKENID_NO_TEST)
-          .then((utxosResponse) => {
-            if (utxosResponse.length === 0) {
-              console.log("NO OWL UTXOS");
-              return;
-            } else {
-              utxosResponse.forEach((owlBox) => {
-                let found = false;
-                utxos.forEach((box) => {
-                  // Check if any matching boxIds
-                  // TODO: Add a break/continue
-                  if (owlBox.boxId == box.boxId) {
-                    found = true;
-                  }
-                });
-                // Found none
-                if (!found) {
-                  utxos.push(owlBox);
-                }
-              });
-              console.log(utxos);
-              // send bet data structure to backend for the bet tx to be built
-              //axios
-              //  .post(`/api/v1/roulette/bet-tx`, {
-              //    board: backendBetObject.backendBoard,
-              //    senderAddr: `${localStorage.getItem("walletAddress")}`,
-              //    utxos: utxos,
-              //  })
-              //  .then(async function (response) {
-              //    // sign tx
-              //    const signedTx = await signTx(response.data.unsignedTx);
-              //    console.log("signedTx", signedTx);
-              //    // Get a BoxId to use for the random number call
-              //    boxId = signedTx.outputs[2].boxId;
-              //    // submit to node
-              //    submitTx(signedTx, response.data.sessionId)
-              //      .then(async (txId) => {
-              //        if (!txId) {
-              //          console.log(`No submitted tx ID`);
-              //          return null;
-              //        }
-              //        console.log(`Transaction submitted - ${txId.data}`);
-              // call rng service with wallet address and box id to get our random number
-              axios
-                .get(
-                  `http://127.0.0.1:8089/api/v1/test/random-number/roulette?walletAddr=${localStorage.getItem(
-                    "walletAddress"
-                  )}`
-                )
-                .then(async function (resp) {
-                  console.log("GET api/v1/random-number/roulette", { resp });
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
-              //      })
-              //      .catch((err) => {
-              //        console.log(err);
-              //      });
-              //  })
-              //  .catch(function (error) {
-              //    console.log(error);
-              //  });
-            }
-          });
-      }
-    });
+    // ergoWallet.get_utxos(backendBetObject.backendBoard.txFee, TOKENID_ERG).then((utxosResponse) => {
+    //   if (utxosResponse.length === 0) {
+    //     console.log("NO ERG UTXOS");
+    //     return;
+    //   } else {
+    //     utxos = JSON.parse(JSON.stringify(utxosResponse));
+    //     ergoWallet
+    //       .get_utxos(backendBetObject.backendBoard.totalWager, TOKENID_NO_TEST)
+    //       .then((utxosResponse) => {
+    //         if (utxosResponse.length === 0) {
+    //           console.log("NO OWL UTXOS");
+    //           return;
+    //         } else {
+    //           utxosResponse.forEach((owlBox) => {
+    //             let found = false;
+    //             utxos.forEach((box) => {
+    //               // Check if any matching boxIds
+    //               // TODO: Add a break/continue
+    //               if (owlBox.boxId == box.boxId) {
+    //                 found = true;
+    //               }
+    //             });
+    //             // Found none
+    //             if (!found) {
+    //               utxos.push(owlBox);
+    //             }
+    //           });
+    //           console.log(utxos);
+    //           // send bet data structure to backend for the bet tx to be built
+    //           //axios
+    //           //  .post(`/api/v1/roulette/bet-tx`, {
+    //           //    board: backendBetObject.backendBoard,
+    //           //    senderAddr: `${localStorage.getItem("walletAddress")}`,
+    //           //    utxos: utxos,
+    //           //  })
+    //           //  .then(async function (response) {
+    //           //    // sign tx
+    //           //    const signedTx = await signTx(response.data.unsignedTx);
+    //           //    console.log("signedTx", signedTx);
+    //           //    // Get a BoxId to use for the random number call
+    //           //    boxId = signedTx.outputs[2].boxId;
+    //           //    // submit to node
+    //           //    submitTx(signedTx, response.data.sessionId)
+    //           //      .then(async (txId) => {
+    //           //        if (!txId) {
+    //           //          console.log(`No submitted tx ID`);
+    //           //          return null;
+    //           //        }
+    //           //        console.log(`Transaction submitted - ${txId.data}`);
+    //           // call rng service with wallet address and box id to get our random number
+    //           axios
+    //             .get(
+    //               `http://127.0.0.1:8089/api/v1/test/random-number/roulette?walletAddr=${localStorage.getItem(
+    //                 "walletAddress"
+    //               )}`
+    //             )
+    //             .then(async function (resp) {
+    //               console.log("GET api/v1/random-number/roulette", { resp });
+    //             })
+    //             .catch(function (error) {
+    //               console.log(error);
+    //             });
+    //           //      })
+    //           //      .catch((err) => {
+    //           //        console.log(err);
+    //           //      });
+    //           //  })
+    //           //  .catch(function (error) {
+    //           //    console.log(error);
+    //           //  });
+    //         }
+    //       });
+    //   }
+    // });
 
     async function signTx(txToBeSigned) {
       try {
@@ -484,14 +484,14 @@ const Roulette = ({ sidebarToggled }) => {
     //send the backend the bet object using buildBackendBetObject();
 
     /* REMOVE THIS ONE AFTER BACKEND CALLS ARE PROPERLY WORKING */
-    //setStopSpin(true);
+    setStopSpin(true);
 
     //This literally triggers the spin to stop, so this next two lines should only be executed when the number is retrieved from the blockchain
-    //setRandomNumber(10);
-    //setNewRandomNumber(true);
+    setRandomNumber(Math.floor(Math.random() * 36) + 1);
+    setNewRandomNumber(true);
 
     // SIMULATION OF THE WAITING FOR THE 2 MINUTES LIMIT.
-    fetchData();
+    // fetchData();
   }
 
   const randNumTimeout = new Promise((resolve) => {

@@ -9,6 +9,8 @@ import magnifier from "../../assets/Elements/magnifier2.svg";
 import AddWallet from "../ConnectWallet/AddWallet";
 import musicOffIcon from "../../assets/Elements/musicoff.svg";
 import musicOnIcon from "../../assets/Elements/musicon.svg";
+import spanishFlag from "../../assets/Elements/esflag.png";
+import ukFlag from "../../assets/Elements/ukflag.png";
 import Switch from "react-switch";
 import { useLocation } from "react-router-dom";
 import ReactHowler from "react-howler";
@@ -22,7 +24,6 @@ import rouletteMascot from "../../assets/Elements/rouletteMascot.png";
 import lotteryMascot from "../../assets/Elements/lotteryMascot.png";
 import coinflipMascot from "../../assets/Elements/coinflipMascot.png";
 import { Navigate, useNavigate, Link } from "react-router-dom";
-
 // import { Link } from "react-router-dom";
 // import { useTranslation } from "react-i18next";
 // import i18next from "i18next";
@@ -51,7 +52,8 @@ const Header = () => {
   const [musicState, setMusicState] = useState(false);
   const [currentSong, setCurrentSong] = useState(sounds[getRandomSong()]);
   const [selectedOption, setSelectedOption] = useState(null);
-
+  const [selectedLanguage, setSelectedLanguage] = useState("english");
+  console.log(selectedLanguage);
   // function checkActivateMusic() {
   //   const wantMusic = localStorage.getItem("wantMusic");
   //   if (wantMusic == "true") {
@@ -117,6 +119,28 @@ const Header = () => {
       ),
     },
   ];
+  
+  const languageSearchOptions = [
+    {
+      value: "english",
+      label: "English",
+      // icon: (
+      //   <img src={ukFlag} alt="roulette" style={{ width: "30px" }} />
+      // ),
+    },
+    {
+      value: "spanish",
+      label: "Spanish",
+    },
+    {
+      value: "chinese",
+      label: "Chinese",
+    },
+    {
+      value: "serbian",
+      label: "Serbian",
+    },
+  ];
 
   const customGameSearchStyles = {
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -149,11 +173,48 @@ const Header = () => {
     valueContainer: (styles) => ({ ...styles, fontSize: "16px" }),
   };
 
+  const customLanguageSearchStyles = {
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      return {
+        ...styles,
+        backgroundColor: isDisabled ? "red" : "white",
+        color: "#000",
+        cursor: isDisabled ? "pointer" : "pointer",
+      };
+    },
+    menu: (styles) => ({ ...styles, marginTop: "5px" }),
+    control: (styles) => ({
+      ...styles,
+      height: "25px",
+      borderRadius: "18px",
+      fontSize: "20px",
+    }),
+    indicatorsContainer: (styles) => ({ ...styles, display: "none" }),
+    option: (styles) => ({
+      ...styles,
+      border: "1px solid lightgrey",
+      height: "50px",
+      textAlign: "center",
+      display: "flex",
+      alignItems: "center",
+      justifyContent:"center",
+      fontWeight: "bold",
+      fontSize: "16px",
+      color: "#d70a84",
+      
+    }),
+    valueContainer: (styles) => ({ ...styles, fontSize: "16px"}),
+  };
   function handleGameSelectChange(e) {
     setSelectedOption(e.value);
     navigate(`/games/${e.value}`, { replace: true });
   }
-  console.log(musicState);
+  function handleLanguageSelectChange(e) {
+    setSelectedLanguage(e.value);
+  }
+
+  
+
   return (
     <div id="header-wrapper">
       <ReactHowler
@@ -202,6 +263,30 @@ const Header = () => {
             <img id="magnifier" src={magnifier} alt="magnifier" />
           </div>
           <div id="header-seperator"></div>
+          <div id="header-search-language-wrapper">
+            <Select
+              defaultValue={selectedLanguage}
+              onChange={(e) => handleLanguageSelectChange(e)}
+              options={languageSearchOptions}
+              placeholder="Language..."
+              styles={customLanguageSearchStyles}
+              style={{ height: "150px" }}
+              getOptionLabel={(e) => (
+                <div style={{ display:"flex", justifyContent:"center", alignItems:"center", }}>
+                  <span
+                    style={{
+                      // position: "absolute",
+                      // left: "70px",
+                      color: "#d70a84",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {e.label}
+                  </span>
+                </div>
+              )}
+            />
+          </div>
           <div id="music-switch-container">
             <Switch
               onChange={(e) => handleChange(e)}

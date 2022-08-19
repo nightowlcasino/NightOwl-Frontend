@@ -75,8 +75,19 @@ input {
 
 #header-wrapper #header-items #header-search-wrapper
 {
-    flex: 350px;
-    max-width: 350px;
+    flex: 300px;
+    max-width: 300px;
+}
+
+#header-wrapper #header-items #header-search-language-wrapper
+{
+    display:"flex";
+    align-items: center;
+    margin: auto 0;
+    text-align: center;
+    width: 100px;
+    max-width: 150px;
+    padding: 0px 10px;
 }
 
 #header-wrapper #header-items #header-seperator
