@@ -7,8 +7,7 @@ const LotteryModal = ({ showModal, setModalOff }) => {
   return (
     <div className={`warning-modal-wrapper ${showModal ? "show" : "hide"}`}>
       <div id="overlay-popup-lottery" style={{ margin: "0 auto" }}>
-        <div id="overlay-close">
-        <span><span style={{display:"inline", color:"#d70a84"}}>House edge:</span> 3%</span>
+        <div id="overlay-close" onClick={() => setModalOff(false)} style={{justifyContent:"flex-end"}}>
           <img
             src={closeModalIcon}
             alt="Close this window"

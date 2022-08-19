@@ -2,10 +2,12 @@ import textLogo from "../../assets/Elements/textlogo.png";
 import "./Footer.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
 export default function Footer() {
   const location = useLocation();
   const path = location.pathname;
+  const [hoveredXIcon, setHoveredXIcon] = useState(false);
 
   return (
     <div
@@ -57,7 +59,7 @@ export default function Footer() {
           display: "flex",
           width: "100%",
           justifyContent: "center",
-          gap: "100px",
+          gap: "10%",
         }}
       >
         <ul style={{ listStyleType: "none" }}>
@@ -68,13 +70,12 @@ export default function Footer() {
               lineHeight: "1.5",
             }}
           >
-            <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px', fontFamily:'sans'}}>Night Owl</p>
+            <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px', color:"#d70a84"}}>Night Owl</p>
           </li>
           <span style={{ cursor: "pointer", color:'white' }}>
             <Link to='/aboutus'><li style={{paddingLeft: '5px',color:'white'}}>About</li></Link>
             <Link to='/swap'><li style={{paddingLeft: '5px', color:'white'}}>Token</li></Link>
             <Link to='/liquidity'><li style={{paddingLeft: '5px', color:'white'}}>Liquidity Provision</li></Link>
-            <Link to='/availableGames'><li style={{paddingLeft: '5px',color:'white'}}>List a Game</li></Link>
           </span>
         </ul>
 
@@ -86,12 +87,15 @@ export default function Footer() {
               lineHeight: "1.5",
             }}
           >
-            <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px', fontFamily:'sans'}}>Support</p>
+            <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px', color:"#d70a84"}}>Support</p>
           </li>
           <span style={{ cursor: "pointer", color:'white'  }}>
-          <Link to="#"><li style={{paddingLeft: '5px',color:'white'}}>Documentation</li></Link>
+          <li style={{paddingLeft: '5px',color:'white'}}><a href="https://github.com/nightowlcasino/"
+            style={{color:'white'}}
+            id="doc-link"
+          >Documentation</a></li>
             <Link to="/faq" className="footer-link">
-              <li style={{paddingLeft: '5px', color:'rgb(162, 162, 168)', color:'white' }} id='faq'>FAQ</li>
+              <li style={{paddingLeft: '5px',color:'white' }} id='faq'>FAQ</li>
             </Link>
           </span>
         </ul>
@@ -106,7 +110,7 @@ export default function Footer() {
               justifyContent:'center',
             }}
           >
-            <p style={{fontWeight:900, fontSize:'26px', margin:'0', fontFamily:"sans"}}>Social</p>
+            <p style={{fontWeight:900, fontSize:'26px', margin:'0', color:"#d70a84"}}>Social</p>
           </li>
           <span
             style={{
@@ -123,6 +127,8 @@ export default function Footer() {
               style={{ color: "rgb(58, 186, 180)" }}
             >
               <svg
+              onMouseEnter={() => setHoveredXIcon(1)}
+              onMouseLeave={() => setHoveredXIcon(false)}
                 style={{
                   userSelect: "none",
                   display: "inline-block",
@@ -132,7 +138,7 @@ export default function Footer() {
                   fontSize: "1.5rem",
                   width: "38px",
                   height: "38px",
-                  color: "#ab0d82",
+                  color: hoveredXIcon == 1 ? "d70a84" : "white",
                 }}
                 focusable="false"
                 aria-hidden="true"
@@ -149,6 +155,8 @@ export default function Footer() {
               style={{ color: "rgb(58, 186, 180)" }}
             >
               <svg
+              onMouseEnter={() => setHoveredXIcon(2)}
+              onMouseLeave={() => setHoveredXIcon(false)}
                 style={{
                   userSelect: "none",
                   display: "inline-block",
@@ -158,7 +166,7 @@ export default function Footer() {
                   fontSize: "1.5rem",
                   width: "38px",
                   height: "38px",
-                  color: "#ab0d82",
+                  color: hoveredXIcon == 2 ? "d70a84" : "white",
                 }}
                 focusable="false"
                 aria-hidden="true"
@@ -175,6 +183,8 @@ export default function Footer() {
               style={{ color: "rgb(58, 186, 180)" }}
             >
               <svg
+              onMouseEnter={() => setHoveredXIcon(3)}
+              onMouseLeave={() => setHoveredXIcon(false)}
                 style={{
                   userSelect: "none",
                   display: "inline-block",
@@ -184,7 +194,7 @@ export default function Footer() {
                   fontSize: "1.5rem",
                   width: "38px",
                   height: "38px",
-                  color: "#ab0d82",
+                  color: hoveredXIcon == 3 ? "d70a84" : "white",
                 }}
                 focusable="false"
                 aria-hidden="true"
@@ -201,6 +211,8 @@ export default function Footer() {
               style={{ color: "rgb(58, 186, 180)" }}
             >
               <svg
+              onMouseEnter={() => setHoveredXIcon(4)}
+              onMouseLeave={() => setHoveredXIcon(false)}
                 style={{
                   userSelect: "none",
                   display: "inline-block",
@@ -210,7 +222,7 @@ export default function Footer() {
                   fontSize: "1.5rem",
                   width: "38px",
                   height: "38px",
-                  color: "#ab0d82",
+                  color: hoveredXIcon == 4 ? "d70a84" : "white",
                 }}
                 focusable="false"
                 aria-hidden="true"

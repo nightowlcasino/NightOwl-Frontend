@@ -48,20 +48,20 @@ const Header = () => {
   const location = useLocation();
   const path = location.pathname;
 
-  const [musicState, setMusicState] = useState(checkActivateMusic());
+  const [musicState, setMusicState] = useState(false);
   const [currentSong, setCurrentSong] = useState(sounds[getRandomSong()]);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  function checkActivateMusic() {
-    const wantMusic = localStorage.getItem("wantMusic");
-    if (wantMusic == "true") {
-      return true;
-    } else if (wantMusic == "false") {
-      return false;
-    } else {
-      return true;
-    }
-  }
+  // function checkActivateMusic() {
+  //   const wantMusic = localStorage.getItem("wantMusic");
+  //   if (wantMusic == "true") {
+  //     return true;
+  //   } else if (wantMusic == "false") {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
 
   useEffect(() => {
     if (!path.toLocaleLowerCase().match("/games/")) {
@@ -153,7 +153,7 @@ const Header = () => {
     setSelectedOption(e.value);
     navigate(`/games/${e.value}`, { replace: true });
   }
-  console.log(selectedOption)
+  console.log(musicState);
   return (
     <div id="header-wrapper">
       <ReactHowler
