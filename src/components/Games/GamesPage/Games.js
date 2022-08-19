@@ -2,7 +2,7 @@ import "./Games.css";
 import rouletteCardImage from "../../../assets/Elements/rouletteCardImage.jpg";
 import rouletteMascot from "../../../assets/Elements/rouletteMascot.png";
 import rouletteIcon from "../../../assets/Elements/roulette3.svg";
-
+import amai from "../../../assets/Elements/eiou.png";
 // import rouletteCardImage1 from "../../../assets/Elements/wtfruleta.png";
 import rouletteCardImage2 from "../../../assets/Elements/ruletawhat.png";
 import rouletteCardImage3 from "../../../assets/Elements/rouletteHomeCut.png";
@@ -126,8 +126,8 @@ const Games = () => {
         <div className="games-card-container">
           <div className="image-card-container">
             <img
-              src={rouletteCardImage1}
-              style={{ objectFit:"cover" ,cursor: "pointer" }}
+              src={amai}
+              style={{ objectFit:"cover", objectPosition: "center",cursor: "pointer" }}
               onClick={() => handleNavigateToGame("lottery")}
             />
           </div>
