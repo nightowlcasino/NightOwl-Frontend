@@ -14,7 +14,6 @@ import Roulette from "../Games/Roulette/Roulette";
 import AboutUs from "../AboutUs/AboutUs";
 import FAQ from "../FAQ/FAQ";
 import LiquidityProvision from "../LiquidityProvision/LiquidityProvision";
-import GamesDashboard from "../Games";
 import Games from "../Games/GamesPage/Games.js";
 import Lottery from "../Lottery/Lottery";
 

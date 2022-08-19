@@ -55,7 +55,7 @@ const PurchaseTicketModal = ({ showModal, setModalOff }) => {
         </div>
         <div id="overlay-text">
           <span id="title" style={{ fontSize: "2.25em" }}>
-            Purchase a lottery ticket
+            Purchase a Lottery Ticket
           </span>
           <div className="purchase-ticket-input">
             <div className="conversion-explained">

@@ -7,7 +7,7 @@ const RouletteModal = ({ showModal, setModalOff }) => {
     <div className={`warning-modal-wrapper ${showModal ? "show" : "hide"}`}>
       <div id="overlay-popup" style={{ margin: "0 auto", height:"100%" }}>
         <div id="overlay-close">
-          <span><span style={{display:"inline", color:"#d70a84",}}>House edge:</span> 3%</span>
+          <span><span style={{display:"inline", color:"#d70a84"}}>House edge:</span> 2.7%</span>
           <img
             src={closeModalIcon}
             alt="Close this window"
