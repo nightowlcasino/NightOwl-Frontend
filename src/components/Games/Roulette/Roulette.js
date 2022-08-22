@@ -205,7 +205,7 @@ const Roulette = ({ sidebarToggled }) => {
               console.log(error);
             });
           setBetsEnded(false);
-          resetBets();
+          // resetBets();
           addLastResult(randomNumber);
         }, 2500);
 

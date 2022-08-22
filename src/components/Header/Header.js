@@ -24,6 +24,7 @@ import rouletteMascot from "../../assets/Elements/rouletteMascot.png";
 import lotteryMascot from "../../assets/Elements/lotteryMascot.png";
 import coinflipMascot from "../../assets/Elements/coinflipMascot.png";
 import { Navigate, useNavigate, Link } from "react-router-dom";
+import languageIcon from "../../assets/Elements/language1.svg";
 // import { Link } from "react-router-dom";
 // import { useTranslation } from "react-i18next";
 // import i18next from "i18next";
@@ -52,7 +53,7 @@ const Header = () => {
   const [musicState, setMusicState] = useState(false);
   const [currentSong, setCurrentSong] = useState(sounds[getRandomSong()]);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [selectedLanguage, setSelectedLanguage] = useState("english");
+  const [selectedLanguage, setSelectedLanguage] = useState("English");
   console.log(selectedLanguage);
   // function checkActivateMusic() {
   //   const wantMusic = localStorage.getItem("wantMusic");
@@ -268,7 +269,8 @@ const Header = () => {
               defaultValue={selectedLanguage}
               onChange={(e) => handleLanguageSelectChange(e)}
               options={languageSearchOptions}
-              placeholder="Language..."
+              placeholder={<img src={languageIcon} style={{position:"relative",width:"40%"}}/>}
+              // placeholder={<span style={{color:"#d70a84", fontSize:16, fontWeight:"bold"}}>{selectedLanguage}</span>}
               styles={customLanguageSearchStyles}
               style={{ height: "150px" }}
               getOptionLabel={(e) => (
