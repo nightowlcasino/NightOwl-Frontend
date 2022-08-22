@@ -21,6 +21,7 @@
 {
     margin: 30px;
     height: calc(100% - 60px);
+
     max-height: calc(100vh - 160px);
     width: calc(100% - 60px);
     background-image: linear-gradient(to bottom, #340580, #d70a84);
