@@ -269,8 +269,8 @@ const Header = () => {
               defaultValue={selectedLanguage}
               onChange={(e) => handleLanguageSelectChange(e)}
               options={languageSearchOptions}
-              placeholder={<img src={languageIcon} style={{position:"relative",width:"40%"}}/>}
-              // placeholder={<span style={{color:"#d70a84", fontSize:16, fontWeight:"bold"}}>{selectedLanguage}</span>}
+              // placeholder={<img src={languageIcon} style={{position:"relative",width:"40%"}}/>}
+              placeholder={<span style={{color:"#d70a84", fontSize:16, fontWeight:"bold"}}>{selectedLanguage}</span>}
               styles={customLanguageSearchStyles}
               style={{ height: "150px" }}
               getOptionLabel={(e) => (
