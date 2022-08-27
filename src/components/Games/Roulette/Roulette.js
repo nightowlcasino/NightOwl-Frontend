@@ -213,10 +213,6 @@ const Roulette = ({ sidebarToggled }) => {
     }
   }, [newRandomNumber]);
 
-  useEffect(() => {
-    console.log(backendBetObject)
-  }, [backendBetObject])
-
   function playRandomWinningSound() {
     let randomSound = Math.floor(Math.random() * winningSounds.length);
     winningSounds[randomSound].play();
