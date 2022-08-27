@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useContext } from "react";
 import { connect, StringCodec } from "nats.ws";
 import StateContext from "../../Context";
 import axios from "axios";
+import { env } from "../../../config/env";
 import {
   TwitterShareButton,
   TwitterIcon,
@@ -106,7 +107,7 @@ const Roulette = ({ sidebarToggled }) => {
   const innerRef = useRef();
 
   const wsConnect = () => {
-    connect({ servers: "ws://127.0.0.1:9222" })
+    connect({ servers: env.natsEndpoint })
       .then(async function (nc) {
         if (checkWallet === "true") {
           sub = nc.subscribe(
@@ -381,7 +382,7 @@ const Roulette = ({ sidebarToggled }) => {
     }
     setBetsEnded(true);
     setSpinAvailable(false);
-    setOverlayString("Waiting for the random number to be generated…");
+    setOverlayString("Waiting for the random number to be generated...");
 
     //txFee:
     //  minBoxValue    = 1000000 * (size of bets array)
@@ -418,48 +419,63 @@ const Roulette = ({ sidebarToggled }) => {
                 }
               });
               console.log(utxos);
-              // send bet data structure to backend for the bet tx to be built
-              //axios
-              //  .post(`/api/v1/roulette/bet-tx`, {
-              //    board: backendBetObject.backendBoard,
-              //    senderAddr: `${localStorage.getItem("walletAddress")}`,
-              //    utxos: utxos,
-              //  })
-              //  .then(async function (response) {
-              //    // sign tx
-              //    const signedTx = await signTx(response.data.unsignedTx);
-              //    console.log("signedTx", signedTx);
-              //    // Get a BoxId to use for the random number call
-              //    boxId = signedTx.outputs[2].boxId;
-              //    // submit to node
-              //    submitTx(signedTx, response.data.sessionId)
-              //      .then(async (txId) => {
-              //        if (!txId) {
-              //          console.log(`No submitted tx ID`);
-              //          return null;
-              //        }
-              //        console.log(`Transaction submitted - ${txId.data}`);
-              // call rng service with wallet address and box id to get our random number
-              axios
-                .get(
-                  `http://127.0.0.1:8089/api/v1/test/random-number/roulette?walletAddr=${localStorage.getItem(
-                    "walletAddress"
-                  )}`
-                )
-                .then(async function (resp) {
-                  console.log("GET api/v1/random-number/roulette", { resp });
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
-              //      })
-              //      .catch((err) => {
-              //        console.log(err);
-              //      });
-              //  })
-              //  .catch(function (error) {
-              //    console.log(error);
-              //  });
+              if (process.env.REACT_APP_ENV !== "local") {
+                // send bet data structure to backend for the bet tx to be built
+                axios
+                  .post(`/api/v1/roulette/bet-tx`, {
+                    board: backendBetObject.backendBoard,
+                    senderAddr: `${localStorage.getItem("walletAddress")}`,
+                    utxos: utxos,
+                  })
+                  .then(async function (response) {
+                    // sign tx
+                    const signedTx = await signTx(response.data.unsignedTx);
+                    console.log("signedTx", signedTx);
+                    // Get a BoxId to use for the random number call
+                    boxId = signedTx.outputs[2].boxId;
+                    // submit to node
+                    submitTx(signedTx, response.data.sessionId)
+                      .then(async (txId) => {
+                        if (!txId) {
+                          console.log(`No submitted tx ID`);
+                          return null;
+                        }
+                        console.log(`Transaction submitted - ${txId.data}`);
+                        // call rng service with wallet address and box id to get our random number
+                        axios
+                          .get(
+                            `${env.rngEndpoint}/roulette?walletAddr=${localStorage.getItem(
+                              "walletAddress"
+                            )}&boxId=${boxId}`
+                          )
+                          .then(async function (resp) {
+                            console.log("GET api/v1/random-number/roulette", { resp });
+                          })
+                          .catch(function (error) {
+                            console.log(error);
+                          });
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+              } else {
+                axios
+                  .get(
+                    `${env.rngEndpoint}/roulette?walletAddr=${localStorage.getItem(
+                      "walletAddress"
+                    )}&boxId=${boxId}`
+                  )
+                  .then(async function (resp) {
+                    console.log("GET api/v1/random-number/roulette", { resp });
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+              }
             }
           });
       }
