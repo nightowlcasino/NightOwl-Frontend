@@ -108,6 +108,10 @@
     padding: 40px;
     display: flex;
     flex-direction: column;
+    background-image: url("../../assets/Elements/hhh.png");
+    background-size: cover;
+    background-position: 100% 50%;
+    border-radius: 25px;
 }
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background #home-page-inner-wrapper #home-page-inner-left #top
@@ -134,7 +138,7 @@
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background #home-page-inner-wrapper #home-page-inner-left #bottom #header h1
 {
-    font-size: 50px;
+    font-size: 48px;
     margin: 15px 0px;
 }
 
@@ -146,7 +150,9 @@
     margin: 15px 0px 0px 0px;
     background-image: linear-gradient(to right, #8e0081, #fa008c);
     color: whitesmoke;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-hot-wrapper #home-page-hot #home-page-hot-border #home-page-hot-content-background #home-page-inner-wrapper #home-page-inner-right
@@ -165,13 +171,13 @@
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-footer
 {
-    flex: 30%;
+    flex: 36%;
     display: flex;
 }
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-transactions-wrapper
 {
-    flex: 60%;
+    flex: 63%;
     display: flex;
 }
 
@@ -226,7 +232,6 @@
 #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-transactions-wrapper #home-page-transactions-border #transactions-wrapper #transactions-header-wrapper #transactions-header #transactions-text
 {
     margin-left: 20px;
-    font-size: 20px;
     color: white;
 }
 
@@ -240,18 +245,20 @@
     width: 100%;
 }
 
-#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-transactions-wrapper #home-page-transactions-border #transactions-wrapper #transactions-table-wrapper table th,
 #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-transactions-wrapper #home-page-transactions-border #transactions-wrapper #transactions-table-wrapper table td
 {
     color: white;
     text-align: center;
-    width: 33%;
     padding: 5px;
+    font-size:1.1em;
 }
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-transactions-wrapper #home-page-transactions-border #transactions-wrapper #transactions-table-wrapper table th
 {
-    color: #ab0d82;
+    text-align: center;
+    padding: 5px;
+    color: #fa008c;
+    font-size: 20px;
 }
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games
@@ -280,12 +287,15 @@
 #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper
 {
     color: white;
-    background-color: #20075a;
     width: calc(100% - 15px);
     height: calc(100% - 15px);
     border-radius: 25px;
     margin: 0 auto;
     display: flex;
+    background-image: url("../../assets/Elements/amai.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 30% 50%;
 }
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left
@@ -325,7 +335,7 @@
     flex: 1 1 auto;
 }
 
-#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left .bottom .button-wrapper .button-background
+#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left .bottom .button-wrapper .dsad
 {
     margin: 20px;
     background-image: linear-gradient(to bottom, #4a1077, #d53a9d);
@@ -334,16 +344,18 @@
     width: 112px;
 }
 
-#body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-left .bottom .button-wrapper .button-background .hot-games-button
+.hot-games-button
 {
-    color: white;
-    background-color: #20075a;
     border: none;
     border-radius: 20px;
-    font-size: 16px;
+    background-image: linear-gradient(to right, #8e0081, #fa008c);
+    color: whitesmoke;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
     padding: 10px;
-    margin: 1px;
-    width: 110px;
+    margin: 15px 0px 0px 0px;
+    width: 80%;
 }
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-hot-games .hot-games-border .hot-games-wrapper .hot-games-inner-right
@@ -359,6 +371,16 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
+
+#copy-address-img {
+    cursor: pointer;
+    z-index: 1;
+}
+
+.owl-table-icon {
+    width: 30px;
+    height: 30px;
+  }
 
 @media all and (max-width: 992px)
 {

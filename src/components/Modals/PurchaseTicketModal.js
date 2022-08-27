@@ -46,7 +46,7 @@ const PurchaseTicketModal = ({ showModal, setModalOff }) => {
   return (
     <div className={`warning-modal-wrapper ${showModal ? "show" : "hide"}`}>
       <div id="overlay-popup-purchase-ticket" style={{ margin: "0 auto" }}>
-        <div id="overlay-close" onClick={() => setModalOff(false)}>
+        <div id="overlay-close" onClick={() => setModalOff(false)} style={{justifyContent:"flex-end"}}>
           <img
             src={closeModalIcon}
             alt="Close this window"
@@ -55,7 +55,7 @@ const PurchaseTicketModal = ({ showModal, setModalOff }) => {
         </div>
         <div id="overlay-text">
           <span id="title" style={{ fontSize: "2.25em" }}>
-            Purchase a lottery ticket
+            Purchase a Lottery Ticket
           </span>
           <div className="purchase-ticket-input">
             <div className="conversion-explained">

@@ -108,11 +108,11 @@ const Coinflip = () => {
               </div>
             </div>
             <h3>
-              <span style={{ color: "#d70a84" }}>Possible reward: </span>
+              <span style={{ color: "#d70a84" }}>Possible Reward: </span>
               {rewardMinusHouseFee(Number(bettingAmount))} OWL
             </h3>
             <div id="bet-button-wrapper">
-              <button onClick={handleBetPlaced}>Place bet</button>
+              <button onClick={handleBetPlaced}>Place Bet</button>
             </div>
           </div>
         </div>

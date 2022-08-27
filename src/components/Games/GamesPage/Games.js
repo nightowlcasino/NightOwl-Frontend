@@ -2,13 +2,16 @@ import "./Games.css";
 import rouletteCardImage from "../../../assets/Elements/rouletteCardImage.jpg";
 import rouletteMascot from "../../../assets/Elements/rouletteMascot.png";
 import rouletteIcon from "../../../assets/Elements/roulette3.svg";
-
-import rouletteCardImage1 from "../../../assets/Elements/wtfruleta.png";
+import amai from "../../../assets/Elements/eiou.png";
+// import rouletteCardImage1 from "../../../assets/Elements/wtfruleta.png";
 import rouletteCardImage2 from "../../../assets/Elements/ruletawhat.png";
+import rouletteCardImage3 from "../../../assets/Elements/rouletteHomeCut.png";
+import rouletteCardImage1 from "../../../assets/Elements/ffs.png";
 
 import infologo from "../../../assets/Elements/infologo.svg";
 import dicesImage from "../../../assets/Elements/dicesImage.jpg";
 import casinoEntrance from "../../../assets/Elements/casinoEntrance.jpg";
+import coinflipImage from "../../../assets/Elements/aaaaaaaaa.jpeg";
 
 import RouletteModal from "../../Modals/RouletteModal";
 import LotteryModal from "../../Modals/LotteryModal";
@@ -53,8 +56,8 @@ const Games = () => {
         <div className="games-card-container">
           <div className="image-card-container">
             <img
-              src={rouletteCardImage1}
-              style={{ objectPosition: "center", cursor: "pointer" }}
+              src={rouletteCardImage3}
+              style={{ objectFit:"cover" ,cursor: "pointer" }}
               onClick={() => handleNavigateToGame("roulette")}
             />
           </div>
@@ -88,7 +91,7 @@ const Games = () => {
         <div className="games-card-container">
           <div className="image-card-container">
             <img
-              src={casinoEntrance}
+              src={coinflipImage}
               style={{ objectPosition: "middle", cursor: "pointer" }}
               onClick={() => handleNavigateToGame("coinflip")}
             />
@@ -123,8 +126,8 @@ const Games = () => {
         <div className="games-card-container">
           <div className="image-card-container">
             <img
-              src="https://pbs.twimg.com/media/FEaFK4OWUAAlgiV?format=jpg&name=900x900"
-              style={{ objectPosition: "right", cursor: "pointer" }}
+              src={amai}
+              style={{ objectFit:"cover", objectPosition: "center",cursor: "pointer" }}
               onClick={() => handleNavigateToGame("lottery")}
             />
           </div>

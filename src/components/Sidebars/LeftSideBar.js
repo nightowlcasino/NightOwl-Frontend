@@ -94,7 +94,7 @@ function LeftSideBar({ sidebarToggled, setSidebarToggled }) {
                 style={{ backgroundImage: `url(${home_icon_pink})` }}
               ></div>
             </div>
-            <span className="item-text">Home page</span>
+            <span className="item-text">Home</span>
           </div>
         </Link>
         <Link
@@ -232,7 +232,7 @@ function LeftSideBar({ sidebarToggled, setSidebarToggled }) {
                 style={{ backgroundImage: `url(${coinflip_icon_pink})` }}
               ></div>
             </div>
-            <span className="item-text">Coinflip</span>
+            <span className="item-text">CoinFlip</span>
           </div>
         </Link>
         <Link

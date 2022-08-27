@@ -2,6 +2,18 @@
     text-decoration: none;
 }
 
+span>a>li:hover, .footerLink:hover {
+    color: #d70a84 !important
+}
+
+#doc-link:hover, .footerLink:hover {
+    color: #d70a84 !important
+}
+
+#svgwhat:hover {
+    color:"white" !important;
+}
+
 @media all and (max-width: 992px) {
     #footer {
         flex-direction: column;

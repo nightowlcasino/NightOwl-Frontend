@@ -7,9 +7,11 @@ const CoinflipModal = ({ showModal, setModalOff }) => {
   return (
     <div className={`warning-modal-wrapper ${showModal ? "show" : "hide"}`}>
       <div id="overlay-popup-coinflip" style={{ margin: "0 auto" }}>
-        <div id="overlay-close" onClick={() => setModalOff(false)} >
+        <div id="overlay-close" >
+        <span><span style={{display:"inline", color:"#d70a84"}}>House edge:</span> 2.5%</span>
           <img
             src={closeModalIcon}
+            onClick={() => setModalOff(false)}
             alt="Close this window"
             style={{ width: "30px", height: "30px" }}
           />

@@ -10,7 +10,7 @@ import WarningModal from "../Modals/WarningModal";
 import swapMascot from "../../assets/Elements/blackjackMascot.png";
 
 const TOKENID_NO_TEST =
-  "afd0d6cb61e86d15f2a0adc1e7e23df532ba3ff35f8ba88bed16729cae933032";
+  "473041c7e13b5f5947640f79f00d3c5df22fad4841191260350bb8c526f9851f";
 const TOKENID_FAKE_SIGUSD =
   "96c402c0e658909aa03f534006124f0e43725c467dbc8dea39680d0861892de5";
 const TOKENID_ERG =
@@ -29,12 +29,6 @@ function Swap({ setIsLoading, setSwapTransaction }) {
   const [sigUSDBalance, setSigUSDBalance] = useState();
   const { ergoWallet, defaultAddress } = useContext(StateContext);
 
-  const TOKENID_NO_TEST =
-    "afd0d6cb61e86d15f2a0adc1e7e23df532ba3ff35f8ba88bed16729cae933032";
-
-  const TOKENID_SIGUSD =
-    "03faf2cb329f2e90d6d23b58d91bbb6c046aa143261cc21f52fbe2824bfcbf04";
-
   useEffect(() => {
     async function getBalance() {
       console.log("hola");
@@ -43,7 +37,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
       });
 
       // get SigUSD balance
-      ergoWallet.get_balance(TOKENID_SIGUSD).then(function (balance) {
+      ergoWallet.get_balance(TOKENID_FAKE_SIGUSD).then(function (balance) {
         setSigUSDBalance(balance / 100);
       });
     }
@@ -54,7 +48,6 @@ function Swap({ setIsLoading, setSwapTransaction }) {
 
   const swapTokens = (e) => {
     e.preventDefault();
-    console.log("swap button pressed");
 
     // get input boxes for each token ID
     const sigUSDAmount = 10;
@@ -140,9 +133,13 @@ function Swap({ setIsLoading, setSwapTransaction }) {
 
   async function submitTx(txToBeSubmitted) {
     try {
-      return await ergoWallet.submit_tx(txToBeSubmitted);
+      return await axios.post(`/api/v1/transactions`, {
+        senderAddr: `${localStorage.getItem("walletAddress")}`,
+        game: "swap",
+        sessionId: "test",
+        tx: txToBeSubmitted,
+      });
     } catch (err) {
-      setIsLoading(false);
       const msg = `[submitTx] Error: ${JSON.stringify(err)}`;
       console.error(msg, err);
       return null;
@@ -234,7 +231,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
                       }}
                     />
                     <span>{swap1}</span>
-                    <div className="tokenBalance">
+                    {ergoWallet && (<div className="tokenBalance">
                       <span style={{ fontSize: "14px" }}>
                         Balance:{" "}
                         <span
@@ -249,7 +246,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
                           {swap1 == "SigUSD" ? sigUSDBalance : owlBalance}
                         </span>
                       </span>
-                    </div>
+                    </div>)}
                   </div>
                   <div id="swap-input-amount-input">
                     <input
@@ -283,7 +280,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
                       }}
                     />
                     <span>{swap2}</span>
-                    <div className="tokenBalance">
+                    {ergoWallet && (<div className="tokenBalance">
                       <span style={{ fontSize: "14px" }}>
                         Balance:{" "}
                         <span
@@ -298,7 +295,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
                           {swap2 == "SigUSD" ? sigUSDBalance : owlBalance}
                         </span>
                       </span>
-                    </div>
+                    </div>)}
                   </div>
                   <div id="swap-input-amount-input">
                     <input
@@ -315,12 +312,12 @@ function Swap({ setIsLoading, setSwapTransaction }) {
             </div>
             <div id="swap-buttons">
               <div id="swap-button">
-                {/* <button onClick={swapTokens}>Swap</button> */}
-                <button
+                <button onClick={swapTokens}>Swap</button>
+                {/* <button
                   onClick={(e) => handleWarningTriggered(e, "Swap failed", 4)}
                 >
                   Swap
-                </button>
+                </button> */}
               </div>
               {/* <div id="swap-slippage">Slippage <span id="swap-slippage-value">0.5</span>%</div> */}
             </div>
