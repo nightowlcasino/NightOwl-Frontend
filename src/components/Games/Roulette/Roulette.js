@@ -49,6 +49,7 @@ import {
   arrayWithNumVals3,
   arrayWithNumVals4,
   checkIfZero,
+  checkPairs,
   getSubgame,
   getSpotNumber,
   getMultiplier,
@@ -97,25 +98,12 @@ const Roulette = ({ sidebarToggled }) => {
   const [winningNotification, setWinningNotification] = useState(false);
   const { ergoWallet, defaultAddress } = useContext(StateContext);
 
-  //console.log(ergoWallet);
   const checkWallet = localStorage.getItem("walletConnected");
   let sub;
   const sc = StringCodec();
   //const waiting_for_respond_animation_delay = setInterval(() => {}, 1000);
 
   const innerRef = useRef();
-
-  // const betIsWon = () => {
-  //   Object.values(betObject).forEach((betArray, index) => {
-  //     if (betArray.length) {
-  //       let amountBetted;
-  //       amountBetted = betArray.reduce((x, y) => x + y);
-  //       let aux = betIsWithinWinningFields(index, randomNumber);
-  //       if (aux) {}
-  //       console.log(index);
-  //     }
-  //   });
-  // };
 
   const wsConnect = () => {
     connect({ servers: "ws://127.0.0.1:9222" })
@@ -147,7 +135,6 @@ const Roulette = ({ sidebarToggled }) => {
   };
 
   function handleChipSelected(chipValue) {
-    console.log("what");
     setChipSelected(chipValue);
     choosingChip.currentTime = 0;
     choosingChip.play();
@@ -226,6 +213,10 @@ const Roulette = ({ sidebarToggled }) => {
     }
   }, [newRandomNumber]);
 
+  useEffect(() => {
+    console.log(backendBetObject)
+  }, [backendBetObject])
+
   function playRandomWinningSound() {
     let randomSound = Math.floor(Math.random() * winningSounds.length);
     winningSounds[randomSound].play();
@@ -233,15 +224,8 @@ const Roulette = ({ sidebarToggled }) => {
 
   function addBetToObject(e) {
     let numbers = e.target.getAttribute("num-val");
-    // Test wether the bet amount has reached a maximum value and if so, warn the user about it.
-    // if (totalBet > APICallRetrievingMaxPossibleBet) {
-    //   notifySomething("You have reached the maximum bet amount.", 3);
-    //   return;
-    // }
 
-    let currBets = backendBetObject.backendBoard.bets
-    let currBetsIdx = backendBetObject.betsIndex
-    let currHist = backendBetObject.history
+    let currBackendObj = structuredClone(backendBetObject)
     let newBets = []
     // remove leading '_'
     let betNumbers = numbers
@@ -249,67 +233,110 @@ const Roulette = ({ sidebarToggled }) => {
       betNumbers = numbers.substring(1)
     }
 
-    let betIdx = betNumbers
     // check if bet needs to be split up into small bets
-    betNumbers = betNumbers.split('_')
+    let betNumbers_split = betNumbers.split('_')
     // lower/middle/upper third and lower/upper half are special cases
-    if (betNumbers[0] == "first" || betNumbers[0] == "second" || betNumbers[0] == "third") {
-      betNumbers = [betNumbers[0] + betNumbers[1]]
-      betIdx = betNumbers[0]
+    if (betNumbers_split[0] == "first" || betNumbers_split[0] == "second" || betNumbers_split[0] == "third") {
+      betNumbers_split = [betNumbers_split[0] + betNumbers_split[1]]
     }
 
-    betNumbers.forEach((val) => {
-      const subgame = getSubgame(val)
-      const spotNum = getSpotNumber(val)
-      const mult = getMultiplier(betNumbers)
-      const hash = `${subgame}-${spotNum}-${mult}`
-      // check if chips are already placed on spot, if so we will only update the bet amount
-      if (currBetsIdx[hash] !== undefined) {
-        currBets[currBetsIdx[hash]].amount += (chipSelected / betNumbers.length)
-      } else {
-        // otherwise create new bet
-        const bet = {
-          r4: subgame,
-          r5: spotNum,
-          multiplier: mult,
-          amount: chipSelected / betNumbers.length,
+    // increment current spot total if it exists
+    if (currBackendObj.board[betNumbers] !== undefined) {
+      currBackendObj.board[betNumbers].total += chipSelected
+    } else {
+      currBackendObj.board[betNumbers] = {
+        total: chipSelected,
+        mult: getMultiplier(betNumbers_split),
+      }
+    }
+
+    for (const [key, bet] of Object.entries(currBackendObj.board)) {
+      const amount = checkPairs(key, currBackendObj.board)
+      if (amount > currBackendObj.maxpayout) {
+        currBackendObj.maxpayout = amount
+      }
+    }
+
+    // Test wether the bet amount has reached a maximum value and if so, warn the user about it.
+    axios
+      .get(
+        '/api/v1/liquidity/max-bet'
+      )
+      .then(async function (resp) {
+        console.log("GET /api/v1/liquidity/max-bet", { resp });
+        if (currBackendObj.maxpayout > resp.data.amount) {
+          notifySomething("You have reached the maximum bet amount.", 3);
+          return;
         }
 
-        const idx = currBets.push(bet)
-        // set the bet index so we can find and update it easily
-        currBetsIdx[hash] = idx - 1
-      }
-      newBets.push(hash)
-    })
+        const move = {
+          maxpayout: currBackendObj.maxpayout,
+          hash: "",
+          spot: betNumbers,
+          amount: chipSelected,
+        }
 
-    currHist.push(newBets)
+        betNumbers_split.forEach((val) => {
+          const subgame = getSubgame(val)
+          const spotNum = getSpotNumber(val)
+          const mult = getMultiplier(betNumbers_split)
+          const hash = `${subgame}-${spotNum}-${mult}`
+          // check if chips are already placed on spot, if so we will only update the bet amount
+          if (currBackendObj.betsIndex[hash] !== undefined) {
+            currBackendObj.backendBoard.bets[currBackendObj.betsIndex[hash]].amount += (chipSelected / betNumbers_split.length)
+          } else {
+            // otherwise create new bet
+            const bet = {
+              r4: subgame,
+              r5: spotNum,
+              multiplier: mult,
+              amount: chipSelected / betNumbers_split.length,
+            }
 
-    setBackendBetObject({
-      history: currHist,
-      betsIndex: currBetsIdx,
-      backendBoard: {
-        txFee: (MIN_BOX_VALUE * currBets.length) + (MIN_BOX_VALUE * currBets.length) + MINER_FEE_VALUE + MIN_BOX_VALUE,
-        totalWager: totalBet + chipSelected,
-        bets: currBets,
-      },
-    })
+            const idx = currBackendObj.backendBoard.bets.push(bet)
+            // set the bet index so we can find and update it easily
+            currBackendObj.betsIndex[hash] = idx - 1
+          }
+          newBets.push(hash)
+        })
 
-    let currentArrayCopy = betObject[`num_val${numbers}`].slice();
-    currentArrayCopy.push(chipSelected);
-    setBetObject({
-      ...betObject,
-      [`num_val${numbers}`]: currentArrayCopy, //betObject[`num_val${numbers}`] + chipSelected,
-    });
-    addLatestBet(numbers);
-    setTotalBet(totalBet + chipSelected);
-    placingChip.currentTime = 0;
-    placingChip.play();
+        move.hash = newBets
+        currBackendObj.history.push(move)
+
+        setBackendBetObject({
+          history: currBackendObj.history,
+          betsIndex: currBackendObj.betsIndex,
+          maxpayout: currBackendObj.maxpayout,
+          board: currBackendObj.board,
+          backendBoard: {
+            txFee: (MIN_BOX_VALUE * currBackendObj.backendBoard.bets.length) + (MIN_BOX_VALUE * currBackendObj.backendBoard.bets.length) + MINER_FEE_VALUE + MIN_BOX_VALUE,
+            totalWager: totalBet + chipSelected,
+            bets: currBackendObj.backendBoard.bets,
+          },
+        })
+
+        let currentArrayCopy = betObject[`num_val${numbers}`].slice();
+        currentArrayCopy.push(chipSelected);
+        setBetObject({
+          ...betObject,
+          [`num_val${numbers}`]: currentArrayCopy, //betObject[`num_val${numbers}`] + chipSelected,
+        });
+        addLatestBet(numbers);
+        setTotalBet(totalBet + chipSelected);
+        placingChip.currentTime = 0;
+        placingChip.play();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   function resetBets() {
     setBackendBetObject({
       history: [],
       betsIndex: {},
+      maxpayout: 0,
+      board: {},
       backendBoard: {
         txFee: 0,
         totalWager: 0,
@@ -366,20 +393,6 @@ const Roulette = ({ sidebarToggled }) => {
     //  changeBoxValue = 1000000
     //  payoutFee      = 1000000 * (size of bets array)
 
-    //roulette bet for even
-    //board = {
-    //  txFee: minERG,
-    //  totalWager: 10,
-    //  bets: [
-    //    {
-    //      r4: 1,
-    //      r5: 0,
-    //      multiplier: 1,
-    //      amount: 10,
-    //    },
-    //  ],
-    //};
-
     // Get utxo for ERGs
     ergoWallet.get_utxos(backendBetObject.backendBoard.txFee, TOKENID_ERG).then((utxosResponse) => {
       if (utxosResponse.length === 0) {
@@ -399,7 +412,7 @@ const Roulette = ({ sidebarToggled }) => {
                 utxos.forEach((box) => {
                   // Check if any matching boxIds
                   // TODO: Add a break/continue
-                  if (owlBox.boxId == box.boxId) {
+                  if (owlBox.boxId === box.boxId) {
                     found = true;
                   }
                 });
@@ -481,16 +494,6 @@ const Roulette = ({ sidebarToggled }) => {
       }
     }
 
-    //send the backend the bet object using buildBackendBetObject();
-
-    /* REMOVE THIS ONE AFTER BACKEND CALLS ARE PROPERLY WORKING */
-    //setStopSpin(true);
-
-    //This literally triggers the spin to stop, so this next two lines should only be executed when the number is retrieved from the blockchain
-    //setRandomNumber(10);
-    //setNewRandomNumber(true);
-
-    // SIMULATION OF THE WAITING FOR THE 2 MINUTES LIMIT.
     fetchData();
   }
 
@@ -512,9 +515,6 @@ const Roulette = ({ sidebarToggled }) => {
     } else {
       console.log("random number came successfully");
       //Treatment of the number returned.
-      //This literally triggers the spin to stop, so this next two lines should only be executed when the number is retrieved from the blockchain
-      // setRandomNumber(10);
-      // setNewRandomNumber(true);
     }
   };
 
@@ -541,21 +541,20 @@ const Roulette = ({ sidebarToggled }) => {
       return;
     }
 
-    let currHist = backendBetObject.history
-    let currBets = backendBetObject.backendBoard.bets
-    let currBetsIdx = backendBetObject.betsIndex
+    let currBackendObj = structuredClone(backendBetObject)
+    let newMaxPayout = 0
     let txfee = 0
 
-    let lastHash = currHist.pop()
+    let lastHash = currBackendObj.history.pop()
     if (lastHash === undefined) {
       return
     }
 
     // loop through array of hashes to get index values for the bets to remove
-    lastHash.reverse()
-    lastHash.forEach((hash) => {
-      currBets.splice(currBetsIdx[hash], 1)
-      delete currBetsIdx[hash]
+    lastHash.hash.reverse()
+    lastHash.hash.forEach((hash) => {
+      currBackendObj.backendBoard.bets.splice(currBackendObj.betsIndex[hash], 1)
+      delete currBackendObj.betsIndex[hash]
     })
 
     let currentBetObjectCopy = betObject[`num_val${lastBet}`].slice();
@@ -564,21 +563,37 @@ const Roulette = ({ sidebarToggled }) => {
       ...betObject,
       [`num_val${lastBet}`]: currentBetObjectCopy,
     });
-    setTotalBet(totalBet - chipValueUndone);
 
-    if (currBets.length > 0) {
-      txfee = (MIN_BOX_VALUE * currBets.length) + (MIN_BOX_VALUE * currBets.length) + MINER_FEE_VALUE + MIN_BOX_VALUE
+    if (currBackendObj.board[lastHash.spot] !== undefined) {
+      if (currBackendObj.board[lastHash.spot].total > chipValueUndone) {
+        currBackendObj.board[lastHash.spot].total = currBackendObj.board[lastHash.spot].total - chipValueUndone
+      } else if (currBackendObj.board[lastHash.spot].total === chipValueUndone) {
+        delete currBackendObj.board[lastHash.spot]
+      }
+    }
+
+    if (currBackendObj.backendBoard.bets.length > 0) {
+      txfee = (MIN_BOX_VALUE * currBackendObj.backendBoard.bets.length) + (MIN_BOX_VALUE * currBackendObj.backendBoard.bets.length) + MINER_FEE_VALUE + MIN_BOX_VALUE
+    }
+
+    if (currBackendObj.history.length == 0) {
+      newMaxPayout = 0
+    } else {
+      newMaxPayout = currBackendObj.history[currBackendObj.history.length - 1].maxpayout
     }
 
     setBackendBetObject({
-      history: currHist,
-      betsIndex: currBetsIdx,
+      history: currBackendObj.history,
+      betsIndex: currBackendObj.betsIndex,
+      maxpayout: newMaxPayout,
+      board: currBackendObj.board,
       backendBoard: {
         txFee: txfee,
         totalWager: totalBet - chipValueUndone,
-        bets: currBets,
+        bets: currBackendObj.backendBoard.bets,
       },
     })
+    setTotalBet(totalBet - chipValueUndone);
   }
 
   return (
