@@ -260,10 +260,10 @@ const Roulette = ({ sidebarToggled }) => {
     // Test wether the bet amount has reached a maximum value and if so, warn the user about it.
     axios
       .get(
-        '/api/v1/liquidity/max-bet'
+        '/api/v1/liquidity/max-payout'
       )
       .then(async function (resp) {
-        console.log("GET /api/v1/liquidity/max-bet", { resp });
+        console.log("GET /api/v1/liquidity/max-payout", { resp });
         if (currBackendObj.maxpayout > resp.data.amount) {
           notifySomething("You have reached the maximum bet amount.", 3);
           return;
