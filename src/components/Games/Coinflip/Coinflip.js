@@ -18,7 +18,10 @@ const Coinflip = () => {
   }
 
   function handleBetPlaced() {
-    console.log("bet placed");
+	const intervalID = setInterval(() => {
+		set(state=> !state)
+	}, 300);
+    console.log("bet placed", intervalID);
   }
 
   const [flipped, set] = useState(false)
@@ -72,7 +75,7 @@ const Coinflip = () => {
 								src={headIcon}
 								className="coinflip-select-bet-img"
 								alt="Select heads"
-								onClick={() => setSideSelected("Heads")}
+								onClick={() => { setSideSelected("Heads"); set((state) => !state);}}
 								style={
 									sideSelected === "Heads"
 										? {
@@ -88,7 +91,7 @@ const Coinflip = () => {
 								src={tailsIcon}
 								className="coinflip-select-bet-img"
 								alt="Select tails"
-								onClick={() => setSideSelected("Tails")}
+								onClick={() => { setSideSelected("Tails"); set((state) => !state);}}
 								style={
 									sideSelected === "Tails"
 										? {
@@ -128,7 +131,7 @@ const Coinflip = () => {
 					<div id="platform">
 						<div
 							className="flex fill center"
-							onClick={() => set((state) => !state)}
+							onClick={()=> set(state=>!state)}
 						>
 							<a.div
 								className='c back'
