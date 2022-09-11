@@ -48,6 +48,7 @@ function App() {
     const [defaultAddress, setDefaultAddress] = useState();
 	const [isLoading, setIsLoading] = useState(false);
 	const [swapTransaction, setSwapTransaction] = useState(false);
+	const [kyaAccepted, setKyaAccepted] = useState(localStorage.getItem("kya"));
 	const location = useLocation();
 	const path = location.pathname;
 	// console.log(path)
@@ -56,8 +57,8 @@ function App() {
 			{/* need to add class 'overlay' to app in order to have blurred content in case swap overlay is active */}
 				{path.includes('/soon') ? <ComingSoon /> : 
 				<StateContext.Provider value={{ergoWallet, setErgoWallet, defaultAddress, setDefaultAddress}}>
-					<Header />
-					<BodyContent setIsLoading={setIsLoading} setSwapTransaction={setSwapTransaction} />
+					<Header kyaAccepted={kyaAccepted} setKyaAccepted={setKyaAccepted}/>
+					<BodyContent setIsLoading={setIsLoading} setSwapTransaction={setSwapTransaction} kyaAccepted={kyaAccepted} setKyaAccepted={setKyaAccepted}/>
 					{!path.includes('/games') && <Footer />}
 					{<div id="overlay">
 						<div id="overlay-background"></div>

@@ -17,7 +17,7 @@ import LiquidityProvision from "../LiquidityProvision/LiquidityProvision";
 import Games from "../Games/GamesPage/Games.js";
 import Lottery from "../Lottery/Lottery";
 
-function BodyContent({setIsLoading,setSwapTransaction}) {
+function BodyContent({setIsLoading,setSwapTransaction, kyaAccepted, setKyaAccepted}) {
     const location = useLocation();
     const path = location.pathname;
     const [sidebarToggled, setSidebarToggled] = useState(false);
@@ -43,7 +43,7 @@ function BodyContent({setIsLoading,setSwapTransaction}) {
             <Sidebars sidebarToggled={sidebarToggled} setSidebarToggled={setSidebarToggled}/>
             <div id="body-content">
                 <Routes>
-                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/" element={<LandingPage kyaAccepted={kyaAccepted} setKyaAccepted={setKyaAccepted}/>} />
                     <Route path="/soon" element={<ComingSoon />} />
                     <Route path="/stake" element={<Stake />} />
                     <Route path="/swap" element={<Swap setIsLoading={setIsLoading} setSwapTransaction={setSwapTransaction} />} />

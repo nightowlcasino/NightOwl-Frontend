@@ -30,7 +30,7 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 	const [withdrawLiquidityModal, setWithdrawLiquidityModal] = useState(false);
 
 
-	if(hasAddedLiquidity) {
+	if(!hasAddedLiquidity) {
 		return (
 		<div style={{marginTop: 30, display: "flex", flexDirection: "column", color: "white", width: "100%"}}>
 			<AddLiquidityModal showModal={addLiquidityModal} setModalOff={setAddLiquidityModal}/>

@@ -7,8 +7,9 @@ import amai from "../../assets/Elements/amai.png";
 import { useNavigate } from "react-router-dom";
 import copyIcon from "../../assets/Elements/copyIcon.svg";
 import owlIcon from "../../assets/Elements/head.png";
+import KYAModal from "../Modals/KYAModal";
 
-function LandingPage() {
+function LandingPage({kyaAccepted,setKyaAccepted}) {
   let navigate = useNavigate();
 
   function handleNavigateToPage(e, page) {
@@ -44,9 +45,14 @@ function LandingPage() {
       TxID: "109a6e3360661c3fc442a586521f08ee0d67f92f56a71cee8cacc4a8cac42a5e",
     },
   ];
-
+  console.log("hola");
+  console.log(kyaAccepted);
   return (
     <div id="page-content-wrapper">
+      <KYAModal
+        showModal={kyaAccepted}
+        setModalOff={setKyaAccepted}
+      />
       <div id="home-page-hot-wrapper">
         <div id="home-page-hot">
           <div id="home-page-hot-border">

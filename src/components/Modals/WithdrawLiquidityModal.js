@@ -68,7 +68,7 @@ const WithdrawLiquidityModal = ({ showModal, setModalOff }) => {
                   justifyContent: "center",
                 }}
               >
-                <span style={{ fontSize: 17, color: "#d60a84" }}>10</span>
+                <span style={{ fontSize: 17, color: "#d60a84" }}>10 days</span>
               </div>
             </div>
           </div>
