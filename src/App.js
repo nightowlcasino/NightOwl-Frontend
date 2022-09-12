@@ -71,6 +71,7 @@ function App() {
     const [defaultAddress, setDefaultAddress] = useState();
 	const [isLoading, setIsLoading] = useState(false);
 	const [swapTransaction, setSwapTransaction] = useState(false);
+	const [kyaAccepted, setKyaAccepted] = useState(localStorage.getItem("kya"));
 	const location = useLocation();
 	const path = location.pathname;
 	// console.log(path)
@@ -79,33 +80,31 @@ function App() {
 			{/* need to add class 'overlay' to app in order to have blurred content in case swap overlay is active */}
 				{path.includes('/soon') ? <ComingSoon /> : 
 				<MatomoProvider value={instance}>
-					<StateContext.Provider value={{ergoWallet, setErgoWallet, defaultAddress, setDefaultAddress}}>
-						<Header />
-						<BodyContent setIsLoading={setIsLoading} setSwapTransaction={setSwapTransaction} />
-						{!path.includes('/games') && <Footer />}
-						{<div id="overlay">
-							<div id="overlay-background"></div>
-							<div id="overlay-content-wrapper">
-								<div id="overlay-content">
-									
-									{isLoading && 
-										<Triangle
-											height="100"
-											width="100"
-											color='white'
-											ariaLabel='loading'
-										/>
-									}
-									{swapTransaction && 
-										<div id="overlay-popup">
-											<div id="green-checkmark" style={{backgroundImage: `url(${green_check})`}}></div>
-											<div id="overlay-text">
-												<span>Transaction submitted</span>
-												<a style={{textDecoration:'underline'}} target="_blank" rel="noreferrer" href={`https://explorer.ergoplatform.com/en/transactions/${swapTransaction}`}>View Transaction</a>
-											</div>
-											{/* add functionality to close overlay to element below */}
-											<div id="overlay-close" onClick={()=>setSwapTransaction(false)}>X</div>
+				<StateContext.Provider value={{ergoWallet, setErgoWallet, defaultAddress, setDefaultAddress}}>
+					<Header kyaAccepted={kyaAccepted} setKyaAccepted={setKyaAccepted}/>
+					<BodyContent setIsLoading={setIsLoading} setSwapTransaction={setSwapTransaction} kyaAccepted={kyaAccepted} setKyaAccepted={setKyaAccepted}/>
+					{!path.includes('/games') && <Footer />}
+					{<div id="overlay">
+						<div id="overlay-background"></div>
+						<div id="overlay-content-wrapper">
+							<div id="overlay-content">
+								
+								{isLoading && 
+									<Triangle
+										height="100"
+										width="100"
+										color='white'
+										ariaLabel='loading'
+									/>
+								}
+								{swapTransaction && 
+									<div id="overlay-popup">
+										<div id="green-checkmark" style={{backgroundImage: `url(${green_check})`}}></div>
+										<div id="overlay-text">
+											<span>Transaction submitted</span>
+											<a style={{textDecoration:'underline'}} target="_blank" rel="noreferrer" href={`https://explorer.ergoplatform.com/en/transactions/${swapTransaction}`}>View Transaction</a>
 										</div>
+									</div>
 									}
 								</div>
 							</div>

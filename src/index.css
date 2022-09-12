@@ -6,6 +6,10 @@ body
     background-attachment: fixed;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 @media all and (max-width: 992px)
 {
     /* body

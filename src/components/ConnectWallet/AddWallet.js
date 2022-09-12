@@ -179,7 +179,8 @@ function AddWallet(props) {
               const signedTx = await signTx(response.data);
               console.log("signedTx", signedTx);
               const txId = await submitTx(signedTx);
-              if (!txId) {
+              if (!txId) 
+              {
                 console.log(`No submitted tx ID`);
                 return null;
               }

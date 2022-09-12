@@ -206,6 +206,7 @@ const Roulette = ({ sidebarToggled }) => {
             });
           setBetsEnded(false);
           // resetBets();
+          playRandomWinningSound();
           addLastResult(randomNumber);
         }, 2500);
 

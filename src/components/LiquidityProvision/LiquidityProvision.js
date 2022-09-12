@@ -42,7 +42,7 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 	}, [])
 
 
-	if(hasAddedLiquidity) {
+	if(!hasAddedLiquidity) {
 		return (
 		<div style={{marginTop: 30, display: "flex", flexDirection: "column", color: "white", width: "100%"}}>
 			<AddLiquidityModal showModal={addLiquidityModal} setModalOff={setAddLiquidityModal}/>
