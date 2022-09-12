@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
+import { useMatomo } from '@datapunt/matomo-tracker-react'
+
 import { connect, StringCodec } from "nats.ws";
 import StateContext from "../../Context";
 import axios from "axios";
@@ -72,6 +74,9 @@ const MINER_FEE_VALUE = 1100000;
 const MIN_BOX_VALUE = 1000000;
 
 const Roulette = ({ sidebarToggled }) => {
+  // Track page view
+	const { trackPageView } = useMatomo()
+
   const [overlayString, setOverlayString] = useState("No more bets");
   const [spinAvailable, setSpinAvailable] = useState(true);
   const [revealData, setRevealData] = useState(false);
@@ -103,6 +108,13 @@ const Roulette = ({ sidebarToggled }) => {
   let sub;
   const sc = StringCodec();
   //const waiting_for_respond_animation_delay = setInterval(() => {}, 1000);
+
+
+	// Track page view
+	React.useEffect(() => {
+	  trackPageView()
+	}, [])
+
 
   const innerRef = useRef();
 

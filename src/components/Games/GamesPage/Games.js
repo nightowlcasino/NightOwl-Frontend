@@ -16,10 +16,14 @@ import coinflipImage from "../../../assets/Elements/aaaaaaaaa.jpeg";
 import RouletteModal from "../../Modals/RouletteModal";
 import LotteryModal from "../../Modals/LotteryModal";
 import CoinflipModal from "../../Modals/CoinflipModal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 
 const Games = () => {
+  // Track page view
+	const { trackPageView } = useMatomo()
+
   const [showRouletteModal, setRouletteModal] = useState(false);
   const [showLotteryModal, setLotteryModal] = useState(false);
   const [showCoinflipModal, setCoinflipModal] = useState(false);
@@ -29,6 +33,12 @@ const Games = () => {
   function handleNavigateToGame(game) {
     navigate(`/games/${game}`);
   }
+
+
+	// Track page view
+  useEffect(() => {
+	  trackPageView()
+	}, [])
 
   return (
     <div className="games-container">

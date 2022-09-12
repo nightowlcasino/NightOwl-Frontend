@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import "./Coinflip.css";
 import headIcon from "../../../assets/Elements/head.png";
 // import headIcon from "../../../assets/Elements/headpermant.svg";
@@ -8,6 +9,9 @@ import CoinflipModal from "../../Modals/CoinflipModal";
 import coinflipMascot from "../../../assets/Elements/coinflipMascot.png";
 
 const Coinflip = () => {
+  // Track page view
+	const { trackPageView, trackEvent } = useMatomo()
+
   const [informationAboutGameIsPressed, setInformationAboutGameIsPressed] =
     useState(false);
 
@@ -21,6 +25,12 @@ const Coinflip = () => {
 
   const [sideSelected, setSideSelected] = useState("Heads");
   const [bettingAmount, setBettingAmount] = useState("");
+
+
+	// Track page view
+	React.useEffect(() => {
+	  trackPageView()
+	}, [])
 
   return (
     <div style={{ width: "100%" }}>

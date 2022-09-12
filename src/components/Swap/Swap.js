@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import "./Swap.css";
 import StateContext from "../Context";
 import sortArrows1 from "../../assets/Elements/sortArrows1.svg";
@@ -19,6 +20,9 @@ const FEE_VALUE = 1100000;
 const MIN_BOX_VALUE = 1000000;
 
 function Swap({ setIsLoading, setSwapTransaction }) {
+	// Track page view
+	const { trackPageView, trackEvent } = useMatomo()
+
   const [swap1, setSwap1] = useState("SigUSD");
   const [swap2, setSwap2] = useState("OWL");
   const [swap1Amount, setSwap1Amount] = useState("");
@@ -204,6 +208,11 @@ function Swap({ setIsLoading, setSwapTransaction }) {
       tokenNumber == 1 ? setSwap1Amount(Math.round(owlBalance * 100) / 100) : setSwap2Amount(Math.round(owlBalance * 100) / 100);
     }
   }
+
+	// Track page view
+	React.useEffect(() => {
+	  trackPageView()
+	}, [])
 
   return (
     <div id="swap-wrapper">

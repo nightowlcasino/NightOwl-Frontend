@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import Chart from "react-apexcharts";
 import './Stake.css'
 import topSectionRightImg from "../../assets/Elements/homePageRightImg.png";
@@ -28,7 +29,16 @@ const Stake = ()=> {
           colors: ['#F44336', '#E91E63', '#9C27B0']
         }
       ]);
-      
+
+
+    // Track page view
+    const { trackPageView, trackEvent } = useMatomo()
+
+    // Track page view
+    React.useEffect(() => {
+      trackPageView()
+    }, [])
+        
 
     return (
       <div className="flex flex-col gap-16 mx-2 lg:mx-0 max-w-full justify-center items-center xl:items-start xl:ml-5 2xl:items-center">

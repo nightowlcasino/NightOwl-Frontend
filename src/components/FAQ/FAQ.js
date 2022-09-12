@@ -1,6 +1,7 @@
 import { useEffect, useState, Fragment } from "react";
 import FAQItem from "./FAQItem";
 import useCollapse from "react-collapsed";
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import "./FAQ.css";
 
 const faqItemStyle = {
@@ -9,9 +10,15 @@ const faqItemStyle = {
 };
 
 export default function FAQ() {
+  // Track page view
+  const { trackPageView } = useMatomo()
+
   const [windowSize, setWindowSize] = useState(getWindowSize());
 
   useEffect(() => {
+    // Track page view
+    trackPageView()
+
     function handleWindowResize() {
       setWindowSize(getWindowSize());
     }
@@ -22,6 +29,9 @@ export default function FAQ() {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
+
+
+
 
   return (
     <div

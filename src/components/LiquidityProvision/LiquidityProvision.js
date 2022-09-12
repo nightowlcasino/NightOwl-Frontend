@@ -5,6 +5,8 @@ import StateContext from "../Context";
 import { ChevronUpIcon, ChevronDownIcon, QuestionMarkCircleIcon } from '@heroicons/react/solid'
 import { DotsHorizontalIcon } from '@heroicons/react/solid'
 import LiquidityChart from './LiquidityChart'
+import { useMatomo } from '@datapunt/matomo-tracker-react'
+
 
 import "./LiquidityProvision.css";
 import "../BodyContent/BodyContent.css";
@@ -21,6 +23,9 @@ const FEE_VALUE = 1100000;
 const MIN_BOX_VALUE = 1000000;
 
 function Liquidity({ setIsLoading, setliquidityTransaction }) {
+	// Track page view
+	const { trackPageView } = useMatomo()
+
 
 	const [openModal, setOpenModal] = useState(false);
 
@@ -28,6 +33,13 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 
 	const [addLiquidityModal, setAddLiquidityModal] = useState(false);
 	const [withdrawLiquidityModal, setWithdrawLiquidityModal] = useState(false);
+
+
+
+	// Track page view
+	React.useEffect(() => {
+	  trackPageView()
+	}, [])
 
 
 	if(hasAddedLiquidity) {
