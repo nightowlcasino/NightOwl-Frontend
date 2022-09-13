@@ -1,0 +1,47 @@
+.c {
+    position: absolute;
+    max-width: 200px;
+    max-height: 200px;
+    width: 50vw;
+    height: 60vw;
+    cursor: pointer;
+    will-change: transform, opacity;
+  }
+  
+  .front,
+  .back {
+    background-size: cover;
+  }
+  
+  .back {
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    background-image: url(../../../assets/Elements/swap_coin.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation-name: coin-hover;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    margin-left: 30%;
+  }
+  
+  .front {
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    background-image: url(../../../assets/Elements/swap_coin_head.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation-name: coin-hover;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    margin-left: 30%;
+  }
+  

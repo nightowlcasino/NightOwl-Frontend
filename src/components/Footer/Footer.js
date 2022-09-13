@@ -59,7 +59,11 @@ export default function Footer() {
           display: "flex",
           width: "100%",
           justifyContent: "center",
+<<<<<<< HEAD
           gap: "10%",
+=======
+          gap: "106px",
+>>>>>>> Animation_CoinFlip
         }}
       >
         <ul style={{ listStyleType: "none" }}>
@@ -70,7 +74,11 @@ export default function Footer() {
               lineHeight: "1.5",
             }}
           >
+<<<<<<< HEAD
             <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px', color:"#d70a84"}}>Night Owl</p>
+=======
+            <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px'}}>Night Owl</p>
+>>>>>>> Animation_CoinFlip
           </li>
           <span style={{ cursor: "pointer", color:'white' }}>
             <Link to='/aboutus'><li style={{paddingLeft: '5px',color:'white'}}>About</li></Link>
@@ -87,7 +95,11 @@ export default function Footer() {
               lineHeight: "1.5",
             }}
           >
+<<<<<<< HEAD
             <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px', color:"#d70a84"}}>Support</p>
+=======
+            <p style={{fontWeight:900, fontSize:'26px', margin:'0', marginBottom:'1px'}}>Support</p>
+>>>>>>> Animation_CoinFlip
           </li>
           <span style={{ cursor: "pointer", color:'white'  }}>
           <li style={{paddingLeft: '5px',color:'white'}}><a href="https://github.com/nightowlcasino/"
@@ -110,7 +122,11 @@ export default function Footer() {
               justifyContent:'center',
             }}
           >
+<<<<<<< HEAD
             <p style={{fontWeight:900, fontSize:'26px', margin:'0', color:"#d70a84"}}>Social</p>
+=======
+            <p style={{fontWeight:900, fontSize:'26px', margin:'0'}}>Social</p>
+>>>>>>> Animation_CoinFlip
           </li>
           <span
             style={{
