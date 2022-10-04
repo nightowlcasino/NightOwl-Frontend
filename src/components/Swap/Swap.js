@@ -9,6 +9,13 @@ import sigUSDicon from "../../assets/Elements/SigUSD.svg";
 import OWLicon from "../../assets/Elements/head.png";
 import WarningModal from "../Modals/WarningModal";
 import swapMascot from "../../assets/Elements/blackjackMascot.png";
+import { currentBlock, nodeUrl } from "./functions"
+import {Address} from "@coinbarn/ergo-ts";
+import { useAsBind } from "use-as-bind";
+
+// import { Address } from 'ergo-lib-wasm-browser'
+// let ergolib = import('ergo-lib-wasm-browser')
+
 
 const TOKENID_NO_TEST =
   "473041c7e13b5f5947640f79f00d3c5df22fad4841191260350bb8c526f9851f";
@@ -33,6 +40,10 @@ function Swap({ setIsLoading, setSwapTransaction }) {
   const [sigUSDBalance, setSigUSDBalance] = useState();
   const { ergoWallet, defaultAddress } = useContext(StateContext);
 
+  // Load WASM
+  const { loaded, instance, error } = useAsBind("ergo-lib-wasm-browser");
+
+
   useEffect(() => {
     async function getBalance() {
       console.log("hola");
@@ -50,79 +61,269 @@ function Swap({ setIsLoading, setSwapTransaction }) {
 
   const backend = process.env.BACKEND_FQDN || "localhost";
 
-  const swapTokens = (e) => {
+  const swapTokens = async (e) => {
     e.preventDefault();
 
-    // get input boxes for each token ID
-    const sigUSDAmount = 10;
-    const owl = 10;
+    const txFee = 10000000
 
-    let utxos = [];
-    // the minimum ERG requires a swap box, fee box, and change box
-    const minERG = MIN_BOX_VALUE + MIN_BOX_VALUE + FEE_VALUE;
 
-    // Get utxo for ERGs
-    ergoWallet.get_utxos(minERG, TOKENID_ERG).then((utxosResponse) => {
-      if (utxosResponse.length === 0) {
-        console.log("NO ERG UTXOS");
-        return;
-      } else {
-        utxos = JSON.parse(JSON.stringify(utxosResponse));
-        // This is a hack for now, we need to remove the decimals for SigUSD
-        const sigAmnt = swap1 * 100;
-        ergoWallet
-          .get_utxos(swap1, TOKENID_FAKE_SIGUSD)
-          .then((utxosResponse) => {
-            //ergoWallet.get_utxos(swap2, TOKENID_NO_TEST).then(utxosResponse => {
-            if (utxosResponse.length === 0) {
-              console.log("NO SigUSD UTXOS");
-              return;
+    if(!ergoWallet) {
+      console.log("Connect wallet first")
+      return
+    }
+
+    // const wasm = await ergolib
+    const p2s = ""
+    const bidder = await ergoWallet.get_change_address();
+
+
+    const requiredErg = 100000000//(parseInt(listedBox.additionalRegisters.R4.renderedValue) + parseInt(buyerGets.value) + parseInt(feeBox.value))
+    let need = {ERG: requiredErg}
+    // Get all wallet tokens/ERG and see if they have enough
+    let have = JSON.parse(JSON.stringify(need))
+    have['ERG'] += txFee
+    let ins = []
+    const keys = Object.keys(have)
+
+
+    for (let i = 0; i < keys.length; i++) {
+        if (have[keys[i]] <= 0) continue
+        const curIns = await ergoWallet.get_utxos(have[keys[i]].toString(), keys[i]);
+        if (curIns !== undefined) {
+            curIns.forEach(bx => {
+                have['ERG'] -= parseInt(bx.value)
+                bx.assets.forEach(ass => {
+                    if (!Object.keys(have).includes(ass.tokenId)) have[ass.tokenId] = 0
+                    have[ass.tokenId] -= parseInt(ass.amount)
+                })
+            })
+            ins = ins.concat(curIns)
+        }
+    }
+    if (keys.filter(key => have[key] > 0).length > 0) {
+        // showMsg('Not enough balance in the wallet! See FAQ for more info.', true)
+        console.log("Not enough balance in the wallet!")
+        return
+    }
+
+
+
+    // -----------Output boxes--------------
+    const blockHeight = await currentBlock();
+    // let artBox = await boxById(nft_id);
+    let publicKeyResponse = await axios.get(`${nodeUrl}/utils/addressToRaw/`+bidder).catch((err) => {
+        console.log("Error when calling utils/addressToRaw/useraddress");
+    })
+    let publicKey = publicKeyResponse.data.raw
+
+    // const encodedSer = await getEncodedBoxSer(artBox).catch((err)=>{
+    //     console.log("Error: ", err)
+    //     showMsg("Listing is currently unavailable, please try again later.", true);
+    //     return;
+    // });
+
+    // if(!encodedSer) {
+    //     return;
+    // }
+
+    const min_value = 1000000000
+
+    let registers = {
+        // R4: await encodeNum((list_price).toString()),
+        // R5: await encodeHex(new Address(bidder).ergoTree),
+        // // R6: encodedSer,
+        // R7: "07" + publicKey
+    };
+
+    const listedBox = {
+        value: (min_value + txFee).toString(),
+        ergoTree: Address.from_mainnet_str(p2s).to_ergo_tree().to_base16_bytes(), // p2s to ergotree (can do through node or wasm)
+        // assets: [
+        //     {'tokenId': nft_id, 'amount': "1"}
+        // ],
+        additionalRegisters: registers,
+        creationHeight: blockHeight.height
+    }
+
+
+    // Change calculation
+    let changeAssets = []
+    let changeValue = -requiredErg + min_value
+    let firstTime = true; // subtract 1 nft from the first box you find that contains it
+    let changeAssetsPerBox = []
+    
+    let box;
+    for (box of ins){
+        let asset;
+        for (asset of box.assets){
+            if (asset.tokenId !== "random"){
+                changeAssets.push(asset)
             } else {
-              utxosResponse.forEach((sigBox) => {
-                let found = false;
-                utxos.forEach((box) => {
-                  // Check if any matching boxIds
-                  // TODO: Add a break/continue
-                  if (sigBox.boxId == box.boxId) {
-                    found = true;
-                  }
-                });
-                // Found none
-                if (!found) {
-                  utxos.push(sigBox);
+                if(((parseInt(asset.amount) - 1) !== 0) && firstTime === true) {
+                    var tempAsset = JSON.parse(JSON.stringify(asset));
+
+                    tempAsset.amount = `${parseInt(asset.amount) - 1}`;
+                    changeAssets.push(tempAsset)
+                    firstTime = false;
                 }
-              });
-              console.log(utxos);
-              // send token input boxes and token amounts in a POST message to the backend
-              setIsLoading(true);
-              axios
-                .post(`/api/v1/swap/sigusd`, {
-                  //axios.post(`/api/v1/swap/owl`, {
-                  amnt: sigAmnt,
-                  senderAddr: localStorage.getItem("walletAddress"),
-                  utxos: utxos,
-                })
-                .then(async function (response) {
-                  const signedTx = await signTx(response.data);
-                  console.log("signedTx", signedTx);
-                  const txId = await submitTx(signedTx);
-                  if (!txId) {
-                    console.log(`No submitted tx ID`);
-                    return null;
-                  }
-                  setIsLoading(false);
-                  setSwapTransaction(txId);
-                  console.log(`Transaction submitted - ${txId}`);
-                })
-                .catch(function (error) {
-                  setIsLoading(false);
-                  console.log(error);
-                });
             }
-          });
-      }
-    });
-  };
+            //cut change box once it hits change box asset limit, start a new change box 
+            // asset limit set to 90 because if the user has high count of particular tokens (i.e. 10,000,000 SIGRSV), a box might not be able to hold 100 distinct tokens
+            // would be best to ensure box doesn't exceed 4KiB but not sure how to do that lel 
+            if (changeAssets.length == 100) {
+                changeAssetsPerBox.push(changeAssets);
+                // no need to remove already-processed change assets from change boxes, already looped over
+                // clear changeAssets
+                changeAssets = [];
+            }
+        }
+        changeValue += parseInt(box.value)
+    }
+    //push remaining to changeBoxes
+    changeAssetsPerBox.push(changeAssets);
+
+    if (changeValue < min_value) {
+        // showMsg('Not enough balance in the wallet! See FAQ for more info.', true)
+        console.log("Not enough balance in wallet")
+        return
+    }
+
+    let remainder = changeValue % changeAssetsPerBox.length 
+    let changeErgsPerBoxFloored =  Math.floor(changeValue / changeAssetsPerBox.length);
+    let changeBoxes = []
+    let i = 0 ;
+    for (let assets of changeAssetsPerBox) {    
+
+        let boxValue;
+        // add remainder nergs to final box in case ergs / changeboxes isn't integer
+        if (i == changeAssetsPerBox.length - 1) {
+            boxValue = changeErgsPerBoxFloored + remainder;
+        } else {
+            boxValue = changeErgsPerBoxFloored;
+        }
+
+        console.log(changeErgsPerBoxFloored);
+        console.log(boxValue);
+        console.log(boxValue.toString());
+        
+        let changeBox = {
+            value: boxValue.toString(),
+            ergoTree: Address.from_mainnet_str(bidder).to_ergo_tree().to_base16_bytes(),
+            assets: assets, 
+            additionalRegisters: {},
+            creationHeight: blockHeight.height
+        }
+
+        changeBoxes.push(changeBox);
+
+        i++;
+    }
+
+    const feeBox = {
+        value: txFee.toString(),
+        creationHeight: blockHeight.height,
+        ergoTree: "1005040004000e36100204a00b08cd0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798ea02d192a39a8cc7a701730073011001020402d19683030193a38cc7b2a57300000193c2b2a57301007473027303830108cdeeac93b1a57304",
+        assets: [],
+        additionalRegisters: {},
+    }
+
+    // console.log(paySeller.value + payService.value + payRoyalty.value + buyerGets.value + feeBox.value)
+    let transaction_to_sign = {
+        inputs: ins,
+        outputs: [listedBox], // Adding change and fee boxes below. 
+        dataInputs: [],
+        fee: txFee
+    }
+
+    transaction_to_sign.outputs.push(feeBox);
+
+    for (let changeBox of changeBoxes) {    
+        transaction_to_sign.outputs.push(changeBox)
+    }
+
+    console.log("transaction_to_sign", transaction_to_sign)
+
+    // return transaction_to_sign
+    return await signTx(transaction_to_sign)
+
+
+
+
+  }
+
+  // const swapTokens = (e) => {
+  //   e.preventDefault();
+
+  //   // get input boxes for each token ID
+  //   const sigUSDAmount = 10;
+  //   const owl = 10;
+
+  //   let utxos = [];
+  //   // the minimum ERG requires a swap box, fee box, and change box
+  //   const minERG = MIN_BOX_VALUE + MIN_BOX_VALUE + FEE_VALUE;
+
+  //   // Get utxo for ERGs
+  //   ergoWallet.get_utxos(minERG, TOKENID_ERG).then((utxosResponse) => {
+  //     if (utxosResponse.length === 0) {
+  //       console.log("NO ERG UTXOS");
+  //       return;
+  //     } else {
+  //       utxos = JSON.parse(JSON.stringify(utxosResponse));
+  //       // This is a hack for now, we need to remove the decimals for SigUSD
+  //       const sigAmnt = swap1 * 100;
+  //       ergoWallet
+  //         .get_utxos(swap1, TOKENID_FAKE_SIGUSD)
+  //         .then((utxosResponse) => {
+  //           //ergoWallet.get_utxos(swap2, TOKENID_NO_TEST).then(utxosResponse => {
+  //           if (utxosResponse.length === 0) {
+  //             console.log("NO SigUSD UTXOS");
+  //             return;
+  //           } else {
+  //             utxosResponse.forEach((sigBox) => {
+  //               let found = false;
+  //               utxos.forEach((box) => {
+  //                 // Check if any matching boxIds
+  //                 // TODO: Add a break/continue
+  //                 if (sigBox.boxId == box.boxId) {
+  //                   found = true;
+  //                 }
+  //               });
+  //               // Found none
+  //               if (!found) {
+  //                 utxos.push(sigBox);
+  //               }
+  //             });
+  //             console.log(utxos);
+  //             // send token input boxes and token amounts in a POST message to the backend
+  //             setIsLoading(true);
+  //             axios
+  //               .post(`/api/v1/swap/sigusd`, {
+  //                 //axios.post(`/api/v1/swap/owl`, {
+  //                 amnt: sigAmnt,
+  //                 senderAddr: localStorage.getItem("walletAddress"),
+  //                 utxos: utxos,
+  //               })
+  //               .then(async function (response) {
+  //                 const signedTx = await signTx(response.data);
+  //                 console.log("signedTx", signedTx);
+  //                 const txId = await submitTx(signedTx);
+  //                 if (!txId) {
+  //                   console.log(`No submitted tx ID`);
+  //                   return null;
+  //                 }
+  //                 setIsLoading(false);
+  //                 setSwapTransaction(txId);
+  //                 console.log(`Transaction submitted - ${txId}`);
+  //               })
+  //               .catch(function (error) {
+  //                 setIsLoading(false);
+  //                 console.log(error);
+  //               });
+  //           }
+  //         });
+  //     }
+  //   });
+  // };
 
   async function signTx(txToBeSigned) {
     try {
