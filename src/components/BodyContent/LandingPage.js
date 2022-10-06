@@ -7,9 +7,13 @@ import amai from "../../assets/Elements/amai.png";
 import { useNavigate } from "react-router-dom";
 import copyIcon from "../../assets/Elements/copyIcon.svg";
 import owlIcon from "../../assets/Elements/head.png";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { stringify } from "postcss";
 
 function LandingPage() {
   let navigate = useNavigate();
+  const [leaderboardData, setLeaderboardData] = useState()
 
   function handleNavigateToPage(e, page) {
     e.preventDefault();
@@ -21,8 +25,18 @@ function LandingPage() {
   }
 
   function truncateId(id) {
-    return id.substring(0, 10) + "...";
+    return id && id.substring(0, 10) + "...";
   }
+
+  useEffect(()=>{
+    async function getLeaderboardData() {
+      const winners = await axios.get('api/v1/leaderboard/all')
+      console.log(winners.data[0].address)
+      setLeaderboardData(winners.data.slice(0,3))
+    }
+
+    getLeaderboardData()
+  },[])
 
   const weekWinsObject = [
     {
@@ -105,7 +119,8 @@ function LandingPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {weekWinsObject.map((item, index) => (
+                    {leaderboardData && leaderboardData.map((item, index) => (
+                      
                       <tr key={index}>
                         <td style={{ color: "#fa008c" }}>{index + 1}</td>
                         <td>{truncateId(item.address)}</td>
@@ -128,7 +143,7 @@ function LandingPage() {
                         </td>
 
                         <td>
-                          {truncateId(item.TxID)}
+                          {truncateId(item.txId)}
                           <img
                             src={copyIcon}
                             alt="Copy address"

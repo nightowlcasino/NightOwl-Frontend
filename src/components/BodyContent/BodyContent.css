@@ -242,6 +242,7 @@
 
 #body-content-wrapper #body-content #page-content-wrapper #home-page-footer #home-page-transactions-wrapper #home-page-transactions-border #transactions-wrapper #transactions-table-wrapper table
 {
+    margin-bottom: 15px;
     width: 100%;
 }
 
