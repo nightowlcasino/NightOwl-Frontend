@@ -11,7 +11,7 @@ import WarningModal from "../Modals/WarningModal";
 import swapMascot from "../../assets/Elements/blackjackMascot.png";
 // import { currentBlock, nodeUrl } from "./functions"
 import {Address} from "@coinbarn/ergo-ts";
-import { CHANGE_BOX_ASSET_LIMIT, CONTRACT_BUY_OWL_ADDRESS, currentBlock, SIGUSD_TOKEN_ID } from "../utils/contract_functions";
+import { CHANGE_BOX_ASSET_LIMIT, CONTRACT_BUY_OWL_ADDRESS, currentBlock, encodeHex, encodeNum, SIGUSD_TOKEN_ID } from "../utils/contract_functions";
 
 
 const TOKENID_NO_TEST =
@@ -54,23 +54,35 @@ function Swap({ setIsLoading, setSwapTransaction }) {
 
   const backend = process.env.BACKEND_FQDN || "localhost";
 
-  const swapTokens = () => {
+  const swapTokens = (e) => {
+    e.preventDefault();
+
     // if swapping ERG for OWL
-    buyOwl();
+    console.log("swap1", swap1)
+    console.log("swap2", swap2)
+    console.log("swap1Amount", swap1Amount)
+    console.log("swap2Amount", swap2Amount)
+    if(swap1 == "SigUSD") {
+      buyOwl(swap1Amount);
+    }
 
     // if swapping OWL for ERG
-    // sellOwl()
+    // else {
+    //   sellOwl()
+    // }
 
   }
 
   const buyOwl = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     // get input boxes for each token ID
     const sigUSDAmount = 10;
     const owl = 10;
 
-    const sigUSDId = SIGUSD_TOKEN_ID;
+    const amount = e;
+
+    const sigUSDId = SIGUSD_TOKEN_ID; // TOKENID_FAKE_SIGUSD
 
     // let utxos = [];
     // the minimum ERG requires a swap box, fee box, and change box
@@ -79,19 +91,19 @@ function Swap({ setIsLoading, setSwapTransaction }) {
 
         // Eject if wallet isnt connected
         if(!ergoWallet) {
-          console.log('Connect your wallet first.', true);
+          console.log('Connect your wallet first.');
           return
       }
   
       // Consts
-      const wasm = await ergolib
+      // const wasm = await ergolib
       const p2s = CONTRACT_BUY_OWL_ADDRESS;
       const user = await ergoWallet.get_change_address();
       const currencyId = sigUSDId
   
       const requiredErg = minERG
       let need = {ERG: requiredErg}
-      need[currencyId] = parseInt(e)
+      need[currencyId] = parseInt(amount)
       let have = JSON.parse(JSON.stringify(need))
       let ins = []
       const keys = Object.keys(have)
@@ -126,8 +138,8 @@ function Swap({ setIsLoading, setSwapTransaction }) {
       };
   
       const proxyBox = {
-          value: (min_value + FEE_VALUE).toString(),
-          ergoTree: wasm.Address.from_mainnet_str(p2s).to_ergo_tree().to_base16_bytes(), // p2s to ergotree (can do through node or wasm)
+          value: (MIN_BOX_VALUE + FEE_VALUE).toString(),
+          ergoTree: Address.from_mainnet_str(p2s).to_ergo_tree().to_base16_bytes(), // p2s to ergotree (can do through node or wasm)
           assets: [
               {'tokenId': sigUSDId, 'amount': amount}
           ],
@@ -137,7 +149,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
   
       const changeBox = {
           value: (-have['ERG']).toString(),
-          ergoTree: wasm.Address.from_mainnet_str(user).to_ergo_tree().to_base16_bytes(),
+          ergoTree: Address.from_mainnet_str(user).to_ergo_tree().to_base16_bytes(),
           assets: Object.keys(have).filter(key => key !== 'ERG')
               .filter(key => have[key] < 0)
               .map(key => {

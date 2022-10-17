@@ -1,11 +1,11 @@
+import {Explorer, Transaction} from '@coinbarn/ergo-ts';
+
+
 export const CONTRACT_BUY_OWL_ADDRESS = "N5YCek6dZq8hQvMMb1istLmKkW5ovBjJLKSk7EdTwQuPpfJJXXGCW486TvjYe7h23Ej1eneG61d37upWJUVoaixPJq6CoP43GjSdEhr5THK2pn8x2ZFf3eVErhb4Qk5xFdCykPZ4MvmMH5GE6FMXwgtn4b2v2oSQGaeQ4i1Fv5Bf4vMEq4aqAFiL7Z5YHMX1zZawet2JCfYQFEyD1Nt9tXCwVTWWvptFpLGByUJ5sQLKvLRU7a23qaTYaDTKMhrzy97h"
 export const CONTRACT_SELL_OWL_ADDRESS = "N5YCek6dZq8hQvMMazRcfLnmd1pMVzHq8GkDUg8Jn3KFa3k7M53PjQSd2yBc1KTNRJVko891THPvg9wZ3ryBcWNV7PGbRuUJ2S4ojvQ7E4FegZ8jBh6tsWMQoSxTfkN7ynLpFCUEnx5bdRFgxdA3vzbsHiPg3sgvpN2MCWvsoRWQcxdF4FvNo4NtiTbCsZcu9SLx9gS3bvdmX6d7jo8SAgAQQ2CEBKamCbbHmWAB6cwSXm72RPaFsC1uCWNBWHzmit5b"
-
 export const SIGUSD_TOKEN_ID = "03faf2cb329f2e90d6d23b58d91bbb6c046aa143261cc21f52fbe2824bfcbf04"
-
 export const CHANGE_BOX_ASSET_LIMIT = 100
 
-import {Explorer, Transaction} from '@coinbarn/ergo-ts';
 
 const explorer = Explorer.mainnet;
 const explorerApi = 'https://api.ergoplatform.com/api/v0'
@@ -33,6 +33,13 @@ export async function get(url, apiKey = '') {
     }).catch((error)=> {
         console.log(error)
     });;
+}
+
+export async function encodeNum(num) {
+
+}
+export async function encodeHex(num) {
+
 }
 
 
