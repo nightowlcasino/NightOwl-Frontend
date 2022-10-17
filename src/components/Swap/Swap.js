@@ -9,6 +9,9 @@ import sigUSDicon from "../../assets/Elements/SigUSD.svg";
 import OWLicon from "../../assets/Elements/head.png";
 import WarningModal from "../Modals/WarningModal";
 import swapMascot from "../../assets/Elements/blackjackMascot.png";
+// import { currentBlock, nodeUrl } from "./functions"
+import {Address} from "@coinbarn/ergo-ts";
+
 
 const TOKENID_NO_TEST =
   "473041c7e13b5f5947640f79f00d3c5df22fad4841191260350bb8c526f9851f";
@@ -50,78 +53,28 @@ function Swap({ setIsLoading, setSwapTransaction }) {
 
   const backend = process.env.BACKEND_FQDN || "localhost";
 
-  const swapTokens = (e) => {
+  const swapTokens = () => {
+    // if swapping ERG for OWL
+    buyOwl();
+
+    // if swapping OWL for ERG
+    // sellOwl()
+
+  }
+
+  const buyOwl = async (e) => {
     e.preventDefault();
 
     // get input boxes for each token ID
     const sigUSDAmount = 10;
     const owl = 10;
 
-    let utxos = [];
+    // let utxos = [];
     // the minimum ERG requires a swap box, fee box, and change box
     const minERG = MIN_BOX_VALUE + MIN_BOX_VALUE + FEE_VALUE;
 
     // Get utxo for ERGs
-    ergoWallet.get_utxos(minERG, TOKENID_ERG).then((utxosResponse) => {
-      if (utxosResponse.length === 0) {
-        console.log("NO ERG UTXOS");
-        return;
-      } else {
-        utxos = JSON.parse(JSON.stringify(utxosResponse));
-        // This is a hack for now, we need to remove the decimals for SigUSD
-        const sigAmnt = swap1 * 100;
-        ergoWallet
-          .get_utxos(swap1, TOKENID_FAKE_SIGUSD)
-          .then((utxosResponse) => {
-            //ergoWallet.get_utxos(swap2, TOKENID_NO_TEST).then(utxosResponse => {
-            if (utxosResponse.length === 0) {
-              console.log("NO SigUSD UTXOS");
-              return;
-            } else {
-              utxosResponse.forEach((sigBox) => {
-                let found = false;
-                utxos.forEach((box) => {
-                  // Check if any matching boxIds
-                  // TODO: Add a break/continue
-                  if (sigBox.boxId == box.boxId) {
-                    found = true;
-                  }
-                });
-                // Found none
-                if (!found) {
-                  utxos.push(sigBox);
-                }
-              });
-              console.log(utxos);
-              // send token input boxes and token amounts in a POST message to the backend
-              setIsLoading(true);
-              axios
-                .post(`/api/v1/swap/sigusd`, {
-                  //axios.post(`/api/v1/swap/owl`, {
-                  amnt: sigAmnt,
-                  senderAddr: localStorage.getItem("walletAddress"),
-                  utxos: utxos,
-                })
-                .then(async function (response) {
-                  const signedTx = await signTx(response.data);
-                  console.log("signedTx", signedTx);
-                  const txId = await submitTx(signedTx);
-                  if (!txId) {
-                    console.log(`No submitted tx ID`);
-                    return null;
-                  }
-                  setIsLoading(false);
-                  setSwapTransaction(txId);
-                  console.log(`Transaction submitted - ${txId}`);
-                })
-                .catch(function (error) {
-                  setIsLoading(false);
-                  console.log(error);
-                });
-            }
-          });
-      }
-    });
+
   };
 
   async function signTx(txToBeSigned) {
