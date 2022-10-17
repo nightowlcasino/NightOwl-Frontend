@@ -11,6 +11,7 @@ import WarningModal from "../Modals/WarningModal";
 import swapMascot from "../../assets/Elements/blackjackMascot.png";
 // import { currentBlock, nodeUrl } from "./functions"
 import {Address} from "@coinbarn/ergo-ts";
+import { CHANGE_BOX_ASSET_LIMIT, CONTRACT_BUY_OWL_ADDRESS, currentBlock, SIGUSD_TOKEN_ID } from "../utils/contract_functions";
 
 
 const TOKENID_NO_TEST =
@@ -69,11 +70,118 @@ function Swap({ setIsLoading, setSwapTransaction }) {
     const sigUSDAmount = 10;
     const owl = 10;
 
+    const sigUSDId = SIGUSD_TOKEN_ID;
+
     // let utxos = [];
     // the minimum ERG requires a swap box, fee box, and change box
     const minERG = MIN_BOX_VALUE + MIN_BOX_VALUE + FEE_VALUE;
 
-    // Get utxo for ERGs
+
+        // Eject if wallet isnt connected
+        if(!ergoWallet) {
+          console.log('Connect your wallet first.', true);
+          return
+      }
+  
+      // Consts
+      const wasm = await ergolib
+      const p2s = CONTRACT_BUY_OWL_ADDRESS;
+      const user = await ergoWallet.get_change_address();
+      const currencyId = sigUSDId
+  
+      const requiredErg = minERG
+      let need = {ERG: requiredErg}
+      need[currencyId] = parseInt(e)
+      let have = JSON.parse(JSON.stringify(need))
+      let ins = []
+      const keys = Object.keys(have)
+  
+  
+      for (let i = 0; i < keys.length; i++) {
+          if (have[keys[i]] <= 0) continue
+          const curIns = await ergoWallet.get_utxos(have[keys[i]].toString(), keys[i]);
+          if (curIns !== undefined) {
+              curIns.forEach(bx => {
+                  have['ERG'] -= parseInt(bx.value)
+                  bx.assets.forEach(ass => {
+                      if (!Object.keys(have).includes(ass.tokenId)) have[ass.tokenId] = 0
+                      have[ass.tokenId] -= parseInt(ass.amount)
+                  })
+              })
+              ins = ins.concat(curIns)
+          }
+      }
+      if (keys.filter(key => have[key] > 0).length > 0) {
+          console.log('Not enough balance in the wallet! See FAQ for more info.', true)
+          return
+      }
+      // -----------Output boxes--------------
+      const blockHeight = await currentBlock();
+  
+      let registers = {
+          R4: await encodeHex(new Address(user).ergoTree),
+          R5: await encodeNum((amount).toString()),
+          R6: await encodeNum((blockHeight.height + 20).toString()),
+          R7: await encodeNum((FEE_VALUE).toString())
+      };
+  
+      const proxyBox = {
+          value: (min_value + FEE_VALUE).toString(),
+          ergoTree: wasm.Address.from_mainnet_str(p2s).to_ergo_tree().to_base16_bytes(), // p2s to ergotree (can do through node or wasm)
+          assets: [
+              {'tokenId': sigUSDId, 'amount': amount}
+          ],
+          additionalRegisters: registers,
+          creationHeight: blockHeight.height
+      }
+  
+      const changeBox = {
+          value: (-have['ERG']).toString(),
+          ergoTree: wasm.Address.from_mainnet_str(user).to_ergo_tree().to_base16_bytes(),
+          assets: Object.keys(have).filter(key => key !== 'ERG')
+              .filter(key => have[key] < 0)
+              .map(key => {
+                  return {
+                      tokenId: key,
+                      amount: (-have[key]).toString()
+                  }
+              }),
+          additionalRegisters: {},
+          creationHeight: blockHeight.height
+      }
+  
+      if (changeBox.assets.length > CHANGE_BOX_ASSET_LIMIT) {
+  
+        console.log('Too many NFTs in input boxes to form single change box. Please de-consolidate some UTXOs. Contact the team on discord for more information.', true)
+          return
+  
+      } else {
+          const feeBox = {
+              value: FEE_VALUE.toString(),
+              creationHeight: blockHeight.height,
+              ergoTree: "1005040004000e36100204a00b08cd0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798ea02d192a39a8cc7a701730073011001020402d19683030193a38cc7b2a57300000193c2b2a57301007473027303830108cdeeac93b1a57304",
+              assets: [],
+              additionalRegisters: {},
+          }
+  
+          let outputs = [proxyBox, changeBox, feeBox]
+  
+          const transaction_to_sign = {
+              inputs: ins.map(curIn => {
+                  return {
+                      ...curIn,
+                      extension: {}
+                  }
+              }),
+              outputs: outputs,
+              dataInputs: [],
+              fee: FEE_VALUE
+          }
+          console.log("transaction_to_sign", transaction_to_sign)
+          return await signTx(transaction_to_sign)
+      }
+  
+  
 
   };
 
