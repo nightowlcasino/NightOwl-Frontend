@@ -11,7 +11,7 @@ import WarningModal from "../Modals/WarningModal";
 import swapMascot from "../../assets/Elements/blackjackMascot.png";
 // import { currentBlock, nodeUrl } from "./functions"
 import {Address} from "@coinbarn/ergo-ts";
-import { CHANGE_BOX_ASSET_LIMIT, CONTRACT_BUY_OWL_ADDRESS, currentBlock, encodeHex, encodeNum, SIGUSD_TOKEN_ID } from "../utils/contract_functions";
+import { CHANGE_BOX_ASSET_LIMIT, CONTRACT_BUY_OWL_ADDRESS, currentBlock, encodeBase16, encodeHex, encodeNum, SIGUSD_TOKEN_ID } from "../utils/contract_functions";
 
 
 const TOKENID_NO_TEST =
@@ -82,7 +82,8 @@ function Swap({ setIsLoading, setSwapTransaction }) {
 
     const amount = e;
 
-    const sigUSDId = SIGUSD_TOKEN_ID; // TOKENID_FAKE_SIGUSD
+    // const sigUSDId = SIGUSD_TOKEN_ID; // TOKENID_FAKE_SIGUSD
+    const sigUSDId = TOKENID_FAKE_SIGUSD;
 
     // let utxos = [];
     // the minimum ERG requires a swap box, fee box, and change box
@@ -131,15 +132,16 @@ function Swap({ setIsLoading, setSwapTransaction }) {
       const blockHeight = await currentBlock();
   
       let registers = {
-          R4: await encodeHex(new Address(user).ergoTree),
+          R4: await encodeHex(await encodeBase16(user)),//await encodeHex(new Address(user).ergoTree),
           R5: await encodeNum((amount).toString()),
           R6: await encodeNum((blockHeight.height + 20).toString()),
           R7: await encodeNum((FEE_VALUE).toString())
       };
+      console.log("registers", registers);
   
       const proxyBox = {
           value: (MIN_BOX_VALUE + FEE_VALUE).toString(),
-          ergoTree: Address.from_mainnet_str(p2s).to_ergo_tree().to_base16_bytes(), // p2s to ergotree (can do through node or wasm)
+          ergoTree: await encodeBase16(p2s), //Address.from_mainnet_str(p2s).to_ergo_tree().to_base16_bytes(), // p2s to ergotree (can do through node or wasm)
           assets: [
               {'tokenId': sigUSDId, 'amount': amount}
           ],
@@ -149,7 +151,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
   
       const changeBox = {
           value: (-have['ERG']).toString(),
-          ergoTree: Address.from_mainnet_str(user).to_ergo_tree().to_base16_bytes(),
+          ergoTree: await encodeBase16(user),// Address.from_mainnet_str(user).to_ergo_tree().to_base16_bytes(),
           assets: Object.keys(have).filter(key => key !== 'ERG')
               .filter(key => have[key] < 0)
               .map(key => {
@@ -192,9 +194,6 @@ function Swap({ setIsLoading, setSwapTransaction }) {
           console.log("transaction_to_sign", transaction_to_sign)
           return await signTx(transaction_to_sign)
       }
-  
-  
-
   };
 
   async function signTx(txToBeSigned) {

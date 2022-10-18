@@ -5,6 +5,7 @@
   "proxy": "http://127.0.0.1:8088",
   "dependencies": {
     "@coinbarn/ergo-ts": "^0.3.0",
+    "@craco/craco": "^6.4.5",
     "@datapunt/matomo-tracker-react": "^0.5.1",
     "@ergolabs/ergo-sdk": "^0.1.28",
     "@headlessui/react": "^1.5.0",
@@ -34,7 +35,7 @@
     "react-icons": "^4.3.1",
     "react-loader-spinner": "^6.0.0-0",
     "react-router-dom": "^6.2.1",
-    "react-scripts": "5.0.0",
+    "react-scripts": "^4.0.3",
     "react-select": "^5.4.0",
     "react-share": "^4.4.0",
     "react-spring": "^9.5.2",
@@ -43,9 +44,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "CI=false && react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "CI=false && craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

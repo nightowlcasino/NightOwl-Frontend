@@ -1,4 +1,10 @@
 import {Explorer, Transaction} from '@coinbarn/ergo-ts';
+import axios from 'axios';
+// import dotenv from "dotenv";
+
+// dotenv.config()
+const nodeUser = process.env.REACT_APP_NODE_USER || ""
+const nodePass = process.env.REACT_APP_NODE_PASS || ""
 
 
 export const CONTRACT_BUY_OWL_ADDRESS = "N5YCek6dZq8hQvMMb1istLmKkW5ovBjJLKSk7EdTwQuPpfJJXXGCW486TvjYe7h23Ej1eneG61d37upWJUVoaixPJq6CoP43GjSdEhr5THK2pn8x2ZFf3eVErhb4Qk5xFdCykPZ4MvmMH5GE6FMXwgtn4b2v2oSQGaeQ4i1Fv5Bf4vMEq4aqAFiL7Z5YHMX1zZawet2JCfYQFEyD1Nt9tXCwVTWWvptFpLGByUJ5sQLKvLRU7a23qaTYaDTKMhrzy97h"
@@ -35,12 +41,111 @@ export async function get(url, apiKey = '') {
     });;
 }
 
+const headers = {
+    'mode': 'cors',
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+
+    // 'Access-Control-Allow-Origin': '*',
+    'Authorization': nodeUser !== "" && nodePass !== "" ? 'Basic ' + nodeUser + ':' + nodePass : '',
+}
+
 export async function encodeNum(num) {
+    // const res = await axios.post(`/api/v1/ergo/encode-num`, 
+    //     {
+    //         number: num,
+    //     },
+    //     {
+    //         headers: {
+    //             Accept: 'application/json',
+    //             'Content-Type': 'application/json',
+    //             'Access-Control-Allow-Origin': '*',
+    //             'Access-Control-Allow-Headers': '*',
+    //             'Access-Control-Allow-Credentials': 'true',
 
-}
-export async function encodeHex(num) {
+    //             'Authorization': nodeUser !== "" && nodePass !== "" ? 'Basic ' + btoa(nodeUser + ':' + nodePass) : '',
+    //         }
+    //     }
+    // );
 
+    const res = await fetch("/api/v1/ergo/encode-num", {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        // credentials: 'same-origin', // include, *same-origin, omit
+        headers: headers,
+        // redirect: 'follow', // manual, *follow, error
+        // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify({number: num}) // body data type must match "Content-Type" header
+      });
+
+    return res;
 }
+
+export async function encodeHex(hex) {
+    // const res = await axios.post(`https://dev.nightowlcasino.io/api/v1/ergo/encode-hex`, 
+    //     {
+    //         reg: hex,
+    //     },
+    //     {
+    //         headers: {
+    //             // Accept: 'application/json',
+    //             // 'Content-Type': 'application/json',
+    //             'Access-Control-Allow-Origin': '*',
+    //             'Access-Control-Allow-Headers': '*',
+    //             'Access-Control-Allow-Credentials': 'true',
+    
+    //             'Authorization': nodeUser !== "" && nodePass !== "" ? 'Basic ' + btoa(nodeUser + ':' + nodePass) : '',
+
+    //         }
+    //     }
+    // );
+
+    const res = await fetch("/api/v1/ergo/encode-hex", {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        // credentials: 'same-origin', // include, *same-origin, omit
+        headers: headers,
+        // redirect: 'follow', // manual, *follow, error
+        // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify({reg: hex}) // body data type must match "Content-Type" header
+      });
+    
+
+    return res;
+}
+
+export async function encodeBase16(address) {
+    // const res = await axios.post(`/api/v1/ergo/ergo-tree-base16`, {
+    //     addr: address,
+    // },
+    // {
+    //     headers: {
+    //         'Access-Control-Allow-Origin': '*',
+
+    //         'Authorization': nodeUser !== "" && nodePass !== "" ? 'Basic ' + nodeUser + ':' + nodePass : '',
+
+    //     }
+    // }
+    // )
+
+    const res = await fetch("/api/v1/ergo/ergo-tree-base16", {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        // credentials: 'same-origin', // include, *same-origin, omit
+        headers: headers,
+        // redirect: 'follow', // manual, *follow, error
+        // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify({addr: address}) // body data type must match "Content-Type" header
+      });
+    
+
+    return res;
+}
+
+
 
 
 
