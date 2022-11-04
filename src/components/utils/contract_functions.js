@@ -1,4 +1,5 @@
 import {Explorer, Transaction} from '@coinbarn/ergo-ts';
+import axios from 'axios';
 
 
 export const CONTRACT_BUY_OWL_ADDRESS = "N5YCek6dZq8hQvMMb1istLmKkW5ovBjJLKSk7EdTwQuPpfJJXXGCW486TvjYe7h23Ej1eneG61d37upWJUVoaixPJq6CoP43GjSdEhr5THK2pn8x2ZFf3eVErhb4Qk5xFdCykPZ4MvmMH5GE6FMXwgtn4b2v2oSQGaeQ4i1Fv5Bf4vMEq4aqAFiL7Z5YHMX1zZawet2JCfYQFEyD1Nt9tXCwVTWWvptFpLGByUJ5sQLKvLRU7a23qaTYaDTKMhrzy97h"
@@ -32,14 +33,37 @@ export async function get(url, apiKey = '') {
         },
     }).catch((error)=> {
         console.log(error)
-    });;
+    });
 }
 
 export async function encodeNum(num) {
-
+    axios.post(`/api/v1/ergo/encode-num`, {
+      number: num,
+    })
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
-export async function encodeHex(num) {
+export async function encodeHex(string) {
+    axios.post(`/api/v1/ergo/encode-hex`, {
+        reg: string,
+      })
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+}
+export async function encodeBase16(address) {
+    const res = await axios.post(`/api/v1/ergo/ergo-tree-base16`, {
+        addr: address,
+    })
 
+    return res;
 }
 
 
