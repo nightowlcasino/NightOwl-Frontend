@@ -37,33 +37,40 @@ export async function get(url, apiKey = '') {
 }
 
 export async function encodeNum(num) {
-    axios.post(`/api/v1/ergo/encode-num`, {
+    const res = await axios.post(`/api/v1/ergo/encode-num`, {
       number: num,
     })
-    .then((response) => {
-      console.log(response)
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+
+    if(!res) {
+        console.log("Error encoding")
+        return
+    }
+
+    return res.data;
 }
 export async function encodeHex(string) {
-    axios.post(`/api/v1/ergo/encode-hex`, {
+    const res = await axios.post(`/api/v1/ergo/encode-hex`, {
         reg: string,
-      })
-      .then((response) => {
-        console.log(response)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    })
+
+    if(!res) {
+        console.log("Error encoding")
+        return
+    }
+
+    return res.data;
 }
 export async function encodeBase16(address) {
     const res = await axios.post(`/api/v1/ergo/ergo-tree-base16`, {
         addr: address,
     })
 
-    return res;
+    if(!res) {
+        console.log("Error encoding")
+        return
+    }
+
+    return res.data;
 }
 
 

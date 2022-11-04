@@ -131,7 +131,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
       const blockHeight = await currentBlock();
   
       let registers = {
-          R4: await encodeHex(encodeBase16(user)), // encodeBase16 converts user address to ergotree
+          R4: await encodeHex(await encodeBase16(user)), // encodeBase16 converts user address to ergotree
           R5: await encodeNum((amount).toString()),
           R6: await encodeNum((blockHeight.height + 20).toString()),
           R7: await encodeNum((FEE_VALUE).toString())
@@ -141,7 +141,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
   
       const proxyBox = {
           value: (MIN_BOX_VALUE + FEE_VALUE).toString(),
-          ergoTree: encodeBase16(p2s),//Address.from_mainnet_str(p2s).to_ergo_tree().to_base16_bytes(), // p2s to ergotree (can do through node or wasm)
+          ergoTree: await encodeBase16(p2s),//Address.from_mainnet_str(p2s).to_ergo_tree().to_base16_bytes(), // p2s to ergotree (can do through node or wasm)
           assets: [
               {'tokenId': sigUSDId, 'amount': amount}
           ],
@@ -151,7 +151,7 @@ function Swap({ setIsLoading, setSwapTransaction }) {
   
       const changeBox = {
           value: (-have['ERG']).toString(),
-          ergoTree: encodeBase16(user),//Address.from_mainnet_str(user).to_ergo_tree().to_base16_bytes(),
+          ergoTree: await encodeBase16(user),//Address.from_mainnet_str(user).to_ergo_tree().to_base16_bytes(),
           assets: Object.keys(have).filter(key => key !== 'ERG')
               .filter(key => have[key] < 0)
               .map(key => {
