@@ -1,9 +1,20 @@
 import React from "react";
+import { useMatomo } from '@datapunt/matomo-tracker-react'
+
 import "./HomePage.css";
 import image1 from "../../assets/Elements/Design-2_0000_Layer-21.png";
 import topSectionRightImg from "../../assets/Elements/homePageRightImg.png";
 
 const HomePage = () => {
+
+	// Track page view
+	const { trackPageView, trackEvent } = useMatomo()
+
+	// Track page view
+	React.useEffect(() => {
+	  trackPageView()
+	}, [])
+	
 	return (
 		<div className="mx-2 lg:mx-0 max-w-full flex flex-col justify-center xl:items-start xl:ml-20 items-center ">
 			<header

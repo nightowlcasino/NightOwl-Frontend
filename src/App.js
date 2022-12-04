@@ -32,6 +32,8 @@ import { IoClose } from 'react-icons/io5'
 import successTick from './assets/Elements/successTick.png'
 import Footer from "./components/Footer/Footer";
 import darkBackground from "./assets/Elements/background_dark.png";
+import { MatomoProvider, createInstance } from '@datapunt/matomo-tracker-react' // Analytics Provider
+
 
 // import LeftSideBar from "./components/LeftSideBar/LeftSideBar";
 // import logo from "./assets/Elements/logo.png";
@@ -43,11 +45,33 @@ import darkBackground from "./assets/Elements/background_dark.png";
 // import Leaderboard from "./components/HomePage/Leaderboard";
 // import MobileSlideOverBar from "./components/LeftSideBar/MobileSlideOverBar";
 
+const instance = createInstance({
+	urlBase: process.env.REACT_APP_MATOMO_URL,
+	siteId: 1,
+	// userId: `UID${process.env.REACT_APP_MATOMO_USER}`, // optional, default value: `undefined`.
+	// trackerUrl: 'https://LINK.TO.DOMAIN/tracking.php', // optional, default value: `${urlBase}matomo.php`
+	// srcUrl: 'https://LINK.TO.DOMAIN/tracking.js', // optional, default value: `${urlBase}matomo.js`
+	// disabled: false, // optional, false by default. Makes all tracking calls no-ops if set to true.
+	// heartBeat: { // optional, enabled by default
+	//   active: true, // optional, default value: true
+	//   seconds: 10 // optional, default value: `15
+	// },
+	// linkTracking: false, // optional, default value: true
+	configurations: { // optional, default value: {}
+	  // any valid matomo configuration, all below are optional
+	  disableCookies: true,
+	//   setSecureCookie: true,
+	  setRequestMethod: 'POST'
+	}
+  })
+  
+
 function App() {
 	const [ergoWallet, setErgoWallet] = useState();
     const [defaultAddress, setDefaultAddress] = useState();
 	const [isLoading, setIsLoading] = useState(false);
 	const [swapTransaction, setSwapTransaction] = useState(false);
+	const [kyaAccepted, setKyaAccepted] = useState(localStorage.getItem("kya"));
 	const location = useLocation();
 	const path = location.pathname;
 	// console.log(path)
@@ -55,9 +79,10 @@ function App() {
 		<div className={(swapTransaction || isLoading) ? "App overlay" : "App"} style={{backgroundImage: path.includes('/games') ? `url(${darkBackground})` : "none"}}>
 			{/* need to add class 'overlay' to app in order to have blurred content in case swap overlay is active */}
 				{path.includes('/soon') ? <ComingSoon /> : 
+				<MatomoProvider value={instance}>
 				<StateContext.Provider value={{ergoWallet, setErgoWallet, defaultAddress, setDefaultAddress}}>
-					<Header />
-					<BodyContent setIsLoading={setIsLoading} setSwapTransaction={setSwapTransaction} />
+					<Header kyaAccepted={kyaAccepted} setKyaAccepted={setKyaAccepted}/>
+					<BodyContent setIsLoading={setIsLoading} setSwapTransaction={setSwapTransaction} kyaAccepted={kyaAccepted} setKyaAccepted={setKyaAccepted}/>
 					{!path.includes('/games') && <Footer />}
 					{<div id="overlay">
 						<div id="overlay-background"></div>
@@ -79,14 +104,13 @@ function App() {
 											<span>Transaction submitted</span>
 											<a style={{textDecoration:'underline'}} target="_blank" rel="noreferrer" href={`https://explorer.ergoplatform.com/en/transactions/${swapTransaction}`}>View Transaction</a>
 										</div>
-										{/* add functionality to close overlay to element below */}
-										<div id="overlay-close" onClick={()=>setSwapTransaction(false)}>X</div>
 									</div>
-								}
+									}
+								</div>
 							</div>
-						</div>
-					</div>}
-				</StateContext.Provider>
+						</div>}
+					</StateContext.Provider>
+				</MatomoProvider>
 				}
 		</div>
 	);

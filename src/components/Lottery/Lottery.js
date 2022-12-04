@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import StateContext from "../Context";
 //import { WalletContext } from "../Header/Header";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/solid";
@@ -17,10 +18,21 @@ import goldCup from "../../assets/Elements/goldCup.png";
 import bronzeCup from "../../assets/Elements/bronzeCup.png";
 
 function Lottery({ setIsLoading }) {
+
+  // Track page view
+  const { trackPageView, trackEvent } = useMatomo()
+
   const [informationAboutGameIsPressed, setInformationAboutGameIsPressed] =
     useState(false);
   const [purchaseTicketPressed, setPurchaseTicketPressed] = useState(false);
   const [myTicketsPressed, setMyTicketsPressed] = useState(false);
+
+
+  // Track page view
+  React.useEffect(() => {
+    trackPageView()
+  }, [])
+      
 
   return (
     <>

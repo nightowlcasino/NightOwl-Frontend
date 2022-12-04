@@ -1,6 +1,18 @@
 import "../BodyContent/BodyContent.css";
+import { useMatomo } from '@datapunt/matomo-tracker-react'
+import React from "react";
 
 export default function AboutUs() {
+
+  // Track page view
+  const { trackPageView, trackEvent } = useMatomo()
+
+  // Track page view
+  React.useEffect(() => {
+    trackPageView()
+  }, [])
+      
+
   return (
     <div
       id="page-content-wrapper"
