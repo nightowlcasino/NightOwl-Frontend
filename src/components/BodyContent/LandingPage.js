@@ -1,3 +1,4 @@
+import React from "react";
 import home_trending from "../../assets/Elements/home_trending.png";
 import leaderboard_icon from "../../assets/Elements/leaderboard_icon.png";
 import { useMatomo } from '@datapunt/matomo-tracker-react'
