@@ -1,5 +1,6 @@
 import home_trending from "../../assets/Elements/home_trending.png";
 import leaderboard_icon from "../../assets/Elements/leaderboard_icon.png";
+import { useMatomo } from '@datapunt/matomo-tracker-react'
 import slots from "../../assets/Elements/slots.png";
 import roulette from "../../assets/Elements/roulette.png";
 import hotNowImage from "../../assets/Elements/wtfruleta.png";
@@ -11,6 +12,8 @@ import KYAModal from "../Modals/KYAModal";
 
 function LandingPage({kyaAccepted,setKyaAccepted}) {
   let navigate = useNavigate();
+	const { trackPageView, trackEvent } = useMatomo()
+
 
   function handleNavigateToPage(e, page) {
     e.preventDefault();
@@ -47,6 +50,12 @@ function LandingPage({kyaAccepted,setKyaAccepted}) {
   ];
   console.log("hola");
   console.log(kyaAccepted);
+
+  // Track page view
+	React.useEffect(() => {
+	  trackPageView()
+	}, [])
+
   return (
     <div id="page-content-wrapper">
       <KYAModal
