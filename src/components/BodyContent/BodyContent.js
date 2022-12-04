@@ -16,6 +16,7 @@ import FAQ from "../FAQ/FAQ";
 import LiquidityProvision from "../LiquidityProvision/LiquidityProvision";
 import Games from "../Games/GamesPage/Games.js";
 import Lottery from "../Lottery/Lottery";
+import Blackjack from "../Games/Blackjack/Blackjack";
 
 function BodyContent({setIsLoading,setSwapTransaction, kyaAccepted, setKyaAccepted}) {
     const location = useLocation();
@@ -54,6 +55,7 @@ function BodyContent({setIsLoading,setSwapTransaction, kyaAccepted, setKyaAccept
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="/liquidity" element={<LiquidityProvision />} />
                     <Route path="/games/lottery" element={<Lottery />} />
+                    <Route path="/games/blackjack" element={<Blackjack />} />
                 </Routes>
             </div>
         </div>

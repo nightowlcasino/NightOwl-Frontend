@@ -1,0 +1,256 @@
+#blackjack-game-wrapper {
+  display: flex;
+  flex: 100%;
+  align-items: center;
+  align-content: center;
+  flex-direction: row;
+}
+
+#info-btn {
+  padding: 5px 10px;
+  text-align: center;
+  color: white;
+  background-image: linear-gradient(to right, #8e0081, #fa008c);
+  border-radius: 10px;
+  margin: 0px auto;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  border: none;
+}
+
+.info-btn-container {
+  margin-left: auto;
+}
+.btn .btn-label {
+  font-size: 20px;
+  font-weight: 900;
+  padding: 12px;
+  white-space: nowrap;
+}
+
+#blackjack-game-wrapper #blackjack-content-wrapper {
+  flex: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  margin-bottom: 20px;
+}
+
+.blackjack-table-chips-wrapper {
+position: absolute;
+  top:120%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+    height: 220px;
+    width: 50%;
+     /* background-color: darkmagenta; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity:0;
+  display: hidden;
+  transition: all 0.5s ease;
+}
+
+.blackjack-table-game-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 0vh;
+  opacity:0;
+  display: hidden;
+  transition: all 0.5s ease;
+}
+
+
+.blackjack-table-chips-wrapper.active
+{
+  top:80%;
+  display: flex;
+  opacity:1;
+}
+
+.blackjack-table-game-wrapper.active  {
+  height: 70vh;
+  margin-top: -30px;
+  display: flex;
+  opacity:1;
+}
+
+.dealer-row, .player-row {
+  width: 100%;
+  height: 33%;
+}
+
+.buttons-mid-row {
+  width: 100%;
+  height: 33%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.buttons-mid-row button {
+  width: 10%;
+  height: 40%;
+    border: none;
+    border-radius: 15px;
+    background-image: linear-gradient(to right, #8e0081, #fa008c);
+    color: whitesmoke;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#hit-button:disabled,
+#hit-button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  background-image: none;
+  color: #666666;
+  cursor: pointer;
+}
+
+.player-cards, .dealer-cards {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.player-cards {
+  align-items: flex-start;
+}
+
+.dealer-cards {
+  align-items: flex-end;
+}
+
+.card-score {
+  color: #d70a84; 
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+/* .player-cards img, .dealer-cards img{
+  position: absolute;
+  top:50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+} */
+
+.dealer-table-card, .player-table-card {
+  position: absolute;
+  top:-100%;
+  transform: translateY(-300px) rotate(150deg);
+  width: 100px;
+  opacity: 0;
+}
+
+.dealer-table-card.active, .player-table-card.active {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  transition: all 1s;
+}
+
+.dealer-table-card.active {
+  top: 43%;
+}
+
+.player-table-card.active {
+  top: 57%;
+}
+
+#blackjack-table-chips-selected {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  margin: 0px auto;
+  width: 100%;
+  height: 100%;
+}
+
+#blackjack-bet-amount {
+  font-size: 1.8em;
+  font-weight: 900;
+  padding: 12px;
+  width: 25%;
+  color: white;
+  word-wrap: break-word;
+}
+
+.stack-coins {
+  position: relative;
+  width: 25%;
+  height: 100%;
+}
+
+.stack-coins img {
+  position: absolute;
+  left: 50%;
+  width: 70px;
+  transform: translate(-50%, -50%);
+}
+
+#deal-button {
+    width: 25%;
+    padding: 10px 0px;
+    border: none;
+    border-radius: 20px;
+    margin: 0px 12px 0px 0px;
+    background-color: #fa008c;
+    color: whitesmoke;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#blackjack-table-chips
+{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+#blackjack-table-chips .table-chip-wrapper
+{
+    flex: calc(100% / 5);
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    transition: all var(--roulette-bets-end-transition-time) ease;
+}
+
+#blackjack-table-chips .table-chip-wrapper:hover .table-chip
+{
+    width: 100px;
+    height: 100px;
+}
+
+#blackjack-table-chips .table-chip-wrapper.active .table-chip
+{
+    width: 120px;
+    height: 120px;
+}
+
+#blackjack-table-chips .table-chip
+{
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: all var(--roulette-bets-end-transition-time) ease;
+    cursor: pointer;
+}
