@@ -29,7 +29,7 @@ function Liquidity({ setIsLoading, setliquidityTransaction }) {
 
 	const [openModal, setOpenModal] = useState(false);
 
-	const [hasAddedLiquidity, setHasAddedLiquidity] = useState(false);
+	const [hasAddedLiquidity, setHasAddedLiquidity] = useState(true);
 
 	const [addLiquidityModal, setAddLiquidityModal] = useState(false);
 	const [withdrawLiquidityModal, setWithdrawLiquidityModal] = useState(false);
